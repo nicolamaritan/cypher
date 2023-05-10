@@ -8,6 +8,9 @@ import org.junit.Assert.*
 
 class SecurityUnitTest
 {
+    /**
+     * Tests encryption and decryption with a simple password and text.
+     */
     @Test
     fun encryptionAndDecryption1()
     {
@@ -19,6 +22,9 @@ class SecurityUnitTest
         assertEquals(text, decryptedText)
     }
 
+    /**
+     * Tests encryption and decryption with a complex password and text.
+     */
     @Test
     fun encryptionAndDecryption2()
     {
@@ -34,6 +40,10 @@ class SecurityUnitTest
         assertEquals(text, decryptedText)
     }
 
+    /**
+     * Tests encryption and decryption with a complex password and text.
+     * The encryption and decryption is tested with varying password size.
+     */
     @Test
     fun encryptionAndDecryption3()
     {
@@ -49,6 +59,9 @@ class SecurityUnitTest
         }
     }
 
+    /**
+     * Tests encryption 10 times with the same password and decryption 10 times with the same password.
+     */
     @Test
     fun layeredEncryption1()
     {
@@ -72,6 +85,10 @@ class SecurityUnitTest
         assertEquals(text, decryptedText)
     }
 
+    /**
+     * Tests encryption different times with a varying password and
+     * decryption different times with the a varying password.
+     */
     @Test
     fun layeredEncryption2()
     {
@@ -99,6 +116,9 @@ class SecurityUnitTest
         assertEquals(text, decryptedText)
     }
 
+    /**
+     * Tests bad decryption from wrong password.
+     */
     @Test(expected = BadDecryptionException::class)
     fun wrongDecryption1()
     {
@@ -108,6 +128,9 @@ class SecurityUnitTest
         Cryptography.decryptText(encryptedText, "MASTER")
     }
 
+    /**
+     * Tests bad decryption from wrong password.
+     */
     @Test(expected = BadDecryptionException::class)
     fun wrongDecryption2()
     {
