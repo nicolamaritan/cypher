@@ -2,6 +2,7 @@ package com.project.passwordmanager
 
 import com.project.passwordmanager.security.BadDecryptionException
 import com.project.passwordmanager.security.Cryptography
+import com.project.passwordmanager.security.Hashing
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -33,7 +34,7 @@ class SecurityUnitTest
                 " multitasking, Unix-like operating system kernel. It was originally" +
                 " authored in 1991 by Linus Torvalds for his i386-based PC, and" +
                 " it was soon adopted as the kernel for the GNU operating system," +
-                " which was written to be a free (libre) replacement for Unix."
+                " which was written to be a free (libre) replacement for Unix." // Source: Wikipedia
         val encryptedText = Cryptography.encryptText(text, masterPassword)
         val decryptedText = Cryptography.decryptText(encryptedText, masterPassword)
 
@@ -69,7 +70,7 @@ class SecurityUnitTest
         val text = "Android is a mobile operating system based on a" +
                 "modified version of the Linux kernel and other open-source" +
                 "software, designed primarily for touchscreen mobile" +
-                "devices such as smartphones and tablets."
+                "devices such as smartphones and tablets." // Source: Wikipedia
 
         var encryptedText = text
         for (i in 0.. 10)
@@ -96,7 +97,7 @@ class SecurityUnitTest
         val text = "The Advanced Encryption Standard (AES), also known by its" +
                 "original name Rijndael is a specification for the encryption" +
                 " of electronic data established by the U.S. National Institute" +
-                " of Standards and Technology (NIST) in 2001"
+                " of Standards and Technology (NIST) in 2001" // Source: Wikipedia
 
         var encryptedText = text
         for (i in 1.. fullMasterPassword.length)
@@ -138,5 +139,21 @@ class SecurityUnitTest
         val text = "Hello World!"
         val encryptedText = Cryptography.encryptText(text, masterPassword)
         Cryptography.decryptText(encryptedText, "trivial password")
+    }
+
+    /**
+     * Tests SHA256 hashing function.
+     */
+    @Test
+    fun sha256()
+    {
+        // Hash samples by https://emn178.github.io/online-tools/sha256.html
+        assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", Hashing.sha_256("Hello World!"))
+        assertEquals("6d612a86bee4b0a659b8b3affd6f1fbcad15c4cbbbbdc4996c6c01c786711a21", Hashing.sha_256("Android"))
+        assertEquals("4828e60247c1636f57b7446a314e7f599c12b53d40061cc851a1442004354fed", Hashing.sha_256("Linux"))
+        assertEquals("ebb249c9fbb167669b8ee62545112842d0a7ac427e8b9de29b11242c323de041", Hashing.sha_256("PasswordManager"))
+        assertEquals("ed4d432d8304bbfa03c1941f6f9fcca209d22974bbcd316045c4b671a39bc18b", Hashing.sha_256("Kotlin is a cross-platform, statically " +
+                "typed, general-purpose high-level programming language with type inference. Kotlin is designed to interoperate fully with Java, " +
+                "and the JVM version of Kotlin's standard library depends on the Java Class Library, but type inference allows its syntax to be more concise."))    // Source: Wikipedia
     }
 }
