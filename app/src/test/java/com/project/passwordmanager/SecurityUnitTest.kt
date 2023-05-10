@@ -148,11 +148,11 @@ class SecurityUnitTest
     fun sha256()
     {
         // Hash samples by https://emn178.github.io/online-tools/sha256.html
-        assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", Hashing.sha_256("Hello World!"))
-        assertEquals("6d612a86bee4b0a659b8b3affd6f1fbcad15c4cbbbbdc4996c6c01c786711a21", Hashing.sha_256("Android"))
-        assertEquals("4828e60247c1636f57b7446a314e7f599c12b53d40061cc851a1442004354fed", Hashing.sha_256("Linux"))
-        assertEquals("ebb249c9fbb167669b8ee62545112842d0a7ac427e8b9de29b11242c323de041", Hashing.sha_256("PasswordManager"))
-        assertEquals("ed4d432d8304bbfa03c1941f6f9fcca209d22974bbcd316045c4b671a39bc18b", Hashing.sha_256("Kotlin is a cross-platform, statically " +
+        assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", Hashing.sha256("Hello World!"))
+        assertEquals("6d612a86bee4b0a659b8b3affd6f1fbcad15c4cbbbbdc4996c6c01c786711a21", Hashing.sha256("Android"))
+        assertEquals("4828e60247c1636f57b7446a314e7f599c12b53d40061cc851a1442004354fed", Hashing.sha256("Linux"))
+        assertEquals("ebb249c9fbb167669b8ee62545112842d0a7ac427e8b9de29b11242c323de041", Hashing.sha256("PasswordManager"))
+        assertEquals("ed4d432d8304bbfa03c1941f6f9fcca209d22974bbcd316045c4b671a39bc18b", Hashing.sha256("Kotlin is a cross-platform, statically " +
                 "typed, general-purpose high-level programming language with type inference. Kotlin is designed to interoperate fully with Java, " +
                 "and the JVM version of Kotlin's standard library depends on the Java Class Library, but type inference allows its syntax to be more concise."))    // Source: Wikipedia
     }
