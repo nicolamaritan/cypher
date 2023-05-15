@@ -14,7 +14,6 @@ import com.project.passwordmanager.R
  */
 class PasswordManagerWidget : AppWidgetProvider() {
 
-    //Implement the onUpdate() callback method to set the RemoteViewsService as the remote adapter for the widget collection
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -49,17 +48,20 @@ class PasswordManagerWidget : AppWidgetProvider() {
             data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
         }
 
-        //Instantiate the RemoteViews object for the widget layout
+
         val views = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
-            //Set up the RemoteViews object to use a RemoteViews adapter.
-            //This adapter connects to a RemoteViewsService through the
-            //specified intent.
-            //This is how you populate the data
+            /*
+                Set up the RemoteViews object to use a RemoteViews adapter.
+                This adapter connects to a RemoteViewsService through the specified intent.
+                This is how you populate the data
+            */
             setRemoteAdapter(R.id.widget_listview, pwmServiceIntent)
 
-            //The empty view is displayed when the collection has no items.
-            //It must be in the same layout used to instantiate the
-            //RemoteViews object
+            /*
+                The empty view is displayed when the collection has no items.
+                It must be in the same layout used to instantiate the
+                RemoteViews object.
+            */
             setEmptyView(R.id.widget_listview, R.id.empty_listview)
         }
 
