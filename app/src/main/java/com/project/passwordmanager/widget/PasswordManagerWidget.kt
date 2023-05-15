@@ -41,20 +41,21 @@ class PasswordManagerWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
     ) {
-        val intent = Intent(context, PasswordManagerWidgetService::class.java).apply {
+        val pwmServiceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
             //Add the widget ID to the intent extras
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
 
             //with this line, the system can distinguish between the instances of the widgets
             data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
         }
+
         //Instantiate the RemoteViews object for the widget layout
         val views = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
             //Set up the RemoteViews object to use a RemoteViews adapter.
             //This adapter connects to a RemoteViewsService through the
             //specified intent.
             //This is how you populate the data
-            setRemoteAdapter(R.id.widget_listview, intent)
+            setRemoteAdapter(R.id.widget_listview, pwmServiceIntent)
 
             //The empty view is displayed when the collection has no items.
             //It must be in the same layout used to instantiate the

@@ -19,6 +19,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         private val context: Context,
         intent: Intent
     ): RemoteViewsFactory{
+        //provvisory
         private val appNames = Datasource(this.context).getAppNameList()
         private val userData = Datasource(this.context).getUserList()
         private val pwData = Datasource(this.context).getPasswordList()
@@ -27,17 +28,11 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         //source. Heavy lifting, such as downloading or creating content,
         //must be deferred to onDataSetChanged() or getViewAt(). Taking
         //more than 20 seconds on this call results in an ANR
-        override fun onCreate() {
-            //tocca mettere view binding etc me sa
-        }
+        override fun onCreate() {}
 
-        override fun onDataSetChanged() {
-            TODO("Not yet implemented")
-        }
+        override fun onDataSetChanged() {}
 
-        override fun onDestroy() {
-            TODO("Not yet implemented")
-        }
+        override fun onDestroy() {}
 
         override fun getCount(): Int {
             return userData.size
@@ -49,7 +44,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             val view = RemoteViews(context.packageName, R.layout.password_manager_item)
 
             //set the text in the view, taking the id of the TextView and the element to insert in it
-            view.setTextViewText(R.id.app_name, appNames[position])
+            view.setTextViewText(R.id.service, appNames[position])
             view.setTextViewText(R.id.user, userData[position])
             view.setTextViewText(R.id.password, pwData[position])
 
@@ -57,8 +52,8 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             return view
         }
 
-        override fun getLoadingView(): RemoteViews {
-            TODO("Not yet implemented")
+        override fun getLoadingView(): RemoteViews? {
+            return null
         }
 
         override fun getViewTypeCount(): Int {
