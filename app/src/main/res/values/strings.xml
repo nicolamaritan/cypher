@@ -3,4 +3,29 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="emptywidget_text">Lista vuota</string>
+    <string-array name="lista_app">
+        <item >Netflix</item>
+        <item >Instagram</item>
+        <item >Prime Video</item>
+        <item >GitHub</item>
+        <item >Discord</item>
+        <item >PornHub</item>
+    </string-array>
+    <string-array name="lista_users">
+        <item >Ciccio</item>
+        <item >Ezechiele</item>
+        <item >ElPrimo69</item>
+        <item >Cagnazzo_01</item>
+        <item >CiccioGamer89</item>
+        <item >Pisello_69</item>
+    </string-array>
+    <string-array name="lista_password">
+        <item >fessamammt</item>
+        <item >01234567</item>
+        <item >password</item>
+        <item >forzajuve</item>
+        <item >LaMiaPassword</item>
+        <item >passworddipornhub</item>
+    </string-array>
 </resources>
