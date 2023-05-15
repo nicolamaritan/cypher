@@ -13,6 +13,6 @@ interface CredentialDao{
     @Delete
     suspend fun delete(credential:Credential)
 
-    @Query("SELECT * FROM records_table ORDER BY id ASC")
+    @Query("SELECT * FROM credentials_table ORDER BY id ASC")
     fun getAll(): List<Credential>
 }
