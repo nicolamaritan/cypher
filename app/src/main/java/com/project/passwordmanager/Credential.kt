@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "records_table")
-data class Records(
+data class Credential(
 
     @PrimaryKey(autoGenerate = true) //auto-increment
     var id:Long = 0L,
