@@ -9,38 +9,93 @@ import com.project.passwordmanager.R
 
 //WATCH THE MANIFEST!
 
+/**
+ * A RemoteViewsService that provides a widget that displays the user and password data
+ * for each service in the Password Manager app.
+ * This widget uses a RemoteViewsFactory to provide the data to the widget, which is
+ * responsible for creating the RemoteViews that will be displayed in the widget.
+ * @see RemoteViewsService
+ * @see RemoteViewsService.RemoteViewsFactory
+*/
 class PasswordManagerWidgetService: RemoteViewsService() {
 
-    //equivalent to the recyclerview adapter(widgets, though, belong to a different process compared to the app)
-    override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
+    /**
+     * Called when the widget is created, this method sets up the RemoteViewsFactory
+     * to provide the data for the widget.
+     * @param intent The intent that was used to start the service.
+     * @return A new instance of PasswordManagerWidgetItemFactory to act as the RemoteViewsFactory for the widget.
+     * @throws NullPointerException if the intent passed in is null.
+     * @see RemoteViewsService.RemoteViewsFactory
+     */
+    override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory
+    {
+        //equivalent to the recyclerview adapter(widgets, though, belong to a different process compared to the app)
         return PasswordManagerWidgetItemFactory(applicationContext, intent!!)
     }
 
+    /**
+     * A RemoteViewsFactory that provides the data for the PasswordManagerWidgetService.
+     * @property context The application context.
+     * TODO The class should pull the data from WidgetData
+     * @see RemoteViewsService.RemoteViewsFactory
+     */
     class PasswordManagerWidgetItemFactory(
         private val context: Context,
         intent: Intent
-    ): RemoteViewsFactory{
+    ): RemoteViewsFactory
+    {
         //provvisory
         private val appNames = Datasource(this.context).getAppNameList()
         private val userData = Datasource(this.context).getUserList()
         private val pwData = Datasource(this.context).getPasswordList()
 
-        //In onCreate(), set up any connections or cursors to your data
-        //source. Heavy lifting, such as downloading or creating content,
-        //must be deferred to onDataSetChanged() or getViewAt(). Taking
-        //more than 20 seconds on this call results in an ANR
-        override fun onCreate() {}
+        /**
+         * Called when the factory is first created.
+         * This method should not perform any heavy lifting,
+         * such as downloading or creating content.
+         */
+        override fun onCreate()
+        {
+            /*
+                In onCreate(), set up any connections or cursors to your data
+                source. Heavy lifting, such as downloading or creating content,
+                must be deferred to onDataSetChanged() or getViewAt(). Taking
+                more than 20 seconds on this call results in an ANR
+            */
+        }
 
+        /**
+         * Called when the data set changes. This method should be used to notify the factory
+         * that the data has changed and needs to be updated.
+         */
         override fun onDataSetChanged() {}
 
+        /**
+         * Called when the factory is destroyed. This method should be used to clean up any
+         * resources used by the factory.
+         */
         override fun onDestroy() {}
 
-        override fun getCount(): Int {
+        /**
+         * Gets the number of items in the list that will be displayed in the widget.
+         *
+         * @return The number of items in the list.
+         */
+        override fun getCount(): Int
+        {
             return userData.size
         }
 
-        //WARNING! As this is not a RecyclerView, the list in the widget will be less efficient! So, don't put a large amount of data inside!
-        override fun getViewAt(position: Int): RemoteViews {
+        /**
+         * Gets the view to display at the given position in the widget.
+         *
+         * @param position The position of the view to display.
+         * @return The RemoteViews to display at the given position.
+         */
+        override fun getViewAt(position: Int): RemoteViews
+        {
+            //WARNING! As this is not a RecyclerView, the list in the widget will be less efficient! So, don't put a large amount of data inside!
+
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.password_manager_item)
 
@@ -53,19 +108,46 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             return view
         }
 
-        override fun getLoadingView(): RemoteViews? {
+        /**
+         * Returns the loading view to display while the widget is loading.
+         *
+         * @return the loading view to display while the widget is loading
+         */
+        override fun getLoadingView(): RemoteViews?
+        {
             return null
         }
 
-        override fun getViewTypeCount(): Int {
+        /**
+         * Returns the number of different types of views the factory can provide.
+         * In this case, there is only one type of view.
+         *
+         * @return the number of different types of views the factory can provide
+         */
+        override fun getViewTypeCount(): Int
+        {
             return 1
         }
 
-        override fun getItemId(position: Int): Long {
-            return position.toLong()     //NON SO WHY
+        /**
+         * Returns the ID of the item at the given position in the widget.
+         *
+         * @param position the position of the item in the widget
+         * @return the ID of the item at the given position in the widget
+         */
+        override fun getItemId(position: Int): Long
+        {
+            return position.toLong()
         }
 
-        override fun hasStableIds(): Boolean {
+        /**
+         * Indicates whether the items in the widget have a stable ID.
+         * In this case, it returns true.
+         *
+         * @return true if the item at the given position has a stable ID, false otherwise
+         */
+        override fun hasStableIds(): Boolean
+        {
             return true
         }
 
