@@ -1,10 +1,11 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.widget
 
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import com.project.passwordmanager.Datasource
+import com.project.passwordmanager.R
 
 //WATCH THE MANIFEST!
 

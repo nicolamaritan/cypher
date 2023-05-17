@@ -37,7 +37,7 @@
         you need to make it possible for widgets with collections to bind to your RemoteViewsService.
         Do this by declaring the service in your manifest file with the permission BIND_REMOTEVIEWS.
         This prevents other applications from freely accessing your widget's data. -->
-        <service android:name=".PasswordManagerWidgetService"
+        <service android:name=".widget.PasswordManagerWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     </application>
