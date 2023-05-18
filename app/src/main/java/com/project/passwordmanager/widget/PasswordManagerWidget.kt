@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
-import com.project.passwordmanager.PasswordManagerWidgetService
 import com.project.passwordmanager.R
 
 /**
