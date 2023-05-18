@@ -11,4 +11,19 @@
     <color name="light_blue_200">#FF81D4FA</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
+
+    <!-- Light theme colors -->
+    <color name="light_blue">#81D4FA</color>
+    <color name="dark_blue">#2196F3</color>
+    <color name="darker_blue">#1976D2</color>
+    <color name="lighter_blue">#64B5F6</color>
+    <color name="darker_light_blue">#0D47A1</color>
+
+    <!-- Dark theme colors -->
+    <color name="night_primary">#0D47A1</color> <!-- Dark blue for night theme -->
+    <color name="night_primary_variant">#002171</color> <!-- Darker shade of blue for night theme -->
+    <color name="night_on_primary">#FFFFFF</color> <!-- White text on blue for night theme -->
+    <color name="night_secondary">#00695C</color> <!-- Dark teal for night theme -->
+    <color name="night_secondary_variant">#004D40</color> <!-- Darker shade of teal for night theme -->
+    <color name="night_on_secondary">#FFFFFF</color> <!-- White text on teal for night theme -->
 </resources>
