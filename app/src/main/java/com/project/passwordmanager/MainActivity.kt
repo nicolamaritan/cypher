@@ -21,9 +21,12 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        // Gets reference to the navigationController
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+
+        // Builds a configuration linking the toolbar to the navigation graph
         val builder = AppBarConfiguration.Builder(navController.graph)
         val appBarConfiguration = builder.build()
         toolbar.setupWithNavController(navController, appBarConfiguration)
@@ -31,13 +34,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean
     {
+        /*
+        * Actually adds elements to the toolbar.
+        * called when the activity is ready to add items to the toolbar.
+        * */
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
+        /*
+        * This method runs whenever an item in the toolbar is clicked.
+        * It is used to respond to clicks.
+        * */
         val navController = findNavController(R.id.nav_host_fragment)
+
+        // If the navController is unable to navigate, invokes superclass default method.
         return item.onNavDestinationSelected(navController) ||
                 super.onOptionsItemSelected(item)
     }
