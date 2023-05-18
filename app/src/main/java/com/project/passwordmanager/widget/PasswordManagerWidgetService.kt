@@ -8,6 +8,7 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.project.passwordmanager.Datasource
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.Logger
 
 //WATCH THE MANIFEST!
 
@@ -70,7 +71,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
          */
         override fun onCreate()
         {
-            logCallback("onCreate", appWidgetId)
+            Logger.logCallback(TAG, "onCreate", appWidgetId)
             /*
                 In onCreate(), set up any connections or cursors to your data
                 source. Heavy lifting, such as downloading or creating content,
@@ -169,14 +170,6 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         companion object
         {
             private val TAG = PasswordManagerWidgetItemFactory::class.simpleName
-
-            /**
-             * Logs the invocation of a callback function for a specified appWidgetId.
-             * @param callback The name of the callback function being invoked.
-             * @param appWidgetId The ID of the app widget for which the callback is being invoked.
-             */
-            fun logCallback(callback: String, appWidgetId: Int) =
-                Log.d(TAG, "Invoked $callback for appWidgetId $appWidgetId")
         }
 
     }
