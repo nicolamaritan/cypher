@@ -96,6 +96,11 @@ class WidgetData private constructor()
         entries.removeAt(entryId)
     }
 
+    fun addEntry(entry: Entry)
+    {
+        entries.add(entry)
+    }
+
 
     private val entries = mutableListOf<Entry>()
 
