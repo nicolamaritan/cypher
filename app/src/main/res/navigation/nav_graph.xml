@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/CredentialsFragment">
+
+    <fragment
+        android:id="@+id/CredentialsFragment"
+        android:name="com.project.passwordmanager.fragments.CredentialsFragment"
+        android:label="Credentials"
+        tools:layout="@layout/fragment_credentials"/>
+
+    <fragment
+        android:id="@+id/AddCredentialsFragment"
+        android:name="com.project.passwordmanager.fragments.AddCredentialsFragment"
+        android:label="Add Credentials"
+        tools:layout="@layout/fragment_addcredentials"/>
+</navigation>
