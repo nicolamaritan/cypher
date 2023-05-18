@@ -40,8 +40,8 @@ class WidgetData private constructor()
          * @param appWidgetId The ID of the widget to get data for.
          * @return The widget data for the given ID.
          */
-        fun getWidgetData(appWidgetId: Int): WidgetData? =
-            widgetDataMap[appWidgetId]
+        fun getWidgetData(appWidgetId: Int): WidgetData =
+            widgetDataMap[appWidgetId]!!
 
         private val widgetDataMap = mutableMapOf<Int, WidgetData>()
         val TAG = WidgetData::class.java
@@ -101,6 +101,7 @@ class WidgetData private constructor()
         entries.add(entry)
     }
 
+    fun size() = entries.size
 
     private val entries = mutableListOf<Entry>()
 

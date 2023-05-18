@@ -18,10 +18,9 @@ object ToyDataWidgetDataInitializer
      */
     fun initialize(appWidgetId: Int)
     {
-        if (WidgetData.hasWidgetData(appWidgetId))
+        if (!WidgetData.hasWidgetData(appWidgetId))
             return
 
-        WidgetData.createWidgetData(appWidgetId)
         val widgetData = WidgetData.getWidgetData(appWidgetId)
 
         val services = getToyServices()
@@ -32,7 +31,7 @@ object ToyDataWidgetDataInitializer
         for (i in services.indices)
         {
             val entry = Entry(services[i], users[i], passwords[i])
-            widgetData!!.addEntry(entry)
+            widgetData.addEntry(entry)
         }
     }
 

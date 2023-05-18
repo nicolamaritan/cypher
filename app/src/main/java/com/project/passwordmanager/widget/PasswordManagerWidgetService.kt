@@ -5,9 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.project.passwordmanager.Datasource
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.ToyDataWidgetDataInitializer
+import com.project.passwordmanager.model.WidgetData
 
 //WATCH THE MANIFEST!
 
@@ -57,11 +58,10 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID)
 
-
-        //provvisory
-        private val appNames = Datasource(this.context).getAppNameList()
-        private val userData = Datasource(this.context).getUserList()
-        private val pwData = Datasource(this.context).getPasswordList()
+        /**
+         * Holds reference to its WidgetData.
+         */
+        private var widgetData: WidgetData? = null
 
         /**
          * Called when the factory is first created.
@@ -77,6 +77,10 @@ class PasswordManagerWidgetService: RemoteViewsService() {
                 must be deferred to onDataSetChanged() or getViewAt(). Taking
                 more than 20 seconds on this call results in an ANR
             */
+
+            WidgetData.createWidgetData(appWidgetId)
+            ToyDataWidgetDataInitializer.initialize(appWidgetId)    // Populating WD with toy entries
+            widgetData = WidgetData.getWidgetData(appWidgetId)
         }
 
         /**
@@ -98,7 +102,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
          */
         override fun getCount(): Int
         {
-            return userData.size
+            return widgetData!!.size()
         }
 
         /**
@@ -113,11 +117,12 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.password_manager_item)
+            val entry = widgetData!!.getEntry(position)
 
             //set the text in the view, taking the id of the TextView and the element to insert in it
-            view.setTextViewText(R.id.service, appNames[position])
-            view.setTextViewText(R.id.user, userData[position])
-            view.setTextViewText(R.id.password, pwData[position])
+            view.setTextViewText(R.id.service, entry.service)
+            view.setTextViewText(R.id.user, entry.username)
+            view.setTextViewText(R.id.password, entry.password)
 
             //SystemClock.sleep(500)        NON SO WHY
             return view
