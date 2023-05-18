@@ -2,7 +2,6 @@ package com.project.passwordmanager
 
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 
