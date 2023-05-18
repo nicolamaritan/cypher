@@ -1,7 +1,9 @@
 package com.project.passwordmanager.widget
 
+import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.project.passwordmanager.Datasource
@@ -35,8 +37,11 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
     /**
      * A RemoteViewsFactory that provides the data for the PasswordManagerWidgetService.
-     * @property context The application context.
-     * TODO The class should pull the data from WidgetData
+     * When an intent asks the PasswordManagerWidgetService a PasswordManagerWidgetItemFactory,
+     * the intent is passed as parameter to the factory's constructor. The
+     * intent contains info about the widget, such as the widget's id.
+     * @param context The application context.
+     * @param intent The intent which requested the factory
      * @see RemoteViewsService.RemoteViewsFactory
      */
     class PasswordManagerWidgetItemFactory(
@@ -44,6 +49,15 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         intent: Intent
     ): RemoteViewsFactory
     {
+        /**
+         * Obtains the widgetId from the intent which requested
+         * the factory. The intent contains such information.
+         */
+        private val appWidgetId: Int = intent.getIntExtra(
+            AppWidgetManager.EXTRA_APPWIDGET_ID,
+            AppWidgetManager.INVALID_APPWIDGET_ID)
+
+
         //provvisory
         private val appNames = Datasource(this.context).getAppNameList()
         private val userData = Datasource(this.context).getUserList()
@@ -56,6 +70,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
          */
         override fun onCreate()
         {
+            logCallback("onCreate", appWidgetId)
             /*
                 In onCreate(), set up any connections or cursors to your data
                 source. Heavy lifting, such as downloading or creating content,
@@ -149,6 +164,19 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         override fun hasStableIds(): Boolean
         {
             return true
+        }
+
+        companion object
+        {
+            private val TAG = PasswordManagerWidgetItemFactory::class.simpleName
+
+            /**
+             * Logs the invocation of a callback function for a specified appWidgetId.
+             * @param callback The name of the callback function being invoked.
+             * @param appWidgetId The ID of the app widget for which the callback is being invoked.
+             */
+            fun logCallback(callback: String, appWidgetId: Int) =
+                Log.d(TAG, "Invoked $callback for appWidgetId $appWidgetId")
         }
 
     }
