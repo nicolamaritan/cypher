@@ -1,5 +1,7 @@
 package com.project.passwordmanager.model
 
+import com.project.passwordmanager.security.AlreadyDecryptedException
+import com.project.passwordmanager.security.AlreadyEncryptedException
 import com.project.passwordmanager.security.Cryptography
 
 class WidgetData private constructor()
@@ -52,14 +54,20 @@ class WidgetData private constructor()
 
     /**
      * Encrypts the entry with the given ID.
+     * This method should not be invoked if the password is
+     * already encrypted. If this happens, something in the app logic
+     * did not work. Therefore, the thrown exception should
+     * rarely be caught.
      *
+     * @throws AlreadyEncryptedException
      * @param entryId The ID of the entry to encrypt.
      * @param master The master password used to encrypt the entry's password
      */
     fun encrypt(entryId: Int, master: String)
     {
         if (entries[entryId].encrypted)
-            return
+            throw AlreadyEncryptedException("The $entryId-th entry is already encrypted.")
+
         val encryptedPassword = Cryptography.encryptText(entries[entryId].password, master)
         entries[entryId].encrypted = true
         entries[entryId].password = encryptedPassword
@@ -67,14 +75,20 @@ class WidgetData private constructor()
 
     /**
      * Decrypts the entry with the given ID.
+     * This method should not be invoked if the password is
+     * already decrypted. If this happens, something in the app logic
+     * did not work. Therefore, the thrown exception should
+     * rarely be caught.
      *
+     * @throws AlreadyDecryptedException
      * @param entryId The ID of the entry to decrypt.
      * @param master The master password used to decrypt the entry's password
      */
     fun decrypt(entryId: Int, master: String)
     {
         if (!entries[entryId].encrypted)
-            return
+            throw AlreadyDecryptedException("The $entryId-th entry is already decrypted.")
+
         val decryptedPassword = Cryptography.encryptText(entries[entryId].password, master)
         entries[entryId].encrypted = false
         entries[entryId].password = decryptedPassword
