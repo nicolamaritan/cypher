@@ -1,4 +1,4 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
