@@ -6,6 +6,6 @@
     <item
         android:id="@+id/AddCredentialsFragment"
         android:icon="@drawable/baseline_add_24"
-        android:title="Add"
+        android:title="@string/add"
         app:showAsAction="always" />
 </menu>
