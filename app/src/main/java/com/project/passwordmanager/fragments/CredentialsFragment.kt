@@ -16,10 +16,8 @@ class CredentialsFragment : Fragment()
     private var _binding: FragmentCredentialsBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: CredentialsViewModel
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    {
         _binding = FragmentCredentialsBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModel = ViewModelProvider(this)[CredentialsViewModel::class.java]
