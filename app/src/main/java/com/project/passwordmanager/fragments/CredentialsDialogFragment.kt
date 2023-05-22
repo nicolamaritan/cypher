@@ -27,25 +27,12 @@ class CredentialsDialogFragment private constructor(): DialogFragment()
         private val TAG = CredentialsFragment::javaClass.toString()
     }
 
-    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog
-    {
-        return AlertDialog.Builder(activity)
-            .setIcon(androidx.constraintlayout.widget.R.drawable.abc_ic_arrow_drop_right_black_24dp)
-            .setTitle("title")
-            .setPositiveButton("R.string.alert_dialog_ok") {
-                    dialogInterface, i -> Log.d(TAG, "OK")
-            }
-            .setNegativeButton("R.string.alert_dialog_cancel") {
-                    dialogInterface, i -> Log.d(TAG, "CANCEL")
-            }
-            .create()
-    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return layoutInflater.inflate(R.layout.dialog_credentials, container, false)
     }
 }
