@@ -4,6 +4,9 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
@@ -24,7 +27,7 @@ class CredentialsDialogFragment private constructor(): DialogFragment()
         private val TAG = CredentialsFragment::javaClass.toString()
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog
+    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog
     {
         return AlertDialog.Builder(activity)
             .setIcon(androidx.constraintlayout.widget.R.drawable.abc_ic_arrow_drop_right_black_24dp)
@@ -36,5 +39,13 @@ class CredentialsDialogFragment private constructor(): DialogFragment()
                     dialogInterface, i -> Log.d(TAG, "CANCEL")
             }
             .create()
+    }*/
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 }
