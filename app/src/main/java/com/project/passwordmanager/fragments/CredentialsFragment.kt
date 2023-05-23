@@ -22,8 +22,9 @@ class CredentialsFragment : Fragment()
         val view = binding.root
         viewModel = ViewModelProvider(this)[CredentialsViewModel::class.java]
 
-        // Test binding
-        binding.helloTv.text = "Binding changed the textview"
+        binding.addCredentialButton.setOnClickListener{
+            viewModel.showDialog(parentFragmentManager)
+        }
 
         return view
     }
