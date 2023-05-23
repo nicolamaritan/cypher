@@ -1,5 +1,6 @@
 package com.project.passwordmanager.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.passwordmanager.model.Credential
@@ -14,6 +15,8 @@ class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
 
     fun addCredential()
     {
+        //TODO Add data verification system
+        Log.d(TAG, "addCredential invoked.")
         viewModelScope.launch {
             val credential = Credential()
             credential.username = newCredentialUsername
@@ -23,5 +26,10 @@ class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
             dao.insert(credential)
         }
 
+    }
+
+    companion object
+    {
+        val TAG = CredentialsDialogViewModel::javaClass.toString()
     }
 }

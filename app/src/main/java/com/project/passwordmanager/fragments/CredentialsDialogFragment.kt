@@ -38,7 +38,8 @@ class CredentialsDialogFragment(): DialogFragment()
         val viewModelFactory = CredentialsDialogViewModelFactory(dao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[CredentialsDialogViewModel::class.java]
 
-
+        binding.credentialsDialogViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return view
     }
