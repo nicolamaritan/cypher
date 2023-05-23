@@ -9,18 +9,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.databinding.DialogCredentialsBinding
+import com.project.passwordmanager.factories.CredentialsDialogViewModelFactory
+import com.project.passwordmanager.model.Credential
+import com.project.passwordmanager.model.CredentialDao
+import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.viewmodels.CredentialsDialogViewModel
 
 class CredentialsDialogFragment(): DialogFragment()
 {
+    private var _binding: DialogCredentialsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         Logger.logCallback(TAG, "onCreateView", "CredentialsDialogFragment")
-        return layoutInflater.inflate(R.layout.dialog_credentials, container, false)
+        _binding = DialogCredentialsBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val application = requireActivity().application
+        val dao = CredentialDatabase.getInstance(application).credentialDao
+        val viewModelFactory = CredentialsDialogViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[CredentialsDialogViewModel::class.java]
+
+        return view
     }
 
     companion object
