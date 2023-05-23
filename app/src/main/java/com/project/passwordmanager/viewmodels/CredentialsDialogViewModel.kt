@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.project.passwordmanager.R
 import com.project.passwordmanager.common.CredentialValidator
-import com.project.passwordmanager.common.Event
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import kotlinx.coroutines.launch
@@ -41,13 +41,13 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
      */
     var closing = false
 
-    private val _toastEvent = MutableLiveData<Event<String>>()
+    private val _toastStringId = MutableLiveData<Int>()
 
     /**
      * LiveData for observing toast events.
      */
-    val toastEvent: LiveData<Event<String>>
-        get() = _toastEvent
+    val toastStringId: LiveData<Int>
+        get() = _toastStringId
 
     /**
      * Adds a new credential to the database.
@@ -67,7 +67,7 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
         credential.password = newCredentialPassword
 
         if (!CredentialValidator.validate(credential)) {
-            _toastEvent.value = Event("Invalid input data")
+            _toastStringId.value = R.string.invalid_credential_toast
             return
         }
 
@@ -76,7 +76,7 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
         }
 
         closing = true
-        _toastEvent.value = Event("Credential added :)")
+        _toastStringId.value = R.string.credential_added_toast
     }
 
     companion object {

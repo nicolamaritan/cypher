@@ -42,4 +42,6 @@
     <string name="insert_your_username">Insert your username</string>
     <string name="username">Username</string>
     <string name="insert_a_new_credential">Insert a new credential</string>
+    <string name="credential_added_toast">Credential safely added ;)</string>
+    <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
 </resources>

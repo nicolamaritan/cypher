@@ -57,12 +57,13 @@ class CredentialsDialogFragment(): DialogFragment()
         }
 
         /*
-        * Observes the toastEvent in the viewModel to show
-        * a toast whenever the Event changes.
-        * For reference, see the Event<out T> class.
+        * Observes the toastStringId in the viewModel to show
+        * a toast whenever the value changes.
+        * Contains the id of the string to show.
         * */
-        viewModel.toastEvent.observe(this) {
-            it.getContentIfNotHandled()?.let {
+        viewModel.toastStringId.observe(this) {
+            it.let {
+                val toastMessage = requireContext().getString(it)
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         }
