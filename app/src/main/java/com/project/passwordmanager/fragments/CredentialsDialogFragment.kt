@@ -28,7 +28,7 @@ class CredentialsDialogFragment(): DialogFragment()
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         Logger.logCallback(TAG, "onCreateView", "CredentialsDialogFragment")
         _binding = DialogCredentialsBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -41,8 +41,22 @@ class CredentialsDialogFragment(): DialogFragment()
         binding.credentialsDialogViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.add.setOnClickListener{
+            viewModel.addCredential()
+            if (viewModel.closing)
+            {
+                dismiss()
+            }
+        }
+
         return view
     }
+
+    override fun onDismiss(dialog: DialogInterface)
+    {
+        super.onDismiss(dialog)
+    }
+
 
     companion object
     {
