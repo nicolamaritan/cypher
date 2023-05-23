@@ -1,10 +1,12 @@
 package com.project.passwordmanager.viewmodels
 
 import android.util.Log
-import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.project.passwordmanager.common.CredentialValidator
+import com.project.passwordmanager.common.Event
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import kotlinx.coroutines.launch
@@ -16,6 +18,10 @@ class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
     var newCredentialPassword = ""
     var closing = false
 
+    private val _message = MutableLiveData<Event<String>>()
+    val message : LiveData<Event<String>>
+        get() = _message
+
     fun addCredential()
     {
         Log.d(TAG, "addCredential invoked.")
@@ -26,7 +32,7 @@ class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
 
         if (!CredentialValidator.validate(credential))
         {
-            // TODO add display message
+            _message.value = Event("Invalid input data")
             return
         }
 
@@ -35,7 +41,7 @@ class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
         }
 
         closing = true
-        //TODO add display message
+        _message.value = Event("Credential added :)")
 
     }
 
