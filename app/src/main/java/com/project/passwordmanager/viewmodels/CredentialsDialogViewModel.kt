@@ -8,13 +8,18 @@ import kotlinx.coroutines.launch
 
 class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
 {
+    var newCredentialUsername = ""
+    var newCredentialService = ""
     var newCredentialPassword = ""
 
     fun addCredential()
     {
         viewModelScope.launch {
             val credential = Credential()
+            credential.username = newCredentialUsername
+            credential.service = newCredentialService
             credential.password = newCredentialPassword
+
             dao.insert(credential)
         }
 
