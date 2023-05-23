@@ -1,26 +1,27 @@
 package com.project.passwordmanager.fragments
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
 import com.project.passwordmanager.databinding.DialogCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsDialogViewModelFactory
-import com.project.passwordmanager.model.Credential
-import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.CredentialsDialogViewModel
 
+/**
+ * Dialog fragment for adding credentials in the password manager application.
+ *
+ * This dialog allows the user to enter new credentials, which are then added to the database.
+ * It utilizes a ViewModel to handle user interactions, data validation, and database operations.
+ *
+ * @see CredentialsDialogViewModel
+ */
 class CredentialsDialogFragment(): DialogFragment()
 {
     private var _binding: DialogCredentialsBinding? = null
@@ -32,14 +33,18 @@ class CredentialsDialogFragment(): DialogFragment()
         savedInstanceState: Bundle?
     ): View {
         Logger.logCallback(TAG, "onCreateView", "CredentialsDialogFragment")
+
+        // ViewBinding
         _binding = DialogCredentialsBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // Instantiating the ViewModel
         val application = requireActivity().application
         val dao = CredentialDatabase.getInstance(application).credentialDao
         val viewModelFactory = CredentialsDialogViewModelFactory(dao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[CredentialsDialogViewModel::class.java]
 
+        // DataBinding
         binding.credentialsDialogViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -51,8 +56,13 @@ class CredentialsDialogFragment(): DialogFragment()
             }
         }
 
-        viewModel.message.observe(this) {
-            it.getContent()?.let {
+        /*
+        * Observes the toastEvent in the viewModel to show
+        * a toast whenever the Event changes.
+        * For reference, see the Event<out T> class.
+        * */
+        viewModel.toastEvent.observe(this) {
+            it.getContentIfNotHandled()?.let {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         }

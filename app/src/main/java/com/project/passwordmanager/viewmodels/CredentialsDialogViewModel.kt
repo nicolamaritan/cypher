@@ -11,28 +11,63 @@ import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import kotlinx.coroutines.launch
 
-class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
-{
+/**
+ * ViewModel class for CredentialsDialogFragment.
+ * This class is responsible for handling user interactions and data management related to adding new credentials.
+ * It provides methods to add credentials and handle events for displaying toasts.
+ *
+ * @param dao The DAO (Data Access Object) for accessing the Credential entity in the database.
+ * @see com.project.passwordmanager.fragments.CredentialsDialogFragment
+ */
+class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
+
+    /**
+     * The username for the new credential.
+     */
     var newCredentialUsername = ""
+
+    /**
+     * The service for the new credential.
+     */
     var newCredentialService = ""
+
+    /**
+     * The password for the new credential.
+     */
     var newCredentialPassword = ""
+
+    /**
+     * Indicates whether the dialog is closing.
+     */
     var closing = false
 
-    private val _message = MutableLiveData<Event<String>>()
-    val message : LiveData<Event<String>>
-        get() = _message
+    private val _toastEvent = MutableLiveData<Event<String>>()
 
-    fun addCredential()
-    {
+    /**
+     * LiveData for observing toast events.
+     */
+    val toastEvent: LiveData<Event<String>>
+        get() = _toastEvent
+
+    /**
+     * Adds a new credential to the database.
+     *
+     * This method creates a new Credential object using the input data and inserts it into the database using the DAO.
+     * Before inserting, it validates the input data.
+     * If the input data is invalid, it emits a toast event signaling that the data is invalid.
+     * After inserting the credential, it sets the closing flag to true and emits a toast event with positive
+     * result message.
+     *
+     */
+    fun addCredential() {
         Log.d(TAG, "addCredential invoked.")
         val credential = Credential()
         credential.username = newCredentialUsername
         credential.service = newCredentialService
         credential.password = newCredentialPassword
 
-        if (!CredentialValidator.validate(credential))
-        {
-            _message.value = Event("Invalid input data")
+        if (!CredentialValidator.validate(credential)) {
+            _toastEvent.value = Event("Invalid input data")
             return
         }
 
@@ -41,12 +76,13 @@ class CredentialsDialogViewModel(val dao: CredentialDao) : ViewModel()
         }
 
         closing = true
-        _message.value = Event("Credential added :)")
-
+        _toastEvent.value = Event("Credential added :)")
     }
 
-    companion object
-    {
-        val TAG = CredentialsDialogViewModel::javaClass.toString()
+    companion object {
+        /**
+         * TAG used for logging.
+         */
+        val TAG: String = CredentialsDialogViewModel::class.java.simpleName
     }
 }

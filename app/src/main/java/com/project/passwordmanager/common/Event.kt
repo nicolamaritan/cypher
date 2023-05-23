@@ -24,7 +24,7 @@ open class Event<out T>(private val content: T) {
      *
      * @return the content of type T if the event has not been handled, or null if it has.
      */
-    fun getContent(): T? {
+    fun getContentIfNotHandled(): T? {
         if (handled) {
             return null
         }
