@@ -1,4 +1,4 @@
-package com.project.passwordmanager.recyclerView
+package com.project.passwordmanager.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 
 //NOTE: modify with the database
-class PwmAdapter(private var app_lst: Array<String>, private var user_lst: Array<String>, private var pw_lst: Array<String>):
-    RecyclerView.Adapter<PwmAdapter.PwmViewHolder>(){
+class CredentialsAdapter(private var app_lst: Array<String>, private var user_lst: Array<String>, private var pw_lst: Array<String>):
+    RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
 
 
     class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
