@@ -33,6 +33,7 @@ class CredentialsFragment : Fragment()
 
         //setting the data binding for the layout
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val recyclerView: RecyclerView = binding.homeRecyclerView
         //recyclerView.adapter = PwmAdapter()
