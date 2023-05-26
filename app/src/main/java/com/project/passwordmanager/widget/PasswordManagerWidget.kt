@@ -111,7 +111,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
             setupRemoteAdapter(this, serviceIntent)
         }
 
-        val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
+        val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
             setupRemoteAdapter(this, serviceIntent)
         }
 
