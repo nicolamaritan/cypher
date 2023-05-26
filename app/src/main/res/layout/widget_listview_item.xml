@@ -3,33 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/rounded_corners"
-    android:padding="5dp">
+    android:background="@drawable/credentials_recyclerview_item_background"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/service"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="vedi strings app_name"
+        android:text="Service"
         android:textSize="20sp" />
 
 
     <TextView
         android:id="@+id/user"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="vedi strings user"
+        android:text="User"
         android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/password"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="vedi strings password"
+        android:text="Password"
         android:textSize="20sp"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 
 </LinearLayout>

@@ -35,7 +35,7 @@ class CredentialsAdapter:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PwmViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.password_manager_item, parent, false)
+            .inflate(R.layout.credentials_recyclerview_item, parent, false)
 
         return PwmViewHolder(view)
     }

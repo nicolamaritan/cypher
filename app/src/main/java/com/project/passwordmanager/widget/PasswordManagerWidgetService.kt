@@ -116,7 +116,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             //WARNING! As this is not a RecyclerView, the list in the widget will be less efficient! So, don't put a large amount of data inside!
 
             //takes the view to display remotely in the widget
-            val view = RemoteViews(context.packageName, R.layout.password_manager_item)
+            val view = RemoteViews(context.packageName, R.layout.widget_listview_item)
             val entry = widgetData!!.getEntry(position)
 
             //set the text in the view, taking the id of the TextView and the element to insert in it
