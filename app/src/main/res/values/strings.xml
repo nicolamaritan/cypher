@@ -21,4 +21,6 @@
     <string name="insert_a_new_credential">Insert a new credential</string>
     <string name="credential_added_toast">Credential safely added ;)</string>
     <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
+    <string name="unlock">Unlock</string>
+    <string name="do_something">Do something</string>
 </resources>
