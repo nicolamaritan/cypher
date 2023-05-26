@@ -49,7 +49,8 @@ object ToyDataWidgetDataInitializer
             "iCloud",
             "Steam",
             "Google",
-            "Google"
+            "Google",
+            "Steam"
         )
 
     /**
@@ -66,7 +67,8 @@ object ToyDataWidgetDataInitializer
             "Laura Ferrari",
             "Giovanni Ricci",
             "Sara Conti",
-            "Alessandro Moretti"
+            "Alessandro Moretti",
+            "Marco Bianchi"
         )
 
     /**
@@ -83,6 +85,7 @@ object ToyDataWidgetDataInitializer
             "let me in",
             "1234",
             "G1$%/pUn",
-            "sono io"
+            "sono io",
+            "ci9efndjoipwendfwexzdm9ewnfcgfgtrg"
         )
 }
