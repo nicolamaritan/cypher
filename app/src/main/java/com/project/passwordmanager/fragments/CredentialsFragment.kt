@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.project.passwordmanager.adapters.CredentialsAdapter
 import com.project.passwordmanager.databinding.FragmentCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
@@ -22,13 +23,13 @@ class CredentialsFragment : Fragment()
         _binding = FragmentCredentialsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        //Build the database (if it doesn't already exist
+        //Build the database (if it doesn't already exist)
         val application = requireNotNull(this.activity).application
         val dao = CredentialDatabase.getInstance(application).credentialDao
 
         //Get the view model
         val viewModelFactory = CredentialsViewModelFactory(dao)
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             this, viewModelFactory)[CredentialsViewModel::class.java]
 
         //setting the data binding for the layout
@@ -36,7 +37,7 @@ class CredentialsFragment : Fragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
         val recyclerView: RecyclerView = binding.homeRecyclerView
-        //recyclerView.adapter = PwmAdapter()
+        recyclerView.adapter = CredentialsAdapter(viewModel.services, viewModel.users, viewModel.pws)
 
         binding.addCredentialButton.setOnClickListener{
             viewModel.showDialog(parentFragmentManager)
@@ -44,6 +45,7 @@ class CredentialsFragment : Fragment()
 
         return view
     }
+
 
     override fun onDestroyView()
     {

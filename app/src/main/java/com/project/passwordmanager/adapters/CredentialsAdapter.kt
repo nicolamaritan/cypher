@@ -14,9 +14,9 @@ class CredentialsAdapter(private var app_lst: Array<String>, private var user_ls
 
     class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        val appName: TextView = itemView.findViewById(R.id.service)
-        val appUser: TextView = itemView.findViewById(R.id.user)
-        val appPw: TextView = itemView.findViewById(R.id.password)
+        private val appName: TextView = itemView.findViewById(R.id.service)
+        private val appUser: TextView = itemView.findViewById(R.id.user)
+        private val appPw: TextView = itemView.findViewById(R.id.password)
 
         fun bind(name:String, user:String, pw:String){
             appName.text = name
@@ -26,7 +26,7 @@ class CredentialsAdapter(private var app_lst: Array<String>, private var user_ls
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PwmViewHolder {
-        val view =  LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.password_manager_item, parent, false)
 
         return PwmViewHolder(view)
