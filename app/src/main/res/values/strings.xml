@@ -23,4 +23,7 @@
     <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
     <string name="unlock">Unlock</string>
     <string name="do_something">Do something</string>
+    <string name="copy_the_credential_s_password">Copy the credential\'s password.</string>
+    <string name="modify_the_credential">Modify the credential.</string>
+    <string name="unlock_lock_the_credential_s_password">Unlock/lock the credential\'s password.</string>
 </resources>
