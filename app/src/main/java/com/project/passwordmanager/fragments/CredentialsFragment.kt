@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.adapters.CredentialsAdapter
 import com.project.passwordmanager.databinding.FragmentCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsViewModelFactory
@@ -18,7 +18,7 @@ class CredentialsFragment : Fragment()
     private var _binding: FragmentCredentialsBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: CredentialsViewModel
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
     {
         _binding = FragmentCredentialsBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -36,8 +36,17 @@ class CredentialsFragment : Fragment()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val recyclerView: RecyclerView = binding.homeRecyclerView
-        recyclerView.adapter = CredentialsAdapter(viewModel.services, viewModel.users, viewModel.pws)
+
+        val adapter = CredentialsAdapter()
+        binding.homeRecyclerView.adapter = adapter
+
+        //passes the data to the adapter
+        viewModel.credentials.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                adapter.data = it
+            }
+        })
+
 
         binding.addCredentialButton.setOnClickListener{
             viewModel.showDialog(parentFragmentManager)

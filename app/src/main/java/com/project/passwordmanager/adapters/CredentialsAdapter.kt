@@ -6,10 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.model.Credential
 
-//NOTE: modify with the database
-class CredentialsAdapter(private var app_lst: Array<String>, private var user_lst: Array<String>, private var pw_lst: Array<String>):
+class CredentialsAdapter:
     RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
+
+    //definition of the data type we will work with
+    var data = listOf<Credential>()
+        //custom setter that tells the recyclerView if data changed
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
 
 
     class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -33,11 +41,12 @@ class CredentialsAdapter(private var app_lst: Array<String>, private var user_ls
     }
 
     override fun getItemCount(): Int {
-        return user_lst.size
+        return data.size
     }
 
     override fun onBindViewHolder(holder: PwmViewHolder, position: Int) {
-        holder.bind(app_lst[position], user_lst[position], pw_lst[position])
+        val item = data[position]
+        holder.bind(item.service, item.username, item.password)
     }
 
 
