@@ -1,5 +1,6 @@
 package com.project.passwordmanager.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -14,5 +15,5 @@ interface CredentialDao{
     suspend fun delete(credential: Credential)
 
     @Query("SELECT * FROM credentials_table ORDER BY id ASC")
-    fun getAll(): List<Credential>
+    fun getAll(): LiveData<List<Credential>>
 }

@@ -2,11 +2,14 @@ package com.project.passwordmanager.viewmodels
 
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import com.project.passwordmanager.R
 import com.project.passwordmanager.fragments.CredentialsDialogFragment
+import com.project.passwordmanager.model.CredentialDao
 
-class CredentialsViewModel : ViewModel()
+class CredentialsViewModel(dao: CredentialDao) : ViewModel()
 {
+    val credentials = dao.getAll()  //used for the RecyclerView to show all the tuples
+
+
     fun showDialog(fragmentManager: FragmentManager)
     {
         val newFragment = CredentialsDialogFragment()
