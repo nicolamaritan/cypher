@@ -1,15 +1,20 @@
 package com.project.passwordmanager.adapters
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
+
 
 class CredentialsAdapter(private val context: Context):
     RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
@@ -44,12 +49,32 @@ class CredentialsAdapter(private val context: Context):
                 locked = !locked
                 updatePasswordTextView(password)
             }
+
+            copyImageButton.setOnClickListener{
+                if (!locked)
+                {
+                    copyPassword()
+                }
+                else
+                {
+                    Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         private fun updatePasswordTextView(clearPassword: String)
         {
             appPw.text = if(locked) context.getString(R.string.locked_password)
                         else Cryptography.decryptText(clearPassword, "MASTER")
+        }
+
+        private fun copyPassword()
+        {
+            val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("Copied password", appPw.text)
+            clipboardManager.setPrimaryClip(clipData)
+
+            Toast.makeText(context, "Password copied to clipboard.", Toast.LENGTH_SHORT).show()
         }
     }
 
