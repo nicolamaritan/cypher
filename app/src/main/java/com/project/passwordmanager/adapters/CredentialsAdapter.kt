@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.model.Credential
+import com.project.passwordmanager.security.Cryptography
 
 class CredentialsAdapter(private val context: Context):
     RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
@@ -47,7 +48,8 @@ class CredentialsAdapter(private val context: Context):
 
         private fun updatePasswordTextView(clearPassword: String)
         {
-            appPw.text = if(locked) context.getString(R.string.locked_password) else clearPassword
+            appPw.text = if(locked) context.getString(R.string.locked_password)
+                        else Cryptography.decryptText(clearPassword, "MASTER")
         }
     }
 
