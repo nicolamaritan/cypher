@@ -9,6 +9,7 @@ import com.project.passwordmanager.R
 import com.project.passwordmanager.common.CredentialValidator
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
+import com.project.passwordmanager.security.Cryptography
 import kotlinx.coroutines.launch
 
 /**
@@ -64,7 +65,7 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
         val credential = Credential()
         credential.username = newCredentialUsername
         credential.service = newCredentialService
-        credential.password = newCredentialPassword
+        credential.password = Cryptography.encryptText(newCredentialPassword, "MASTER")
 
         if (!CredentialValidator.validate(credential)) {
             _toastStringId.value = R.string.invalid_credential_toast

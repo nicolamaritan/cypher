@@ -1,14 +1,22 @@
 package com.project.passwordmanager.adapters
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.model.Credential
+import com.project.passwordmanager.security.Cryptography
 
-class CredentialsAdapter:
+
+class CredentialsAdapter(private val context: Context):
     RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
 
     //definition of the data type we will work with
@@ -20,16 +28,53 @@ class CredentialsAdapter:
         }
 
 
-    class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
 
         private val appName: TextView = itemView.findViewById(R.id.service)
         private val appUser: TextView = itemView.findViewById(R.id.user)
-        private val appPw: TextView = itemView.findViewById(R.id.password)
+        private var appPw: TextView = itemView.findViewById(R.id.password)
+        private var locked: Boolean = true
 
-        fun bind(name:String, user:String, pw:String){
-            appName.text = name
+        private val lockImageButton: ImageButton = itemView.findViewById(R.id.lock_imageButton)
+        private val copyImageButton: ImageButton = itemView.findViewById(R.id.copy_imageButton)
+        private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
+
+        fun bind(service:String, user:String, password:String){
+            appName.text = service
             appUser.text = user
-            appPw.text = pw
+            updatePasswordTextView(password)
+
+            lockImageButton.setOnClickListener{
+                locked = !locked
+                updatePasswordTextView(password)
+            }
+
+            copyImageButton.setOnClickListener{
+                if (!locked)
+                {
+                    copyPassword()
+                }
+                else
+                {
+                    Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        private fun updatePasswordTextView(clearPassword: String)
+        {
+            appPw.text = if(locked) context.getString(R.string.locked_password)
+                        else Cryptography.decryptText(clearPassword, "MASTER")
+        }
+
+        private fun copyPassword()
+        {
+            val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("Copied password", appPw.text)
+            clipboardManager.setPrimaryClip(clipData)
+
+            Toast.makeText(context, "Password copied to clipboard.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -48,6 +93,5 @@ class CredentialsAdapter:
         val item = data[position]
         holder.bind(item.service, item.username, item.password)
     }
-
 
 }

@@ -38,7 +38,7 @@ class CredentialsFragment : Fragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
 
-        val adapter = CredentialsAdapter()
+        val adapter = CredentialsAdapter(requireContext())
         binding.homeRecyclerView.adapter = adapter
 
         //passes the data to the adapter
