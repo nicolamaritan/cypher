@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.adapters.CredentialsAdapter
@@ -48,7 +49,7 @@ class CredentialsFragment : Fragment()
         })
 
 
-        binding.addCredentialButton.setOnClickListener{
+        binding.fab.setOnClickListener{
             viewModel.showDialog(parentFragmentManager)
         }
 
