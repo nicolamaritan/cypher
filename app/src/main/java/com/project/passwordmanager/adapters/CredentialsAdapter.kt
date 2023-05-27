@@ -1,14 +1,16 @@
 package com.project.passwordmanager.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.model.Credential
 
-class CredentialsAdapter:
+class CredentialsAdapter(private val context: Context):
     RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
 
     //definition of the data type we will work with
@@ -20,16 +22,32 @@ class CredentialsAdapter:
         }
 
 
-    class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
 
         private val appName: TextView = itemView.findViewById(R.id.service)
         private val appUser: TextView = itemView.findViewById(R.id.user)
-        private val appPw: TextView = itemView.findViewById(R.id.password)
+        private var appPw: TextView = itemView.findViewById(R.id.password)
+        private var locked: Boolean = true
 
-        fun bind(name:String, user:String, pw:String){
-            appName.text = name
+        private val lockImageButton: ImageButton = itemView.findViewById(R.id.lock_imageButton)
+        private val copyImageButton: ImageButton = itemView.findViewById(R.id.copy_imageButton)
+        private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
+
+        fun bind(service:String, user:String, password:String){
+            appName.text = service
             appUser.text = user
-            appPw.text = pw
+            updatePasswordTextView(password)
+
+            lockImageButton.setOnClickListener{
+                locked = !locked
+                updatePasswordTextView(password)
+            }
+        }
+
+        private fun updatePasswordTextView(clearPassword: String)
+        {
+            appPw.text = if(locked) context.getString(R.string.locked_password) else clearPassword
         }
     }
 
@@ -48,6 +66,5 @@ class CredentialsAdapter:
         val item = data[position]
         holder.bind(item.service, item.username, item.password)
     }
-
 
 }
