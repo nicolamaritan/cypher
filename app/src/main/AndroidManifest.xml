@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PasswordManager"
         tools:targetApi="31">
+        <activity
+            android:name=".UnlockWidgetActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".widget.PasswordManagerWidget"
             android:exported="false">
@@ -33,19 +37,22 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".widget.ItemClickReceiver" android:exported="false">
+        <receiver
+            android:name=".widget.ItemClickReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="item_click" />
             </intent-filter>
         </receiver>
-
-        <!--Beyond the requirements listed in Declare a widget in the manifest,
+        <!--
+Beyond the requirements listed in Declare a widget in the manifest,
         you need to make it possible for widgets with collections to bind to your RemoteViewsService.
         Do this by declaring the service in your manifest file with the permission BIND_REMOTEVIEWS.
-        This prevents other applications from freely accessing your widget's data. -->
-        <service android:name=".widget.PasswordManagerWidgetService"
+        This prevents other applications from freely accessing your widget's data.
+        -->
+        <service
+            android:name=".widget.PasswordManagerWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
     </application>
 
 </manifest>

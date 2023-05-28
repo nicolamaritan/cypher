@@ -27,14 +27,13 @@ class ItemClickReceiver : BroadcastReceiver()
         Log.d(TAG, "List Item: $position" )
 
 
-        // Encryption / Decryption
-        if (WidgetData.getWidgetData(appWidgetId).isEncrypted(position))
+        if (WidgetData.getWidgetData(appWidgetId).isVisible(position))
         {
-            WidgetData.getWidgetData(appWidgetId).decrypt(position, "MASTER")
+            WidgetData.getWidgetData(appWidgetId).hideEntry(position)
         }
         else
         {
-            WidgetData.getWidgetData(appWidgetId).encrypt(position, "MASTER")
+            WidgetData.getWidgetData(appWidgetId).showEntry(position)
         }
 
         // Notify Service

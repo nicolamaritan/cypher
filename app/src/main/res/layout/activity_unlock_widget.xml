@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UnlockWidgetActivity"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Insert the Master Password to unlock your passwords:" />
+
+    <EditText
+        android:id="@+id/username_te"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Insert your Master Password"
+        android:minHeight="48dp"
+        android:autofillHints="username"
+        android:text="@={credentialsDialogViewModel.newCredentialUsername}"
+        android:inputType="" />
+
+    <Button
+        android:id="@+id/unlock_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Unlock" />
+
+</LinearLayout>

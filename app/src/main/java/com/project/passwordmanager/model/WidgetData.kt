@@ -63,7 +63,7 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to encrypt.
      * @param master The master password used to encrypt the entry's password
      */
-    fun encrypt(entryId: Int, master: String)
+    private fun encrypt(entryId: Int, master: String)
     {
         if (entries[entryId].encrypted)
             throw AlreadyEncryptedException("The $entryId-th entry is already encrypted.")
@@ -84,7 +84,7 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to decrypt.
      * @param master The master password used to decrypt the entry's password
      */
-    fun decrypt(entryId: Int, master: String)
+    private fun decrypt(entryId: Int, master: String)
     {
         if (!entries[entryId].encrypted)
             throw AlreadyDecryptedException("The $entryId-th entry is already decrypted.")
@@ -101,7 +101,7 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to check.
      * @return true if the entry is encrypted, false otherwise.
      */
-    fun isEncrypted(entryId: Int) =
+    private fun isEncrypted(entryId: Int) =
         getEntry(entryId).encrypted
 
     /**
@@ -139,6 +139,20 @@ class WidgetData private constructor()
      * @return The number of entries.
      */
     fun size() = entries.size
+
+    fun showEntry(entryId: Int)
+    {
+        entries[entryId].visible = true
+    }
+
+    fun hideEntry(entryId: Int)
+    {
+        entries[entryId].visible = false
+    }
+
+    var locked: Boolean = true
+        private set
+    fun isVisible(entryId: Int) = entries[entryId].visible
 
     private val entries = mutableListOf<Entry>()
 

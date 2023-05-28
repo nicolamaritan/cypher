@@ -125,7 +125,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             view.setTextViewText(R.id.user, entry.username)
             view.setTextViewText(
                 R.id.password,
-                if (entry.encrypted) context.getString(R.string.locked_password) else entry.password
+                if (!entry.visible) context.getString(R.string.locked_password) else entry.password
             )
 
             /*
