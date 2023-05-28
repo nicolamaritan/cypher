@@ -6,10 +6,8 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.util.SizeF
 import android.widget.RemoteViews
-import androidx.annotation.RequiresApi
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
 
@@ -26,7 +24,6 @@ class PasswordManagerWidget : AppWidgetProvider() {
      * @param appWidgetManager The AppWidgetManager instance for managing the widget.
      * @param appWidgetIds An array of widget IDs for the widgets that need to be updated.
      */
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -120,7 +117,6 @@ class PasswordManagerWidget : AppWidgetProvider() {
      * @param appWidgetManager The AppWidgetManager instance for managing the widget.
      * @param appWidgetId The ID of the widget to be updated.
      */
-    @RequiresApi(Build.VERSION_CODES.S)
     internal fun updateAppWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
