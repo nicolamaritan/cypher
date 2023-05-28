@@ -123,13 +123,16 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             //set the text in the view, taking the id of the TextView and the element to insert in it
             view.setTextViewText(R.id.service, entry.service)
             view.setTextViewText(R.id.user, entry.username)
-            view.setTextViewText(R.id.password, entry.password)
+            view.setTextViewText(
+                R.id.password,
+                if (entry.encrypted) context.getString(R.string.locked_password) else entry.password
+            )
 
             /*
             * Set FillInIntent for clicking on the unlock button.
             * */
             val fillInIntentBundle = Bundle()
-            fillInIntentBundle.putInt("credential_position", position)
+            fillInIntentBundle.putInt(PasswordManagerWidget.ITEM_POSITION, position)
             val fillInIntent = Intent()
             fillInIntent.putExtras(fillInIntentBundle)
             view.setOnClickFillInIntent(R.id.widget_listview_item, fillInIntent)

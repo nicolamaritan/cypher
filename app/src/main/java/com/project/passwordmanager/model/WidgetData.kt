@@ -89,7 +89,7 @@ class WidgetData private constructor()
         if (!entries[entryId].encrypted)
             throw AlreadyDecryptedException("The $entryId-th entry is already decrypted.")
 
-        val decryptedPassword = Cryptography.encryptText(entries[entryId].password, master)
+        val decryptedPassword = Cryptography.decryptText(entries[entryId].password, master)
         entries[entryId].encrypted = false
         entries[entryId].password = decryptedPassword
 

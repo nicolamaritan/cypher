@@ -57,7 +57,10 @@ class PasswordManagerWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context?, intent: Intent?)
     {
-        Logger.logCallback(TAG, "onReceive", intent!!.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID))
+        /*Logger.logCallback(
+            TAG,
+            "onReceive ${intent!!.getIntExtra("credential_position", -1)}",
+            intent!!.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID))*/
         super.onReceive(context, intent)
     }
 
@@ -93,7 +96,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
      */
     private fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
     {
-        val itemClickIntent = Intent(context, PasswordManagerWidget::class.java).apply {
+        val itemClickIntent = Intent(context, ItemClickReceiver::class.java).apply {
             action = "item_click"
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         }
@@ -159,5 +162,6 @@ class PasswordManagerWidget : AppWidgetProvider() {
     companion object
     {
         val TAG = PasswordManagerWidget::class.java.toString()
+        const val ITEM_POSITION = "item_position"
     }
 }

@@ -2,6 +2,7 @@ package com.project.passwordmanager.common
 
 import com.project.passwordmanager.model.Entry
 import com.project.passwordmanager.model.WidgetData
+import com.project.passwordmanager.security.Cryptography
 
 /**
  * ToyDataWidgetDataInitializer is a utility object for initializing widget data for a password manager app.
@@ -30,7 +31,11 @@ object ToyDataWidgetDataInitializer
         // Iterate the lists
         for (i in services.indices)
         {
-            val entry = Entry(services[i], users[i], passwords[i])
+            val entry = Entry(
+                services[i],
+                users[i],
+                Cryptography.encryptText(passwords[i], "MASTER"))
+
             widgetData.addEntry(entry)
         }
     }
