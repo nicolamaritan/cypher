@@ -1,5 +1,6 @@
 package com.project.passwordmanager.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
@@ -10,6 +11,7 @@ import android.util.SizeF
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.Logger
 
 /**
  * Implementation of App Widget functionality for the Password Manager widget.
@@ -56,25 +58,59 @@ class PasswordManagerWidget : AppWidgetProvider() {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    /**
-     * Sets up the RemoteViews adapter for the widget.
-     *
-     * @param remoteViews The RemoteViews object for the widget.
-     * @param serviceIntent The intent for the RemoteViewsService.
-     */
-    private fun setupRemoteAdapter(remoteViews: RemoteViews, serviceIntent: Intent) {
-        /*
-            Set up the RemoteViews object to use a RemoteViews adapter.
-            This adapter connects to a RemoteViewsService through the specified intent.
-            This is how you populate the data.
-        */
-        remoteViews.setRemoteAdapter(R.id.widget_listview, serviceIntent)
+    override fun onReceive(context: Context?, intent: Intent?)
+    {
+        Logger.logCallback(TAG, "onReceive", intent!!.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID))
+        super.onReceive(context, intent)
+    }
 
-        /*
-            The empty view is displayed when the collection has no items.
-            It must be in the same layout used to instantiate the RemoteViews object.
-        */
+
+    /**
+     * Initializes the RemoteViews adapter and sets up the widget's remote adapter and empty view.
+     *
+     * @param remoteViews The RemoteViews object representing the widget's layout.
+     * @param context The context in which the receiver is running.
+     * @param appWidgetId The ID of the widget to be updated.
+     */
+    private fun initRemoteAdapter(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+    {
+        val serviceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
+            //Add the widget ID to the intent extras
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+
+            //with this line, the system can distinguish between the instances of the widgets
+            data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
+        }
+
+        remoteViews.setRemoteAdapter(R.id.widget_listview, serviceIntent)
         remoteViews.setEmptyView(R.id.widget_listview, R.id.empty_listview)
+    }
+
+
+    /**
+     * Sets up the item click PendingIntent for the widget.
+     *
+     * @param remoteViews The RemoteViews object representing the widget's layout.
+     * @param context The context in which the receiver is running.
+     * @param appWidgetId The ID of the widget to be updated.
+     */
+    private fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+    {
+        val itemClickIntent = Intent(context, PasswordManagerWidget::class.java).apply {
+            action = "item_click"
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+        }
+
+        // Special intent performing a broadcast
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            appWidgetId,
+            itemClickIntent,
+            PendingIntent.FLAG_MUTABLE
+        )
+
+        // The PendingIntentTemplate is combined with the FillInIntent in AppWidgetService
+        remoteViews.setPendingIntentTemplate(R.id.widget_listview, pendingIntent)
     }
 
     /**
@@ -90,29 +126,24 @@ class PasswordManagerWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
     ) {
-        val serviceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
-            //Add the widget ID to the intent extras
-            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-
-            //with this line, the system can distinguish between the instances of the widgets
-            data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
-        }
-
         /**
          *  RemoteViews specifying separate layouts for orientation or size cannot be modified.
          *  Instead, fully configure each layouts individually before constructing the combined.
          *  Therefore, each layout should be configured BEFORE invoking RemoteViews(viewMapping).
          * */
         val smallView = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
-            setupRemoteAdapter(this, serviceIntent)
+            initRemoteAdapter(this, context, appWidgetId)
+            setupItemClick(this, context, appWidgetId)
         }
 
         val tallView = RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
-            setupRemoteAdapter(this, serviceIntent)
+            initRemoteAdapter(this, context, appWidgetId)
+            setupItemClick(this, context, appWidgetId)
         }
 
         val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
-            setupRemoteAdapter(this, serviceIntent)
+            initRemoteAdapter(this, context, appWidgetId)
+            setupItemClick(this, context, appWidgetId)
         }
 
         // Maps the sizes to each view.
@@ -127,5 +158,10 @@ class PasswordManagerWidget : AppWidgetProvider() {
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)
+    }
+
+    companion object
+    {
+        val TAG = PasswordManagerWidget::class.java.toString()
     }
 }

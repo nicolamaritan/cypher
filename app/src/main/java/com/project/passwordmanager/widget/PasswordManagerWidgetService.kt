@@ -3,6 +3,7 @@ package com.project.passwordmanager.widget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.project.passwordmanager.R
@@ -124,7 +125,16 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             view.setTextViewText(R.id.user, entry.username)
             view.setTextViewText(R.id.password, entry.password)
 
-            //SystemClock.sleep(500)        NON SO WHY
+            /*
+            * Set FillInIntent for clicking on the unlock button.
+            * */
+            val fillInIntentBundle = Bundle()
+            fillInIntentBundle.putInt("credential_position", position)
+            val fillInIntent = Intent()
+            fillInIntent.putExtras(fillInIntentBundle)
+            view.setOnClickFillInIntent(R.id.widget_listview_item, fillInIntent)
+
+
             return view
         }
 
