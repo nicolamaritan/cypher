@@ -11,7 +11,6 @@ import android.util.SizeF
 import android.widget.RemoteViews
 import com.project.passwordmanager.R
 import com.project.passwordmanager.UnlockWidgetActivity
-import com.project.passwordmanager.common.Logger
 import com.project.passwordmanager.model.WidgetData
 
 /**
@@ -60,10 +59,6 @@ class PasswordManagerWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context?, intent: Intent?)
     {
-        /*Logger.logCallback(
-            TAG,
-            "onReceive ${intent!!.getIntExtra("credential_position", -1)}",
-            intent!!.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID))*/
         super.onReceive(context, intent)
     }
 
@@ -100,7 +95,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
     private fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
     {
         val itemClickIntent = Intent(context, ItemClickReceiver::class.java).apply {
-            action = "item_click"
+            action = ITEM_CLICK_ACTION
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         }
 
@@ -136,6 +131,24 @@ class PasswordManagerWidget : AppWidgetProvider() {
                 R.id.unlock_button,
                 context.getString(R.string.unlock)
             )
+        }
+        else
+        {
+            val lockIntent = Intent(context, LockWidgetReceiver::class.java).apply {
+                action = LOCK_ACTION
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            }
+
+            val lockPendingIntent = PendingIntent.getBroadcast(
+                context,
+                appWidgetId,
+                lockIntent,
+                PendingIntent.FLAG_MUTABLE
+            )
+            remoteViews.setOnClickPendingIntent(R.id.unlock_button, lockPendingIntent)
+            remoteViews.setTextViewText(
+                R.id.unlock_button,
+                context.getString(R.string.lock))
         }
 
     }
@@ -193,5 +206,21 @@ class PasswordManagerWidget : AppWidgetProvider() {
     {
         val TAG = PasswordManagerWidget::class.java.toString()
         const val ITEM_POSITION = "item_position"
+        const val ITEM_CLICK_ACTION = "item_click"
+        const val LOCK_ACTION = "lock"
+
+        fun updateAppWidget(context: Context, appWidgetId: Int)
+        {
+            // Update widget
+            val updateWidgetIntent = Intent(context, PasswordManagerWidget::class.java)
+            updateWidgetIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+            val ids = intArrayOf(appWidgetId)   // Update ONLY one widget
+            updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+            context.sendBroadcast(updateWidgetIntent)
+
+            // Update the elements of the listview
+            AppWidgetManager.getInstance(context)
+                .notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
+        }
     }
 }

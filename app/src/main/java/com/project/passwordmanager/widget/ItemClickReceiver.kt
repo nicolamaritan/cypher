@@ -29,7 +29,6 @@ class ItemClickReceiver : BroadcastReceiver()
             Log.d(TAG, "Widget ID: $appWidgetId")
             Log.d(TAG, "List Item: $position" )
 
-
             widgetData[position].visible = !widgetData[position].visible
 
             // Notify Service

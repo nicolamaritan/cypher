@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.databinding.ActivityUnlockWidgetBinding
 import com.project.passwordmanager.viewmodels.UnlockWidgetViewModel
+import com.project.passwordmanager.widget.PasswordManagerWidget
 
 /**
  * This activity is responsible for unlocking the password manager widget.
@@ -52,6 +53,7 @@ class UnlockWidgetActivity : AppCompatActivity()
                     "Widget unlocked successfully.",
                     Toast.LENGTH_LONG
                 ).show()
+                PasswordManagerWidget.updateAppWidget(applicationContext, viewModel.appWidgetId)
                 finish()
             }
             else

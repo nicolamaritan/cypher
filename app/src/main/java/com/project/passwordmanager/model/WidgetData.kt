@@ -137,11 +137,10 @@ class WidgetData private constructor()
     fun size() = entries.size
 
 
-    var locked: Boolean = true
-        private set
-
     fun unlock(master: String)
     {
+        // Deep copies entries
+        copiedEncryptedPassword = entries.map{it.copy()}
         for (i in 0 until entries.size)
         {
             decrypt(i, master)
@@ -150,15 +149,18 @@ class WidgetData private constructor()
 
     }
 
-    fun lock(master: String)
+    fun lock()
     {
-        for (i in 0 until entries.size)
-        {
-            encrypt(i, master)
-        }
+        // No need to re-set visibility, as in unlock visibility is deep-copied too
+        entries = copiedEncryptedPassword as MutableList<Entry>
+        copiedEncryptedPassword = null
         locked = true
     }
 
-    private val entries = mutableListOf<Entry>()
+    var locked: Boolean = true
+        private set
+
+    private var entries = mutableListOf<Entry>()
+    private var copiedEncryptedPassword: List<Entry>?  = null
 
 }
