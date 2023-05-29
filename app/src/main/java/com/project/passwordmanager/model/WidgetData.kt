@@ -102,7 +102,7 @@ class WidgetData private constructor()
      * @return true if the entry is encrypted, false otherwise.
      */
     private fun isEncrypted(entryId: Int) =
-        getEntry(entryId).encrypted
+        get(entryId).encrypted
 
     /**
      * Gets the entry with the given ID.
@@ -110,8 +110,7 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to get.
      * @return The entry with the given ID.
      */
-    fun getEntry(entryId: Int) =
-        entries[entryId]
+    operator fun get(entryId: Int) = entries[entryId]
 
     /**
      * Removes the entry with the given ID.
@@ -128,10 +127,7 @@ class WidgetData private constructor()
      *
      * @param entry The Entry to be added.
      */
-    fun addEntry(entry: Entry)
-    {
-        entries.add(entry)
-    }
+    fun addEntry(entry: Entry) = entries.add(entry)
 
     /**
      * Returns the number of entries.
@@ -140,19 +136,28 @@ class WidgetData private constructor()
      */
     fun size() = entries.size
 
-    fun showEntry(entryId: Int)
-    {
-        entries[entryId].visible = true
-    }
-
-    fun hideEntry(entryId: Int)
-    {
-        entries[entryId].visible = false
-    }
 
     var locked: Boolean = true
         private set
-    fun isVisible(entryId: Int) = entries[entryId].visible
+
+    fun unlock(master: String)
+    {
+        for (i in 0 until entries.size)
+        {
+            decrypt(i, master)
+        }
+        locked = false
+
+    }
+
+    fun lock(master: String)
+    {
+        for (i in 0 until entries.size)
+        {
+            encrypt(i, master)
+        }
+        locked = true
+    }
 
     private val entries = mutableListOf<Entry>()
 

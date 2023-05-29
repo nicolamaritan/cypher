@@ -118,7 +118,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.widget_listview_item)
-            val entry = widgetData!!.getEntry(position)
+            val entry = widgetData!!.get(position)
 
             //set the text in the view, taking the id of the TextView and the element to insert in it
             view.setTextViewText(R.id.service, entry.service)

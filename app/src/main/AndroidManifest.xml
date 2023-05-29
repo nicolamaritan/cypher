@@ -55,4 +55,5 @@ Beyond the requirements listed in Declare a widget in the manifest,
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
+
 </manifest>

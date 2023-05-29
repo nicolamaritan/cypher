@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import com.project.passwordmanager.R
 import com.project.passwordmanager.model.WidgetData
 
@@ -14,31 +15,28 @@ class ItemClickReceiver : BroadcastReceiver()
     {
         val appWidgetId: Int = intent!!.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
         val position = intent.extras!!.getInt(PasswordManagerWidget.ITEM_POSITION)
+        val widgetData = WidgetData.getWidgetData(appWidgetId)
 
-        /*if (!WidgetData.getWidgetData(appWidgetId).authenticated)
+        if (widgetData.locked)
         {
             Toast.makeText(
                 context,
-                "You are not authenticated.",
-                Toast.LENGTH_LONG).show()
-        }*/
-
-        Log.d(TAG, "Widget ID: $appWidgetId")
-        Log.d(TAG, "List Item: $position" )
-
-
-        if (WidgetData.getWidgetData(appWidgetId).isVisible(position))
-        {
-            WidgetData.getWidgetData(appWidgetId).hideEntry(position)
+                "The widget is locked. Unlock the widget first.",
+                Toast.LENGTH_SHORT).show()
         }
         else
         {
-            WidgetData.getWidgetData(appWidgetId).showEntry(position)
+            Log.d(TAG, "Widget ID: $appWidgetId")
+            Log.d(TAG, "List Item: $position" )
+
+
+            widgetData[position].visible = !widgetData[position].visible
+
+            // Notify Service
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
         }
 
-        // Notify Service
-        val appWidgetManager = AppWidgetManager.getInstance(context)
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
     }
 
     companion object
