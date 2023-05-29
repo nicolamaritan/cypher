@@ -7,7 +7,7 @@
         />
 
     <item
-        android:id="@+id/AddCredentialsFragment"
-        android:icon="@drawable/baseline_add_24"
-        android:title="@string/add"/>
+        android:id="@+id/StatsFragment"
+        android:icon="@drawable/baseline_query_stats_24"
+        android:title="@string/stats"/>
 </menu>

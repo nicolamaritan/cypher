@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AddCredentialsFragment">
+    tools:context=".fragments.StatsFragment">
 
     <TextView
         android:id="@+id/add_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/addcredentials_fragment" />
+        android:text="@string/stats_fragment" />
 
 </FrameLayout>
