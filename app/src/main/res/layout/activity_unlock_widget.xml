@@ -7,12 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".UnlockWidgetActivity"
     android:orientation="vertical"
+
     >
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Insert the Master Password to unlock your passwords:" />
+        android:text="Insert the Master Password to unlock your passwords.\nRemember to lock your passwords afterwards."
+        android:layout_margin="10dp"/>
+
 
     <EditText
         android:id="@+id/username_te"
@@ -21,13 +29,15 @@
         android:hint="Insert your Master Password"
         android:minHeight="48dp"
         android:autofillHints="username"
-        android:text="@={credentialsDialogViewModel.newCredentialUsername}"
-        android:inputType="" />
+        android:inputType=""
+        android:layout_marginHorizontal="10dp"/>
 
     <Button
         android:id="@+id/unlock_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unlock" />
+        android:text="@string/unlock"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"/>
 
 </LinearLayout>

@@ -6,10 +6,13 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.util.SizeF
 import android.widget.RemoteViews
 import com.project.passwordmanager.R
+import com.project.passwordmanager.UnlockWidgetActivity
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.model.WidgetData
 
 /**
  * Implementation of App Widget functionality for the Password Manager widget.
@@ -113,6 +116,30 @@ class PasswordManagerWidget : AppWidgetProvider() {
         remoteViews.setPendingIntentTemplate(R.id.widget_listview, pendingIntent)
     }
 
+    private fun setupLockButtonClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+    {
+        if (!WidgetData.hasWidgetData(appWidgetId) || WidgetData.getWidgetData(appWidgetId).locked)
+        {
+            val unlockIntent = Intent(context, UnlockWidgetActivity::class.java)
+            val unlockIntentExtras = Bundle()
+            unlockIntentExtras.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            unlockIntent.putExtras(unlockIntentExtras)
+
+            val unlockPendingIntent = PendingIntent.getActivity(
+                context,
+                appWidgetId,
+                unlockIntent,
+                PendingIntent.FLAG_MUTABLE
+            )
+            remoteViews.setOnClickPendingIntent(R.id.unlock_button, unlockPendingIntent)
+            remoteViews.setTextViewText(
+                R.id.unlock_button,
+                context.getString(R.string.unlock)
+            )
+        }
+
+    }
+
     /**
      * Updates the widget with the specified ID.
      *
@@ -133,16 +160,19 @@ class PasswordManagerWidget : AppWidgetProvider() {
         val smallView = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
+            setupLockButtonClick(this, context, appWidgetId)
         }
 
         val tallView = RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
+            setupLockButtonClick(this, context, appWidgetId)
         }
 
         val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
+            setupLockButtonClick(this, context, appWidgetId)
         }
 
         // Maps the sizes to each view.
