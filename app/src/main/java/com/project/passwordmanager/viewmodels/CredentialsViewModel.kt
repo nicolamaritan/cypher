@@ -9,7 +9,6 @@ class CredentialsViewModel(dao: CredentialDao) : ViewModel()
 {
     val credentials = dao.getAll()  //used for the RecyclerView to show all the tuples
 
-
     fun showDialog(fragmentManager: FragmentManager)
     {
         val newFragment = CredentialsDialogFragment()

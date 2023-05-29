@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.databinding.FragmentStatsBinding
+import com.project.passwordmanager.factories.StatsViewModelFactory
 import com.project.passwordmanager.viewmodels.StatsViewModel
 
 class StatsFragment : Fragment()
@@ -20,8 +21,9 @@ class StatsFragment : Fragment()
         val view = binding.root
         viewModel = ViewModelProvider(this)[StatsViewModel::class.java]
 
-        // Test binding
-        binding.addTv.text = "Binding changed the textview again again"
+        //Get the view model
+        val viewModelFactory = StatsViewModelFactory()
+        viewModel = ViewModelProvider(this, viewModelFactory)[StatsViewModel::class.java]
 
         return view
     }
