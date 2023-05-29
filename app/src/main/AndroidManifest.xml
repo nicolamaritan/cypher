@@ -41,17 +41,11 @@
         <receiver
             android:name=".widget.ItemClickReceiver"
             android:exported="false" >
-            <intent-filter>
-                <action android:name="item_click" />
-            </intent-filter>
         </receiver>
 
         <receiver
             android:name=".widget.LockWidgetReceiver"
             android:exported="false" >
-            <intent-filter>
-                <action android:name="item_click" />
-            </intent-filter>
         </receiver>
         <!--
 Beyond the requirements listed in Declare a widget in the manifest,
