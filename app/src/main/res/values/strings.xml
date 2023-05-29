@@ -28,4 +28,6 @@
     <string name="add_a_new_credential">Add a new credential.</string>
     <string name="locked_password">*******</string>
     <string name="unlock_widget">Unlock widget</string>
+    <string name="insert_the_master_password_to_unlock_your_passwords_nremember_to_lock_your_passwords_afterwards">Insert the Master Password to unlock your passwords.\nRemember to lock your passwords afterwards.</string>
+    <string name="insert_your_master_password">Insert the Master Password</string>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,19 +17,23 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Insert the Master Password to unlock your passwords.\nRemember to lock your passwords afterwards."
+        android:text="@string/insert_the_master_password_to_unlock_your_passwords_nremember_to_lock_your_passwords_afterwards"
         android:layout_margin="10dp"/>
 
 
+    <!-- Warning suppressed as it said the layout width is too wide using match_parent.
+    This is not true as match parent exactly matches the parent size and there is no
+    risk of overflowing or badly formatted text.-->
     <EditText
-        android:id="@+id/username_te"
+        android:id="@+id/inserted_password_te"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Insert your Master Password"
+        android:hint="@string/insert_your_master_password"
         android:minHeight="48dp"
         android:autofillHints="username"
-        android:inputType=""
-        android:layout_marginHorizontal="10dp"/>
+        android:inputType="textPassword"
+        android:layout_marginHorizontal="10dp"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/unlock_button"
