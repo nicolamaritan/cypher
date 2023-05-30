@@ -27,8 +27,17 @@
     <string name="unlock_lock_the_credential_s_password">Unlock/lock the credential\'s password.</string>
     <string name="add_a_new_credential">Add a new credential.</string>
     <string name="locked_password">*******</string>
+
+    // Widget
     <string name="unlock_widget">Unlock widget</string>
     <string name="insert_the_master_password_to_unlock_your_passwords_nremember_to_lock_your_passwords_afterwards">Insert the Master Password to unlock your passwords.\nRemember to lock your passwords afterwards.</string>
     <string name="insert_your_master_password">Insert the Master Password</string>
     <string name="lock">LOCK</string>
+
+    // Stats
+    <string name="stats">Stats</string>
+    <string name="pw_to_modify">Password da modificare</string>
+    <string name="show">Show</string>
+    <string name="categories">Categorie</string>
+    <string name="stat3">Stat da inventare</string>
 </resources>
