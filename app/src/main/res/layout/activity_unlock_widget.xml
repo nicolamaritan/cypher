@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UnlockWidgetActivity"
+    android:orientation="vertical"
+
+    >
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/insert_the_master_password_to_unlock_your_passwords_nremember_to_lock_your_passwords_afterwards"
+        android:layout_margin="10dp"/>
+
+
+    <!-- Warning suppressed as it said the layout width is too wide using match_parent.
+    This is not true as match parent exactly matches the parent size and there is no
+    risk of overflowing or badly formatted text.-->
+    <EditText
+        android:id="@+id/inserted_password_te"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/insert_your_master_password"
+        android:minHeight="48dp"
+        android:autofillHints="username"
+        android:inputType="textPassword"
+        android:layout_marginHorizontal="10dp"
+        tools:ignore="VisualLintTextFieldSize" />
+
+    <Button
+        android:id="@+id/unlock_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unlock"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"/>
+
+</LinearLayout>

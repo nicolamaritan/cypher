@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/widget_listview_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/credentials_recyclerview_item_background"
+    android:foreground="?android:attr/selectableItemBackground"
     android:padding="10dp"
     android:layout_marginVertical="2dp">
 
     <TextView
         android:id="@+id/service"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Service"
@@ -18,7 +21,7 @@
 
     <TextView
         android:id="@+id/user"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="User"
@@ -28,11 +31,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginVertical="5dp"
-        android:background="@android:color/darker_gray" />
+        android:background="?android:attr/textColorPrimary" />
 
     <TextView
         android:id="@+id/password"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Password"

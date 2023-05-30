@@ -63,7 +63,7 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to encrypt.
      * @param master The master password used to encrypt the entry's password
      */
-    fun encrypt(entryId: Int, master: String)
+    private fun encrypt(entryId: Int, master: String)
     {
         if (entries[entryId].encrypted)
             throw AlreadyEncryptedException("The $entryId-th entry is already encrypted.")
@@ -84,12 +84,12 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to decrypt.
      * @param master The master password used to decrypt the entry's password
      */
-    fun decrypt(entryId: Int, master: String)
+    private fun decrypt(entryId: Int, master: String)
     {
         if (!entries[entryId].encrypted)
             throw AlreadyDecryptedException("The $entryId-th entry is already decrypted.")
 
-        val decryptedPassword = Cryptography.encryptText(entries[entryId].password, master)
+        val decryptedPassword = Cryptography.decryptText(entries[entryId].password, master)
         entries[entryId].encrypted = false
         entries[entryId].password = decryptedPassword
 
@@ -101,8 +101,8 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to check.
      * @return true if the entry is encrypted, false otherwise.
      */
-    fun isEncrypted(entryId: Int) =
-        getEntry(entryId).encrypted
+    private fun isEncrypted(entryId: Int) =
+        get(entryId).encrypted
 
     /**
      * Gets the entry with the given ID.
@@ -110,8 +110,7 @@ class WidgetData private constructor()
      * @param entryId The ID of the entry to get.
      * @return The entry with the given ID.
      */
-    fun getEntry(entryId: Int) =
-        entries[entryId]
+    operator fun get(entryId: Int) = entries[entryId]
 
     /**
      * Removes the entry with the given ID.
@@ -128,10 +127,7 @@ class WidgetData private constructor()
      *
      * @param entry The Entry to be added.
      */
-    fun addEntry(entry: Entry)
-    {
-        entries.add(entry)
-    }
+    fun addEntry(entry: Entry) = entries.add(entry)
 
     /**
      * Returns the number of entries.
@@ -140,6 +136,31 @@ class WidgetData private constructor()
      */
     fun size() = entries.size
 
-    private val entries = mutableListOf<Entry>()
+
+    fun unlock(master: String)
+    {
+        // Deep copies entries
+        copiedEncryptedPassword = entries.map{it.copy()}
+        for (i in 0 until entries.size)
+        {
+            decrypt(i, master)
+        }
+        locked = false
+
+    }
+
+    fun lock()
+    {
+        // No need to re-set visibility, as in unlock visibility is deep-copied too
+        entries = copiedEncryptedPassword as MutableList<Entry>
+        copiedEncryptedPassword = null
+        locked = true
+    }
+
+    var locked: Boolean = true
+        private set
+
+    private var entries = mutableListOf<Entry>()
+    private var copiedEncryptedPassword: List<Entry>?  = null
 
 }

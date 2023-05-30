@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <application
         android:allowBackup="true"
@@ -10,10 +10,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.PasswordManager"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+
+        <activity
+            android:name=".UnlockWidgetActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".widget.PasswordManagerWidget"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -25,7 +30,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,13 +38,24 @@
             </intent-filter>
         </activity>
 
-        <!--Beyond the requirements listed in Declare a widget in the manifest,
+        <receiver
+            android:name=".widget.ItemClickReceiver"
+            android:exported="false" >
+        </receiver>
+
+        <receiver
+            android:name=".widget.LockWidgetReceiver"
+            android:exported="false" >
+        </receiver>
+        <!--
+Beyond the requirements listed in Declare a widget in the manifest,
         you need to make it possible for widgets with collections to bind to your RemoteViewsService.
         Do this by declaring the service in your manifest file with the permission BIND_REMOTEVIEWS.
-        This prevents other applications from freely accessing your widget's data. -->
-        <service android:name=".widget.PasswordManagerWidgetService"
+        This prevents other applications from freely accessing your widget's data.
+        -->
+        <service
+            android:name=".widget.PasswordManagerWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
     </application>
 
 </manifest>
