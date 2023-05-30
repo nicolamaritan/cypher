@@ -2,8 +2,8 @@
     <string name="app_name">PasswordManager</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
-    <string name="emptywidget_text">Lista vuota</string>
+    <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
+    <string name="emptywidget_text">No credentials added.</string>
 
     <string name="credentials_fragment">Hello credentials fragment</string>
     <string name="addcredentials_fragment">Hello add credentials fragment</string>
@@ -33,6 +33,7 @@
     <string name="insert_the_master_password_to_unlock_your_passwords_nremember_to_lock_your_passwords_afterwards">Insert the Master Password to unlock your passwords.\nRemember to lock your passwords afterwards.</string>
     <string name="insert_your_master_password">Insert the Master Password</string>
     <string name="lock">LOCK</string>
+    <string name="widget_configuration">Widget configuration</string>
 
     // Stats
     <string name="stats">Stats</string>

@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".UnlockWidgetActivity"
     android:orientation="vertical"
-
     >
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
