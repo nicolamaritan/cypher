@@ -1,9 +1,9 @@
-package com.project.passwordmanager.model;
+package com.project.passwordmanager.model
 
-import android.content.Context;
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 /**
  * This abstract class serves as the Room database class for the Credential entity.

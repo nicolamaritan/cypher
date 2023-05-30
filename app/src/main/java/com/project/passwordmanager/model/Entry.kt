@@ -1,4 +1,4 @@
-package com.project.passwordmanager.model;
+package com.project.passwordmanager.model
 
 /**
  * This data class represents an entry in the password manager.

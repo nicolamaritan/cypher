@@ -1,7 +1,7 @@
-package com.project.passwordmanager.model;
+package com.project.passwordmanager.model
 
-import androidx.lifecycle.LiveData;
-import androidx.room.*;
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 /**
  * This interface serves as the Data Access Object (DAO) for the Credential entity.

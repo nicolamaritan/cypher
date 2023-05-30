@@ -1,9 +1,9 @@
 
-package com.project.passwordmanager.model;
+package com.project.passwordmanager.model
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * This class represents the credentials of an account.
