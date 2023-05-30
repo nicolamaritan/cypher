@@ -18,7 +18,7 @@
         android:id="@+id/add_widget_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_widget"
+        android:text="@string/save_configuration"
         android:layout_gravity="center"
         android:layout_marginHorizontal="10dp"/>
 

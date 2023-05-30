@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PasswordManager</string>
     <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="save_configuration">Save</string>
     <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
     <string name="emptywidget_text">No credentials added.</string>
 
