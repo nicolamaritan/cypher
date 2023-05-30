@@ -1,22 +1,39 @@
-package com.project.passwordmanager.viewmodels
+package com.project.passwordmanager.viewmodels;
 
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModel
-import com.project.passwordmanager.fragments.CredentialsDialogFragment
-import com.project.passwordmanager.model.CredentialDao
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModel;
+import com.project.passwordmanager.fragments.CredentialsDialogFragment;
+import com.project.passwordmanager.model.CredentialDao;
 
-class CredentialsViewModel(dao: CredentialDao) : ViewModel()
-{
-    val credentials = dao.getAll()  //used for the RecyclerView to show all the tuples
+/**
+ * This ViewModel class represents the credentials screen logic and data management.
+ * It is responsible for providing data to the UI and handling user interactions.
+ *
+ * @param dao The CredentialDao used for data retrieval and manipulation.
+ */
+class CredentialsViewModel(dao: CredentialDao) : ViewModel() {
+    /**.
+     * Used for the RecyclerView to display all the tuples.
+     */
+    val credentials = dao.getAll();
 
-    fun showDialog(fragmentManager: FragmentManager)
-    {
-        val newFragment = CredentialsDialogFragment()
-        newFragment.show(fragmentManager, TAG)
+    /**
+     * Displays the dialog fragment for adding new credentials.
+     *
+     * @param fragmentManager The FragmentManager to show the dialog fragment.
+     */
+    fun showDialog(fragmentManager: FragmentManager) {
+        val newFragment = CredentialsDialogFragment();
+        newFragment.show(fragmentManager, TAG);
     }
 
-    companion object
-    {
-        private val TAG = CredentialsViewModel::javaClass.toString()
+    /**
+     * Companion object for static members and constants of the CredentialsViewModel class.
+     */
+    companion object {
+        /**
+         * The tag used for logging and identification of the CredentialsViewModel class.
+         */
+        private val TAG = CredentialsViewModel::javaClass.toString();
     }
 }

@@ -8,9 +8,7 @@
     android:orientation="vertical"
     android:backgroundTint="@color/light_blue">
 
-    <!-- A CardView that contains a TextView -->
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
@@ -26,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
-            android:text="Password da cambiare"/>
+            android:paddingRight="20dp"
+            android:text="@string/pw_to_modify"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
-                android:text="Show"
+                android:text="@string/show"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent" />
 
@@ -48,7 +47,6 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view2"
         android:layout_width="match_parent"
@@ -64,12 +62,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
                 android:paddingLeft="20dp"
-            android:text="Password per categoria"/>
+                android:paddingRight="20dp"
+            android:text="@string/categories"/>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view3"
         android:layout_width="match_parent"
@@ -85,7 +83,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
-            android:text="Boh"/>
+            android:paddingRight="20dp"
+            android:text="@string/stat3"/>
     </androidx.cardview.widget.CardView>
 
 
