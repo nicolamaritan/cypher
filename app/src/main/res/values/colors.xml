@@ -26,4 +26,5 @@
     <color name="night_secondary">#00695C</color> <!-- Dark teal for night theme -->
     <color name="night_secondary_variant">#004D40</color> <!-- Darker shade of teal for night theme -->
     <color name="night_on_secondary">#FFFFFF</color> <!-- White text on teal for night theme -->
+
 </resources>
