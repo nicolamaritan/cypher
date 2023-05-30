@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.WidgetConfigurationFragment">
+    tools:context=".fragments.CredentialsFragment"
+    android:layout_margin="10dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/configuration_rv"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:contentDescription="@string/add_a_new_credential"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:fabCustomSize="78dp"
-        app:maxImageSize="35dp"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_save"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/configuration_credentials_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-</FrameLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:contentDescription="@string/add_a_new_credential"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:fabCustomSize="78dp"
+            app:maxImageSize="35dp"
+            android:layout_margin="16dp"
+            android:src="@android:drawable/ic_menu_save"/>
+
+    </FrameLayout>
+
+</layout>

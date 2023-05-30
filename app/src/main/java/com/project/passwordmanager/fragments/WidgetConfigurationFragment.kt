@@ -8,12 +8,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.adapters.CredentialsAdapter
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
+import com.project.passwordmanager.factories.CredentialsViewModelFactory
+import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
+import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
 
 class WidgetConfigurationFragment : Fragment()
 {
     private var _binding: FragmentWidgetConfigurationBinding? = null
     private val binding get() = _binding!!
+    lateinit var viewModel: ViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +30,25 @@ class WidgetConfigurationFragment : Fragment()
         // Inflate the layout for this fragment
         _binding = FragmentWidgetConfigurationBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        // Setup view model and binding's viewmodel
+        val application = requireNotNull(this.activity).application
+        val dao = CredentialDatabase.getInstance(application).credentialDao
+        val viewModelFactory = WidgetConfigurationViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[WidgetConfigurationViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        // Adapter setup
+        val adapter = CredentialsAdapter(requireContext())
+        binding.configurationCredentialsRv.adapter = adapter
+
+        // Passing data to the adapter
+        viewModel.credentials.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.data = it
+            }
+        }
 
         val activity = requireActivity()
 
@@ -34,6 +61,8 @@ class WidgetConfigurationFragment : Fragment()
         val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         activity.setResult(Activity.RESULT_CANCELED, resultValue)
 
+
+
         //val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
         //val views = RemoteViews(applicationContext.packageName, R.layout.example_appwidget)
         //appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -44,6 +73,11 @@ class WidgetConfigurationFragment : Fragment()
         }
 
         return view
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
