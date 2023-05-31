@@ -52,26 +52,6 @@ class WidgetData private constructor()
 
     }
 
-    /**
-     * Encrypts the entry with the given ID.
-     * This method should not be invoked if the password is
-     * already encrypted. If this happens, something in the app logic
-     * did not work. Therefore, the thrown exception should
-     * rarely be caught.
-     *
-     * @throws AlreadyEncryptedException
-     * @param entryId The ID of the entry to encrypt.
-     * @param master The master password used to encrypt the entry's password
-     */
-    private fun encrypt(entryId: Int, master: String)
-    {
-        if (entries[entryId].encrypted)
-            throw AlreadyEncryptedException("The $entryId-th entry is already encrypted.")
-
-        val encryptedPassword = Cryptography.encryptText(entries[entryId].password, master)
-        entries[entryId].encrypted = true
-        entries[entryId].password = encryptedPassword
-    }
 
     /**
      * Decrypts the entry with the given ID.
@@ -95,14 +75,6 @@ class WidgetData private constructor()
 
     }
 
-    /**
-     * Checks if the entry with the given ID is encrypted.
-     *
-     * @param entryId The ID of the entry to check.
-     * @return true if the entry is encrypted, false otherwise.
-     */
-    private fun isEncrypted(entryId: Int) =
-        get(entryId).encrypted
 
     /**
      * Gets the entry with the given ID.
