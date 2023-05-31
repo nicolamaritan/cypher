@@ -64,10 +64,7 @@ class WidgetConfigurationFragment : Fragment()
         activity.setResult(Activity.RESULT_CANCELED, resultValue)
 
         binding.fab.setOnClickListener{
-            val toBeAddedIndex = viewModel.getToBeAddedIndex(
-                binding.configurationCredentialsRv,
-                appWidgetId
-            )
+            val toBeAddedIndex = viewModel.getToBeAddedIndex(binding.configurationCredentialsRv,)
 
             // To istantiate the widget you need to select at least one credential
             if (toBeAddedIndex.isNotEmpty())

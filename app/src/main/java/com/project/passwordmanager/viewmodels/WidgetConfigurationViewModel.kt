@@ -28,7 +28,7 @@ class WidgetConfigurationViewModel(private val dao: CredentialDao) : ViewModel()
      * @param appWidgetId The ID of the app widget being configured.
      * @return The list of indices of the credentials to be added.
      */
-    fun getToBeAddedIndex(recyclerView: RecyclerView, appWidgetId: Int): List<Int> {
+    fun getToBeAddedIndex(recyclerView: RecyclerView): List<Int> {
         val toBeAddedIndex = mutableListOf<Int>()
         var checkedCount = 0
         for (i in 0 until recyclerView.childCount) {
