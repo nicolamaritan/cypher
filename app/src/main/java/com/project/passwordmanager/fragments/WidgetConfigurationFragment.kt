@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.project.passwordmanager.adapters.CredentialsAdapter
+import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
-import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
@@ -40,7 +40,7 @@ class WidgetConfigurationFragment : Fragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Adapter setup
-        val adapter = CredentialsAdapter(requireContext())
+        val adapter = WidgetConfigurationCredentialsAdapter(requireContext())
         binding.configurationCredentialsRv.adapter = adapter
 
         // Passing data to the adapter
@@ -50,6 +50,7 @@ class WidgetConfigurationFragment : Fragment()
             }
         }
 
+
         val activity = requireActivity()
 
         // Get the intent which invoked the configuration activity, which will contain tha appWidgetId
@@ -58,18 +59,29 @@ class WidgetConfigurationFragment : Fragment()
             AppWidgetManager.INVALID_APPWIDGET_ID
         ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
+
         val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         activity.setResult(Activity.RESULT_CANCELED, resultValue)
 
-
-
-        //val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
-        //val views = RemoteViews(applicationContext.packageName, R.layout.example_appwidget)
-        //appWidgetManager.updateAppWidget(appWidgetId, views)
-
         binding.fab.setOnClickListener{
-            activity.setResult(Activity.RESULT_OK, resultValue)
-            activity.finish()
+            val toBeAddedIndex = viewModel.getToBeAddedIndex(
+                binding.configurationCredentialsRv,
+                appWidgetId
+            )
+
+            // To istantiate the widget you need to select at least one credential
+            if (toBeAddedIndex.isNotEmpty())
+            {
+                activity.setResult(Activity.RESULT_OK, resultValue)
+                viewModel.initializeWidgetData(toBeAddedIndex, adapter, appWidgetId)
+
+                activity.finish()
+            }
+            else
+            {
+                Toast.makeText(context, "Select at least one credential.", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         return view

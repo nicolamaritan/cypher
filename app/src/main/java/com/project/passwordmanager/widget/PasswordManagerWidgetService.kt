@@ -8,7 +8,6 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
-import com.project.passwordmanager.common.ToyDataWidgetDataInitializer
 import com.project.passwordmanager.model.WidgetData
 
 //WATCH THE MANIFEST!
@@ -79,8 +78,8 @@ class PasswordManagerWidgetService: RemoteViewsService() {
                 more than 20 seconds on this call results in an ANR
             */
 
-            WidgetData.createWidgetData(appWidgetId)
-            ToyDataWidgetDataInitializer.initialize(appWidgetId)    // Populating WD with toy entries
+            //WidgetData.createWidgetData(appWidgetId)
+            //ToyDataWidgetDataInitializer.initialize(appWidgetId)    // Populating WD with toy entries
             widgetData = WidgetData.getWidgetData(appWidgetId)
         }
 
