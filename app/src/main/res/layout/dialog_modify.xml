@@ -1,0 +1,84 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="modifyDialogViewModel"
+            type="com.project.passwordmanager.viewmodels.ModifyDialogViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--
+            The warning UselessParent is a false positive
+            because this structure allows a wider dialog.
+            Therefore the warning is ignored.
+        -->
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            tools:ignore="UselessParent"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/username" />
+
+            <EditText
+                android:id="@+id/username_te"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/modify_your_username"
+                android:minHeight="48dp"
+                android:autofillHints="username"
+                android:text="@={modifyDialogViewModel.newCredentialUsername}"
+                android:inputType="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/service" />
+
+            <EditText
+                android:id="@+id/service_te"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/modify_the_service"
+                android:minHeight="48dp"
+                android:autofillHints=""
+                android:inputType=""
+                android:text="@={modifyDialogViewModel.newCredentialService}"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/password" />
+
+            <EditText
+                android:id="@+id/password_te"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/modify_the_password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:autofillHints=""
+                android:text="@={modifyDialogViewModel.newCredentialPassword}"
+                />
+
+            <Button
+                android:id="@+id/modify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/modify_the_credential" />
+        </LinearLayout>
+    </FrameLayout>
+</layout>
