@@ -11,11 +11,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.model.WidgetCredentialsData
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
+import kotlinx.coroutines.launch
 
 class WidgetConfigurationFragment : Fragment()
 {
@@ -70,7 +73,14 @@ class WidgetConfigurationFragment : Fragment()
             if (toBeAddedIndex.isNotEmpty())
             {
                 activity.setResult(Activity.RESULT_OK, resultValue)
-                viewModel.initializeWidgetData(toBeAddedIndex, adapter, appWidgetId)
+                //viewModel.initializeWidgetData(toBeAddedIndex, adapter, appWidgetId)
+
+                for (i in toBeAddedIndex.indices)
+                {
+                    viewLifecycleOwner.lifecycleScope.launch{
+                        WidgetCredentialsData.addWidgetCredential(requireContext(), appWidgetId, adapter.data[i])
+                    }
+                }
 
                 activity.finish()
             }
