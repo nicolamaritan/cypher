@@ -45,12 +45,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".widget.ItemClickReceiver"
-            android:exported="false" />
-        <receiver
-            android:name=".widget.LockWidgetReceiver"
-            android:exported="false" />
         <!--
 Beyond the requirements listed in Declare a widget in the manifest,
         you need to make it possible for widgets with collections to bind to your RemoteViewsService.
