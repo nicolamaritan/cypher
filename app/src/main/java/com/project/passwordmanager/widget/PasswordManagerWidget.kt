@@ -65,7 +65,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
         {
             ITEM_CLICK_ACTION ->
             {
-                val appWidgetId: Int = intent!!.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
+                val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
                 val position = intent.extras!!.getInt(ITEM_POSITION)
                 val widgetData = WidgetData.getWidgetData(appWidgetId)
 
@@ -91,7 +91,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
 
             LOCK_ACTION ->
             {
-                val appWidgetId: Int = intent!!.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
+                val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
                 val widgetData = WidgetData.getWidgetData(appWidgetId)
 
                 Toast.makeText(
