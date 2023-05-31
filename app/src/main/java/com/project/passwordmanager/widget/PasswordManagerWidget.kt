@@ -102,9 +102,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
 
                 widgetData.lock()
 
-                // Notify Service
-                val appWidgetManager = AppWidgetManager.getInstance(context)
-                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
+                updateAppWidget(context!!, appWidgetId)
             }
 
             AppWidgetManager.ACTION_APPWIDGET_DELETED ->
