@@ -104,6 +104,12 @@ class PasswordManagerWidget : AppWidgetProvider() {
 
                 updateAppWidget(context!!, appWidgetId)
             }
+
+            AppWidgetManager.ACTION_APPWIDGET_DELETED ->
+            {
+                val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
+                Log.d(TAG, "Deleted widget ID $appWidgetId")
+            }
         }
 
 
