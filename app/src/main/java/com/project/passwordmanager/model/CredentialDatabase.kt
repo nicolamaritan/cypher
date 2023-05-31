@@ -9,15 +9,13 @@ import androidx.room.RoomDatabase
  * This abstract class serves as the Room database class for the Credential entity.
  * It provides methods to access the DAO and create the database instance.
  */
-@Database(entities = [Credential::class, WidgetCredential::class], version = 2, exportSchema = false)
+@Database(entities = [Credential::class], version = 1, exportSchema = false)
 abstract class CredentialDatabase : RoomDatabase() {
 
     /**
      * Retrieves the CredentialDao interface to access the database operations for Credential entity.
      */
     abstract val credentialDao: CredentialDao
-    abstract val widgetCredentialDao: WidgetCredentialDao
-
 
     companion object {
         @Volatile
@@ -38,7 +36,7 @@ abstract class CredentialDatabase : RoomDatabase() {
                         context.applicationContext,
                         CredentialDatabase::class.java,
                         "credentials_database"
-                    ).fallbackToDestructiveMigration().build()
+                    ).build()
                     INSTANCE = instance
                 }
                 return instance
