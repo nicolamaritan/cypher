@@ -36,7 +36,7 @@ abstract class CredentialDatabase : RoomDatabase() {
                         context.applicationContext,
                         CredentialDatabase::class.java,
                         "credentials_database"
-                    ).build()
+                    ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance
                 }
                 return instance

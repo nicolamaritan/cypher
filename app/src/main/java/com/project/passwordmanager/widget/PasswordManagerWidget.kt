@@ -3,6 +3,7 @@ package com.project.passwordmanager.widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -11,8 +12,12 @@ import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
 import com.project.passwordmanager.UnlockWidgetActivity
+import com.project.passwordmanager.model.Credential
+import com.project.passwordmanager.model.CredentialDao
+import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.model.WidgetData
 
 /**
@@ -20,6 +25,10 @@ import com.project.passwordmanager.model.WidgetData
  * This class extends AppWidgetProvider and provides methods to handle widget updates and events.
  */
 class PasswordManagerWidget : AppWidgetProvider() {
+
+    private lateinit var allShoppingItems: LiveData<List<Credential>>
+    private var shoppingItemList = ArrayList<Credential>()
+    private lateinit var dao: CredentialDao
 
     /**
      * Called when the widget is being updated.
@@ -33,6 +42,22 @@ class PasswordManagerWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
+        dao = CredentialDatabase.getInstance(context).credentialDao
+        allShoppingItems = dao.getAll()
+        allShoppingItems.observeForever { list ->
+            updateList(list)
+        }
+
+        // Notify that data has changed
+        val widgetManager = AppWidgetManager.getInstance(context.applicationContext)
+        widgetManager.notifyAppWidgetViewDataChanged(
+            widgetManager.getAppWidgetIds(
+                ComponentName(
+                    context.applicationContext.packageName,
+                    PasswordManagerWidget::class.java.name)),
+            R.id.widget_listview
+        )
+
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
@@ -278,5 +303,10 @@ class PasswordManagerWidget : AppWidgetProvider() {
             AppWidgetManager.getInstance(context)
                 .notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
         }
+    }
+
+    private fun updateList(newList: List<Credential>) {
+        shoppingItemList.clear()
+        shoppingItemList.addAll(newList)
     }
 }

@@ -6,8 +6,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.model.Credential
+import com.project.passwordmanager.model.CredentialDao
+import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.model.WidgetData
 
 //WATCH THE MANIFEST!
@@ -50,18 +54,21 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         intent: Intent
     ): RemoteViewsFactory
     {
-        /**
-         * Obtains the widgetId from the intent which requested
-         * the factory. The intent contains such information.
-         */
+        private var credentialDao: CredentialDao = CredentialDatabase.getInstance(context).credentialDao
+        private lateinit var allCredentials: LiveData<List<Credential>>
+        private var credentialsItemList = ArrayList<Credential>()
+
+
         private val appWidgetId: Int = intent.getIntExtra(
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID)
 
-        /**
-         * Holds reference to its WidgetData.
-         */
-        private var widgetData: WidgetData? = null
+
+        private fun updateList(newList: List<Credential>) {
+            credentialsItemList.clear()
+            credentialsItemList.addAll(newList)
+            onDataSetChanged()
+        }
 
         /**
          * Called when the factory is first created.
@@ -71,6 +78,11 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         override fun onCreate()
         {
             Logger.logCallback(TAG, "onCreate", appWidgetId)
+            allCredentials = credentialDao.getAll()
+            allCredentials.observeForever{ list ->
+                updateList(list)
+            }
+
             /*
                 In onCreate(), set up any connections or cursors to your data
                 source. Heavy lifting, such as downloading or creating content,
@@ -80,14 +92,20 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
             //WidgetData.createWidgetData(appWidgetId)
             //ToyDataWidgetDataInitializer.initialize(appWidgetId)    // Populating WD with toy entries
-            widgetData = WidgetData.getWidgetData(appWidgetId)
+            //widgetData = WidgetData.getWidgetData(appWidgetId)
         }
 
         /**
          * Called when the data set changes. This method should be used to notify the factory
          * that the data has changed and needs to be updated.
          */
-        override fun onDataSetChanged() {}
+        override fun onDataSetChanged()
+        {
+            allCredentials = credentialDao.getAll()
+            if(credentialsItemList.isNotEmpty()) {
+                getViewAt(0)
+            }
+        }
 
         /**
          * Called when the factory is destroyed. This method should be used to clean up any
@@ -102,7 +120,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
          */
         override fun getCount(): Int
         {
-            return widgetData!!.size()
+            return credentialsItemList.size
         }
 
         /**
@@ -117,14 +135,16 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.widget_listview_item)
-            val entry = widgetData!!.get(position)
+            //val entry = widgetData!![position]
+            val entry = credentialsItemList[position]
 
             //set the text in the view, taking the id of the TextView and the element to insert in it
             view.setTextViewText(R.id.service, entry.service)
             view.setTextViewText(R.id.user, entry.username)
             view.setTextViewText(
                 R.id.password,
-                if (!entry.visible) context.getString(R.string.locked_password) else entry.password
+                //if (!entry.visible) context.getString(R.string.locked_password) else entry.password
+                entry.password
             )
 
             /*
