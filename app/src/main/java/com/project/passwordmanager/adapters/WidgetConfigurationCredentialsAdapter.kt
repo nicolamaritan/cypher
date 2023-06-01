@@ -11,7 +11,7 @@ import com.project.passwordmanager.R
 import com.project.passwordmanager.model.Credential
 
 
-class WidgetConfigurationCredentialsAdapter(private val context: Context):
+class WidgetConfigurationCredentialsAdapter(context: Context):
     RecyclerView.Adapter<WidgetConfigurationCredentialsAdapter.PwmViewHolder>(){
 
     //definition of the data type we will work with
@@ -22,17 +22,31 @@ class WidgetConfigurationCredentialsAdapter(private val context: Context):
             notifyDataSetChanged()
         }
 
+    private var savedToBeAddedIds: List<Long>
+
+    init
+    {
+        val sharedPreferences = context.getSharedPreferences(
+            "widget_prefs",
+            Context.MODE_PRIVATE
+        )
+        val toBeAddedIdsString = sharedPreferences.getString("toBeAddedIds", "") ?: ""
+        savedToBeAddedIds = toBeAddedIdsString.split(",").mapNotNull { it.toLongOrNull() }
+    }
+
 
     inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
 
         private val service: TextView = itemView.findViewById(R.id.service)
         private val username: TextView = itemView.findViewById(R.id.user)
+        private val checkBox: CheckBox = itemView.findViewById(R.id.add_cb)
 
-        fun bind(service:String, user:String)
+        fun bind(credential: Credential)
         {
-            this.service.text = service
-            username.text = user
+            service.text = credential.service
+            username.text = credential.username
+            checkBox.isChecked =  (credential.id in savedToBeAddedIds)
         }
 
 
@@ -51,7 +65,7 @@ class WidgetConfigurationCredentialsAdapter(private val context: Context):
 
     override fun onBindViewHolder(holder: PwmViewHolder, position: Int) {
         val item = data[position]
-        holder.bind(item.service, item.username)
+        holder.bind(item)
     }
 
 }
