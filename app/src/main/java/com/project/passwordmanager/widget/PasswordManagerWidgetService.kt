@@ -100,7 +100,9 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
         override fun onDataSetChanged()
         {
+            Logger.logCallback(TAG, "onDataSetChanged", appWidgetId)
             allCredentials = credentialDao.getAll()
+            allCredentials.value?.let { updateList(it) }
         }
 
 
