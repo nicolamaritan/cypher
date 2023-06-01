@@ -11,12 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
 import com.project.passwordmanager.databinding.DialogCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsDialogViewModelFactory
-import com.project.passwordmanager.factories.CredentialsViewModelFactory
-import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.CredentialsDialogViewModel
-import com.project.passwordmanager.viewmodels.CredentialsViewModel
-import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
 
 /**
  * Dialog fragment for adding credentials in the password manager application.

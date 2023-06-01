@@ -20,6 +20,7 @@
     <string name="insert_a_new_credential">Insert a new credential</string>
     <string name="credential_added_toast">Credential safely added ;)</string>
     <string name="credential_modified_toast">Credential safely modified ;)</string>
+    <string name="unlock_toast">Successful unlock</string>
     <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
     <string name="unlock">UNLOCK</string>
     <string name="do_something">Do something</string>

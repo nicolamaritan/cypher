@@ -23,7 +23,7 @@ class ModifyDialogFragment(private val credentialId : Long): DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Logger.logCallback(ModifyDialogFragment.TAG, "onCreateView", "CredentialsDialogFragment")
+        Logger.logCallback(TAG, "onCreateView", "CredentialsDialogFragment")
 
         // ViewBinding
         _binding = DialogModifyBinding.inflate(inflater, container, false)
@@ -44,6 +44,18 @@ class ModifyDialogFragment(private val credentialId : Long): DialogFragment() {
             viewModel.modifyCredential(credentialId)
             if (viewModel.closing) {
                 dismiss()
+            }
+        }
+
+        /*
+        * Observes the toastStringId in the viewModel to show
+        * a toast whenever the value changes.
+        * Contains the id of the string to show.
+        * */
+        viewModel.toastStringId.observe(this) {
+            it.let {
+                val toastMessage = requireContext().getString(it)
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
             }
         }
 

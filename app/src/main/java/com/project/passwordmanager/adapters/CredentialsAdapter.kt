@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.fragments.ModifyDialogFragment
+import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
 
@@ -49,7 +50,13 @@ class CredentialsAdapter(private val context: Context):
 
             lockImageButton.setOnClickListener{
                 locked = !locked
-                updatePasswordTextView(password)
+                val activity = context as FragmentActivity
+                val fm: FragmentManager = activity.supportFragmentManager
+                val alertDialog = UnlockDialogFragment()
+                alertDialog.show(fm, "fragment_alert")
+                if(alertDialog.unlocked){
+                    updatePasswordTextView(password)
+                }
             }
 
             copyImageButton.setOnClickListener{
