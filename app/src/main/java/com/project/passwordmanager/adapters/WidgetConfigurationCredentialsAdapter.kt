@@ -8,6 +8,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.model.Credential
 
 
@@ -27,10 +28,13 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
     init
     {
         val sharedPreferences = context.getSharedPreferences(
-            "widget_prefs",
+            Constants.WIDGET_PREFERENCES,
             Context.MODE_PRIVATE
         )
-        val toBeAddedIdsString = sharedPreferences.getString("toBeAddedIds", "") ?: ""
+        val toBeAddedIdsString = sharedPreferences.getString(
+            Constants.WIDGET_ADDED_IDS,
+            ""
+        ) ?: ""
         savedToBeAddedIds = toBeAddedIdsString.split(",").mapNotNull { it.toLongOrNull() }
     }
 

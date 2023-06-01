@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
+import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
@@ -52,10 +53,13 @@ class WidgetConfigurationFragment : Fragment()
         }
 
         val sharedPreferences = requireContext().getSharedPreferences(
-            "widget_prefs",
+            Constants.WIDGET_PREFERENCES,
             Context.MODE_PRIVATE
         )
-        val toBeAddedIdsString = sharedPreferences.getString("toBeAddedIds", "") ?: ""
+        val toBeAddedIdsString = sharedPreferences.getString(
+            Constants.WIDGET_ADDED_IDS,
+            ""
+        ) ?: ""
         val savedToBeAddedIds = toBeAddedIdsString.split(",").mapNotNull { it.toLongOrNull() }
 
 
@@ -81,12 +85,12 @@ class WidgetConfigurationFragment : Fragment()
                 activity.setResult(Activity.RESULT_OK, resultValue)
 
                 val widgetPreferences = requireContext().getSharedPreferences(
-                    "widget_prefs",
+                    Constants.WIDGET_PREFERENCES,
                     Context.MODE_PRIVATE
                 )
                 val editor = widgetPreferences.edit()
                 val toBeAddedIdsPreferences = toBeAddedIds.joinToString(",")
-                editor.putString("toBeAddedIds", toBeAddedIdsPreferences)
+                editor.putString(Constants.WIDGET_ADDED_IDS, toBeAddedIdsPreferences)
                 editor.apply()
 
                 activity.finish()
