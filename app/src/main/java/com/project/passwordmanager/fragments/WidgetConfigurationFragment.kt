@@ -18,6 +18,7 @@ import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBindin
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
+import com.project.passwordmanager.widget.PasswordManagerWidget
 
 class WidgetConfigurationFragment : Fragment()
 {
@@ -52,16 +53,6 @@ class WidgetConfigurationFragment : Fragment()
             }
         }
 
-        val sharedPreferences = requireContext().getSharedPreferences(
-            Constants.WIDGET_PREFERENCES,
-            Context.MODE_PRIVATE
-        )
-        val toBeAddedIdsString = sharedPreferences.getString(
-            Constants.WIDGET_ADDED_IDS,
-            ""
-        ) ?: ""
-        val savedToBeAddedIds = toBeAddedIdsString.split(",").mapNotNull { it.toLongOrNull() }
-
 
         val activity = requireActivity()
 
@@ -92,6 +83,8 @@ class WidgetConfigurationFragment : Fragment()
                 val toBeAddedIdsPreferences = toBeAddedIds.joinToString(",")
                 editor.putString(Constants.WIDGET_ADDED_IDS, toBeAddedIdsPreferences)
                 editor.apply()
+
+                PasswordManagerWidget.updateAppWidget(requireContext(), appWidgetId)
 
                 activity.finish()
             }

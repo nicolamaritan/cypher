@@ -26,8 +26,8 @@ import com.project.passwordmanager.model.WidgetData
  */
 class PasswordManagerWidget : AppWidgetProvider() {
 
-    private lateinit var allShoppingItems: LiveData<List<Credential>>
-    private var shoppingItemList = ArrayList<Credential>()
+    private lateinit var allCredentials: LiveData<List<Credential>>
+    private var credentialsList = ArrayList<Credential>()
     private lateinit var dao: CredentialDao
 
     /**
@@ -43,8 +43,8 @@ class PasswordManagerWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         dao = CredentialDatabase.getInstance(context).credentialDao
-        allShoppingItems = dao.getAll()
-        allShoppingItems.observeForever { list ->
+        allCredentials = dao.getAll()
+        allCredentials.observeForever { list ->
             updateList(list)
         }
 
@@ -88,34 +88,6 @@ class PasswordManagerWidget : AppWidgetProvider() {
     {
         when(intent!!.action)
         {
-            ITEM_CLICK_ACTION ->
-            {
-                val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
-                val position = intent.extras!!.getInt(ITEM_POSITION)
-                /*val widgetData = WidgetData.getWidgetData(appWidgetId)
-
-                if (widgetData.locked)
-                {
-                    Toast.makeText(
-                        context,
-                        "The widget is locked. Unlock the widget first.",
-                        Toast.LENGTH_SHORT).show()
-                }
-                else
-                {
-                    Log.d(TAG, "Widget ID: $appWidgetId")
-                    Log.d(TAG, "List Item: $position" )
-
-                    widgetData[position].visible = !widgetData[position].visible
-
-                    // Notify Service
-                    val appWidgetManager = AppWidgetManager.getInstance(context)
-                    appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
-
-                }
-                 */
-            }
-
             LOCK_ACTION ->
             {
                 val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
@@ -303,15 +275,11 @@ class PasswordManagerWidget : AppWidgetProvider() {
             val ids = intArrayOf(appWidgetId)   // Update ONLY one widget
             updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
             context.sendBroadcast(updateWidgetIntent)
-
-            // Update the elements of the listview
-            AppWidgetManager.getInstance(context)
-                .notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
         }
     }
 
     private fun updateList(newList: List<Credential>) {
-        shoppingItemList.clear()
-        shoppingItemList.addAll(newList)
+        credentialsList.clear()
+        credentialsList.addAll(newList)
     }
 }

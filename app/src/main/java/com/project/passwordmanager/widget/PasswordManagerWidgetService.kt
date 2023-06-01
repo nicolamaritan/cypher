@@ -4,15 +4,16 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.Logger
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
-import com.project.passwordmanager.model.WidgetData
 
 //WATCH THE MANIFEST!
 
@@ -64,17 +65,27 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             AppWidgetManager.INVALID_APPWIDGET_ID)
 
 
-        private fun updateList(newList: List<Credential>) {
+        private fun updateList(newList: List<Credential>)
+        {
+            Log.d(TAG, "updateList invoked")
             credentialsItemList.clear()
-            credentialsItemList.addAll(newList)
+
+            // Adds only the ids contained in the shared preferences
+            val sharedPreferences = context.getSharedPreferences(
+                Constants.WIDGET_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
+            val toBeAddedIdsPreferences = sharedPreferences.getString(
+                Constants.WIDGET_ADDED_IDS,
+                ""
+            ) ?: ""
+            val savedToBeAddedIds = toBeAddedIdsPreferences.split(",").mapNotNull { it.toLongOrNull() }
+            val filteredList = newList.filter { obj -> savedToBeAddedIds.contains(obj.id) }
+
+            credentialsItemList.addAll(filteredList)
             onDataSetChanged()
         }
 
-        /**
-         * Called when the factory is first created.
-         * This method should not perform any heavy lifting,
-         * such as downloading or creating content.
-         */
         override fun onCreate()
         {
             Logger.logCallback(TAG, "onCreate", appWidgetId)
@@ -82,53 +93,21 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             allCredentials.observeForever{ list ->
                 updateList(list)
             }
-
-            /*
-                In onCreate(), set up any connections or cursors to your data
-                source. Heavy lifting, such as downloading or creating content,
-                must be deferred to onDataSetChanged() or getViewAt(). Taking
-                more than 20 seconds on this call results in an ANR
-            */
-
-            //WidgetData.createWidgetData(appWidgetId)
-            //ToyDataWidgetDataInitializer.initialize(appWidgetId)    // Populating WD with toy entries
-            //widgetData = WidgetData.getWidgetData(appWidgetId)
         }
 
-        /**
-         * Called when the data set changes. This method should be used to notify the factory
-         * that the data has changed and needs to be updated.
-         */
         override fun onDataSetChanged()
         {
             allCredentials = credentialDao.getAll()
-            /*if(credentialsItemList.isNotEmpty()) {
-                getViewAt(0)
-            }*/
         }
 
-        /**
-         * Called when the factory is destroyed. This method should be used to clean up any
-         * resources used by the factory.
-         */
+
         override fun onDestroy() {}
 
-        /**
-         * Gets the number of items in the list that will be displayed in the widget.
-         *
-         * @return The number of items in the list.
-         */
         override fun getCount(): Int
         {
             return credentialsItemList.size
         }
 
-        /**
-         * Gets the view to display at the given position in the widget.
-         *
-         * @param position The position of the view to display.
-         * @return The RemoteViews to display at the given position.
-         */
         override fun getViewAt(position: Int): RemoteViews
         {
             //takes the view to display remotely in the widget
