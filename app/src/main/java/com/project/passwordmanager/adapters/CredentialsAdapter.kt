@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.fragments.ModifyDialogFragment
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
 
@@ -40,7 +42,7 @@ class CredentialsAdapter(private val context: Context):
         private val copyImageButton: ImageButton = itemView.findViewById(R.id.copy_imageButton)
         private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
 
-        fun bind(service:String, user:String, password:String){
+        fun bind(credentialId:Long, service:String, user:String, password:String){
             appName.text = service
             appUser.text = user
             updatePasswordTextView(password)
@@ -60,6 +62,14 @@ class CredentialsAdapter(private val context: Context):
                     Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
                 }
             }
+            // TODO refactor as Int the Id
+            editImageButton.setOnClickListener {
+                val activity = context as FragmentActivity
+                val fm: FragmentManager = activity.supportFragmentManager
+                val alertDialog = ModifyDialogFragment(credentialId)
+                alertDialog.show(fm, "fragment_alert")
+            }
+
         }
 
         private fun updatePasswordTextView(clearPassword: String)
@@ -91,7 +101,7 @@ class CredentialsAdapter(private val context: Context):
 
     override fun onBindViewHolder(holder: PwmViewHolder, position: Int) {
         val item = data[position]
-        holder.bind(item.service, item.username, item.password)
+        holder.bind(item.id, item.service, item.username, item.password)
     }
 
 }

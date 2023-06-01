@@ -47,7 +47,6 @@ class CredentialsFragment : Fragment()
             }
         })
 
-
         binding.fab.setOnClickListener{
             viewModel.showDialog(parentFragmentManager)
         }
