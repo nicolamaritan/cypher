@@ -17,6 +17,7 @@ import com.project.passwordmanager.fragments.ModifyDialogFragment
 import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
+import com.project.passwordmanager.viewmodels.UnlockDialogListener
 
 
 class CredentialsAdapter(private val context: Context):
@@ -48,15 +49,44 @@ class CredentialsAdapter(private val context: Context):
             appUser.text = user
             updatePasswordTextView(password)
 
-            lockImageButton.setOnClickListener{
+            /**
+             * OnClickListener for the lockImageButton.
+             * Toggles the 'locked' state, displays an UnlockDialogFragment,
+             * and sets an UnlockDialogListener to handle unlock events.
+             */
+            lockImageButton.setOnClickListener {
                 locked = !locked
+
+                // Cast the context to a FragmentActivity
                 val activity = context as FragmentActivity
+
+                // Get the FragmentManager
                 val fm: FragmentManager = activity.supportFragmentManager
+
+                // Create an instance of UnlockDialogFragment
                 val alertDialog = UnlockDialogFragment()
+
+                // Set an UnlockDialogListener to handle unlock events
+                alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
+                    /**
+                     * Called when the password is successfully unlocked.
+                     * Updates the password text view.
+                     */
+                    override fun onUnlockSuccess() {
+                        updatePasswordTextView(password)
+                    }
+
+                    /**
+                     * Called when the entered password is incorrect.
+                     * Perform any necessary actions in case of an incorrect password.
+                     */
+                    override fun onUnlockFailure() {
+                        // Any actions to take in case of an incorrect password
+                    }
+                })
+
+                // Show the UnlockDialogFragment
                 alertDialog.show(fm, "fragment_alert")
-                if(alertDialog.unlocked){
-                    updatePasswordTextView(password)
-                }
             }
 
             copyImageButton.setOnClickListener{

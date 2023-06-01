@@ -17,7 +17,22 @@ class UnlockDialogViewModel () : ViewModel() {
     /**
      * Indicates if the password inserted is correct.
      */
-    var unlocked = false
+
+    /**
+     * The UnlockDialogListener instance to listen for unlock events.
+     * It is initially set to null until a listener is assigned.
+     */
+    private var unlockDialogListener: UnlockDialogListener? = null
+
+    /**
+     * Sets the UnlockDialogListener to listen for unlock events.
+     *
+     * @param listener The UnlockDialogListener instance to set.
+     */
+    fun setUnlockDialogListener(listener: UnlockDialogListener) {
+        unlockDialogListener = listener
+    }
+
     private val _toastStringId = MutableLiveData<Int>()
 
     /**
@@ -36,11 +51,12 @@ class UnlockDialogViewModel () : ViewModel() {
         val hashedInsertedPassword = Hashing.sha256(insertedPassword)
 
         if (hashedInsertedPassword == Hashing.sha256("MASTER")) {
-            unlocked = true
+            unlockDialogListener?.onUnlockSuccess()
             closing = true
             _toastStringId.value = R.string.unlock_toast
             return true
         }
+        unlockDialogListener?.onUnlockFailure()
         return false
     }
 
@@ -51,4 +67,18 @@ class UnlockDialogViewModel () : ViewModel() {
          */
         val TAG: String = UnlockDialogViewModel::class.java.simpleName
     }
+}
+/**
+ * Interface for listening to unlock events in the UnlockDialogFragment.
+ */
+interface UnlockDialogListener {
+    /**
+     * Called when the password is successfully unlocked.
+     */
+    fun onUnlockSuccess()
+
+    /**
+     * Called when the entered password is incorrect.
+     */
+    fun onUnlockFailure()
 }
