@@ -102,9 +102,9 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         override fun onDataSetChanged()
         {
             allCredentials = credentialDao.getAll()
-            if(credentialsItemList.isNotEmpty()) {
+            /*if(credentialsItemList.isNotEmpty()) {
                 getViewAt(0)
-            }
+            }*/
         }
 
         /**
@@ -131,8 +131,6 @@ class PasswordManagerWidgetService: RemoteViewsService() {
          */
         override fun getViewAt(position: Int): RemoteViews
         {
-            //WARNING! As this is not a RecyclerView, the list in the widget will be less efficient! So, don't put a large amount of data inside!
-
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.widget_listview_item)
             //val entry = widgetData!![position]
@@ -144,7 +142,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             view.setTextViewText(
                 R.id.password,
                 //if (!entry.visible) context.getString(R.string.locked_password) else entry.password
-                entry.password
+                context.getString(R.string.locked_password)
             )
 
             /*
@@ -152,10 +150,13 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             * */
             val fillInIntentBundle = Bundle()
             fillInIntentBundle.putInt(PasswordManagerWidget.ITEM_POSITION, position)
+            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_SERVICE, entry.service)
+            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_USERNAME, entry.username)
+            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_PASSWORD, entry.password)
+
             val fillInIntent = Intent()
             fillInIntent.putExtras(fillInIntentBundle)
             view.setOnClickFillInIntent(R.id.widget_listview_item, fillInIntent)
-
 
             return view
         }
@@ -207,6 +208,5 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         {
             private val TAG = PasswordManagerWidgetItemFactory::class.simpleName
         }
-
     }
 }

@@ -92,7 +92,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
             {
                 val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
                 val position = intent.extras!!.getInt(ITEM_POSITION)
-                val widgetData = WidgetData.getWidgetData(appWidgetId)
+                /*val widgetData = WidgetData.getWidgetData(appWidgetId)
 
                 if (widgetData.locked)
                 {
@@ -111,7 +111,9 @@ class PasswordManagerWidget : AppWidgetProvider() {
                     // Notify Service
                     val appWidgetManager = AppWidgetManager.getInstance(context)
                     appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
+
                 }
+                 */
             }
 
             LOCK_ACTION ->
@@ -175,13 +177,13 @@ class PasswordManagerWidget : AppWidgetProvider() {
      */
     private fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
     {
-        val itemClickIntent = Intent(context, PasswordManagerWidget::class.java).apply {
+        val itemClickIntent = Intent(context, UnlockWidgetActivity::class.java).apply {
             action = ITEM_CLICK_ACTION
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         }
 
         // Special intent performing a broadcast
-        val pendingIntent = PendingIntent.getBroadcast(
+        val pendingIntent = PendingIntent.getActivity(
             context,
             appWidgetId,
             itemClickIntent,
@@ -289,6 +291,9 @@ class PasswordManagerWidget : AppWidgetProvider() {
         const val ITEM_POSITION = "item_position"
         const val ITEM_CLICK_ACTION = "item_click"
         const val LOCK_ACTION = "lock"
+        const val ITEM_PASSWORD = "item_password"
+        const val ITEM_SERVICE = "item_service"
+        const val ITEM_USERNAME = "item_username"
 
         fun updateAppWidget(context: Context, appWidgetId: Int)
         {
