@@ -2,6 +2,7 @@ package com.project.passwordmanager.fragments
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -50,6 +51,13 @@ class WidgetConfigurationFragment : Fragment()
             }
         }
 
+        val sharedPreferences = requireContext().getSharedPreferences(
+            "widget_prefs",
+            Context.MODE_PRIVATE
+        )
+        val toBeAddedIdsString = sharedPreferences.getString("toBeAddedIds", "") ?: ""
+        val savedToBeAddedIds = toBeAddedIdsString.split(",").mapNotNull { it.toLongOrNull() }
+
 
         val activity = requireActivity()
 
@@ -64,13 +72,22 @@ class WidgetConfigurationFragment : Fragment()
         activity.setResult(Activity.RESULT_CANCELED, resultValue)
 
         binding.fab.setOnClickListener{
-            val toBeAddedIndex = viewModel.getToBeAddedIndex(binding.configurationCredentialsRv,)
+            val toBeAddedIndexes = viewModel.getToBeAddedIndexes(binding.configurationCredentialsRv,)
+            val toBeAddedIds = viewModel.getToBeAddedIds(toBeAddedIndexes)
 
             // To istantiate the widget you need to select at least one credential
-            if (toBeAddedIndex.isNotEmpty())
+            if (toBeAddedIds.isNotEmpty())
             {
                 activity.setResult(Activity.RESULT_OK, resultValue)
-                viewModel.initializeWidgetData(toBeAddedIndex, adapter, appWidgetId)
+
+                val widgetPreferences = requireContext().getSharedPreferences(
+                    "widget_prefs",
+                    Context.MODE_PRIVATE
+                )
+                val editor = widgetPreferences.edit()
+                val toBeAddedIdsPreferences = toBeAddedIds.joinToString(",")
+                editor.putString("toBeAddedIds", toBeAddedIdsPreferences)
+                editor.apply()
 
                 activity.finish()
             }
