@@ -83,6 +83,9 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             val filteredList = newList.filter { obj -> savedToBeAddedIds.contains(obj.id) }
 
             credentialsItemList.addAll(filteredList)
+
+
+            credentialsItemList.addAll(newList)
             onDataSetChanged()
         }
 
