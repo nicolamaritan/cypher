@@ -89,12 +89,14 @@ class PasswordManagerWidget : AppWidgetProvider()
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
             setupWidgetName(this, context, appWidgetId)
+            setupCredentialsNumber(this, context, appWidgetId)
         }
 
         val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
             setupWidgetName(this, context, appWidgetId)
+            setupCredentialsNumber(this, context, appWidgetId)
         }
 
         // Maps the sizes to each view.
@@ -191,6 +193,27 @@ class PasswordManagerWidget : AppWidgetProvider()
             }
 
             remoteViews.setTextViewText(R.id.widget_name, widgetName)
+        }
+
+        fun setupCredentialsNumber(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        {
+            val widgetPreferences = context.getSharedPreferences(
+                Constants.WIDGET_PREFERENCES+appWidgetId,
+                Context.MODE_PRIVATE
+            )
+            // Adds only the ids contained in the shared preferences
+            val sharedPreferences = context.getSharedPreferences(
+                Constants.WIDGET_PREFERENCES+appWidgetId,
+                Context.MODE_PRIVATE
+            )
+            val toBeAddedIdsPreferences = sharedPreferences.getString(
+                Constants.WIDGET_ADDED_IDS,
+                ""
+            ) ?: ""
+            val savedToBeAddedIds = toBeAddedIdsPreferences.split(",").mapNotNull { it.toLongOrNull() }
+
+
+            remoteViews.setTextViewText(R.id.credentials_number, "Stored credentials: " + savedToBeAddedIds.size)
         }
 
     }
