@@ -68,7 +68,6 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         private fun updateList(newList: List<Credential>)
         {
             Log.d(TAG, "updateList invoked")
-            credentialsItemList.clear()
 
             // Adds only the ids contained in the shared preferences
             val sharedPreferences = context.getSharedPreferences(
@@ -82,10 +81,11 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             val savedToBeAddedIds = toBeAddedIdsPreferences.split(",").mapNotNull { it.toLongOrNull() }
             val filteredList = newList.filter { obj -> savedToBeAddedIds.contains(obj.id) }
 
+            if (filteredList.isEmpty())
+                return
+
+            credentialsItemList.clear()
             credentialsItemList.addAll(filteredList)
-
-
-            credentialsItemList.addAll(newList)
             onDataSetChanged()
         }
 
@@ -115,7 +115,6 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         {
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.widget_listview_item)
-            //val entry = widgetData!![position]
             val entry = credentialsItemList[position]
 
             //set the text in the view, taking the id of the TextView and the element to insert in it

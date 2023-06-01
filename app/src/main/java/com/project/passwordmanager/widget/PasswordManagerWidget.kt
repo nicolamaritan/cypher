@@ -3,7 +3,6 @@ package com.project.passwordmanager.widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -11,44 +10,21 @@ import android.os.Bundle
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
-import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
 import com.project.passwordmanager.UnlockWidgetActivity
 import com.project.passwordmanager.common.Constants
-import com.project.passwordmanager.model.Credential
-import com.project.passwordmanager.model.CredentialDao
-import com.project.passwordmanager.model.CredentialDatabase
 
 /**
  * Implementation of App Widget functionality for the Password Manager widget.
  * This class extends AppWidgetProvider and provides methods to handle widget updates and events.
  */
-class PasswordManagerWidget : AppWidgetProvider() {
-
-    private lateinit var allCredentials: LiveData<List<Credential>>
-    private var credentialsList = ArrayList<Credential>()
-    private lateinit var dao: CredentialDao
-
+class PasswordManagerWidget : AppWidgetProvider()
+{
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        dao = CredentialDatabase.getInstance(context).credentialDao
-        allCredentials = dao.getAll()
-        allCredentials.observeForever { list ->
-            updateList(list)
-        }
-
-        // Notify that data has changed
-        val widgetManager = AppWidgetManager.getInstance(context.applicationContext)
-        widgetManager.notifyAppWidgetViewDataChanged(
-            widgetManager.getAppWidgetIds(
-                ComponentName(
-                    context.applicationContext.packageName,
-                    PasswordManagerWidget::class.java.name)),
-            R.id.widget_listview
-        )
 
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
@@ -82,11 +58,8 @@ class PasswordManagerWidget : AppWidgetProvider() {
             }
         }
 
-
         super.onReceive(context, intent)
     }
-
-
 
 
     /**
@@ -211,14 +184,14 @@ class PasswordManagerWidget : AppWidgetProvider() {
                 Constants.WIDGET_PREFERENCES+appWidgetId,
                 Context.MODE_PRIVATE
             )
-            val widgetName = widgetPreferences.getString(Constants.WIDGET_NAME, "Widget's passwords")
+            var widgetName = widgetPreferences.getString(Constants.WIDGET_NAME, "")
+            if (widgetName!!.isBlank())
+            {
+                widgetName = "My passwords"
+            }
+
             remoteViews.setTextViewText(R.id.widget_name, widgetName)
         }
 
-    }
-
-    private fun updateList(newList: List<Credential>) {
-        credentialsList.clear()
-        credentialsList.addAll(newList)
     }
 }
