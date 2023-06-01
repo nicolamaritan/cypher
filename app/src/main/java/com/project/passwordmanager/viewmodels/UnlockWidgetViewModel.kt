@@ -2,7 +2,6 @@ package com.project.passwordmanager.viewmodels
 
 import android.appwidget.AppWidgetManager
 import androidx.lifecycle.ViewModel
-import com.project.passwordmanager.model.WidgetData
 import com.project.passwordmanager.security.Hashing
 
 /**
