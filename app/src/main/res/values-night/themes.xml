@@ -3,7 +3,7 @@
     <style name="Theme.PasswordManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/night_primary</item>
-        <item name="colorPrimaryVariant">@color/night_primary_variant</item>
+        <item name="colorPrimaryVariant">@color/night_secondary_variant</item>
         <item name="colorOnPrimary">@color/night_on_primary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/night_secondary</item>
