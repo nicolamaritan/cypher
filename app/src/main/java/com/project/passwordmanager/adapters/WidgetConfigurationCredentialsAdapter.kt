@@ -8,36 +8,21 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
-import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.model.Credential
 
 
 class WidgetConfigurationCredentialsAdapter(context: Context):
     RecyclerView.Adapter<WidgetConfigurationCredentialsAdapter.PwmViewHolder>(){
 
-    //definition of the data type we will work with
+    // Definition of the data type we will work with
     var data = listOf<Credential>()
-        //custom setter that tells the recyclerView if data changed
+        // Custom setter that tells the recyclerView if data changed
         set(value){
             field = value
             notifyDataSetChanged()
         }
 
-    private var savedToBeAddedIds: List<Long>
-
-    init
-    {
-        val sharedPreferences = context.getSharedPreferences(
-            Constants.WIDGET_PREFERENCES,
-            Context.MODE_PRIVATE
-        )
-        val toBeAddedIdsString = sharedPreferences.getString(
-            Constants.WIDGET_ADDED_IDS,
-            ""
-        ) ?: ""
-        savedToBeAddedIds = toBeAddedIdsString.split(",").mapNotNull { it.toLongOrNull() }
-    }
-
+    val selectedCredentialsIds: MutableList<Long> = mutableListOf()
 
     inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
@@ -50,7 +35,18 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
         {
             service.text = credential.service
             username.text = credential.username
-            checkBox.isChecked =  (credential.id in savedToBeAddedIds)
+
+            // Checking a credential implies putting it into the list
+            checkBox.setOnCheckedChangeListener{ _, b ->
+                if (b)
+                {
+                    selectedCredentialsIds.add(credential.id)
+                }
+                else
+                {
+                    selectedCredentialsIds.remove(credential.id)
+                }
+            }
         }
 
 

@@ -72,7 +72,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
             // Adds only the ids contained in the shared preferences
             val sharedPreferences = context.getSharedPreferences(
-                Constants.WIDGET_PREFERENCES,
+                Constants.WIDGET_PREFERENCES+appWidgetId,
                 Context.MODE_PRIVATE
             )
             val toBeAddedIdsPreferences = sharedPreferences.getString(

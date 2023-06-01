@@ -5,13 +5,16 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.SizeF
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
 import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
@@ -53,7 +56,6 @@ class WidgetConfigurationFragment : Fragment()
             }
         }
 
-
         val activity = requireActivity()
 
         // Get the intent which invoked the configuration activity, which will contain tha appWidgetId
@@ -67,24 +69,57 @@ class WidgetConfigurationFragment : Fragment()
         activity.setResult(Activity.RESULT_CANCELED, resultValue)
 
         binding.fab.setOnClickListener{
-            val toBeAddedIndexes = viewModel.getToBeAddedIndexes(binding.configurationCredentialsRv,)
-            val toBeAddedIds = viewModel.getToBeAddedIds(toBeAddedIndexes)
+
+            val toBeAddedIds = adapter.selectedCredentialsIds
 
             // To istantiate the widget you need to select at least one credential
             if (toBeAddedIds.isNotEmpty())
             {
                 activity.setResult(Activity.RESULT_OK, resultValue)
 
+                // Puts the selected credentials and its name in the preferences
                 val widgetPreferences = requireContext().getSharedPreferences(
-                    Constants.WIDGET_PREFERENCES,
+                    Constants.WIDGET_PREFERENCES+appWidgetId,
                     Context.MODE_PRIVATE
                 )
                 val editor = widgetPreferences.edit()
                 val toBeAddedIdsPreferences = toBeAddedIds.joinToString(",")
                 editor.putString(Constants.WIDGET_ADDED_IDS, toBeAddedIdsPreferences)
+                editor.putString(Constants.WIDGET_NAME, binding.widgetNameEt.text.toString())
                 editor.apply()
 
-                PasswordManagerWidget.updateAppWidget(requireContext(), appWidgetId)
+
+                // Update the layout for the widget
+                val smallView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget).apply {
+                    PasswordManagerWidget.initRemoteAdapter(this, requireContext(), appWidgetId)
+                    PasswordManagerWidget.setupItemClick(this, requireContext(), appWidgetId)
+                    PasswordManagerWidget.setupWidgetName(this, requireContext(), appWidgetId)
+                }
+
+                val tallView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget_tall).apply {
+                    PasswordManagerWidget.initRemoteAdapter(this, requireContext(), appWidgetId)
+                    PasswordManagerWidget.setupItemClick(this, requireContext(), appWidgetId)
+                    PasswordManagerWidget.setupWidgetName(this, requireContext(), appWidgetId)
+                }
+
+                val wideView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget_wide).apply {
+                    PasswordManagerWidget.initRemoteAdapter(this, requireContext(), appWidgetId)
+                    PasswordManagerWidget.setupItemClick(this, requireContext(), appWidgetId)
+                    PasswordManagerWidget.setupWidgetName(this, requireContext(), appWidgetId)
+                }
+
+                // Maps the sizes to each view.
+                val viewMapping: Map<SizeF, RemoteViews> = mapOf(
+                    SizeF(80f, 80f) to smallView,
+                    SizeF(80f, 350f) to tallView,
+                    SizeF(240f, 140f) to wideView
+                )
+
+                // The returned RemoteViews is chosen based on the widget size, according to the mapping
+                val views = RemoteViews(viewMapping)
+
+                val appWidgetManager = AppWidgetManager.getInstance(context)
+                appWidgetManager.updateAppWidget(appWidgetId, views)
 
                 activity.finish()
             }

@@ -7,18 +7,16 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
 import com.project.passwordmanager.UnlockWidgetActivity
+import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
-import com.project.passwordmanager.model.WidgetData
 
 /**
  * Implementation of App Widget functionality for the Password Manager widget.
@@ -30,13 +28,6 @@ class PasswordManagerWidget : AppWidgetProvider() {
     private var credentialsList = ArrayList<Credential>()
     private lateinit var dao: CredentialDao
 
-    /**
-     * Called when the widget is being updated.
-     *
-     * @param context The context in which the receiver is running.
-     * @param appWidgetManager The AppWidgetManager instance for managing the widget.
-     * @param appWidgetIds An array of widget IDs for the widgets that need to be updated.
-     */
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -64,21 +55,11 @@ class PasswordManagerWidget : AppWidgetProvider() {
         }
     }
 
-    /**
-     * Called when the first instance of the widget is created.
-     *
-     * @param context The context in which the receiver is running.
-     */
     override fun onEnabled(context: Context)
     {
         // Enter relevant functionality for when the first widget is created
     }
 
-    /**
-     * Called when the last instance of the widget is disabled.
-     *
-     * @param context The context in which the receiver is running.
-     */
     override fun onDisabled(context: Context)
     {
         // Enter relevant functionality for when the last widget is disabled
@@ -88,28 +69,15 @@ class PasswordManagerWidget : AppWidgetProvider() {
     {
         when(intent!!.action)
         {
-            LOCK_ACTION ->
-            {
-                val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
-                val widgetData = WidgetData.getWidgetData(appWidgetId)
-
-                Toast.makeText(
-                    context,
-                    "Widget safely locked.",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                widgetData.lock()
-
-                // Notify Service
-                val appWidgetManager = AppWidgetManager.getInstance(context)
-                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
-            }
-
             AppWidgetManager.ACTION_APPWIDGET_DELETED ->
             {
+                // When the widget is deleted, remove all its preferences
                 val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
                 Log.d(TAG, "Deleted widget ID $appWidgetId")
+                context!!.getSharedPreferences(
+                    Constants.WIDGET_PREFERENCES+appWidgetId,
+                    0
+                ).edit().clear().apply()
             }
         }
 
@@ -118,95 +86,7 @@ class PasswordManagerWidget : AppWidgetProvider() {
     }
 
 
-    /**
-     * Initializes the RemoteViews adapter and sets up the widget's remote adapter and empty view.
-     *
-     * @param remoteViews The RemoteViews object representing the widget's layout.
-     * @param context The context in which the receiver is running.
-     * @param appWidgetId The ID of the widget to be updated.
-     */
-    private fun initRemoteAdapter(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
-    {
-        val serviceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
-            //Add the widget ID to the intent extras
-            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
 
-            //with this line, the system can distinguish between the instances of the widgets
-            data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
-        }
-
-        remoteViews.setRemoteAdapter(R.id.widget_listview, serviceIntent)
-        remoteViews.setEmptyView(R.id.widget_listview, R.id.empty_listview)
-    }
-
-
-    /**
-     * Sets up the item click PendingIntent for the widget.
-     *
-     * @param remoteViews The RemoteViews object representing the widget's layout.
-     * @param context The context in which the receiver is running.
-     * @param appWidgetId The ID of the widget to be updated.
-     */
-    private fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
-    {
-        val itemClickIntent = Intent(context, UnlockWidgetActivity::class.java).apply {
-            action = ITEM_CLICK_ACTION
-            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-        }
-
-        // Special intent performing a broadcast
-        val pendingIntent = PendingIntent.getActivity(
-            context,
-            appWidgetId,
-            itemClickIntent,
-            PendingIntent.FLAG_MUTABLE
-        )
-
-        // The PendingIntentTemplate is combined with the FillInIntent in AppWidgetService
-        remoteViews.setPendingIntentTemplate(R.id.widget_listview, pendingIntent)
-    }
-
-    private fun setupLockButtonClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
-    {
-        if (!WidgetData.hasWidgetData(appWidgetId) || WidgetData.getWidgetData(appWidgetId).locked)
-        {
-            val unlockIntent = Intent(context, UnlockWidgetActivity::class.java)
-            val unlockIntentExtras = Bundle()
-            unlockIntentExtras.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-            unlockIntent.putExtras(unlockIntentExtras)
-
-            val unlockPendingIntent = PendingIntent.getActivity(
-                context,
-                appWidgetId,
-                unlockIntent,
-                PendingIntent.FLAG_MUTABLE
-            )
-            remoteViews.setOnClickPendingIntent(R.id.unlock_button, unlockPendingIntent)
-            remoteViews.setTextViewText(
-                R.id.unlock_button,
-                context.getString(R.string.unlock)
-            )
-        }
-        else
-        {
-            val lockIntent = Intent(context, PasswordManagerWidget::class.java).apply {
-                action = LOCK_ACTION
-                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-            }
-
-            val lockPendingIntent = PendingIntent.getBroadcast(
-                context,
-                appWidgetId,
-                lockIntent,
-                PendingIntent.FLAG_MUTABLE
-            )
-            remoteViews.setOnClickPendingIntent(R.id.unlock_button, lockPendingIntent)
-            remoteViews.setTextViewText(
-                R.id.unlock_button,
-                context.getString(R.string.lock))
-        }
-
-    }
 
     /**
      * Updates the widget with the specified ID.
@@ -228,19 +108,19 @@ class PasswordManagerWidget : AppWidgetProvider() {
         val smallView = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
-            setupLockButtonClick(this, context, appWidgetId)
+            setupWidgetName(this, context, appWidgetId)
         }
 
         val tallView = RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
-            setupLockButtonClick(this, context, appWidgetId)
+            setupWidgetName(this, context, appWidgetId)
         }
 
         val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
             initRemoteAdapter(this, context, appWidgetId)
             setupItemClick(this, context, appWidgetId)
-            setupLockButtonClick(this, context, appWidgetId)
+            setupWidgetName(this, context, appWidgetId)
         }
 
         // Maps the sizes to each view.
@@ -262,20 +142,68 @@ class PasswordManagerWidget : AppWidgetProvider() {
         val TAG = PasswordManagerWidget::class.java.toString()
         const val ITEM_POSITION = "item_position"
         const val ITEM_CLICK_ACTION = "item_click"
-        const val LOCK_ACTION = "lock"
         const val ITEM_PASSWORD = "item_password"
         const val ITEM_SERVICE = "item_service"
         const val ITEM_USERNAME = "item_username"
 
-        fun updateAppWidget(context: Context, appWidgetId: Int)
+        /**
+         * Initializes the RemoteViews adapter and sets up the widget's remote adapter and empty view.
+         *
+         * @param remoteViews The RemoteViews object representing the widget's layout.
+         * @param context The context in which the receiver is running.
+         * @param appWidgetId The ID of the widget to be updated.
+         */
+        fun initRemoteAdapter(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
-            // Update widget
-            val updateWidgetIntent = Intent(context, PasswordManagerWidget::class.java)
-            updateWidgetIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-            val ids = intArrayOf(appWidgetId)   // Update ONLY one widget
-            updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
-            context.sendBroadcast(updateWidgetIntent)
+            val serviceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
+                //Add the widget ID to the intent extras
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+
+                //with this line, the system can distinguish between the instances of the widgets
+                data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
+            }
+
+            remoteViews.setRemoteAdapter(R.id.widget_listview, serviceIntent)
+            remoteViews.setEmptyView(R.id.widget_listview, R.id.empty_listview)
         }
+
+
+        /**
+         * Sets up the item click PendingIntent for the widget.
+         *
+         * @param remoteViews The RemoteViews object representing the widget's layout.
+         * @param context The context in which the receiver is running.
+         * @param appWidgetId The ID of the widget to be updated.
+         */
+        fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        {
+            val itemClickIntent = Intent(context, UnlockWidgetActivity::class.java).apply {
+                action = ITEM_CLICK_ACTION
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            }
+
+            // Special intent performing a broadcast
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                appWidgetId,
+                itemClickIntent,
+                PendingIntent.FLAG_MUTABLE
+            )
+
+            // The PendingIntentTemplate is combined with the FillInIntent in AppWidgetService
+            remoteViews.setPendingIntentTemplate(R.id.widget_listview, pendingIntent)
+        }
+
+        fun setupWidgetName(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        {
+            val widgetPreferences = context.getSharedPreferences(
+                Constants.WIDGET_PREFERENCES+appWidgetId,
+                Context.MODE_PRIVATE
+            )
+            val widgetName = widgetPreferences.getString(Constants.WIDGET_NAME, "Widget's passwords")
+            remoteViews.setTextViewText(R.id.widget_name, widgetName)
+        }
+
     }
 
     private fun updateList(newList: List<Credential>) {
