@@ -1,7 +1,9 @@
 package com.project.passwordmanager.viewmodels
 
 import android.appwidget.AppWidgetManager
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.security.Hashing
 
 /**
@@ -19,8 +21,8 @@ class UnlockWidgetViewModel : ViewModel() {
      * @param insertedPassword The password entered by the user.
      * @return True if the password is correct and the widget is unlocked, false otherwise.
      */
-    fun unlock(insertedPassword: String): Boolean {
+    fun unlock(context: Context, insertedPassword: String): Boolean {
         val hashedInsertedPassword = Hashing.sha256(insertedPassword)
-        return  (hashedInsertedPassword == Hashing.sha256("MASTER"))
+        return  (hashedInsertedPassword == Utils.getHashedMasterPassword(context))
     }
 }

@@ -6,10 +6,10 @@ import com.project.passwordmanager.security.Hashing
 
 object Utils
 {
-    fun getHashedMasterPassword(context: Context)
+    fun getHashedMasterPassword(context: Context) : String
     {
-        context.getSharedPreferences(Constants.SYSTEM_PREFERENCES, AppCompatActivity.MODE_PRIVATE)
-            .getString(Constants.MASTER_PASSWORD, "")
+        return context.getSharedPreferences(Constants.SYSTEM_PREFERENCES, AppCompatActivity.MODE_PRIVATE)
+            .getString(Constants.MASTER_PASSWORD, "")!!
     }
 
     fun setHashedMasterPassword(context: Context, clearMasterPassword: String)

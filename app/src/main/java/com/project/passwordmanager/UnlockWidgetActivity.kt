@@ -3,7 +3,6 @@ package com.project.passwordmanager
 import android.appwidget.AppWidgetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.databinding.ActivityUnlockWidgetBinding
@@ -49,11 +48,11 @@ class UnlockWidgetActivity : AppCompatActivity()
 
         binding.unlockButton.setOnClickListener {
             val insertedMasterPassword = binding.insertedMasterPasswordTe.text.toString()
-            if (viewModel.unlock(insertedMasterPassword))
+            if (viewModel.unlock(applicationContext, insertedMasterPassword))
             {
                 Toast.makeText(
                     applicationContext,
-                    "Widget unlocked successfully.",
+                    "Credential unlocked successfully.",
                     Toast.LENGTH_LONG
                 ).show()
 

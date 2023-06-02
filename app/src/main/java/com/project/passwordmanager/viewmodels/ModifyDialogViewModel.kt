@@ -68,6 +68,7 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
         credential.id = credentialId
         credential.username = newCredentialUsername
         credential.service = newCredentialService
+        // TODO change modifyCredential to accept the inserted password to authenticate
         credential.password = Cryptography.encryptText(newCredentialPassword, "MASTER")
 
         if (!CredentialValidator.validate(credential)) {

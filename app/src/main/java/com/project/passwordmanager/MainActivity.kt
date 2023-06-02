@@ -18,11 +18,13 @@ import com.project.passwordmanager.common.Constants
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
-        getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
+        /*getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
             .edit()
-            .putBoolean("first_run", true)
+            .putBoolean(Constants.FIRST_TIME, true)
             .apply()
 
+
+         */
         val isFirstRun = getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
             .getBoolean(Constants.FIRST_TIME, true)
 
