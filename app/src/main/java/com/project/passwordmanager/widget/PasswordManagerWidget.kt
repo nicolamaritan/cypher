@@ -12,7 +12,7 @@ import android.util.SizeF
 import android.widget.RemoteViews
 import com.project.passwordmanager.R
 import com.project.passwordmanager.UnlockWidgetActivity
-import com.project.passwordmanager.common.Constants
+import com.project.passwordmanager.common.WidgetPreferencesManager
 
 /**
  * Implementation of App Widget functionality for the Password Manager widget.
@@ -51,10 +51,7 @@ class PasswordManagerWidget : AppWidgetProvider()
                 // When the widget is deleted, remove all its preferences
                 val appWidgetId: Int = intent.extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID)
                 Log.d(TAG, "Deleted widget ID $appWidgetId")
-                context!!.getSharedPreferences(
-                    Constants.WIDGET_PREFERENCES+appWidgetId,
-                    0
-                ).edit().clear().apply()
+                WidgetPreferencesManager(context!!, appWidgetId).clear()
             }
         }
 
@@ -182,12 +179,8 @@ class PasswordManagerWidget : AppWidgetProvider()
 
         fun setupWidgetName(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
-            val widgetPreferences = context.getSharedPreferences(
-                Constants.WIDGET_PREFERENCES+appWidgetId,
-                Context.MODE_PRIVATE
-            )
-            var widgetName = widgetPreferences.getString(Constants.WIDGET_NAME, "")
-            if (widgetName!!.isBlank())
+            var widgetName = WidgetPreferencesManager(context, appWidgetId).getName()
+            if (widgetName.isBlank())
             {
                 widgetName = "My passwords"
             }
@@ -197,23 +190,8 @@ class PasswordManagerWidget : AppWidgetProvider()
 
         fun setupCredentialsNumber(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
-            val widgetPreferences = context.getSharedPreferences(
-                Constants.WIDGET_PREFERENCES+appWidgetId,
-                Context.MODE_PRIVATE
-            )
-            // Adds only the ids contained in the shared preferences
-            val sharedPreferences = context.getSharedPreferences(
-                Constants.WIDGET_PREFERENCES+appWidgetId,
-                Context.MODE_PRIVATE
-            )
-            val toBeAddedIdsPreferences = sharedPreferences.getString(
-                Constants.WIDGET_ADDED_IDS,
-                ""
-            ) ?: ""
-            val savedToBeAddedIds = toBeAddedIdsPreferences.split(",").mapNotNull { it.toLongOrNull() }
-
-
-            remoteViews.setTextViewText(R.id.credentials_number, "Stored credentials: " + savedToBeAddedIds.size)
+            val savedAddedIds = WidgetPreferencesManager(context, appWidgetId).getAddedIds()
+            remoteViews.setTextViewText(R.id.credentials_number, "Stored credentials: " + savedAddedIds.size)
         }
 
     }

@@ -9,8 +9,8 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
-import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.WidgetPreferencesManager
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
@@ -69,17 +69,8 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         {
             Log.d(TAG, "updateList invoked")
 
-            // Adds only the ids contained in the shared preferences
-            val sharedPreferences = context.getSharedPreferences(
-                Constants.WIDGET_PREFERENCES+appWidgetId,
-                Context.MODE_PRIVATE
-            )
-            val toBeAddedIdsPreferences = sharedPreferences.getString(
-                Constants.WIDGET_ADDED_IDS,
-                ""
-            ) ?: ""
-            val savedToBeAddedIds = toBeAddedIdsPreferences.split(",").mapNotNull { it.toLongOrNull() }
-            val filteredList = newList.filter { obj -> savedToBeAddedIds.contains(obj.id) }
+            val savedAddedIds = WidgetPreferencesManager(context, appWidgetId).getAddedIds()
+            val filteredList = newList.filter { obj -> savedAddedIds.contains(obj.id) }
 
             if (filteredList.isEmpty())
                 return

@@ -2,7 +2,6 @@ package com.project.passwordmanager.fragments
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.SizeF
@@ -16,7 +15,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
-import com.project.passwordmanager.common.Constants
+import com.project.passwordmanager.common.WidgetPreferencesManager
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
@@ -77,17 +76,9 @@ class WidgetConfigurationFragment : Fragment()
             {
                 activity.setResult(Activity.RESULT_OK, resultValue)
 
-                // Puts the selected credentials and its name in the preferences
-                val widgetPreferences = requireContext().getSharedPreferences(
-                    Constants.WIDGET_PREFERENCES+appWidgetId,
-                    Context.MODE_PRIVATE
-                )
-                val editor = widgetPreferences.edit()
-                val toBeAddedIdsPreferences = toBeAddedIds.joinToString(",")
-                editor.putString(Constants.WIDGET_ADDED_IDS, toBeAddedIdsPreferences)
-                editor.putString(Constants.WIDGET_NAME, binding.widgetNameEt.text.toString())
-                editor.apply()
-
+                val widgetPreferencesManager = WidgetPreferencesManager(requireContext(), appWidgetId)
+                widgetPreferencesManager.insertName(binding.widgetNameEt.text.toString())
+                widgetPreferencesManager.insertAddedIds(toBeAddedIds)
 
                 // Update the layout for the widget
                 val smallView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget).apply {
