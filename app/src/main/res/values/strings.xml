@@ -48,10 +48,15 @@
     <string name="modify_the_password">Modify your password</string>
     <string name="credential_modified_toast">Credential modified</string>
 
-    // Other
+    // Welcome
     <string name="how_to_create_strong_password">How to create a <i>strong</i> password? Check <a href="https://support.google.com/accounts/answer/32040?hl=en">Google\'s advices.</a></string>
     <string name="welcome_this_app">Welcome! This app allows you to safely store your password on the device.</string>
     <string name="choose">Choose a <i>strong</i> Master Password used to access all your saved passwords.</string>
     <string name="reinsert_your_master_password">Reinsert your Master Password</string>
     <string name="confirm">Confirm</string>
+    <string name="password_mismatch">Password mismatch</string>
+    <string name="entered_passwords_do_not_match">The entered passwords do not match.</string>
+    <string name="master_password_correctly_inserted">Master Password correctly inserted.</string>
+    <string name="blank_password">Blank password</string>
+    <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
 </resources>

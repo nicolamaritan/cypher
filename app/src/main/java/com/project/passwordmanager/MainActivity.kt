@@ -12,13 +12,19 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.project.passwordmanager.common.Constants
 
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
-        val isFirstRun = getSharedPreferences("activation", MODE_PRIVATE)
-            .getBoolean("first_run", true)
+        getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
+            .edit()
+            .putBoolean("first_run", true)
+            .apply()
+
+        val isFirstRun = getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
+            .getBoolean(Constants.FIRST_TIME, true)
 
         if (isFirstRun)
         {
