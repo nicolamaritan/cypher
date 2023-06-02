@@ -87,7 +87,7 @@ class PasswordManagerWidget : AppWidgetProvider()
         newOptions: Bundle?
     ) {
         updateAppWidget(context!!, appWidgetManager!!, appWidgetId)
-        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
     }
 
     companion object

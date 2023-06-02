@@ -14,6 +14,7 @@ import com.project.passwordmanager.common.WidgetPreferencesManager
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.model.CredentialRepository
 
 //WATCH THE MANIFEST!
 
@@ -56,6 +57,7 @@ class PasswordManagerWidgetService: RemoteViewsService() {
     ): RemoteViewsFactory
     {
         private var credentialDao: CredentialDao = CredentialDatabase.getInstance(context).credentialDao
+        private val credentialRepository: CredentialRepository = CredentialRepository(credentialDao)
         private lateinit var allCredentials: LiveData<List<Credential>>
         private var credentialsItemList = ArrayList<Credential>()
 
@@ -82,24 +84,22 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
         override fun onCreate()
         {
-            // Initialize the LiveData object by calling the DAO method
             Logger.logCallback(TAG, "onCreate", appWidgetId)
 
-            allCredentials = credentialDao.getAll()
-            allCredentials.observeForever { credentials ->
-                credentials?.let {
-                    updateList(credentials)
-                }
+            allCredentials = credentialRepository.allCredentials
+            allCredentials.observeForever { list ->
+                updateList(list)
             }
-            AppWidgetManager.getInstance(context)
-                .notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
         }
 
         override fun onDataSetChanged()
         {
             Logger.logCallback(TAG, "onDataSetChanged", appWidgetId)
-            allCredentials = credentialDao.getAll()
-            allCredentials.value?.let { updateList(it) }
+            allCredentials = credentialRepository.allCredentials
+            if (credentialsItemList.isNotEmpty())
+            {
+                getViewAt(0)
+            }
         }
 
 
