@@ -12,13 +12,15 @@
         android:theme="@style/Theme.PasswordManager"
         tools:targetApi="31">
         <activity
+            android:name=".FirstTimeActivity"
+            android:exported="false" />
+        <activity
             android:name=".WidgetConfigurationActivity"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".UnlockWidgetActivity"
             android:exported="false" />
@@ -44,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!--
 Beyond the requirements listed in Declare a widget in the manifest,
         you need to make it possible for widgets with collections to bind to your RemoteViewsService.

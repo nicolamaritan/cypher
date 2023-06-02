@@ -1,9 +1,10 @@
 package com.project.passwordmanager
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,10 +12,29 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.project.passwordmanager.common.Constants
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
+        /*getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
+            .edit()
+            .putBoolean(Constants.FIRST_TIME, true)
+            .apply()
+
+
+         */
+        val isFirstRun = getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
+            .getBoolean(Constants.FIRST_TIME, true)
+
+        if (isFirstRun)
+        {
+            startActivity(Intent(this, FirstTimeActivity::class.java))
+
+            finish()
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
