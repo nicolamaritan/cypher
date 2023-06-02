@@ -20,11 +20,15 @@
     <string name="username">Username</string>
     <string name="insert_a_new_credential">Insert a new credential</string>
     <string name="credential_added_toast">Credential safely added ;)</string>
+    <string name="credential_modified_toast">Credential safely modified ;)</string>
+    <string name="credential_deleted_toast">Credential safely deleted ;)</string>
+    <string name="unlock_toast">Successful unlock</string>
     <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
     <string name="unlock">UNLOCK</string>
     <string name="do_something">Do something</string>
     <string name="copy_the_credential_s_password">Copy the credential\'s password.</string>
     <string name="modify_the_credential">Modify</string>
+    <string name="delete_the_credential">Delete</string>
     <string name="unlock_lock_the_credential_s_password">Unlock/lock the credential\'s password.</string>
     <string name="add_a_new_credential">Add a new credential.</string>
     <string name="locked_password">*******</string>
