@@ -53,7 +53,6 @@
     <string name="modify_your_username">Modify your username</string>
     <string name="modify_the_service">Modify your service</string>
     <string name="modify_the_password">Modify your password</string>
-    <string name="credential_modified_toast">Credential modified</string>
 
     // Welcome
     <string name="how_to_create_strong_password">How to create a <i>strong</i> password? Check <a href="https://support.google.com/accounts/answer/32040?hl=en">Google\'s advices.</a></string>
