@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.ActivityUnlockWidgetBinding
 import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.viewmodels.UnlockWidgetViewModel
@@ -39,39 +40,29 @@ class UnlockWidgetActivity : AppCompatActivity()
             AppWidgetManager.INVALID_APPWIDGET_ID
         )
 
+        // Get data from the filled-in intent
         val encryptedPassword = intent.getStringExtra(PasswordManagerWidget.ITEM_PASSWORD)!!
-
         binding.credentialItem.user.text = intent.getStringExtra(PasswordManagerWidget.ITEM_USERNAME)!!
         binding.credentialItem.service.text = intent.getStringExtra(PasswordManagerWidget.ITEM_SERVICE)!!
         binding.credentialItem.password.text = applicationContext.getString(R.string.locked_password)
 
-
         binding.unlockButton.setOnClickListener {
             val insertedMasterPassword = binding.insertedMasterPasswordTe.text.toString()
-            if (viewModel.unlock(applicationContext, insertedMasterPassword))
+            if (viewModel.unlock(Utils.getHashedMasterPassword(applicationContext), insertedMasterPassword))
             {
-                Toast.makeText(
-                    applicationContext,
-                    "Credential unlocked successfully.",
-                    Toast.LENGTH_LONG
-                ).show()
-
                 // The hashes coincides, therefore can be decrypted
                 binding.credentialItem.password.text = Cryptography.decryptText(
                     encryptedPassword,
                     insertedMasterPassword
                 )
             }
-            else
-            {
-                Toast.makeText(
-                    applicationContext,
-                    "Wrong password.",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
 
             binding.insertedMasterPasswordTe.text.clear()
+        }
+
+        // Observe the toast id to change
+        viewModel.toastStringId.observe(this){
+            Toast.makeText(applicationContext, getString(it), Toast.LENGTH_LONG).show()
         }
     }
 

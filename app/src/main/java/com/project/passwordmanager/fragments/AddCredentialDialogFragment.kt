@@ -9,14 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsDialogViewModelFactory
-import com.project.passwordmanager.factories.CredentialsViewModelFactory
-import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
-import com.project.passwordmanager.viewmodels.CredentialsDialogViewModel
-import com.project.passwordmanager.viewmodels.CredentialsViewModel
-import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
+import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
 
 /**
  * Dialog fragment for adding credentials in the password manager application.
@@ -24,9 +21,9 @@ import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
  * This dialog allows the user to enter new credentials, which are then added to the database.
  * It utilizes a ViewModel to handle user interactions, data validation, and database operations.
  *
- * @see CredentialsDialogViewModel
+ * @see AddCredentialDialogViewModel
  */
-class CredentialsDialogFragment(): DialogFragment()
+class AddCredentialDialogFragment(): DialogFragment()
 {
     private var _binding: DialogCredentialsBinding? = null
     private val binding get() = _binding!!
@@ -46,17 +43,24 @@ class CredentialsDialogFragment(): DialogFragment()
         val application = requireActivity().application
         val dao = CredentialDatabase.getInstance(application).credentialDao
         val viewModelFactory = CredentialsDialogViewModelFactory(dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[CredentialsDialogViewModel::class.java]
+        val viewModel = ViewModelProvider(this, viewModelFactory)[AddCredentialDialogViewModel::class.java]
 
         // DataBinding
         binding.credentialsDialogViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.add.setOnClickListener{
-            viewModel.addCredential()
-            if (viewModel.closing)
+            // Passes the true hashed password for the check
+            if (viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(requireContext())))
             {
-                dismiss()
+                if (viewModel.addCredential())
+                {
+                    dismiss()
+                }
+            }
+            else
+            {
+                binding.insertedMasterPasswordTe.text.clear()
             }
         }
 
@@ -68,7 +72,7 @@ class CredentialsDialogFragment(): DialogFragment()
         viewModel.toastStringId.observe(this) {
             it.let {
                 val toastMessage = requireContext().getString(it)
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -83,6 +87,6 @@ class CredentialsDialogFragment(): DialogFragment()
 
     companion object
     {
-        private val TAG = CredentialsDialogFragment::javaClass.toString()
+        private val TAG = AddCredentialDialogFragment::javaClass.toString()
     }
 }

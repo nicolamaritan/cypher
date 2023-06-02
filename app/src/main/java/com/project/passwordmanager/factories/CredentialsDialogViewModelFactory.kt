@@ -3,7 +3,7 @@ package com.project.passwordmanager.factories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.model.CredentialDao
-import com.project.passwordmanager.viewmodels.CredentialsDialogViewModel
+import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
 
 class CredentialsDialogViewModelFactory(private val dao: CredentialDao)
     : ViewModelProvider.Factory
@@ -16,9 +16,9 @@ class CredentialsDialogViewModelFactory(private val dao: CredentialDao)
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T
     {
-        if (modelClass.isAssignableFrom(CredentialsDialogViewModel::class.java))
+        if (modelClass.isAssignableFrom(AddCredentialDialogViewModel::class.java))
         {
-            return CredentialsDialogViewModel(dao) as T
+            return AddCredentialDialogViewModel(dao) as T
         }
         throw IllegalArgumentException("Wrong ViewModel")
     }

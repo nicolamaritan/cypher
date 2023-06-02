@@ -13,6 +13,7 @@
     <string name="clear">Clear</string>
     <string name="insert_the_password">Insert the password</string>
     <string name="password">Password</string>
+    <string name="master_password">Master Password</string>
     <string name="insert_the_service">Insert the service</string>
     <string name="service">Service</string>
     <string name="insert_your_username">Insert your username</string>
@@ -27,6 +28,7 @@
     <string name="unlock_lock_the_credential_s_password">Unlock/lock the credential\'s password.</string>
     <string name="add_a_new_credential">Add a new credential.</string>
     <string name="locked_password">*******</string>
+    <string name="wrong_master_password">Wrong master password.</string>
 
     // Widget
     <string name="unlock_widget">Unlock widget</string>
@@ -34,6 +36,7 @@
     <string name="insert_your_master_password">Insert your Master Password</string>
     <string name="lock">LOCK</string>
     <string name="widget_configuration">Widget configuration</string>
+    <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
 
     // Stats
     <string name="stats">Stats</string>

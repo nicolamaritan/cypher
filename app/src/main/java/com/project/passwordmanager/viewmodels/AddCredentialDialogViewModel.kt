@@ -10,6 +10,7 @@ import com.project.passwordmanager.common.CredentialValidator
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.security.Cryptography
+import com.project.passwordmanager.security.Hashing
 import kotlinx.coroutines.launch
 
 /**
@@ -18,9 +19,10 @@ import kotlinx.coroutines.launch
  * It provides methods to add credentials and handle events for displaying toasts.
  *
  * @param dao The DAO (Data Access Object) for accessing the Credential entity in the database.
- * @see com.project.passwordmanager.fragments.CredentialsDialogFragment
+ * @see com.project.passwordmanager.fragments.AddCredentialDialogFragment
  */
-class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
+class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
+{
 
     /**
      * The username for the new credential.
@@ -37,12 +39,10 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
      */
     var newCredentialPassword = ""
 
-    /**
-     * Indicates whether the dialog is closing.
-     */
-    var closing = false
+    var insertedMasterPassword = ""
 
-    private val _toastStringId = MutableLiveData<Int>()
+
+    private var _toastStringId = MutableLiveData<Int>()
 
     /**
      * LiveData for observing toast events.
@@ -60,30 +60,43 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
      * result message.
      *
      */
-    fun addCredential() {
+    fun addCredential() : Boolean
+    {
         Log.d(TAG, "addCredential invoked.")
         val credential = Credential()
         credential.username = newCredentialUsername
         credential.service = newCredentialService
-        credential.password = Cryptography.encryptText(newCredentialPassword, "MASTER")
+        credential.password = newCredentialPassword
 
         if (!CredentialValidator.validate(credential)) {
             _toastStringId.value = R.string.invalid_credential_toast
-            return
+            return false
         }
 
+        // Encrypt the password before insertion
+        credential.password = Cryptography.encryptText(newCredentialPassword, insertedMasterPassword)
         viewModelScope.launch {
             dao.insert(credential)
         }
 
-        closing = true
         _toastStringId.value = R.string.credential_added_toast
+        return true
+    }
+
+    fun checkInsertedMasterPassword(trueHashedMasterPassword: String) : Boolean
+    {
+        if (Hashing.sha256(insertedMasterPassword) != trueHashedMasterPassword)
+        {
+            _toastStringId.value = R.string.wrong_master_password
+            return false
+        }
+        return true
     }
 
     companion object {
         /**
          * TAG used for logging.
          */
-        val TAG: String = CredentialsDialogViewModel::class.java.simpleName
+        val TAG: String = AddCredentialDialogViewModel::class.java.simpleName
     }
 }
