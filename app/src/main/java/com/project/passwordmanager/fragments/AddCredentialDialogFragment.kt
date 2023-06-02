@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
@@ -49,10 +50,17 @@ class AddCredentialDialogFragment(): DialogFragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.add.setOnClickListener{
-            viewModel.addCredential()
-            if (viewModel.closing)
+            // Passes the true hashed password for the check
+            if (viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(requireContext())))
             {
-                dismiss()
+                if (viewModel.addCredential())
+                {
+                    dismiss()
+                }
+            }
+            else
+            {
+                binding.insertedMasterPasswordTe.text.clear()
             }
         }
 
@@ -64,7 +72,7 @@ class AddCredentialDialogFragment(): DialogFragment()
         viewModel.toastStringId.observe(this) {
             it.let {
                 val toastMessage = requireContext().getString(it)
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, toastMessage, Toast.LENGTH_LONG).show()
             }
         }
 
