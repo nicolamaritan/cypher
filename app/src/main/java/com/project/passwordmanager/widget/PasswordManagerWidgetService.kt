@@ -82,11 +82,17 @@ class PasswordManagerWidgetService: RemoteViewsService() {
 
         override fun onCreate()
         {
+            // Initialize the LiveData object by calling the DAO method
             Logger.logCallback(TAG, "onCreate", appWidgetId)
+
             allCredentials = credentialDao.getAll()
-            allCredentials.observeForever{ list ->
-                updateList(list)
+            allCredentials.observeForever { credentials ->
+                credentials?.let {
+                    updateList(credentials)
+                }
             }
+            AppWidgetManager.getInstance(context)
+                .notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
         }
 
         override fun onDataSetChanged()
