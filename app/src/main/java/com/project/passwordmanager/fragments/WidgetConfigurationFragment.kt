@@ -4,7 +4,6 @@ import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
-import android.util.SizeF
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
 import com.project.passwordmanager.common.WidgetPreferencesManager
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
@@ -80,34 +78,8 @@ class WidgetConfigurationFragment : Fragment()
                 widgetPreferencesManager.insertName(binding.widgetNameEt.text.toString())
                 widgetPreferencesManager.insertAddedIds(toBeAddedIds)
 
-                // Update the layout for the widget
-                val smallView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget).apply {
-                    PasswordManagerWidget.initRemoteAdapter(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupItemClick(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupWidgetName(this, requireContext(), appWidgetId)
-                }
 
-                val tallView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget_tall).apply {
-                    PasswordManagerWidget.initRemoteAdapter(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupItemClick(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupWidgetName(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupCredentialsNumber(this, requireContext(), appWidgetId)
-                }
-
-                val wideView = RemoteViews(requireContext().packageName, R.layout.password_manager_widget_wide).apply {
-                    PasswordManagerWidget.initRemoteAdapter(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupItemClick(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupWidgetName(this, requireContext(), appWidgetId)
-                    PasswordManagerWidget.setupCredentialsNumber(this, requireContext(), appWidgetId)
-                }
-
-                // Maps the sizes to each view.
-                val viewMapping: Map<SizeF, RemoteViews> = mapOf(
-                    SizeF(80f, 80f) to smallView,
-                    SizeF(80f, 350f) to tallView,
-                    SizeF(240f, 140f) to wideView
-                )
-
+                val viewMapping = PasswordManagerWidget.getWidgetViewMapping(requireContext(), appWidgetId)
                 // The returned RemoteViews is chosen based on the widget size, according to the mapping
                 val views = RemoteViews(viewMapping)
 

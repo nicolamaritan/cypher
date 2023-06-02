@@ -71,38 +71,8 @@ class PasswordManagerWidget : AppWidgetProvider()
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
     ) {
-        /**
-         *  RemoteViews specifying separate layouts for orientation or size cannot be modified.
-         *  Instead, fully configure each layouts individually before constructing the combined.
-         *  Therefore, each layout should be configured BEFORE invoking RemoteViews(viewMapping).
-         * */
-        val smallView = RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
-            initRemoteAdapter(this, context, appWidgetId)
-            setupItemClick(this, context, appWidgetId)
-            setupWidgetName(this, context, appWidgetId)
-        }
 
-        val tallView = RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
-            initRemoteAdapter(this, context, appWidgetId)
-            setupItemClick(this, context, appWidgetId)
-            setupWidgetName(this, context, appWidgetId)
-            setupCredentialsNumber(this, context, appWidgetId)
-        }
-
-        val wideView = RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
-            initRemoteAdapter(this, context, appWidgetId)
-            setupItemClick(this, context, appWidgetId)
-            setupWidgetName(this, context, appWidgetId)
-            setupCredentialsNumber(this, context, appWidgetId)
-        }
-
-        // Maps the sizes to each view.
-        val viewMapping: Map<SizeF, RemoteViews> = mapOf(
-            SizeF(80f, 80f) to smallView,
-            SizeF(80f, 350f) to tallView,
-            SizeF(240f, 140f) to wideView
-        )
-
+        val viewMapping = getWidgetViewMapping(context, appWidgetId)
         // The returned RemoteViews is chosen based on the widget size, according to the mapping
         val views = RemoteViews(viewMapping)
 
@@ -192,6 +162,44 @@ class PasswordManagerWidget : AppWidgetProvider()
         {
             val savedAddedIds = WidgetPreferencesManager(context, appWidgetId).getAddedIds()
             remoteViews.setTextViewText(R.id.credentials_number, "Stored credentials: " + savedAddedIds.size)
+        }
+
+        fun getWidgetViewMapping(context: Context, appWidgetId: Int): Map<SizeF, RemoteViews> {
+            /**
+             *  RemoteViews specifying separate layouts for orientation or size cannot be modified.
+             *  Instead, fully configure each layouts individually before constructing the combined.
+             *  Therefore, each layout should be configured BEFORE invoking RemoteViews(viewMapping).
+             * */
+            val smallView =
+                RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
+                    initRemoteAdapter(this, context, appWidgetId)
+                    setupItemClick(this, context, appWidgetId)
+                    setupWidgetName(this, context, appWidgetId)
+                }
+
+            val tallView =
+                RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
+                    initRemoteAdapter(this, context, appWidgetId)
+                    setupItemClick(this, context, appWidgetId)
+                    setupWidgetName(this, context, appWidgetId)
+                    setupCredentialsNumber(this, context, appWidgetId)
+                }
+
+            val wideView =
+                RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
+                    initRemoteAdapter(this, context, appWidgetId)
+                    setupItemClick(this, context, appWidgetId)
+                    setupWidgetName(this, context, appWidgetId)
+                    setupCredentialsNumber(this, context, appWidgetId)
+                }
+
+            // Maps the sizes to each view.
+
+            return mapOf(
+                SizeF(80f, 80f) to smallView,
+                SizeF(80f, 350f) to tallView,
+                SizeF(240f, 140f) to wideView
+            )
         }
 
     }

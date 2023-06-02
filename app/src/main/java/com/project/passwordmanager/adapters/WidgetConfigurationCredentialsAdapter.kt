@@ -12,7 +12,7 @@ import com.project.passwordmanager.model.Credential
 
 
 class WidgetConfigurationCredentialsAdapter(context: Context):
-    RecyclerView.Adapter<WidgetConfigurationCredentialsAdapter.PwmViewHolder>(){
+    RecyclerView.Adapter<WidgetConfigurationCredentialsAdapter.WidgetConfigurationCredentialsViewHolder>(){
 
     // Definition of the data type we will work with
     var data = listOf<Credential>()
@@ -24,7 +24,7 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
 
     val selectedCredentialsIds: MutableList<Long> = mutableListOf()
 
-    inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class WidgetConfigurationCredentialsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
 
         private val service: TextView = itemView.findViewById(R.id.service)
@@ -35,6 +35,7 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
         {
             service.text = credential.service
             username.text = credential.username
+            checkBox.isChecked = false
 
             // Checking a credential implies putting it into the list
             checkBox.setOnCheckedChangeListener{ _, b ->
@@ -52,18 +53,18 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PwmViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WidgetConfigurationCredentialsViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.widget_configuration_credentials_recyclerview_item, parent, false)
 
-        return PwmViewHolder(view)
+        return WidgetConfigurationCredentialsViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: PwmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WidgetConfigurationCredentialsViewHolder, position: Int) {
         val item = data[position]
         holder.bind(item)
     }
