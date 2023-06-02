@@ -4,12 +4,17 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import androidx.lifecycle.LiveData
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Logger
-import com.project.passwordmanager.common.ToyDataWidgetDataInitializer
-import com.project.passwordmanager.model.WidgetData
+import com.project.passwordmanager.common.WidgetPreferencesManager
+import com.project.passwordmanager.model.Credential
+import com.project.passwordmanager.model.CredentialDao
+import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.model.CredentialRepository
 
 //WATCH THE MANIFEST!
 
@@ -51,81 +56,73 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         intent: Intent
     ): RemoteViewsFactory
     {
-        /**
-         * Obtains the widgetId from the intent which requested
-         * the factory. The intent contains such information.
-         */
+        private var credentialDao: CredentialDao = CredentialDatabase.getInstance(context).credentialDao
+        private val credentialRepository: CredentialRepository = CredentialRepository(credentialDao)
+        private lateinit var allCredentials: LiveData<List<Credential>>
+        private var credentialsItemList = ArrayList<Credential>()
+
+
         private val appWidgetId: Int = intent.getIntExtra(
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID)
 
-        /**
-         * Holds reference to its WidgetData.
-         */
-        private var widgetData: WidgetData? = null
 
-        /**
-         * Called when the factory is first created.
-         * This method should not perform any heavy lifting,
-         * such as downloading or creating content.
-         */
+        private fun updateList(newList: List<Credential>)
+        {
+            Log.d(TAG, "updateList invoked")
+
+            val savedAddedIds = WidgetPreferencesManager(context, appWidgetId).getAddedIds()
+            val filteredList = newList.filter { obj -> savedAddedIds.contains(obj.id) }
+
+            if (filteredList.isEmpty())
+                return
+
+            credentialsItemList.clear()
+            credentialsItemList.addAll(filteredList)
+            onDataSetChanged()
+        }
+
         override fun onCreate()
         {
             Logger.logCallback(TAG, "onCreate", appWidgetId)
-            /*
-                In onCreate(), set up any connections or cursors to your data
-                source. Heavy lifting, such as downloading or creating content,
-                must be deferred to onDataSetChanged() or getViewAt(). Taking
-                more than 20 seconds on this call results in an ANR
-            */
 
-            WidgetData.createWidgetData(appWidgetId)
-            ToyDataWidgetDataInitializer.initialize(appWidgetId)    // Populating WD with toy entries
-            widgetData = WidgetData.getWidgetData(appWidgetId)
+            allCredentials = credentialRepository.allCredentials
+            allCredentials.observeForever { list ->
+                updateList(list)
+            }
         }
 
-        /**
-         * Called when the data set changes. This method should be used to notify the factory
-         * that the data has changed and needs to be updated.
-         */
-        override fun onDataSetChanged() {}
+        override fun onDataSetChanged()
+        {
+            Logger.logCallback(TAG, "onDataSetChanged", appWidgetId)
+            allCredentials = credentialRepository.allCredentials
+            if (credentialsItemList.isNotEmpty())
+            {
+                getViewAt(0)
+            }
+        }
 
-        /**
-         * Called when the factory is destroyed. This method should be used to clean up any
-         * resources used by the factory.
-         */
+
         override fun onDestroy() {}
 
-        /**
-         * Gets the number of items in the list that will be displayed in the widget.
-         *
-         * @return The number of items in the list.
-         */
         override fun getCount(): Int
         {
-            return widgetData!!.size()
+            return credentialsItemList.size
         }
 
-        /**
-         * Gets the view to display at the given position in the widget.
-         *
-         * @param position The position of the view to display.
-         * @return The RemoteViews to display at the given position.
-         */
         override fun getViewAt(position: Int): RemoteViews
         {
-            //WARNING! As this is not a RecyclerView, the list in the widget will be less efficient! So, don't put a large amount of data inside!
-
             //takes the view to display remotely in the widget
             val view = RemoteViews(context.packageName, R.layout.widget_listview_item)
-            val entry = widgetData!!.get(position)
+            val entry = credentialsItemList[position]
 
             //set the text in the view, taking the id of the TextView and the element to insert in it
             view.setTextViewText(R.id.service, entry.service)
             view.setTextViewText(R.id.user, entry.username)
             view.setTextViewText(
                 R.id.password,
-                if (!entry.visible) context.getString(R.string.locked_password) else entry.password
+                //if (!entry.visible) context.getString(R.string.locked_password) else entry.password
+                context.getString(R.string.locked_password)
             )
 
             /*
@@ -133,10 +130,13 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             * */
             val fillInIntentBundle = Bundle()
             fillInIntentBundle.putInt(PasswordManagerWidget.ITEM_POSITION, position)
+            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_SERVICE, entry.service)
+            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_USERNAME, entry.username)
+            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_PASSWORD, entry.password)
+
             val fillInIntent = Intent()
             fillInIntent.putExtras(fillInIntentBundle)
             view.setOnClickFillInIntent(R.id.widget_listview_item, fillInIntent)
-
 
             return view
         }
@@ -188,6 +188,5 @@ class PasswordManagerWidgetService: RemoteViewsService() {
         {
             private val TAG = PasswordManagerWidgetItemFactory::class.simpleName
         }
-
     }
 }

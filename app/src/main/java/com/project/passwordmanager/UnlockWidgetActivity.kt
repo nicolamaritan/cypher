@@ -3,9 +3,11 @@ package com.project.passwordmanager
 import android.appwidget.AppWidgetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.databinding.ActivityUnlockWidgetBinding
+import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.viewmodels.UnlockWidgetViewModel
 import com.project.passwordmanager.widget.PasswordManagerWidget
 
@@ -38,23 +40,28 @@ class UnlockWidgetActivity : AppCompatActivity()
             AppWidgetManager.INVALID_APPWIDGET_ID
         )
 
-        binding.unlockButton.setOnClickListener {
+        val encryptedPassword = intent.getStringExtra(PasswordManagerWidget.ITEM_PASSWORD)!!
 
-            /*
-                Checks if the entered password matches the stored password in the view model.
-                If the passwords match, a success message is displayed and the activity is finished,
-                indicating that the widget has been unlocked. Otherwise, an error message is displayed,
-                indicating that the entered password is incorrect.
-             */
-            if (viewModel.unlock(binding.insertedPasswordTe.text.toString()))
+        binding.credentialItem.user.text = intent.getStringExtra(PasswordManagerWidget.ITEM_USERNAME)!!
+        binding.credentialItem.service.text = intent.getStringExtra(PasswordManagerWidget.ITEM_SERVICE)!!
+        binding.credentialItem.password.text = applicationContext.getString(R.string.locked_password)
+
+
+        binding.unlockButton.setOnClickListener {
+            val insertedMasterPassword = binding.insertedMasterPasswordTe.text.toString()
+            if (viewModel.unlock(insertedMasterPassword))
             {
                 Toast.makeText(
                     applicationContext,
                     "Widget unlocked successfully.",
                     Toast.LENGTH_LONG
                 ).show()
-                PasswordManagerWidget.updateAppWidget(applicationContext, viewModel.appWidgetId)
-                finish()
+
+                // The hashes coincides, therefore can be decrypted
+                binding.credentialItem.password.text = Cryptography.decryptText(
+                    encryptedPassword,
+                    insertedMasterPassword
+                )
             }
             else
             {
@@ -64,6 +71,13 @@ class UnlockWidgetActivity : AppCompatActivity()
                     Toast.LENGTH_LONG
                 ).show()
             }
+
+            binding.insertedMasterPasswordTe.text.clear()
         }
+    }
+
+    companion object
+    {
+        val TAG = UnlockWidgetActivity::class.java.toString()
     }
 }
