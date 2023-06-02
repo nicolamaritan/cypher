@@ -18,9 +18,9 @@ import kotlinx.coroutines.launch
  * It provides methods to add credentials and handle events for displaying toasts.
  *
  * @param dao The DAO (Data Access Object) for accessing the Credential entity in the database.
- * @see com.project.passwordmanager.fragments.CredentialsDialogFragment
+ * @see com.project.passwordmanager.fragments.AddCredentialDialogFragment
  */
-class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
+class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel() {
 
     /**
      * The username for the new credential.
@@ -84,6 +84,6 @@ class CredentialsDialogViewModel(private val dao: CredentialDao) : ViewModel() {
         /**
          * TAG used for logging.
          */
-        val TAG: String = CredentialsDialogViewModel::class.java.simpleName
+        val TAG: String = AddCredentialDialogViewModel::class.java.simpleName
     }
 }

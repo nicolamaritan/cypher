@@ -1,9 +1,9 @@
-package com.project.passwordmanager.viewmodels;
+package com.project.passwordmanager.viewmodels
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModel;
-import com.project.passwordmanager.fragments.CredentialsDialogFragment;
-import com.project.passwordmanager.model.CredentialDao;
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModel
+import com.project.passwordmanager.fragments.AddCredentialDialogFragment
+import com.project.passwordmanager.model.CredentialDao
 
 /**
  * This ViewModel class represents the credentials screen logic and data management.
@@ -15,7 +15,7 @@ class CredentialsViewModel(dao: CredentialDao) : ViewModel() {
     /**.
      * Used for the RecyclerView to display all the tuples.
      */
-    val credentials = dao.getAll();
+    val credentials = dao.getAll()
 
     /**
      * Displays the dialog fragment for adding new credentials.
@@ -23,8 +23,8 @@ class CredentialsViewModel(dao: CredentialDao) : ViewModel() {
      * @param fragmentManager The FragmentManager to show the dialog fragment.
      */
     fun showDialog(fragmentManager: FragmentManager) {
-        val newFragment = CredentialsDialogFragment();
-        newFragment.show(fragmentManager, TAG);
+        val newFragment = AddCredentialDialogFragment()
+        newFragment.show(fragmentManager, TAG)
     }
 
     /**
@@ -34,6 +34,6 @@ class CredentialsViewModel(dao: CredentialDao) : ViewModel() {
         /**
          * The tag used for logging and identification of the CredentialsViewModel class.
          */
-        private val TAG = CredentialsViewModel::javaClass.toString();
+        private val TAG = CredentialsViewModel::javaClass.toString()
     }
 }
