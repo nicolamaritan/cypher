@@ -40,12 +40,11 @@ class UnlockWidgetActivity : AppCompatActivity()
             AppWidgetManager.INVALID_APPWIDGET_ID
         )
 
+        // Get data from the filled-in intent
         val encryptedPassword = intent.getStringExtra(PasswordManagerWidget.ITEM_PASSWORD)!!
-
         binding.credentialItem.user.text = intent.getStringExtra(PasswordManagerWidget.ITEM_USERNAME)!!
         binding.credentialItem.service.text = intent.getStringExtra(PasswordManagerWidget.ITEM_SERVICE)!!
         binding.credentialItem.password.text = applicationContext.getString(R.string.locked_password)
-
 
         binding.unlockButton.setOnClickListener {
             val insertedMasterPassword = binding.insertedMasterPasswordTe.text.toString()
@@ -61,6 +60,7 @@ class UnlockWidgetActivity : AppCompatActivity()
             binding.insertedMasterPasswordTe.text.clear()
         }
 
+        // Observe the toast id to change
         viewModel.toastStringId.observe(this){
             Toast.makeText(applicationContext, getString(it), Toast.LENGTH_LONG).show()
         }
