@@ -10,7 +10,9 @@ import com.project.passwordmanager.common.CredentialValidator
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.security.Cryptography
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ViewModel class for ModifyDialogFragment.
@@ -81,6 +83,36 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
 
         closing = true
         _toastStringId.value = R.string.credential_modified_toast
+    }
+
+    /**
+     * Deletes a credential from the database using the specified ID.
+     *
+     * @param credentialId the ID of the credential to delete.
+     */
+    fun deleteCredential(credentialId: Long) {
+        Log.d(TAG, "deleteCredential invoked.")
+
+        // Perform the asynchronous operation using Kotlin coroutines
+        viewModelScope.launch {
+            // Retrieve the credential from the database on the IO thread
+            val credential = withContext(Dispatchers.IO) {
+                dao.getCredentialById(credentialId)
+            }
+
+            // If the credential exists, delete it from the database on the IO thread
+            if (credential != null) {
+                withContext(Dispatchers.IO) {
+                    dao.delete(credential)
+                }
+            }
+        }
+
+        // Set the closing flag to true
+        closing = true
+
+        // Set the toast message value for the credential deletion notification
+        _toastStringId.value = R.string.credential_deleted_toast
     }
 
     companion object {

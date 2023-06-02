@@ -42,4 +42,7 @@ interface CredentialDao {
      */
     @Query("SELECT * FROM credentials_table ORDER BY id ASC")
     fun getAll(): LiveData<List<Credential>>
+
+    @Query("SELECT * FROM credentials_table WHERE id = :credentialId")
+    fun getCredentialById(credentialId: Long): Credential?
 }
