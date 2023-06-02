@@ -70,13 +70,14 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
         credential.id = credentialId
         credential.username = newCredentialUsername
         credential.service = newCredentialService
-        credential.password = Cryptography.encryptText(newCredentialPassword, "MASTER")
+        credential.password = newCredentialPassword
 
         if (!CredentialValidator.validate(credential)) {
             _toastStringId.value = R.string.invalid_credential_toast
             return
         }
 
+        credential.password = Cryptography.encryptText(newCredentialPassword, "MASTER")
         viewModelScope.launch {
             dao.update(credential)
         }
