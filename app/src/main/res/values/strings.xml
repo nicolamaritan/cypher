@@ -46,4 +46,5 @@
     <string name="modify_your_username">Modify your username</string>
     <string name="modify_the_service">Modify your service</string>
     <string name="modify_the_password">Modify your password</string>
+    <string name="credential_modified_toast">Credential modified</string>
 </resources>
