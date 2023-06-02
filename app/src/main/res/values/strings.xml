@@ -36,6 +36,7 @@
     <string name="insert_your_master_password">Insert your Master Password</string>
     <string name="lock">LOCK</string>
     <string name="widget_configuration">Widget configuration</string>
+    <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
 
     // Stats
     <string name="stats">Stats</string>
