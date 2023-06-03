@@ -98,10 +98,9 @@ class UnlockDialogFragment : DialogFragment()
      * Companion object for the UnlockDialogFragment class.
      * Contains constant values and utilities related to the fragment.
      */
-    companion object {
-        /**
-         * TAG used for logging.
-         */
+    companion object
+    {
         private val TAG = UnlockDialogFragment::class.java.simpleName
+        val UNLOCK_DIALOG_FRAGMENT_TAG = "Unlock_Dialog"
     }
 }
