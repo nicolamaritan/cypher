@@ -23,7 +23,7 @@ import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
  *
  * @see AddCredentialDialogViewModel
  */
-class AddCredentialDialogFragment(): DialogFragment()
+class AddCredentialDialogFragment: DialogFragment()
 {
     private var _binding: DialogCredentialsBinding? = null
     private val binding get() = _binding!!

@@ -63,8 +63,8 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
      * result message.
      *
      */
-    //TODO refactor Long as Int
-    fun modifyCredential(credentialId : Long) {
+
+    fun modifyCredential(credentialId : Int) {
         Log.d(TAG, "modifyCredential invoked.")
         val credential = Credential()
         credential.id = credentialId
@@ -92,7 +92,7 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
      *
      * @param credentialId the ID of the credential to delete.
      */
-    fun deleteCredential(credentialId: Long) {
+    fun deleteCredential(credentialId: Int) {
         Log.d(TAG, "deleteCredential invoked.")
 
         // Perform the asynchronous operation using Kotlin coroutines

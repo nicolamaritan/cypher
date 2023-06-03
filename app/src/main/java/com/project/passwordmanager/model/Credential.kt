@@ -14,7 +14,7 @@ data class Credential(
 
     @PrimaryKey(autoGenerate = true) // Auto-increment
     @ColumnInfo(name = "id")
-    var id: Long = 0L,
+    var id: Int = 0,
 
     @ColumnInfo(name = "Service")
     var service: String = "",

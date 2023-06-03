@@ -44,7 +44,7 @@ class CredentialsAdapter(private val context: Context):
         private val copyImageButton: ImageButton = itemView.findViewById(R.id.copy_imageButton)
         private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
 
-        fun bind(credentialId:Long, service:String, user:String, password:String){
+        fun bind(credentialId: Int, service:String, user:String, password:String){
             appName.text = service
             appUser.text = user
             updatePasswordTextView(password)
@@ -57,36 +57,42 @@ class CredentialsAdapter(private val context: Context):
             lockImageButton.setOnClickListener {
                 locked = !locked
 
-                // Cast the context to a FragmentActivity
-                val activity = context as FragmentActivity
+                if(!locked){
+                    // Cast the context to a FragmentActivity
+                    val activity = context as FragmentActivity
 
-                // Get the FragmentManager
-                val fm: FragmentManager = activity.supportFragmentManager
+                    // Get the FragmentManager
+                    val fm: FragmentManager = activity.supportFragmentManager
 
-                // Create an instance of UnlockDialogFragment
-                val alertDialog = UnlockDialogFragment()
+                    // Create an instance of UnlockDialogFragment
+                    val alertDialog = UnlockDialogFragment()
 
-                // Set an UnlockDialogListener to handle unlock events
-                alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
-                    /**
-                     * Called when the password is successfully unlocked.
-                     * Updates the password text view.
-                     */
-                    override fun onUnlockSuccess() {
-                        updatePasswordTextView(password)
-                    }
+                    // Set an UnlockDialogListener to handle unlock events
+                    alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
+                        /**
+                         * Called when the password is successfully unlocked.
+                         * Updates the password text view.
+                         */
+                        override fun onUnlockSuccess() {
+                            updatePasswordTextView(password)
+                        }
 
-                    /**
-                     * Called when the entered password is incorrect.
-                     * Perform any necessary actions in case of an incorrect password.
-                     */
-                    override fun onUnlockFailure() {
-                        // Any actions to take in case of an incorrect password
-                    }
-                })
+                        /**
+                         * Called when the entered password is incorrect.
+                         * Perform any necessary actions in case of an incorrect password.
+                         */
+                        override fun onUnlockFailure() {
+                            // Any actions to take in case of an incorrect password
+                        }
+                    })
 
-                // Show the UnlockDialogFragment
-                alertDialog.show(fm, "fragment_alert")
+                    // Show the UnlockDialogFragment
+                    alertDialog.show(fm, "fragment_alert")
+                }
+                else{
+                    updatePasswordTextView(password)
+                }
+
             }
 
             copyImageButton.setOnClickListener{
@@ -99,12 +105,17 @@ class CredentialsAdapter(private val context: Context):
                     Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
                 }
             }
-            // TODO refactor as Int the Id
+
             editImageButton.setOnClickListener {
-                val activity = context as FragmentActivity
-                val fm: FragmentManager = activity.supportFragmentManager
-                val alertDialog = ModifyDialogFragment(credentialId)
-                alertDialog.show(fm, "fragment_alert")
+                if (!locked) {
+                    val activity = context as FragmentActivity
+                    val fm: FragmentManager = activity.supportFragmentManager
+                    val alertDialog = ModifyDialogFragment(credentialId)
+                    alertDialog.show(fm, "fragment_alert")
+                }
+                else{
+                    Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }

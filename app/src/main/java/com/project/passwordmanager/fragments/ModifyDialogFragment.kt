@@ -14,7 +14,7 @@ import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
 
-class ModifyDialogFragment(private val credentialId : Long): DialogFragment() {
+class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
     private var _binding: DialogModifyBinding? = null
     private val binding get() = _binding!!
 

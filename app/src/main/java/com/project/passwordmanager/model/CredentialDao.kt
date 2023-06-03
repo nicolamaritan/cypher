@@ -44,5 +44,5 @@ interface CredentialDao {
     fun getAll(): LiveData<List<Credential>>
 
     @Query("SELECT * FROM credentials_table WHERE id = :credentialId")
-    fun getCredentialById(credentialId: Long): Credential?
+    fun getCredentialById(credentialId: Int): Credential?
 }

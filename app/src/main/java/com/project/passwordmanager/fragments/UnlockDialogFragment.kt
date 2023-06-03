@@ -68,7 +68,7 @@ class UnlockDialogFragment : DialogFragment(), UnlockDialogListener {
     override fun onUnlockSuccess() {
         Toast.makeText(
             requireContext(),
-            "Unlocked successfully.",
+            "Unlocked successfully",
             Toast.LENGTH_LONG
         ).show()
         unlocked = true
@@ -87,7 +87,7 @@ class UnlockDialogFragment : DialogFragment(), UnlockDialogListener {
     override fun onUnlockFailure() {
         Toast.makeText(
             requireContext(),
-            "Wrong password.",
+            "Wrong password",
             Toast.LENGTH_LONG
         ).show()
     }
