@@ -9,16 +9,28 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogUnlockBinding
 import com.project.passwordmanager.factories.UnlockDialogViewModelFactory
-import com.project.passwordmanager.viewmodels.UnlockDialogListener
+import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.viewmodels.UnlockDialogViewModel
 
-class UnlockDialogFragment : DialogFragment(), UnlockDialogListener {
+/**
+ * DialogFragment of the Dialog used to authenticate the user and
+ * unlock a feature of the app. It provides an interface to access
+ * the inserted master password
+ * by the use.
+ */
+class UnlockDialogFragment : DialogFragment()
+{
     private var _binding: DialogUnlockBinding? = null
     private val binding get() = _binding!!
 
-    var unlocked = false
+    /* Saved in clear to be accessed by the outside to lock and unlock
+    *
+    * */
+    var insertedMasterPassword: String = ""
+        private set
 
     // The listener for unlock events
     private var unlockDialogListener: UnlockDialogListener? = null
@@ -28,7 +40,8 @@ class UnlockDialogFragment : DialogFragment(), UnlockDialogListener {
      *
      * @param listener The UnlockDialogListener instance to set.
      */
-    fun setUnlockDialogListener(listener: UnlockDialogListener) {
+    fun setUnlockDialogListener(listener: UnlockDialogListener)
+    {
         unlockDialogListener = listener
     }
 
@@ -39,64 +52,45 @@ class UnlockDialogFragment : DialogFragment(), UnlockDialogListener {
     ): View {
         Logger.logCallback(TAG, "onCreateView", "UnlockDialogFragment")
 
+
         // ViewBinding
         _binding = DialogUnlockBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // Instantiating the ViewModel
-        val application = requireActivity().application
         val viewModelFactory = UnlockDialogViewModelFactory()
         val viewModel = ViewModelProvider(this, viewModelFactory)[UnlockDialogViewModel::class.java]
-        viewModel.setUnlockDialogListener(this)
 
         // DataBinding
         binding.unlockDialogViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.unlockButton.setOnClickListener {
-            viewModel.unlock(binding.insertedPasswordTe.text.toString())
+            if (viewModel.unlock(binding.insertedPasswordTe.text.toString(),
+                    Utils.getHashedMasterPassword(requireContext())))
+            {
+                insertedMasterPassword = binding.insertedPasswordTe.text.toString()
+                unlockDialogListener!!.onUnlockSuccess()
+                dismiss()
+            }
+            else
+            {
+                binding.insertedPasswordTe.text.clear()
+                unlockDialogListener!!.onUnlockFailure()
+            }
+        }
+
+        viewModel.toastStringId.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), getString(it), Toast.LENGTH_LONG).show()
         }
 
         return view
     }
 
-    /**
-     * Called when the password is successfully unlocked.
-     * Shows a success message, sets the 'unlocked' flag to true,
-     * dismisses the dialog, and notifies the listener of unlock success if available.
-     */
-    override fun onUnlockSuccess() {
-        Toast.makeText(
-            requireContext(),
-            "Unlocked successfully.",
-            Toast.LENGTH_LONG
-        ).show()
-        unlocked = true
-        dismiss()
-
-        // Notify the listener of unlock success
-        if (unlockDialogListener != null) {
-            unlockDialogListener!!.onUnlockSuccess()
-        }
-    }
-
-    /**
-     * Called when the entered password is incorrect.
-     * Shows an error message indicating the wrong password.
-     */
-    override fun onUnlockFailure() {
-        Toast.makeText(
-            requireContext(),
-            "Wrong password.",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    /**
-     * Called when the dialog is dismissed.
-     * Performs any necessary cleanup or actions after the dialog is dismissed.
-     */
-    override fun onDismiss(dialog: DialogInterface) {
+    override fun onDismiss(dialog: DialogInterface)
+    {
+        // Clears the master password for security reasons
+        insertedMasterPassword = ""
         super.onDismiss(dialog)
     }
 
@@ -104,10 +98,9 @@ class UnlockDialogFragment : DialogFragment(), UnlockDialogListener {
      * Companion object for the UnlockDialogFragment class.
      * Contains constant values and utilities related to the fragment.
      */
-    companion object {
-        /**
-         * TAG used for logging.
-         */
+    companion object
+    {
         private val TAG = UnlockDialogFragment::class.java.simpleName
+        const val UNLOCK_DIALOG_FRAGMENT_TAG = "Unlock_Dialog"
     }
 }

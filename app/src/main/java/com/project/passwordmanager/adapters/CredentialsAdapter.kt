@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.fragments.ModifyDialogFragment
 import com.project.passwordmanager.fragments.UnlockDialogFragment
+import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
-import com.project.passwordmanager.viewmodels.UnlockDialogListener
 
 
 class CredentialsAdapter(private val context: Context):
@@ -47,48 +47,37 @@ class CredentialsAdapter(private val context: Context):
         fun bind(credentialId:Long, service:String, user:String, password:String){
             appName.text = service
             appUser.text = user
-            updatePasswordTextView(password)
+            appPw.text = context.getString(R.string.locked_password)
 
-            /**
-             * OnClickListener for the lockImageButton.
-             * Toggles the 'locked' state, displays an UnlockDialogFragment,
-             * and sets an UnlockDialogListener to handle unlock events.
-             */
+            // --------- Lock Button ----------
             lockImageButton.setOnClickListener {
-                locked = !locked
+                if (locked)
+                {
+                    val activity = context as FragmentActivity
+                    val fm: FragmentManager = activity.supportFragmentManager
+                    val alertDialog = UnlockDialogFragment()
 
-                // Cast the context to a FragmentActivity
-                val activity = context as FragmentActivity
+                    // Set an UnlockDialogListener to handle unlock events
+                    alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
+                        override fun onUnlockSuccess()
+                        {
+                            locked = false
+                            updatePasswordTextView(password, alertDialog.insertedMasterPassword)
+                        }
 
-                // Get the FragmentManager
-                val fm: FragmentManager = activity.supportFragmentManager
+                        override fun onUnlockFailure() {}
+                    })
 
-                // Create an instance of UnlockDialogFragment
-                val alertDialog = UnlockDialogFragment()
-
-                // Set an UnlockDialogListener to handle unlock events
-                alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
-                    /**
-                     * Called when the password is successfully unlocked.
-                     * Updates the password text view.
-                     */
-                    override fun onUnlockSuccess() {
-                        updatePasswordTextView(password)
-                    }
-
-                    /**
-                     * Called when the entered password is incorrect.
-                     * Perform any necessary actions in case of an incorrect password.
-                     */
-                    override fun onUnlockFailure() {
-                        // Any actions to take in case of an incorrect password
-                    }
-                })
-
-                // Show the UnlockDialogFragment
-                alertDialog.show(fm, "fragment_alert")
+                    alertDialog.show(fm, "fragment_alert")
+                }
+                else
+                {
+                    appPw.text = context.getString(R.string.locked_password)
+                    locked = true
+                }
             }
 
+            // --------- Copy Button ----------
             copyImageButton.setOnClickListener{
                 if (!locked)
                 {
@@ -109,10 +98,10 @@ class CredentialsAdapter(private val context: Context):
 
         }
 
-        private fun updatePasswordTextView(clearPassword: String)
+        private fun updatePasswordTextView(encryptedPassword: String, masterPassword: String)
         {
             appPw.text = if(locked) context.getString(R.string.locked_password)
-                        else Cryptography.decryptText(clearPassword, "MASTER")
+                        else Cryptography.decryptText(encryptedPassword, masterPassword)
         }
 
         private fun copyPassword()
