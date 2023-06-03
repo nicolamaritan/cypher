@@ -22,7 +22,7 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
             notifyDataSetChanged()
         }
 
-    val selectedCredentialsIds: MutableList<Long> = mutableListOf()
+    val selectedCredentialsIds: MutableList<Int> = mutableListOf()
 
     inner class WidgetConfigurationCredentialsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {

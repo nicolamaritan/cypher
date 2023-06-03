@@ -15,7 +15,7 @@ class WidgetPreferencesManager(val context: Context, val appWidgetId: Int) {
      *
      * @return The list of added IDs.
      */
-    fun getAddedIds(): List<Long> {
+    fun getAddedIds(): List<Int> {
         // Retrieves the added IDs from the shared preferences
         val widgetPreferences = context.getSharedPreferences(
             Constants.WIDGET_PREFERENCES + appWidgetId,
@@ -25,7 +25,7 @@ class WidgetPreferencesManager(val context: Context, val appWidgetId: Int) {
             Constants.WIDGET_ADDED_IDS,
             ""
         ) ?: ""
-        return addedIdsPreferences.split(",").mapNotNull { it.toLongOrNull() }
+        return addedIdsPreferences.split(",").mapNotNull { it.toIntOrNull() }
     }
 
     /**
@@ -71,7 +71,7 @@ class WidgetPreferencesManager(val context: Context, val appWidgetId: Int) {
      *
      * @param ids The list of IDs to be inserted.
      */
-    fun insertAddedIds(ids: List<Long>) {
+    fun insertAddedIds(ids: List<Int>) {
         val widgetPreferences = context.getSharedPreferences(
             Constants.WIDGET_PREFERENCES + appWidgetId,
             Context.MODE_PRIVATE
