@@ -44,7 +44,7 @@ class CredentialsAdapter(private val context: Context):
         private val copyImageButton: ImageButton = itemView.findViewById(R.id.copy_imageButton)
         private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
 
-        fun bind(credentialId:Long, service:String, user:String, password:String){
+        fun bind(credentialId:Int, service:String, user:String, password:String){
             appName.text = service
             appUser.text = user
             appPw.text = context.getString(R.string.locked_password)
@@ -88,7 +88,7 @@ class CredentialsAdapter(private val context: Context):
                     Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
                 }
             }
-            // TODO refactor as Int the Id
+
             editImageButton.setOnClickListener {
                 val activity = context as FragmentActivity
                 val fm: FragmentManager = activity.supportFragmentManager
