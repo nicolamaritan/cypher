@@ -68,11 +68,6 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         credential.service = newCredentialService
         credential.password = newCredentialPassword
 
-        if (!CredentialValidator.validate(credential)) {
-            _toastStringId.value = R.string.invalid_credential_toast
-            return false
-        }
-
         // Encrypt the password before insertion
         credential.password = Cryptography.encryptText(newCredentialPassword, insertedMasterPassword)
         viewModelScope.launch {
@@ -80,6 +75,20 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         }
 
         _toastStringId.value = R.string.credential_added_toast
+        return true
+    }
+
+    fun validateCredential() : Boolean
+    {
+        val credential = Credential()
+        credential.username = newCredentialUsername
+        credential.service = newCredentialService
+        credential.password = newCredentialPassword
+
+        if (!CredentialValidator.validate(credential)) {
+            _toastStringId.value = R.string.invalid_credential_toast
+            return false
+        }
         return true
     }
 

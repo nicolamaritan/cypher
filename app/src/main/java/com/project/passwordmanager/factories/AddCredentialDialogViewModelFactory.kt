@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
 
-class CredentialsDialogViewModelFactory(private val dao: CredentialDao)
+class AddCredentialDialogViewModelFactory(private val dao: CredentialDao)
     : ViewModelProvider.Factory
 {
     /*

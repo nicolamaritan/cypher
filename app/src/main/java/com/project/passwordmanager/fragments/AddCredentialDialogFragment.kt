@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
 import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogCredentialsBinding
-import com.project.passwordmanager.factories.CredentialsDialogViewModelFactory
+import com.project.passwordmanager.factories.AddCredentialDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
 
@@ -42,7 +42,7 @@ class AddCredentialDialogFragment(): DialogFragment()
         // Instantiating the ViewModel
         val application = requireActivity().application
         val dao = CredentialDatabase.getInstance(application).credentialDao
-        val viewModelFactory = CredentialsDialogViewModelFactory(dao)
+        val viewModelFactory = AddCredentialDialogViewModelFactory(dao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[AddCredentialDialogViewModel::class.java]
 
         // DataBinding
@@ -51,7 +51,7 @@ class AddCredentialDialogFragment(): DialogFragment()
 
         binding.add.setOnClickListener{
             // Passes the true hashed password for the check
-            if (viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(requireContext())))
+            if (viewModel.validateCredential() && viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(requireContext())))
             {
                 if (viewModel.addCredential())
                 {
