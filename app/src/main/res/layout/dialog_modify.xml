@@ -74,28 +74,12 @@
                 android:text="@={modifyDialogViewModel.newCredentialPassword}"
                 />
 
-            <LinearLayout
-            android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="20dp"
-            tools:ignore="UselessParent"
-            >
-
             <Button
                 android:id="@+id/modify"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:text="@string/modify_the_credential" />
-
-                <Button
-                    android:id="@+id/delete"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/red"
-                    android:text="@string/delete_the_credential" />
-            </LinearLayout>
+                android:text="@string/modify_the_credential"
+                android:layout_gravity="center"/>
         </LinearLayout>
     </FrameLayout>
 </layout>
