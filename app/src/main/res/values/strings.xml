@@ -33,6 +33,7 @@
     <string name="add_a_new_credential">Add a new credential.</string>
     <string name="locked_password">*******</string>
     <string name="wrong_master_password">Wrong master password.</string>
+    <string name="authentication">Authentication</string>
 
     // Widget
     <string name="unlock_widget">Unlock widget</string>
@@ -65,4 +66,5 @@
     <string name="master_password_correctly_inserted">Master Password correctly inserted.</string>
     <string name="blank_password">Blank password</string>
     <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
+    <string name="insert_the_master_password">Insert the Master Password.</string>
 </resources>

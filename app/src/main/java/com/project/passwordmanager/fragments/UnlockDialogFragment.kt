@@ -52,6 +52,7 @@ class UnlockDialogFragment : DialogFragment()
     ): View {
         Logger.logCallback(TAG, "onCreateView", "UnlockDialogFragment")
 
+
         // ViewBinding
         _binding = DialogUnlockBinding.inflate(inflater, container, false)
         val view = binding.root
