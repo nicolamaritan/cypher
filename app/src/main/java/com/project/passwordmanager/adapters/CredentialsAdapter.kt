@@ -72,7 +72,6 @@ class CredentialsAdapter(private val context: Context):
                 }
                 else
                 {
-                    // If it is not locked, then dialog contains info to re-encrypt the password
                     appPw.text = context.getString(R.string.locked_password)
                     locked = true
                 }
