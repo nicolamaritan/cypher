@@ -1,19 +1,21 @@
 package com.project.passwordmanager.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.CredentialsAdapter
 import com.project.passwordmanager.databinding.FragmentCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsViewModelFactory
+import com.project.passwordmanager.listeners.DeleteListener
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.CredentialsViewModel
 
-class CredentialsFragment : Fragment()
+class CredentialsFragment : Fragment(), DeleteListener
 {
     private var _binding: FragmentCredentialsBinding? = null
     private val binding get() = _binding!!
@@ -40,12 +42,15 @@ class CredentialsFragment : Fragment()
         val adapter = CredentialsAdapter(requireContext())
         binding.homeRecyclerView.adapter = adapter
 
+        // The Fragment listens for the deletion of a credential
+        adapter.setDeleteListener(this)
+
         //passes the data to the adapter
-        viewModel.credentials.observe(viewLifecycleOwner, Observer {
-            it?.let{
+        viewModel.credentials.observe(viewLifecycleOwner) {
+            it?.let {
                 adapter.data = it
             }
-        })
+        }
 
         binding.fab.setOnClickListener{
             viewModel.showDialog(parentFragmentManager)
@@ -59,6 +64,12 @@ class CredentialsFragment : Fragment()
     {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDeleteCredential(credentialId: Int)
+    {
+        viewModel.deleteCredential(credentialId)
+        Toast.makeText(context, getString(R.string.password_deleted), Toast.LENGTH_LONG).show()
     }
 
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.fragments.ModifyDialogFragment
 import com.project.passwordmanager.fragments.UnlockDialogFragment
+import com.project.passwordmanager.listeners.DeleteListener
 import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
@@ -31,6 +32,12 @@ class CredentialsAdapter(private val context: Context):
             notifyDataSetChanged()
         }
 
+    private var deleteListener: DeleteListener? = null
+
+    fun setDeleteListener(listener: DeleteListener) {
+        deleteListener = listener
+    }
+
 
     inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
@@ -43,6 +50,7 @@ class CredentialsAdapter(private val context: Context):
         private val lockImageButton: ImageButton = itemView.findViewById(R.id.lock_imageButton)
         private val copyImageButton: ImageButton = itemView.findViewById(R.id.copy_imageButton)
         private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
+        private val deleteImageButton: ImageButton = itemView.findViewById(R.id.delete_imageButton)
 
         fun bind(credentialId:Int, service:String, user:String, password:String){
             appName.text = service
@@ -89,11 +97,31 @@ class CredentialsAdapter(private val context: Context):
                 }
             }
 
+            // --------- Edit Button ----------
             editImageButton.setOnClickListener {
                 val activity = context as FragmentActivity
                 val fm: FragmentManager = activity.supportFragmentManager
                 val alertDialog = ModifyDialogFragment(credentialId)
                 alertDialog.show(fm, "fragment_alert")
+            }
+
+            // --------- Delete Button ----------
+            deleteImageButton.setOnClickListener{
+                val activity = context as FragmentActivity
+                val fm: FragmentManager = activity.supportFragmentManager
+                val alertDialog = UnlockDialogFragment()
+
+                // Set an UnlockDialogListener to handle unlock events
+                alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
+                    override fun onUnlockSuccess()
+                    {
+                        deleteListener?.onDeleteCredential(credentialId)
+                    }
+
+                    override fun onUnlockFailure() {}
+                })
+
+                alertDialog.show(fm, UnlockDialogFragment.UNLOCK_DIALOG_FRAGMENT_TAG)
             }
 
         }
