@@ -1,6 +1,5 @@
 package com.project.passwordmanager.fragments
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,7 @@ import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
  *
  * @see AddCredentialDialogViewModel
  */
-class AddCredentialDialogFragment(): DialogFragment()
+class AddCredentialDialogFragment : DialogFragment()
 {
     private var _binding: DialogCredentialsBinding? = null
     private val binding get() = _binding!!
@@ -77,11 +76,6 @@ class AddCredentialDialogFragment(): DialogFragment()
         }
 
         return view
-    }
-
-    override fun onDismiss(dialog: DialogInterface)
-    {
-        super.onDismiss(dialog)
     }
 
 
