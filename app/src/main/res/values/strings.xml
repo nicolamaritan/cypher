@@ -34,6 +34,7 @@
     <string name="locked_password">*******</string>
     <string name="wrong_master_password">Wrong master password.</string>
     <string name="authentication">Authentication</string>
+    <string name="password_deleted">Password deleted.</string>
 
     // Widget
     <string name="unlock_widget">Unlock widget</string>
