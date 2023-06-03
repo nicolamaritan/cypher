@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
@@ -78,16 +77,6 @@ class PasswordManagerWidget : AppWidgetProvider()
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)
-    }
-
-    override fun onAppWidgetOptionsChanged(
-        context: Context?,
-        appWidgetManager: AppWidgetManager?,
-        appWidgetId: Int,
-        newOptions: Bundle?
-    ) {
-        updateAppWidget(context!!, appWidgetManager!!, appWidgetId)
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
     }
 
     companion object

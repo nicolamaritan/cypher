@@ -119,11 +119,6 @@ class PasswordManagerWidgetService: RemoteViewsService() {
             //set the text in the view, taking the id of the TextView and the element to insert in it
             view.setTextViewText(R.id.service, entry.service)
             view.setTextViewText(R.id.user, entry.username)
-            view.setTextViewText(
-                R.id.password,
-                //if (!entry.visible) context.getString(R.string.locked_password) else entry.password
-                context.getString(R.string.locked_password)
-            )
 
             /*
             * Set FillInIntent for clicking on the unlock button.
