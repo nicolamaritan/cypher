@@ -9,15 +9,10 @@ import com.project.passwordmanager.security.Hashing
 /**
  * UnlockDialogViewModel is a ViewModel class that handles the unlocking logic for the app.
  */
-class UnlockDialogViewModel () : ViewModel() {
-    /**
-     * Indicates whether the dialog is closing.
-     */
+class UnlockDialogViewModel () : ViewModel()
+{
+    // Indicates if the dialog is closing
     var closing = false
-    /**
-     * Indicates if the password inserted is correct.
-     */
-
 
     private val _toastStringId = MutableLiveData<Int>()
     val toastStringId: LiveData<Int>

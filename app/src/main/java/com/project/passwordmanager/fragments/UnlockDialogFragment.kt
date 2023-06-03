@@ -1,5 +1,6 @@
 package com.project.passwordmanager.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +15,20 @@ import com.project.passwordmanager.factories.UnlockDialogViewModelFactory
 import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.viewmodels.UnlockDialogViewModel
 
+/**
+ * DialogFragment of the Dialog used to authenticate the user and
+ * unlock a feature of the app. It provides an interface to access
+ * the inserted master password
+ * by the use.
+ */
 class UnlockDialogFragment : DialogFragment()
 {
     private var _binding: DialogUnlockBinding? = null
     private val binding get() = _binding!!
 
-    var unlocked = false
-
-    // Saved in clear to be accessed by the Adapter to lock and unlock
+    /* Saved in clear to be accessed by the outside to lock and unlock
+    *
+    * */
     var insertedMasterPassword: String = ""
         private set
 
@@ -61,7 +68,6 @@ class UnlockDialogFragment : DialogFragment()
             if (viewModel.unlock(binding.insertedPasswordTe.text.toString(),
                     Utils.getHashedMasterPassword(requireContext())))
             {
-                unlocked = true
                 insertedMasterPassword = binding.insertedPasswordTe.text.toString()
                 unlockDialogListener!!.onUnlockSuccess()
                 dismiss()
@@ -78,6 +84,13 @@ class UnlockDialogFragment : DialogFragment()
         }
 
         return view
+    }
+
+    override fun onDismiss(dialog: DialogInterface)
+    {
+        // Clears the master password for security reasons
+        insertedMasterPassword = ""
+        super.onDismiss(dialog)
     }
 
     /**
