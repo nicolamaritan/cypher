@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryVariant">@color/darker_blue</item>
-        <item name="colorOnPrimary">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lighter_blue</item>
         <item name="colorSecondaryVariant">@color/darker_light_blue</item>
@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="icon">@color/darker_blue</item>
     </style>
 
     <style name="Theme.PasswordManager.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
