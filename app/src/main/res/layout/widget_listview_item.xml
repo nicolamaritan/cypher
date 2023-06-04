@@ -11,20 +11,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/service"
-        android:textColor="?android:attr/textColorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Service"
-        android:textSize="14sp" />
-
-
-    <TextView
         android:id="@+id/user"
         android:textColor="?android:attr/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="User"
-        android:textSize="14sp"/>
+        android:textSize="13sp"
+        android:layout_marginBottom="7dp"/>
+
+    <TextView
+        android:id="@+id/service"
+        android:textColor="?android:attr/textColorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Service"
+        android:textSize="13sp" />
+
+
 
 </LinearLayout>
