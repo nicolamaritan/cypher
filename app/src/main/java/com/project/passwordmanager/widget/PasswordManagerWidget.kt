@@ -187,9 +187,11 @@ class PasswordManagerWidget : AppWidgetProvider()
             return mapOf(
                 SizeF(80f, 80f) to smallView,
                 SizeF(80f, 350f) to tallView,
-                SizeF(240f, 140f) to wideView
+                SizeF(240f, 200f) to wideView
             )
         }
+
+
 
     }
 }
