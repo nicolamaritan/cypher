@@ -68,4 +68,5 @@
     <string name="blank_password">Blank password</string>
     <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
     <string name="insert_the_master_password">Insert the Master Password.</string>
+    <string name="see_all">See All</string>
 </resources>

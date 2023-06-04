@@ -6,10 +6,10 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
+import com.project.passwordmanager.MainActivity
 import com.project.passwordmanager.R
 import com.project.passwordmanager.UnlockWidgetActivity
 import com.project.passwordmanager.common.WidgetPreferencesManager
@@ -66,7 +66,7 @@ class PasswordManagerWidget : AppWidgetProvider()
      * @param appWidgetManager The AppWidgetManager instance for managing the widget.
      * @param appWidgetId The ID of the widget to be updated.
      */
-    internal fun updateAppWidget(
+    private fun updateAppWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
@@ -80,21 +80,12 @@ class PasswordManagerWidget : AppWidgetProvider()
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 
-    override fun onAppWidgetOptionsChanged(
-        context: Context?,
-        appWidgetManager: AppWidgetManager?,
-        appWidgetId: Int,
-        newOptions: Bundle?
-    ) {
-        updateAppWidget(context!!, appWidgetManager!!, appWidgetId)
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview)
-    }
-
     companion object
     {
         val TAG = PasswordManagerWidget::class.java.toString()
         const val ITEM_POSITION = "item_position"
         const val ITEM_CLICK_ACTION = "item_click"
+        const val SEE_ALL_ACTION = "see_all"
         const val ITEM_PASSWORD = "item_password"
         const val ITEM_SERVICE = "item_service"
         const val ITEM_USERNAME = "item_username"
@@ -106,7 +97,7 @@ class PasswordManagerWidget : AppWidgetProvider()
          * @param context The context in which the receiver is running.
          * @param appWidgetId The ID of the widget to be updated.
          */
-        fun initRemoteAdapter(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        private fun initRemoteAdapter(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
             val serviceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
                 //Add the widget ID to the intent extras
@@ -128,7 +119,7 @@ class PasswordManagerWidget : AppWidgetProvider()
          * @param context The context in which the receiver is running.
          * @param appWidgetId The ID of the widget to be updated.
          */
-        fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        private fun setupItemClick(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
             val itemClickIntent = Intent(context, UnlockWidgetActivity::class.java).apply {
                 action = ITEM_CLICK_ACTION
@@ -147,7 +138,7 @@ class PasswordManagerWidget : AppWidgetProvider()
             remoteViews.setPendingIntentTemplate(R.id.widget_listview, pendingIntent)
         }
 
-        fun setupWidgetName(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        private fun setupWidgetName(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
             var widgetName = WidgetPreferencesManager(context, appWidgetId).getName()
             if (widgetName.isBlank())
@@ -158,10 +149,28 @@ class PasswordManagerWidget : AppWidgetProvider()
             remoteViews.setTextViewText(R.id.widget_name, widgetName)
         }
 
-        fun setupCredentialsNumber(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        private fun setupCredentialsNumber(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
             val savedAddedIds = WidgetPreferencesManager(context, appWidgetId).getAddedIds()
             remoteViews.setTextViewText(R.id.credentials_number, "Stored credentials: " + savedAddedIds.size)
+        }
+
+        private fun setupSeeAllButton(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
+        {
+            val seeAllClickIntent = Intent(context, MainActivity::class.java).apply {
+                action = SEE_ALL_ACTION
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            }
+
+            // Special intent performing a broadcast
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                appWidgetId,
+                seeAllClickIntent,
+                PendingIntent.FLAG_MUTABLE
+            )
+
+            remoteViews.setOnClickPendingIntent(R.id.see_all_button, pendingIntent)
         }
 
         fun getWidgetViewMapping(context: Context, appWidgetId: Int): Map<SizeF, RemoteViews> {
@@ -191,16 +200,18 @@ class PasswordManagerWidget : AppWidgetProvider()
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)
                     setupCredentialsNumber(this, context, appWidgetId)
+                    setupSeeAllButton(this, context, appWidgetId)
                 }
 
             // Maps the sizes to each view.
-
             return mapOf(
                 SizeF(80f, 80f) to smallView,
                 SizeF(80f, 350f) to tallView,
-                SizeF(240f, 140f) to wideView
+                SizeF(240f, 200f) to wideView
             )
         }
+
+
 
     }
 }
