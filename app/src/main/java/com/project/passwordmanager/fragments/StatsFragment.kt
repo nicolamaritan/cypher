@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
+import com.project.passwordmanager.adapters.PwStatusAdapter
 import com.project.passwordmanager.databinding.FragmentStatsBinding
+import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.factories.StatsViewModelFactory
+import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.viewmodels.CredentialsViewModel
 import com.project.passwordmanager.viewmodels.StatsViewModel
 
 class StatsFragment : Fragment()
@@ -21,9 +26,28 @@ class StatsFragment : Fragment()
         val view = binding.root
         viewModel = ViewModelProvider(this)[StatsViewModel::class.java]
 
+        //Build the database (if it doesn't already exist)
+        val application = requireNotNull(this.activity).application
+        val dao = CredentialDatabase.getInstance(application).credentialDao
+
         //Get the view model
-        val viewModelFactory = StatsViewModelFactory()
+        val viewModelFactory = StatsViewModelFactory(dao)
         viewModel = ViewModelProvider(this, viewModelFactory)[StatsViewModel::class.java]
+
+        //setting the data binding for the layout
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        val pwStatusAdapter = PwStatusAdapter()
+        binding.passwordStatusRv.adapter = pwStatusAdapter
+
+
+        //passes the data to the adapter
+        viewModel.credentials.observe(viewLifecycleOwner) {
+            it?.let {
+                pwStatusAdapter.data = it
+            }
+        }
 
         return view
     }

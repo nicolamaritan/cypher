@@ -62,7 +62,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/password_change_rv"
+                android:id="@+id/password_status_rv"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
