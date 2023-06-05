@@ -24,7 +24,6 @@ class StatsFragment : Fragment()
     {
         _binding = FragmentStatsBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(this)[StatsViewModel::class.java]
 
         //Build the database (if it doesn't already exist)
         val application = requireNotNull(this.activity).application

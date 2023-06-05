@@ -33,7 +33,7 @@ class PwStatusAdapter():
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_stats, parent, false)
+            .inflate(R.layout.pw_status_rv_item, parent, false)
 
         return StatsViewHolder(view)
     }
