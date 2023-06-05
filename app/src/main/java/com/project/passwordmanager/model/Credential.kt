@@ -4,6 +4,8 @@ package com.project.passwordmanager.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import java.time.LocalDate
 
 /**
  * This class represents the credentials of an account.
@@ -23,5 +25,23 @@ data class Credential(
     var username: String = "",
 
     @ColumnInfo(name = "Password")
-    var password: String = ""
+    var password: String = "",
+
+    @ColumnInfo(name = "Date")
+    var date: LocalDate? = null
 )
+
+
+
+// class that converts LocalDate to a Long value and vice versa
+class LocalDateConverter {
+    @TypeConverter
+    fun toLong(date: LocalDate?): Long? {
+        return date?.toEpochDay()
+    }
+
+    @TypeConverter
+    fun fromLong(value: Long?): LocalDate? {
+        return value?.let { LocalDate.ofEpochDay(it) }
+    }
+}

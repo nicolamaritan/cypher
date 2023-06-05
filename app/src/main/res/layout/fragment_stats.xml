@@ -65,6 +65,7 @@
                 android:id="@+id/password_status_rv"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:adjustViewBounds="true"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:ignore="TextSizeCheck" />
         </LinearLayout>
