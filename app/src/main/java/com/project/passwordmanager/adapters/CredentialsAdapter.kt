@@ -17,12 +17,13 @@ import com.project.passwordmanager.fragments.ModifyDialogFragment
 import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.listeners.DeleteListener
 import com.project.passwordmanager.listeners.UnlockDialogListener
+import com.project.passwordmanager.listeners.SettingsFragmentListener
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
 
 
 class CredentialsAdapter(private val context: Context):
-    RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
+    RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(), SettingsFragmentListener{
 
     //definition of the data type we will work with
     var data = listOf<Credential>()
@@ -38,10 +39,13 @@ class CredentialsAdapter(private val context: Context):
         deleteListener = listener
     }
 
+    var choice: String = "Chronological order"
+    override fun onChoiceSelected(choice: String) {
+        this.choice=choice
+    }
 
     inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-
         private val appName: TextView = itemView.findViewById(R.id.service)
         private val appUser: TextView = itemView.findViewById(R.id.user)
         private var appPw: TextView = itemView.findViewById(R.id.password)
