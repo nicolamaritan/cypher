@@ -1,5 +1,6 @@
 package com.project.passwordmanager.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.CredentialsAdapter
+import com.project.passwordmanager.common.Constants
+import com.project.passwordmanager.common.CredentialsOrder
 import com.project.passwordmanager.databinding.FragmentCredentialsBinding
 import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.listeners.DeleteListener
@@ -20,6 +23,7 @@ class CredentialsFragment : Fragment(), DeleteListener
     private var _binding: FragmentCredentialsBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: CredentialsViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
     {
         _binding = FragmentCredentialsBinding.inflate(inflater, container, false)
@@ -29,11 +33,15 @@ class CredentialsFragment : Fragment(), DeleteListener
         val application = requireNotNull(this.activity).application
         val dao = CredentialDatabase.getInstance(application).credentialDao
 
+        val sharedPref = requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+        val credentialsOrder = sharedPref.getInt(Constants.CREDENTIALS_ORDER, CredentialsOrder.CHRONOLOGICAL)
+
         //Get the view model
-        val viewModelFactory = CredentialsViewModelFactory(dao)
+        val viewModelFactory = CredentialsViewModelFactory(dao, credentialsOrder)
         viewModel = ViewModelProvider(
             this, viewModelFactory)[CredentialsViewModel::class.java]
 
+        viewModel.updateCredentialsOrder(credentialsOrder)
         //setting the data binding for the layout
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner

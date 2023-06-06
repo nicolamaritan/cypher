@@ -1,6 +1,7 @@
 package com.project.passwordmanager.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +12,10 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.Constants
+import com.project.passwordmanager.common.CredentialsOrder
 import com.project.passwordmanager.databinding.FragmentSettingsBinding
 import com.project.passwordmanager.factories.StatsViewModelFactory
-import com.project.passwordmanager.listeners.SettingsFragmentListener
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment()
@@ -21,7 +23,6 @@ class SettingsFragment : Fragment()
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: SettingsViewModel
-    var listener: SettingsFragmentListener? = null
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
@@ -38,13 +39,17 @@ class SettingsFragment : Fragment()
         viewModel = ViewModelProvider(this, viewModelFactory)[SettingsViewModel::class.java]
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val selectedValue = when (checkedId) {
-                R.id.radioButton -> getString(R.string.order3)
-                R.id.radioButton2 -> getString(R.string.order2)
-                R.id.radioButton3 -> getString(R.string.order1)
-                else -> ""
+            val selectedValue = when (checkedId)
+            {
+                R.id.radioButton -> CredentialsOrder.CHRONOLOGICAL
+                R.id.radioButton2 -> CredentialsOrder.ALPHABETIC_USERNAME
+                R.id.radioButton3 -> CredentialsOrder.ALPHABETIC_SERVICE
+                else -> CredentialsOrder.CHRONOLOGICAL
             }
-            listener?.onChoiceSelected(selectedValue)
+
+            // Save chosen persistent state in shared preferences
+            val sharedPref = requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+                .edit().putInt(Constants.CREDENTIALS_ORDER, selectedValue).apply()
         }
 
         val switchDarkMode: Switch = view.findViewById(R.id.switchDarkMode)
@@ -58,7 +63,7 @@ class SettingsFragment : Fragment()
         }
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return view
     }
 
     private fun isDarkModeEnabled(): Boolean {
