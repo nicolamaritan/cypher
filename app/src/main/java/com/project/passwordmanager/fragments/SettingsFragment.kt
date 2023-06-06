@@ -28,7 +28,7 @@ class SettingsFragment : Fragment()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -48,7 +48,7 @@ class SettingsFragment : Fragment()
             }
 
             // Save chosen persistent state in shared preferences
-            val sharedPref = requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+            requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
                 .edit().putInt(Constants.CREDENTIALS_ORDER, selectedValue).apply()
         }
 

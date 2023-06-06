@@ -37,7 +37,7 @@ class CredentialsFragment : Fragment(), DeleteListener
         val credentialsOrder = sharedPref.getInt(Constants.CREDENTIALS_ORDER, CredentialsOrder.CHRONOLOGICAL)
 
         //Get the view model
-        val viewModelFactory = CredentialsViewModelFactory(dao, credentialsOrder)
+        val viewModelFactory = CredentialsViewModelFactory(dao)
         viewModel = ViewModelProvider(
             this, viewModelFactory)[CredentialsViewModel::class.java]
 

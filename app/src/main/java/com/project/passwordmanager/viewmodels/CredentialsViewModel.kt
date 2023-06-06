@@ -16,18 +16,13 @@ import kotlinx.coroutines.launch
  *
  * @param dao The CredentialDao used for data retrieval and manipulation.
  */
-class CredentialsViewModel(val dao: CredentialDao, private var credentialOrder: Int) : ViewModel()
+class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
 {
     /**.
      * Used for the RecyclerView to display all the tuples.
      */
-    var credentials: LiveData<List<Credential>> = when (credentialOrder)
-    {
-        CredentialsOrder.CHRONOLOGICAL -> dao.getAll()
-        CredentialsOrder.ALPHABETIC_SERVICE -> dao.getSortedByService()
-        CredentialsOrder.ALPHABETIC_USERNAME -> dao.getSortedByUsername()
-        else -> dao.getAll()
-    }
+    var credentials: LiveData<List<Credential>> = dao.getAll()
+    private var credentialOrder: Int = CredentialsOrder.CHRONOLOGICAL
 
     /**
      * Displays the dialog fragment for adding new credentials.
