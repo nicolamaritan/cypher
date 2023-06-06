@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 /**
  * This abstract class serves as the Room database class for the Credential entity.
  * It provides methods to access the DAO and create the database instance.
  */
 @Database(entities = [Credential::class], version = 1, exportSchema = false)
+@TypeConverters(LocalDateConverter::class)
 abstract class CredentialDatabase : RoomDatabase() {
 
     /**

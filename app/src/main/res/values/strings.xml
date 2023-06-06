@@ -50,6 +50,7 @@
     <string name="show">Show</string>
     <string name="categories">Categorie</string>
     <string name="stat3">Stat da inventare</string>
+    <string name="last_modify_date">Last modify date</string>
 
     // Modify
     <string name="modify_your_username">Modify your username</string>
@@ -69,4 +70,12 @@
     <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
     <string name="insert_the_master_password">Insert the Master Password.</string>
     <string name="see_all">See All</string>
+    <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
+    <string name="password_status">Password status</string>
+    <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
+    <string name="equal_passwords">Equal passwords</string>
+    <string name="you_should_not_use_the_same_password_for_different">You should not use the same password for different</string>
+    <string name="value">Value</string>
+    <string name="add_widget">Add widget</string>
+    <string name="last_modified">Last modified</string>
 </resources>

@@ -12,6 +12,7 @@ import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.security.Hashing
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 /**
  * ViewModel class for CredentialsDialogFragment.
@@ -67,6 +68,7 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         credential.username = newCredentialUsername
         credential.service = newCredentialService
         credential.password = newCredentialPassword
+        credential.date = LocalDate.now()
 
         // Encrypt the password before insertion
         credential.password = Cryptography.encryptText(newCredentialPassword, insertedMasterPassword)
