@@ -12,7 +12,7 @@ import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.viewmodels.UnlockWidgetViewModel
-import com.project.passwordmanager.widget.PasswordManagerWidget
+import com.project.passwordmanager.widgets.credentials.PasswordManagerWidget
 
 /**
  * This activity is responsible for unlocking the selected password.

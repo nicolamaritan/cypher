@@ -18,7 +18,7 @@ import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBindin
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
-import com.project.passwordmanager.widget.PasswordManagerWidget
+import com.project.passwordmanager.widgets.credentials.PasswordManagerWidget
 
 class WidgetConfigurationFragment : Fragment()
 {
