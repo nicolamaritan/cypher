@@ -12,8 +12,8 @@ import com.project.passwordmanager.model.Credential
 import java.time.LocalDate
 
 //Adapter for the password status's recyclerview
-class PwStatusAdapter():
-    RecyclerView.Adapter<PwStatusAdapter.StatsViewHolder>(){
+class CredentialsStatusAdapter():
+    RecyclerView.Adapter<CredentialsStatusAdapter.StatsViewHolder>(){
 
     //definition of the data type we will work with
     var data = listOf<Credential>()
@@ -51,7 +51,7 @@ class PwStatusAdapter():
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.pw_status_rv_item, parent, false)
+            .inflate(R.layout.credentials_status_recyclerview_item, parent, false)
 
         return StatsViewHolder(view)
     }

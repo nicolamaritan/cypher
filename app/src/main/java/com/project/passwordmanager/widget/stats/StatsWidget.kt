@@ -48,7 +48,7 @@ class StatsWidget : AppWidgetProvider() {
             for (i in credentials.indices) {
                 val credential = credentials[i]
                 val itemViews =
-                    RemoteViews(context.packageName, R.layout.stats_widget_stackview_item)
+                    RemoteViews(context.packageName, R.layout.stats_widget_listview_item)
                 itemViews.setTextViewText(R.id.service_tv, credential.service)
                 itemViews.setTextViewText(R.id.username_tv, credential.username)
                 itemViews.setTextViewText(R.id.time_passed_value, credential.date.toString())
