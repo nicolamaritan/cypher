@@ -50,6 +50,7 @@
     <string name="show">Show</string>
     <string name="categories">Categorie</string>
     <string name="stat3">Stat da inventare</string>
+    <string name="last_modify_date">Last modify date</string>
 
     // Modify
     <string name="modify_your_username">Modify your username</string>
@@ -74,4 +75,5 @@
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
     <string name="equal_passwords">Equal passwords</string>
     <string name="you_should_not_use_the_same_password_for_different">You should not use the same password for different</string>
+    <string name="value">Value</string>
 </resources>
