@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.CredentialsStatusAdapter
 import com.project.passwordmanager.databinding.FragmentStatsBinding
 import com.project.passwordmanager.factories.StatsViewModelFactory
@@ -41,7 +42,8 @@ class StatsFragment : Fragment()
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
                 credentialsStatusAdapter.data = it
-
+                binding.numberOfPwStoredTv.text =
+                    resources.getString(R.string.number_of_passwords_stored, it.size.toString())
             }
         }
 

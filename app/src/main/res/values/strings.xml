@@ -70,7 +70,7 @@
     <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
     <string name="insert_the_master_password">Insert the Master Password.</string>
     <string name="see_all">See All</string>
-    <string name="number_of_passwords_stored">Number of passwords stored:</string>
+    <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
     <string name="password_status">Password status</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
     <string name="equal_passwords">Equal passwords</string>
