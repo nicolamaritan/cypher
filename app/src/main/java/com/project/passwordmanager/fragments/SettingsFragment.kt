@@ -38,6 +38,19 @@ class SettingsFragment : Fragment()
         val viewModelFactory = StatsViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory)[SettingsViewModel::class.java]
 
+        // Retrieves the saved option and set it as checked. It is not done by default
+        val sharedPref = requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+        val credentialsOrder = sharedPref.getInt(Constants.CREDENTIALS_ORDER, CredentialsOrder.CHRONOLOGICAL)
+        binding.radioGroup.check(
+            when(credentialsOrder)
+            {
+                CredentialsOrder.CHRONOLOGICAL -> R.id.radioButton
+                CredentialsOrder.ALPHABETIC_USERNAME -> R.id.radioButton2
+                CredentialsOrder.ALPHABETIC_SERVICE -> R.id.radioButton3
+                else ->  R.id.radioButton
+            }
+        )
+
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val selectedValue = when (checkedId)
             {

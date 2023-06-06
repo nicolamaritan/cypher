@@ -33,6 +33,7 @@ class CredentialsFragment : Fragment(), DeleteListener
         val application = requireNotNull(this.activity).application
         val dao = CredentialDatabase.getInstance(application).credentialDao
 
+        // Retrieves the checked option of ordering in the shared preferences
         val sharedPref = requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
         val credentialsOrder = sharedPref.getInt(Constants.CREDENTIALS_ORDER, CredentialsOrder.CHRONOLOGICAL)
 
