@@ -3,6 +3,7 @@ package com.project.passwordmanager.activities
 import android.appwidget.AppWidgetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
@@ -51,7 +52,7 @@ class UnlockWidgetActivity : AppCompatActivity()
         binding.credentialItem.password.text = applicationContext.getString(R.string.locked_password)
 
         binding.unlockButton.setOnClickListener {
-
+            Log.d(TAG, locked.toString())
             if (locked)
             {
                 val unlockDialog = UnlockDialogFragment()
