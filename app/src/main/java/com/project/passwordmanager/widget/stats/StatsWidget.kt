@@ -41,11 +41,12 @@ class StatsWidget : AppWidgetProvider() {
         val views = RemoteViews(context.packageName, R.layout.stats_widget)
 
         // Observe the credentials from the repository
-        credentialRepository.allCredentials.observeForever { credentials ->
+        credentialRepository.allCredentialSortedByDate.observeForever { credentials ->
 
             // Create a RemoteViews for each credential
             val builder = RemoteViews.RemoteCollectionItems.Builder()
-            for (i in credentials.indices) {
+            for (i in credentials.indices)
+            {
                 val credential = credentials[i]
                 val itemViews =
                     RemoteViews(context.packageName, R.layout.stats_widget_listview_item)
@@ -64,6 +65,7 @@ class StatsWidget : AppWidgetProvider() {
                 builder.addItem(i.toLong(), itemViews)
             }
 
+            // There is only one type of view. Different colors are handled programmatically
             builder.setViewTypeCount(1)
 
             // Setup remote adapter
