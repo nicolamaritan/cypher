@@ -9,9 +9,9 @@ import android.net.Uri
 import android.util.Log
 import android.util.SizeF
 import android.widget.RemoteViews
-import com.project.passwordmanager.MainActivity
+import com.project.passwordmanager.activities.MainActivity
 import com.project.passwordmanager.R
-import com.project.passwordmanager.UnlockWidgetActivity
+import com.project.passwordmanager.activities.UnlockWidgetActivity
 import com.project.passwordmanager.common.WidgetPreferencesManager
 
 /**

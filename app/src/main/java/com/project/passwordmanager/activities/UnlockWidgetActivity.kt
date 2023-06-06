@@ -1,10 +1,11 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.activities
 
 import android.appwidget.AppWidgetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.R
 import com.project.passwordmanager.databinding.ActivityUnlockWidgetBinding
 import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.listeners.UnlockDialogListener

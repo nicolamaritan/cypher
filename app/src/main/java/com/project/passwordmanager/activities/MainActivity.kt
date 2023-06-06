@@ -1,4 +1,4 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
 
 

@@ -24,17 +24,17 @@
         </receiver>
 
         <activity
-            android:name=".FirstTimeActivity"
+            android:name=".activities.FirstTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".WidgetConfigurationActivity"
+            android:name=".activities.WidgetConfigurationActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".UnlockWidgetActivity"
+            android:name=".activities.UnlockWidgetActivity"
             android:exported="false" />
 
         <receiver
@@ -50,7 +50,7 @@
         </receiver>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,8 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.project.passwordmanager.R
 import com.project.passwordmanager.databinding.ActivityWidgetConfigurationBinding
 
 class WidgetConfigurationActivity : AppCompatActivity()
