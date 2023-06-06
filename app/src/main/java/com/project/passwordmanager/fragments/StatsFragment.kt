@@ -35,7 +35,7 @@ class StatsFragment : Fragment()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val credentialsStatusAdapter = CredentialsStatusAdapter()
+        val credentialsStatusAdapter = CredentialsStatusAdapter(requireContext())
         binding.passwordStatusRv.adapter = credentialsStatusAdapter
 
         //passes the data to the adapter
