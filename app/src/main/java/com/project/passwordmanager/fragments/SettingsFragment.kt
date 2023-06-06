@@ -15,7 +15,7 @@ import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.CredentialsOrder
 import com.project.passwordmanager.databinding.FragmentSettingsBinding
-import com.project.passwordmanager.factories.StatsViewModelFactory
+import com.project.passwordmanager.factories.SettingsViewModelFactory
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment()
@@ -35,7 +35,7 @@ class SettingsFragment : Fragment()
         viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         //Get the view model
-        val viewModelFactory = StatsViewModelFactory()
+        val viewModelFactory = SettingsViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory)[SettingsViewModel::class.java]
 
         // Retrieves the saved option and set it as checked. It is not done by default
