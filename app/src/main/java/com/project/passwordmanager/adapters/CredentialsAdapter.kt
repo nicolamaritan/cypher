@@ -34,14 +34,13 @@ class CredentialsAdapter(private val context: Context):
 
     private var deleteListener: DeleteListener? = null
 
-    fun setDeleteListener(listener: DeleteListener) {
+    fun setDeleteListener(listener: DeleteListener)
+    {
         deleteListener = listener
     }
 
-
     inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-
         private val appName: TextView = itemView.findViewById(R.id.service)
         private val appUser: TextView = itemView.findViewById(R.id.user)
         private var appPw: TextView = itemView.findViewById(R.id.password)

@@ -44,6 +44,17 @@
     <string name="widget_configuration">Widget configuration</string>
     <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
 
+    //Settings
+    <string name="choice">Choose the order:</string>
+    <string name="order1">Alphabetic order by service</string>
+    <string name="order2">Alphabetic order by username</string>
+    <string name="order3">Chronological order</string>
+    <string name="enable_dark_mode">Cambia il tema</string>
+    <string name="tv_change_masterpassword">Cambia la master password:</string>
+    <string name="old_pw">Inserisci la vecchia password</string>
+    <string name="new_pw">Inserisci la nuova password</string>
+    <string name="confirm_new_pw">Conferma la nuova password</string>
+
     // Stats
     <string name="stats">Stats</string>
     <string name="pw_to_modify">Password da modificare</string>
@@ -70,6 +81,8 @@
     <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
     <string name="insert_the_master_password">Insert the Master Password.</string>
     <string name="see_all">See All</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
     <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
     <string name="password_status">Password status</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>

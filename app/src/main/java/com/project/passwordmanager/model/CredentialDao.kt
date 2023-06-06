@@ -48,4 +48,10 @@ interface CredentialDao {
 
     @Query("SELECT * FROM credentials_table WHERE id = :credentialId")
     fun getCredentialById(credentialId: Int): Credential?
+
+    @Query("SELECT * FROM credentials_table ORDER BY username")
+    fun getSortedByUsername(): LiveData<List<Credential>>
+
+    @Query("SELECT * FROM credentials_table ORDER BY service")
+    fun getSortedByService(): LiveData<List<Credential>>
 }
