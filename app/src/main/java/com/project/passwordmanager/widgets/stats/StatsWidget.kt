@@ -1,4 +1,4 @@
-package com.project.passwordmanager.widget.stats
+package com.project.passwordmanager.widgets.stats
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider

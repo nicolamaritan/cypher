@@ -1,16 +1,18 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.activities
 
 import android.appwidget.AppWidgetManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.R
 import com.project.passwordmanager.databinding.ActivityUnlockWidgetBinding
 import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.viewmodels.UnlockWidgetViewModel
-import com.project.passwordmanager.widget.PasswordManagerWidget
+import com.project.passwordmanager.widgets.credentials.PasswordManagerWidget
 
 /**
  * This activity is responsible for unlocking the selected password.
@@ -50,7 +52,7 @@ class UnlockWidgetActivity : AppCompatActivity()
         binding.credentialItem.password.text = applicationContext.getString(R.string.locked_password)
 
         binding.unlockButton.setOnClickListener {
-
+            Log.d(TAG, locked.toString())
             if (locked)
             {
                 val unlockDialog = UnlockDialogFragment()

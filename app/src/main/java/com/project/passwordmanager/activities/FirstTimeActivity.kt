@@ -1,4 +1,4 @@
-package com.project.passwordmanager
+package com.project.passwordmanager.activities
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.ActivityFirstTimeBinding
