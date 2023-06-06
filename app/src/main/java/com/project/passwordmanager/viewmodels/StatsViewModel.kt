@@ -5,7 +5,7 @@ import com.project.passwordmanager.model.CredentialDao
 
 class StatsViewModel(val dao: CredentialDao) : ViewModel()
 {
-    val credentials = dao.getAll()
+    val credentials = dao.getSortedByDate()
 
     companion object
     {

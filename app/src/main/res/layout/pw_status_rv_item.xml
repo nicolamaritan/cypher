@@ -9,11 +9,11 @@
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="2dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <ImageView
@@ -30,68 +30,51 @@
             app:tint="@color/green"
             tools:ignore="ContentDescription" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/stats_service"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Nome Servizio"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/stats_user"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Nome User"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/time_passed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingEnd="20dp">
+            android:text="Data ultima modifica"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/stats_service"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="Nome Servizio"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/stats_user"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="Nome User"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/guideline2"
-                tools:ignore="HardcodedText" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/time_passed_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingEnd="20dp">
+            android:text="Value"
+            android:textColor="@color/green"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/time_passed"
+            app:layout_constraintStart_toStartOf="@+id/time_passed"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-            <TextView
-                android:id="@+id/time_passed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Data ultima modifica"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/time_passed_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Value"
-                android:textColor="@color/green"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/time_passed"
-                app:layout_constraintStart_toStartOf="@+id/time_passed"
-                app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-        </LinearLayout>
-
-        <!--androidx.constraintlayout.widget.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,16 +86,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="22dp" />
+            app:layout_constraintGuide_begin="33dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="151dp" /-->
+            app:layout_constraintGuide_end="151dp" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>

@@ -37,7 +37,7 @@ class PwStatusAdapter():
             timePassed.text = LocalDate.ofEpochDay(date!!.toEpochDay()).toString()
 
             // Change the color based on the time passed from the last modify
-            val numDays: Long = LocalDate.now().toEpochDay() - date!!.toEpochDay()
+            val numDays: Long = LocalDate.now().toEpochDay() - date.toEpochDay()
             if(numDays > 180) {   //if are passed about 6 months...
                 warningImg.setColorFilter(Color.RED)
                 timePassed.setTextColor(Color.RED)
@@ -62,7 +62,6 @@ class PwStatusAdapter():
 
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val item = data[position]
-        val date = item.date
-        holder.bind(item.service, item.username, date)
+        holder.bind(item.service, item.username, item.date)
     }
 }
