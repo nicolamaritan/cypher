@@ -4,19 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.PwStatusAdapter
 import com.project.passwordmanager.databinding.FragmentStatsBinding
-import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.factories.StatsViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
-import com.project.passwordmanager.viewmodels.CredentialsViewModel
 import com.project.passwordmanager.viewmodels.StatsViewModel
-import java.time.LocalDate
 
 class StatsFragment : Fragment()
 {
