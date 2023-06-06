@@ -19,14 +19,17 @@
     <color name="lighter_blue">#4285F4</color>
     <color name="darker_light_blue">#002171</color>
     <color name="red">#e63c3c</color>
-    <color name = "green">#32CD32</color>
+    <color name="green">#32CD32</color>
 
     <!-- Dark theme colors -->
     <color name="night_primary">#0D47A1</color> <!-- Dark blue for night theme -->
-    <color name="night_primary_variant">#002171</color> <!-- Darker shade of blue for night theme -->
+    <color name="night_primary_variant">#002171
+    </color> <!-- Darker shade of blue for night theme -->
     <color name="night_on_primary">#FFFFFF</color> <!-- White text on blue for night theme -->
     <color name="night_secondary">#0D47A1</color> <!-- Dark teal for night theme -->
-    <color name="night_secondary_variant">#002171</color> <!-- Darker shade of teal for night theme -->
-    <color name="night_on_secondary">#FFFFFF</color> <!-- White text on teal for night theme -->
+    <color name="night_secondary_variant">#002171
+    </color> <!-- Darker shade of teal for night theme -->
+    <color name="night_on_secondary">#FFFFFF</color>
+    <color name="orange">#F9690E</color> <!-- White text on teal for night theme -->
 
 </resources>
