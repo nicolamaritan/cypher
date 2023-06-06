@@ -3,7 +3,7 @@
     android:description="@string/app_widget_description"
     android:initialKeyguardLayout="@layout/stats_widget"
     android:initialLayout="@layout/stats_widget"
-    android:minWidth="110dp"
+    android:minWidth="165dp"
     android:minHeight="110dp"
     android:previewLayout="@layout/stats_widget"
     android:resizeMode="horizontal|vertical"

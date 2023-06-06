@@ -5,8 +5,11 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.widget.RemoteViews
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.DateChecker
+import com.project.passwordmanager.common.DateStatus
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.model.CredentialRepository
+import java.time.LocalDate
 
 /**
  * Implementation of App Widget functionality.
@@ -47,6 +50,14 @@ class StatsWidget : AppWidgetProvider() {
                 itemViews.setTextViewText(R.id.service_tv, credential.service)
                 itemViews.setTextViewText(R.id.username_tv, credential.username)
                 itemViews.setTextViewText(R.id.time_passed_value, credential.date.toString())
+
+                // Gets color in function of the date status
+                val timePassedColor = when (DateChecker(LocalDate.now()).checkDate(credential.date!!)){
+                    DateStatus.NEW -> context.getColor(R.color.green)
+                    DateStatus.THREE_MONTHS_OLD -> context.getColor(R.color.orange)
+                    DateStatus.SIX_MONTHS_OLD -> context.getColor(R.color.red)
+                }
+                itemViews.setTextColor(R.id.time_passed_value, timePassedColor)
 
                 builder.addItem(i.toLong(), itemViews)
             }
