@@ -21,7 +21,8 @@ class StatsWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         // There may be multiple widgets active, so update all of them
-        for (appWidgetId in appWidgetIds) {
+        for (appWidgetId in appWidgetIds)
+        {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
     }
@@ -41,6 +42,7 @@ class StatsWidget : AppWidgetProvider() {
 
         // Observe the credentials from the repository
         credentialRepository.allCredentials.observeForever { credentials ->
+
             // Create a RemoteViews for each credential
             val builder = RemoteViews.RemoteCollectionItems.Builder()
             for (i in credentials.indices) {
@@ -63,8 +65,9 @@ class StatsWidget : AppWidgetProvider() {
             }
 
             builder.setViewTypeCount(1)
-            val remoteCollectionItems = builder.build()
 
+            // Setup remote adapter
+            val remoteCollectionItems = builder.build()
             views.setRemoteAdapter(R.id.list_view, remoteCollectionItems)
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
