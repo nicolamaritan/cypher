@@ -60,6 +60,7 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
      * After inserting the credential, it sets the closing flag to true and emits a toast event with positive
      * result message.
      *
+     * @return True if the credential is added successfully, false otherwise.
      */
     fun addCredential() : Boolean
     {
@@ -80,6 +81,14 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         return true
     }
 
+    /**
+     * Validates the input credential data.
+     *
+     * This method validates the username, service, and password of the new credential.
+     * If any of the fields is invalid, it emits a toast event signaling that the credential is invalid.
+     *
+     * @return True if the credential is valid, false otherwise.
+     */
     fun validateCredential() : Boolean
     {
         val credential = Credential()
@@ -94,6 +103,15 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         return true
     }
 
+    /**
+     * Checks if the inserted master password is correct.
+     *
+     * This method compares the inserted master password with the true hashed master password.
+     * If they match, it returns true. Otherwise, it emits a toast event signaling that the master password is wrong.
+     *
+     * @param trueHashedMasterPassword The true hashed master password stored in the system.
+     * @return True if the inserted master password is correct, false otherwise.
+     */
     fun checkInsertedMasterPassword(trueHashedMasterPassword: String) : Boolean
     {
         if (Hashing.sha256(insertedMasterPassword) != trueHashedMasterPassword)
@@ -104,7 +122,8 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         return true
     }
 
-    companion object {
+    companion object
+    {
         /**
          * TAG used for logging.
          */
