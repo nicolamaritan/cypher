@@ -12,6 +12,7 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
 import com.project.passwordmanager.common.WidgetPreferencesManager
 import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBinding
@@ -67,9 +68,10 @@ class WidgetConfigurationFragment : Fragment()
 
         binding.fab.setOnClickListener{
 
+            // Represents the selected ids that will be added to the widget
             val toBeAddedIds = adapter.selectedCredentialsIds
 
-            // To istantiate the widget you need to select at least one credential
+            // To instantiate the widget you need to select at least one credential
             if (toBeAddedIds.isNotEmpty())
             {
                 activity.setResult(Activity.RESULT_OK, resultValue)
@@ -90,7 +92,7 @@ class WidgetConfigurationFragment : Fragment()
             }
             else
             {
-                Toast.makeText(context, "Select at least one credential.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, requireContext().getString(R.string.select_at_least), Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -98,7 +100,8 @@ class WidgetConfigurationFragment : Fragment()
         return view
     }
 
-    override fun onDestroy() {
+    override fun onDestroy()
+    {
         super.onDestroy()
         _binding = null
     }

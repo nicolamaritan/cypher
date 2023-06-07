@@ -22,6 +22,9 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
             notifyDataSetChanged()
         }
 
+    /**
+     * Contains the selected ids to show in the widget.
+     */
     val selectedCredentialsIds: MutableList<Int> = mutableListOf()
 
     inner class WidgetConfigurationCredentialsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
