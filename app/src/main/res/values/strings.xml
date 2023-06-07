@@ -55,6 +55,9 @@
     <string name="old_pw">Inserisci la vecchia password</string>
     <string name="new_pw">Inserisci la nuova password</string>
     <string name="confirm_new_pw">Conferma la nuova password</string>
+    <string name="order_display">Order display</string>
+    <string name="theme_language">Theme and language</string>
+    <string name="reset_mp">Reset master password</string>
 
     // Stats
     <string name="stats">Stats</string>

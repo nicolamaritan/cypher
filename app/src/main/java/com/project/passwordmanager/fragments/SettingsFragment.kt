@@ -1,6 +1,5 @@
 package com.project.passwordmanager.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
@@ -8,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
@@ -24,7 +25,6 @@ class SettingsFragment : Fragment()
     private val binding get() = _binding!!
     lateinit var viewModel: SettingsViewModel
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,7 +65,9 @@ class SettingsFragment : Fragment()
                 .edit().putInt(Constants.CREDENTIALS_ORDER, selectedValue).apply()
         }
 
-        val switchDarkMode: Switch = view.findViewById(R.id.switchDarkMode)
+        setTextViewColors()
+        // Set the state of the dark mode switch
+        val switchDarkMode: SwitchCompat = view.findViewById(R.id.switchDarkMode)
         switchDarkMode.isChecked = isDarkModeEnabled()
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -79,19 +81,65 @@ class SettingsFragment : Fragment()
         return view
     }
 
+    /**
+     * Checks if dark mode is currently enabled.
+     * @return Boolean indicating whether dark mode is enabled.
+     */
     private fun isDarkModeEnabled(): Boolean {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES
     }
 
+    /**
+     * Enables dark mode.
+     */
     private fun enableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         requireActivity().recreate()
     }
 
+
+    /**
+     * Disables dark mode.
+     */
     private fun disableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         requireActivity().recreate()
+    }
+
+    /**
+     * Sets the text color of the TextViews based on the current mode (light or dark).
+     */
+    private fun setTextViewColors() {
+        // Set text color for TextView 1
+        val textView1: TextView = binding.tvOrderDisplay
+        if (isDarkModeEnabled()) {
+            // Set text color to night mode color
+            textView1.setTextColor(ContextCompat.getColor(requireContext(), R.color.night_on_primary))
+        } else {
+            // Set text color to default color
+            textView1.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        }
+
+        // Set text color for TextView 2
+        val textView2: TextView = binding.tvThemeLanguage
+        if (isDarkModeEnabled()) {
+            // Set text color to night mode color
+            textView2.setTextColor(ContextCompat.getColor(requireContext(), R.color.night_on_primary))
+        } else {
+            // Set text color to default color
+            textView2.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        }
+
+        // Set text color for TextView 3
+        val textView3: TextView = binding.tvResetMp
+        if (isDarkModeEnabled()) {
+            // Set text color to night mode color
+            textView3.setTextColor(ContextCompat.getColor(requireContext(), R.color.night_on_primary))
+        } else {
+            // Set text color to default color
+            textView3.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        }
     }
 
     override fun onDestroyView()

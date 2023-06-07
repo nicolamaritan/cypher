@@ -12,8 +12,8 @@
         android:id="@+id/tv_choice"
         android:layout_width="116dp"
         android:layout_height="67dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
         android:text="@string/choice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,9 +69,9 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         app:layout_constraintVertical_bias="0.055" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchDarkMode"
-        android:layout_width="341dp"
+        android:layout_width="300dp"
         android:layout_height="109dp"
         android:layout_marginTop="40dp"
         android:text="@string/enable_dark_mode"
@@ -103,10 +103,12 @@
     <EditText
         android:id="@+id/oldPw"
         android:layout_width="252dp"
-        android:layout_height="59dp"
+        android:layout_height="51dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="220dp"
+        android:autofillHints="password"
         android:hint="@string/old_pw"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -117,6 +119,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="144dp"
         android:hint="@string/new_pw"
+        android:autofillHints="password"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oldPw"
@@ -129,6 +133,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="76dp"
         android:hint="@string/confirm_new_pw"
+        android:autofillHints="password"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPw"
@@ -143,5 +149,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmNewPw" />
+
+    <TextView
+        android:id="@+id/tv_order_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="@string/order_display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_theme_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="@string/theme_language"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/tv_reset_mp"
+        android:layout_width="117dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/reset_mp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

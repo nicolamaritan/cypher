@@ -47,20 +47,6 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
             }
         }
 
-        /**
-         * Sets a click listener on the delete button to delete a credential.
-         */
-        /*binding.delete.setOnClickListener {
-            viewModel.deleteCredential(credentialId)
-
-            // If the view model's closing flag is set to true, dismiss the view
-            if (viewModel.closing) {
-                dismiss()
-            }
-        }
-        */
-
-
         /*
         * Observes the toastStringId in the viewModel to show
         * a toast whenever the value changes.
