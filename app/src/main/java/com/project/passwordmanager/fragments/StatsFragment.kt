@@ -38,6 +38,12 @@ class StatsFragment : Fragment()
         val credentialsStatusAdapter = CredentialsStatusAdapter(requireContext())
         binding.passwordStatusRv.adapter = credentialsStatusAdapter
 
+        viewModel.oldCredentialsCount.observe(viewLifecycleOwner){
+            it?.let {
+                binding.numberOfOldPasswordsTv.text = getString(R.string.number_of_old_passwords, it.toString())
+            }
+        }
+
         //passes the data to the adapter
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
