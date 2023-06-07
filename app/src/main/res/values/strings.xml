@@ -93,4 +93,11 @@
     <string name="value">Value</string>
     <string name="add_widget">Add widget</string>
     <string name="last_modified">Last modified</string>
+
+    // Widget Previews
+    <string name="education_portals">Education portals</string>
+    <string name="alice_smith">alice.smith</string>
+    <string name="cool_school">Cool School</string>
+    <string name="alice_smith_underscore">alice_smith</string>
+    <string name="stem_everywhere">STEM everywhere</string>
 </resources>
