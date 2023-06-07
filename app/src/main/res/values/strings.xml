@@ -43,6 +43,7 @@
     <string name="lock">LOCK</string>
     <string name="widget_configuration">Widget configuration</string>
     <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
+    <string name = "select_at_least">Select at least one credential.</string>
 
     //Settings
     <string name="choice">Choose the order:</string>

@@ -32,7 +32,8 @@ class CredentialsStatusAdapter(val context: Context):
         private val warningImg: ImageView = itemView.findViewById(R.id.warning_img)
         private val timePassed: TextView = itemView.findViewById(R.id.time_passed_value)
 
-        fun bind(credential: Credential){
+        fun bind(credential: Credential)
+        {
             service.text = credential.service
             username.text = credential.username
             timePassed.text = LocalDate.ofEpochDay(credential.date!!.toEpochDay()).toString()
