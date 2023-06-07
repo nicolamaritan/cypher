@@ -46,12 +46,19 @@ class FirstTimeActivity : AppCompatActivity()
                     Toast.LENGTH_LONG
                     ).show()
 
-                // Next time the apps starts another activity will show up
+                // Next time the apps starts another activity (MainActivity) will show up
                 getSharedPreferences(Constants.SYSTEM_PREFERENCES, MODE_PRIVATE)
                     .edit()
                     .putBoolean(Constants.FIRST_TIME, false)
                     .apply()
 
+                /**
+                 * The master password is never saved on clear in the database.
+                 * Only the hashed value is stored, so that nobody can retrieve it.
+                 * When unlocking something, the user must provide the master password.
+                 * The user authenticates if the hashed provided master password
+                 * matches the saved hashed value.
+                 */
                 Utils.setHashedMasterPassword(applicationContext, inserted)
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -67,6 +74,13 @@ class FirstTimeActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Displays an alert dialog with the provided title and message.
+     *
+     * @param context The context of the activity.
+     * @param title The title of the alert dialog.
+     * @param message The message of the alert dialog.
+     */
     private fun showAlertDialog(context: Context, title: String, message: String)
     {
         val alertDialogBuilder = AlertDialog.Builder(context)

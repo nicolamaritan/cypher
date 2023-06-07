@@ -22,6 +22,11 @@ class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
      * Used for the RecyclerView to display all the tuples.
      */
     var credentials: LiveData<List<Credential>> = dao.getAll()
+
+    /**
+     * The current order of credentials.
+     * Default value is set to CredentialsOrder.CHRONOLOGICAL.
+     */
     private var credentialOrder: Int = CredentialsOrder.CHRONOLOGICAL
 
     /**
@@ -35,6 +40,11 @@ class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
         newFragment.show(fragmentManager, TAG)
     }
 
+    /**
+     * Deletes a credential from the database.
+     *
+     * @param credentialId The ID of the credential to delete.
+     */
     fun deleteCredential(credentialId: Int)
     {
         viewModelScope.launch {
@@ -42,6 +52,12 @@ class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
         }
     }
 
+    /**
+     * Updates the order of credentials.
+     * Retrieves the credentials from the database based on the new order.
+     *
+     * @param credentialOrder The new order of credentials.
+     */
     fun updateCredentialsOrder(credentialOrder: Int)
     {
         this.credentialOrder = credentialOrder

@@ -18,7 +18,8 @@ import com.project.passwordmanager.widgets.credentials.PasswordManagerWidget
  * This activity is responsible for unlocking the selected password.
  * It provides a UI for the user to enter a password and verifies it against
  * the stored password. If the password is correct, the password is unlocked.
- * Otherwise, an error message is displayed.
+ * Otherwise, an error message is displayed. This activity is invoked after
+ * the user clicks on one item in the credentials Widget.
  */
 class UnlockWidgetActivity : AppCompatActivity()
 {
@@ -83,6 +84,12 @@ class UnlockWidgetActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Updates the password TextView in the UI based on the provided encrypted password and master password.
+     *
+     * @param encryptedPassword The encrypted password to be displayed.
+     * @param masterPassword The master password used for decrypting the encrypted password.
+     */
     private fun updatePasswordTextView(encryptedPassword: String, masterPassword: String)
     {
         binding.credentialItem.password.text =
