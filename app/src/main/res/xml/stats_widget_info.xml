@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:description="@string/app_widget_description"
+    android:description="@string/status_widget_description"
     android:initialKeyguardLayout="@layout/stats_widget"
     android:initialLayout="@layout/stats_widget"
     android:minWidth="250dp"
     android:minHeight="110dp"
-    android:previewLayout="@layout/stats_widget"
+    android:previewLayout="@layout/stats_widget_preview"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="3"
     android:targetCellHeight="2"

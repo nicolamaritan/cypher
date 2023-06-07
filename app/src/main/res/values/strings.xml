@@ -2,7 +2,8 @@
     <string name="app_name">PasswordManager</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="save_configuration">Save</string>
-    <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
+    <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock them when needed.</string>
+    <string name="status_widget_description">Keep an eye on the passwords to change.</string>
     <string name="emptywidget_text">No credentials added.</string>
 
     <string name="credentials_fragment">Hello credentials fragment</string>
@@ -101,4 +102,8 @@
     <string name="alice_smith_underscore">alice_smith</string>
     <string name="stem_everywhere">STEM everywhere</string>
     <string name="your_credentials_status">Your credentials status:</string>
+    <string name="fake_date_2023_02_21">2023&#8211;02&#8211;21</string>
+    <string name="important_bank_account_fake">Important bank account</string>
+    <string name="alice_and_bob_fake">Alice and Bob</string>
+    <string name="fake_date_2022_10_11">2022&#8211;10&#8211;11</string>
 </resources>
