@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/your_credentials_status"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         />
 
     <LinearLayout
@@ -37,13 +37,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:text="@string/alice_smith" />
             <TextView
                 android:text="@string/cool_school"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Username" />
         </LinearLayout>
 
@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:text="@string/last_modified"
                 android:textSize="13sp" />
 
@@ -95,13 +95,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:text="@string/alice_and_bob_fake" />
             <TextView
                 android:text="@string/important_bank_account_fake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Username" />
         </LinearLayout>
 
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 android:text="@string/last_modified"
                 android:textSize="13sp" />
 

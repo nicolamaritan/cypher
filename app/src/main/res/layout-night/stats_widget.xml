@@ -1,0 +1,24 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.PasswordManager.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.PasswordManager.AppWidgetContainer"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_credentials_status"
+        android:layout_marginBottom="5dp"
+        android:textColor="?android:attr/textColorPrimary"
+        />
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"/>
+
+</LinearLayout>

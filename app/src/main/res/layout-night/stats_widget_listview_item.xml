@@ -42,7 +42,7 @@
             android:id="@+id/time_passed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:text="@string/last_modified"
             android:textSize="13sp" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Value"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"/>
 
     </LinearLayout>
