@@ -2,6 +2,7 @@ package com.project.passwordmanager.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import java.time.LocalDate
 
 /**
  * This interface serves as the Data Access Object (DAO) for the Credential entity.
@@ -78,4 +79,14 @@ interface CredentialDao {
      */
     @Query("SELECT * FROM credentials_table ORDER BY service")
     fun getSortedByService(): LiveData<List<Credential>>
+
+
+    /**
+     * Returns the number of entries older than 6 months.
+     *
+     * @return The count of entries that are older than 6 months.
+     */
+    @Query("SELECT COUNT(*) FROM credentials_table WHERE date < :sixMonthsAgo")
+    fun getEntriesOlderThanSixMonthsCount(sixMonthsAgo: LocalDate): LiveData<Int>
 }
+

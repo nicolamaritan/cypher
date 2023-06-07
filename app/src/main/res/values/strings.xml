@@ -85,6 +85,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings">Settings</string>
     <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
+    <string name="number_of_old_passwords">Number of old passwords stored: %1$s</string>
     <string name="password_status">Password status</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
     <string name="equal_passwords">Equal passwords</string>
