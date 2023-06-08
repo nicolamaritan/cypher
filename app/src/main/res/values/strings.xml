@@ -41,7 +41,7 @@
     <string name="unlock_widget">Unlock credential</string>
     <string name="insert_the_master_password_to_unlock_your_password">Insert the Master Password to unlock your password.</string>
     <string name="insert_your_master_password">Insert your Master Password</string>
-    <string name="lock">LOCK</string>
+    <string name="lock">Lock</string>
     <string name="widget_configuration">Widget configuration</string>
     <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
     <string name = "select_at_least">Select at least one credential.</string>

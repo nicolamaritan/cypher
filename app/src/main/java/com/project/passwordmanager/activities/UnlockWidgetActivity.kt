@@ -1,6 +1,9 @@
 package com.project.passwordmanager.activities
 
 import android.appwidget.AppWidgetManager
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -73,7 +76,7 @@ class UnlockWidgetActivity : AppCompatActivity()
                     {
                         viewModel.locked = false
                         viewModel.displayedPassword = Cryptography.decryptText(encryptedPassword, unlockDialog.insertedMasterPassword)
-                        viewModel.displayedButtonText = "Lock"
+                        viewModel.displayedButtonText = getString(R.string.lock)
                         binding.credentialItem.password.text = viewModel.displayedPassword
                         binding.unlockButton.text = viewModel.displayedButtonText
                     }
@@ -94,10 +97,30 @@ class UnlockWidgetActivity : AppCompatActivity()
             }
         }
 
+        binding.credentialItem.copyImageButton.setOnClickListener{
+            if (!viewModel.locked)
+            {
+                copyPassword()
+            }
+            else
+            {
+                Toast.makeText(applicationContext, "Unlock the password first.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         // Observe the toast id to change
         viewModel.toastStringId.observe(this){
             Toast.makeText(applicationContext, getString(it), Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun copyPassword()
+    {
+        val clipboardManager = applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("Copied password", viewModel.displayedPassword)
+        clipboardManager.setPrimaryClip(clipData)
+
+        Toast.makeText(applicationContext, "Password copied to clipboard.", Toast.LENGTH_SHORT).show()
     }
 
     companion object
