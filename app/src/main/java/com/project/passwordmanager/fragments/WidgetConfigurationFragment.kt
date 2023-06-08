@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RemoteViews
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
@@ -25,7 +24,7 @@ class WidgetConfigurationFragment : Fragment()
 {
     private var _binding: FragmentWidgetConfigurationBinding? = null
     private val binding get() = _binding!!
-    lateinit var viewModel: ViewModel
+    lateinit var viewModel: WidgetConfigurationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +38,14 @@ class WidgetConfigurationFragment : Fragment()
         val application = requireNotNull(this.activity).application
         val dao = CredentialDatabase.getInstance(application).credentialDao
         val viewModelFactory = WidgetConfigurationViewModelFactory(dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[WidgetConfigurationViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[WidgetConfigurationViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Adapter setup
         val adapter = WidgetConfigurationCredentialsAdapter(requireContext())
+        adapter.selectedCredentialsIds = viewModel.checkedCredentialsIds    // Retrieves previously selected ids from viewmodel
+                                                                            // ViewModel is updated as it holds the list reference
         binding.configurationCredentialsRv.adapter = adapter
 
         // Passing data to the adapter
@@ -54,9 +55,11 @@ class WidgetConfigurationFragment : Fragment()
             }
         }
 
-        val activity = requireActivity()
+        // Retrieves data from viewModel
+        binding.widgetNameEt.setText(viewModel.widgetName)
 
         // Get the intent which invoked the configuration activity, which will contain tha appWidgetId
+        val activity = requireActivity()
         val appWidgetId = activity.intent?.extras?.getInt(
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID
@@ -98,6 +101,12 @@ class WidgetConfigurationFragment : Fragment()
         }
 
         return view
+    }
+
+    override fun onPause()
+    {
+        super.onPause()
+        viewModel.widgetName = binding.widgetNameEt.text.toString()
     }
 
     override fun onDestroy()

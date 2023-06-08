@@ -36,15 +36,19 @@
     <string name="wrong_master_password">Wrong master password.</string>
     <string name="authentication">Authentication</string>
     <string name="password_deleted">Password deleted.</string>
+    <string name="unlock_the_password_first">Unlock the password first.</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
 
     // Widget
-    <string name="unlock_widget">Unlock widget</string>
+    <string name="unlock_widget">Unlock password</string>
     <string name="insert_the_master_password_to_unlock_your_password">Insert the Master Password to unlock your password.</string>
     <string name="insert_your_master_password">Insert your Master Password</string>
-    <string name="lock">LOCK</string>
+    <string name="lock">Lock</string>
     <string name="widget_configuration">Widget configuration</string>
     <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
     <string name = "select_at_least">Select at least one credential.</string>
+    <string name="my_passwords">My passwords</string>
+    <string name="stored_credentials">Stored credentials: %1$d</string>
 
     //Settings
     <string name="choice">Choose the order:</string>

@@ -25,7 +25,7 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
     /**
      * Contains the selected ids to show in the widget.
      */
-    val selectedCredentialsIds: MutableList<Int> = mutableListOf()
+    var selectedCredentialsIds: MutableList<Int> = mutableListOf()
 
     inner class WidgetConfigurationCredentialsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
@@ -38,11 +38,11 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
         {
             service.text = credential.service
             username.text = credential.username
-            checkBox.isChecked = false
+            checkBox.isChecked = selectedCredentialsIds.contains(credential.id)
 
             // Checking a credential implies putting it into the list
-            checkBox.setOnCheckedChangeListener{ _, b ->
-                if (b)
+            checkBox.setOnCheckedChangeListener{ _, checked ->
+                if (checked)
                 {
                     selectedCredentialsIds.add(credential.id)
                 }
