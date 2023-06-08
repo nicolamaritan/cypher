@@ -30,6 +30,11 @@ class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
     private var credentialOrder: Int = CredentialsOrder.CHRONOLOGICAL
 
     /**
+     *
+     */
+    var unlockedCredentials = mutableListOf<Credential>()
+
+    /**
      * Displays the dialog fragment for adding new credentials.
      *
      * @param fragmentManager The FragmentManager to show the dialog fragment.

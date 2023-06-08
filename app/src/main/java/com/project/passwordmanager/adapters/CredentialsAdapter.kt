@@ -33,6 +33,7 @@ class CredentialsAdapter(private val context: Context):
         }
 
     private var deleteListener: DeleteListener? = null
+    var unlockedCredentials = mutableListOf<Credential>()
 
     fun setDeleteListener(listener: DeleteListener)
     {
@@ -51,10 +52,24 @@ class CredentialsAdapter(private val context: Context):
         private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
         private val deleteImageButton: ImageButton = itemView.findViewById(R.id.delete_imageButton)
 
-        fun bind(credentialId:Int, service:String, user:String, password:String){
+        fun bind(credentialId:Int, service:String, user:String, password:String)
+        {
             appName.text = service
             appUser.text = user
-            appPw.text = context.getString(R.string.locked_password)
+
+            var found = false
+            unlockedCredentials.forEach{
+                if (it.id == credentialId)
+                {
+                    appPw.text = it.password
+                    locked = false
+                    found = true
+                }
+            }
+            if (!found)
+            {
+                appPw.text = context.getString(R.string.locked_password)
+            }
 
             // --------- Lock Button ----------
             lockImageButton.setOnClickListener {
@@ -69,6 +84,17 @@ class CredentialsAdapter(private val context: Context):
                         override fun onUnlockSuccess()
                         {
                             locked = false
+
+                            /* Save the unlocked credential with the password in clear.
+                               This is used to restore the clear password when the screen
+                               rotates.
+                             */
+                            unlockedCredentials.add(
+                                Credential(
+                                    id = credentialId,
+                                    password = Cryptography.decryptText(password, alertDialog.insertedMasterPassword)
+                                )
+                            )
                             updatePasswordTextView(password, alertDialog.insertedMasterPassword)
                         }
 
@@ -79,6 +105,14 @@ class CredentialsAdapter(private val context: Context):
                 }
                 else
                 {
+                    // Remove the saved credential as it is locked
+                    unlockedCredentials.remove(
+                        Credential(
+                            id = credentialId,
+                            password = appPw.text.toString()
+                        )
+                    )
+
                     appPw.text = context.getString(R.string.locked_password)
                     locked = true
                 }
@@ -98,6 +132,19 @@ class CredentialsAdapter(private val context: Context):
 
             // --------- Edit Button ----------
             editImageButton.setOnClickListener {
+                // Lock and removes state
+                locked = true
+                appPw.text = context.getString(R.string.locked_password)
+                for (i in 0 until unlockedCredentials.size)
+                {
+                    if (unlockedCredentials[i].id == credentialId)
+                    {
+                        unlockedCredentials.removeAt(i)
+                        break
+                    }
+                }
+
+
                 val activity = context as FragmentActivity
                 val fm: FragmentManager = activity.supportFragmentManager
                 val alertDialog = ModifyDialogFragment(credentialId)
