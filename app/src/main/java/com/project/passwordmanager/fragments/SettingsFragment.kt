@@ -92,34 +92,40 @@ class SettingsFragment : Fragment()
                     Toast.LENGTH_LONG
                 ).show()
             }
-            if (old.isBlank() || newpw.isBlank() || confirmnewpw.isBlank())
-            {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.blank_password) +
-                    getString(R.string.passwords_cannot_be_blank),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else if (newpw == confirmnewpw) {
-                // Actually accepts the master password
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.master_password_correctly_inserted),
-                    Toast.LENGTH_LONG
-                ).show()
-                Utils.setHashedMasterPassword(requireContext(), newpw)
-            }
             else
             {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.password_mismatch) +
-                    getString(R.string.entered_passwords_do_not_match),
-                    Toast.LENGTH_LONG
-                ).show()
+                if (old.isBlank() || newpw.isBlank() || confirmnewpw.isBlank())
+                {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.blank_password) +
+                                getString(R.string.passwords_cannot_be_blank),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else
+                {
+                    if (newpw == confirmnewpw)
+                    {
+                        // Actually accepts the master password
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.master_password_correctly_inserted),
+                            Toast.LENGTH_LONG
+                        ).show()
+                        Utils.setHashedMasterPassword(requireContext(), newpw)
+                    }
+                    else
+                    {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.password_mismatch) +
+                                    getString(R.string.entered_passwords_do_not_match),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
             }
-
         }
 
         // Inflate the layout for this fragment
