@@ -143,7 +143,7 @@ class PasswordManagerWidget : AppWidgetProvider()
             var widgetName = WidgetPreferencesManager(context, appWidgetId).getName()
             if (widgetName.isBlank())
             {
-                widgetName = "My passwords"
+                widgetName = context.getString(R.string.my_passwords)
             }
 
             remoteViews.setTextViewText(R.id.widget_name, widgetName)
@@ -152,7 +152,7 @@ class PasswordManagerWidget : AppWidgetProvider()
         private fun setupCredentialsNumber(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
             val savedAddedIds = WidgetPreferencesManager(context, appWidgetId).getAddedIds()
-            remoteViews.setTextViewText(R.id.credentials_number, "Stored credentials: " + savedAddedIds.size)
+            remoteViews.setTextViewText(R.id.credentials_number, context.getString(R.string.stored_credentials, savedAddedIds.size))
         }
 
         private fun setupSeeAllButton(remoteViews: RemoteViews, context: Context, appWidgetId: Int)

@@ -47,6 +47,8 @@
     <string name="widget_configuration">Widget configuration</string>
     <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
     <string name = "select_at_least">Select at least one credential.</string>
+    <string name="my_passwords">My passwords</string>
+    <string name="stored_credentials">Stored credentials: %1$d</string>
 
     //Settings
     <string name="choice">Choose the order:</string>
