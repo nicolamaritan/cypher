@@ -2,11 +2,13 @@ package com.project.passwordmanager.fragments
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -79,6 +81,54 @@ class SettingsFragment : Fragment()
                 disableDarkMode()
             }
         }
+
+        /**
+         * The code defines an OnGlobalLayoutListener that will be triggered whenever the visibility of the keyboard changes.
+         * Inside the listener, it retrieves the height of the visible display frame and calculates the height of the keyboard.
+         */
+        val listener = ViewTreeObserver.OnGlobalLayoutListener {
+            val rect = Rect()
+            view.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = view.rootView.height
+
+            val keypadHeight = screenHeight - rect.bottom
+
+            // Check if the keyboard is open or closed
+            if (keypadHeight > screenHeight * 0.15) {
+                // Keyboard is open, modify the visibility of TextViews
+                binding.divider.visibility = View.GONE
+                binding.divider2.visibility = View.GONE
+                binding.radioGroup.visibility = View.GONE
+                binding.radioButton.visibility = View.GONE
+                binding.radioButton2.visibility = View.GONE
+                binding.radioButton3.visibility = View.GONE
+                binding.tvChoice.visibility = View.GONE
+                binding.tvOrderDisplay.visibility = View.GONE
+                binding.tvChangeLanguage.visibility = View.GONE
+                binding.tvResetMp.visibility = View.GONE
+                binding.tvThemeLanguage.visibility = View.GONE
+                binding.spinnerLanguage.visibility = View.GONE
+                binding.switchDarkMode.visibility = View.GONE
+            } else {
+                // Keyboard is closed, restore the visibility of TextViews
+                binding.divider.visibility = View.VISIBLE
+                binding.divider2.visibility = View.VISIBLE
+                binding.radioGroup.visibility = View.VISIBLE
+                binding.radioButton.visibility = View.VISIBLE
+                binding.radioButton2.visibility = View.VISIBLE
+                binding.radioButton3.visibility = View.VISIBLE
+                binding.tvChoice.visibility = View.VISIBLE
+                binding.tvOrderDisplay.visibility = View.VISIBLE
+                binding.tvChangeLanguage.visibility = View.VISIBLE
+                binding.tvResetMp.visibility = View.VISIBLE
+                binding.tvThemeLanguage.visibility = View.VISIBLE
+                binding.spinnerLanguage.visibility = View.VISIBLE
+                binding.switchDarkMode.visibility = View.VISIBLE
+            }
+        }
+
+        // Registra l'ascoltatore per il cambio della visibilità della tastiera
+        view.viewTreeObserver.addOnGlobalLayoutListener(listener)
 
         binding.confirmButton.setOnClickListener {
             val old = binding.oldPw.text.toString()
