@@ -28,7 +28,6 @@ class SettingsFragment : Fragment()
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: SettingsViewModel
-    //lateinit var spinnerLanguage : Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

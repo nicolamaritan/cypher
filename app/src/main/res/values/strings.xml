@@ -1,104 +1,104 @@
 <resources>
-    <string name="app_name">PasswordManager</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="save_configuration">Save</string>
-    <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
-    <string name="emptywidget_text">No credentials added.</string>
+    <string name="app_name" translatable="false">Sky Cypher</string>
+    <string name="appwidget_text">Esempio</string>
+    <string name="save_configuration">Salva</string>
+    <string name="app_widget_description">Memorizza in modo sicuro le tue credenziali nella schermata iniziale. Puoi sbloccarli e bloccarli quando necessario.</string>
+    <string name="emptywidget_text">Nessuna credenziale aggiunta</string>
 
-    <string name="credentials_fragment">Hello credentials fragment</string>
-    <string name="addcredentials_fragment">Hello add credentials fragment</string>
-    <string name="add">ADD</string>
-    <string name="credentials">Credentials</string>
-    <string name="add_credential">Add credential</string>
-    <string name="clear">Clear</string>
-    <string name="insert_the_password">Insert the password</string>
-    <string name="password">Password</string>
-    <string name="master_password">Master Password</string>
-    <string name="insert_the_service">Insert the service</string>
-    <string name="service">Service</string>
-    <string name="insert_your_username">Insert your username</string>
-    <string name="username">Username</string>
-    <string name="insert_a_new_credential">Insert a new credential</string>
-    <string name="credential_added_toast">Credential safely added ;)</string>
-    <string name="credential_modified_toast">Credential safely modified ;)</string>
-    <string name="credential_deleted_toast">Credential safely deleted ;)</string>
-    <string name="unlock_toast">Successful unlock</string>
-    <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
-    <string name="unlock">UNLOCK</string>
-    <string name="do_something">Do something</string>
-    <string name="copy_the_credential_s_password">Copy the credential\'s password.</string>
-    <string name="modify_the_credential">Modify</string>
-    <string name="delete_the_credential">Delete</string>
-    <string name="unlock_lock_the_credential_s_password">Unlock/lock the credential\'s password.</string>
-    <string name="add_a_new_credential">Add a new credential.</string>
-    <string name="locked_password">*******</string>
-    <string name="wrong_master_password">Wrong master password.</string>
-    <string name="authentication">Authentication</string>
-    <string name="password_deleted">Password deleted.</string>
+    <string name="credentials_fragment">Ciao credentials fragment</string>
+    <string name="addcredentials_fragment">Ciao add credentials fragment</string>
+    <string name="add">AGGIUNGI</string>
+    <string name="credentials">Credenziali</string>
+    <string name="add_credential">Aggiungi credenziali</string>
+    <string name="clear">Pulisci</string>
+    <string name="insert_the_password">Inserisci la password</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="master_password" translatable="false">Master Password</string>
+    <string name="insert_the_service">Inserisci il servizio</string>
+    <string name="service">Servizio</string>
+    <string name="insert_your_username">Inserisci l\'username</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="insert_a_new_credential">Inserisci una nuova credenziale</string>
+    <string name="credential_added_toast">Credenziali aggiunte correttamente ;)</string>
+    <string name="credential_modified_toast">Credenziali modificate correttamente ;)</string>
+    <string name="credential_deleted_toast">Credenziali eliminate correttamente ;)</string>
+    <string name="unlock_toast">Sblocco riuscito</string>
+    <string name="invalid_credential_toast">Credenziali non valide. Uno o più campi vuoti</string>
+    <string name="unlock">SBLOCCA</string>
+    <string name="do_something">Fai qualcosa</string>
+    <string name="copy_the_credential_s_password">Copia la password.</string>
+    <string name="modify_the_credential">Modifica</string>
+    <string name="delete_the_credential">Cancella</string>
+    <string name="unlock_lock_the_credential_s_password">Blocca/sblocca la password</string>
+    <string name="add_a_new_credential">Aggiungi nuova credenziale</string>
+    <string name="locked_password" translatable="false">*******</string>
+    <string name="wrong_master_password">Master password errata</string>
+    <string name="authentication">Autenticazione</string>
+    <string name="password_deleted">Password eliminata</string>
 
     // Widget
-    <string name="unlock_widget">Unlock widget</string>
-    <string name="insert_the_master_password_to_unlock_your_password">Insert the Master Password to unlock your password.</string>
-    <string name="insert_your_master_password">Insert your Master Password</string>
-    <string name="lock">LOCK</string>
-    <string name="widget_configuration">Widget configuration</string>
-    <string name="credential_unlocked_successfully">Credential unlocked successfully.</string>
-    <string name = "select_at_least">Select at least one credential.</string>
+    <string name="unlock_widget">Sblocca widget</string>
+    <string name="insert_the_master_password_to_unlock_your_password">Inserisci la master password per sbloccare questa password</string>
+    <string name="insert_your_master_password">Inserisci la tua master password</string>
+    <string name="lock">BLOCCA</string>
+    <string name="widget_configuration">Configurazione widget</string>
+    <string name="credential_unlocked_successfully">Credenziali sbloccate correttamente</string>
+    <string name = "select_at_least">Seleziona almeno una credenziale</string>
 
     //Settings
-    <string name="choice">Choose the order:</string>
-    <string name="order1">Alphabetic order by service</string>
-    <string name="order2">Alphabetic order by username</string>
-    <string name="order3">Chronological order</string>
+    <string name="choice">Scegli l\'ordine:</string>
+    <string name="order1">Ordine alfabetico per servizio</string>
+    <string name="order2">Ordine alfabetico per username</string>
+    <string name="order3">Ordine cronologico</string>
     <string name="enable_dark_mode">Cambia il tema</string>
     <string name="change_language">Cambia la lingua</string>
     <string name="tv_change_masterpassword">Cambia la master password:</string>
-    <string name="old_pw">Inserisci la vecchia password</string>
-    <string name="new_pw">Inserisci la nuova password</string>
-    <string name="confirm_new_pw">Conferma la nuova password</string>
+    <string name="old_pw">Inserisci la vecchia master password</string>
+    <string name="new_pw">Inserisci la nuova master password</string>
+    <string name="confirm_new_pw">Conferma la nuova master password</string>
     <string name="order_display">Order display</string>
     <string name="theme_language">Theme and language</string>
-    <string name="reset_mp">Reset master password</string>
+    <string name="reset_mp" translatable="false">Reset master password</string>
     <string-array name="languages">
         <item>Italiano</item>
         <item>English</item>
     </string-array>
 
     // Stats
-    <string name="stats">Stats</string>
+    <string name="stats">Statistiche</string>
     <string name="pw_to_modify">Password da modificare</string>
-    <string name="show">Show</string>
+    <string name="show">Mostra</string>
     <string name="categories">Categorie</string>
     <string name="stat3">Stat da inventare</string>
-    <string name="last_modify_date">Last modify date</string>
+    <string name="last_modify_date">Data di ultima modifica</string>
 
     // Modify
-    <string name="modify_your_username">Modify your username</string>
-    <string name="modify_the_service">Modify your service</string>
-    <string name="modify_the_password">Modify your password</string>
+    <string name="modify_your_username">Modifica username</string>
+    <string name="modify_the_service">Modifica servizio</string>
+    <string name="modify_the_password">Modifica password</string>
 
     // Welcome
-    <string name="how_to_create_strong_password">How to create a <i>strong</i> password? Check <a href="https://support.google.com/accounts/answer/32040?hl=en">Google\'s advices.</a></string>
-    <string name="welcome_this_app">Welcome! This app allows you to safely store your password on the device.</string>
-    <string name="choose">Choose a <i>strong</i> Master Password used to access all your saved passwords.</string>
-    <string name="reinsert_your_master_password">Reinsert your Master Password</string>
-    <string name="confirm">Confirm</string>
-    <string name="password_mismatch">Password mismatch</string>
-    <string name="entered_passwords_do_not_match">The entered passwords do not match.</string>
-    <string name="master_password_correctly_inserted">Master Password correctly inserted.</string>
-    <string name="blank_password">Blank password</string>
-    <string name="passwords_cannot_be_blank">Passwords cannot be blank.</string>
-    <string name="insert_the_master_password">Insert the Master Password.</string>
-    <string name="see_all">See All</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="settings">Settings</string>
-    <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
-    <string name="number_of_old_passwords">Number of old passwords stored: %1$s</string>
-    <string name="password_status">Password status</string>
-    <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
-    <string name="equal_passwords">Equal passwords</string>
-    <string name="you_should_not_use_the_same_password_for_different">You should not use the same password for different</string>
-    <string name="value">Value</string>
-    <string name="add_widget">Add widget</string>
-    <string name="last_modified">Last modified</string>
+    <string name="how_to_create_strong_password">Come creare una password<i>forte</i>? Vedi <a href="https://support.google.com/accounts/answer/32040?hl=en">Consigli di Google</a></string>
+    <string name="welcome_this_app">Benvenuto! Questa app ti consente di memorizzare in modo sicuro le tue password</string>
+    <string name="choose">Scegli una master password <i>forte</i> per accedere a tutte le password salvate</string>
+    <string name="reinsert_your_master_password">Inserisci nuovamente la Master Password</string>
+    <string name="confirm">Conferma</string>
+    <string name="password_mismatch">Password non corrispondenti</string>
+    <string name="entered_passwords_do_not_match">Le password inserite non corrispondono</string>
+    <string name="master_password_correctly_inserted">Master Password inserita correttamente</string>
+    <string name="blank_password">Password vuota</string>
+    <string name="passwords_cannot_be_blank">Le password non possono essere vuote</string>
+    <string name="insert_the_master_password">Inserisci la Master Password</string>
+    <string name="see_all">Vedi tutto</string>
+    <string name="hello_blank_fragment">Ciao blank fragment</string>
+    <string name="settings">Impostazioni</string>
+    <string name="number_of_passwords_stored">Numero di password salvate: %1$s</string>
+    <string name="number_of_old_passwords">Numero di vecchie password salvate: %1$s</string>
+    <string name="password_status">Stato della password</string>
+    <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">E\' consigliato cambiare le tue password almeno ogni 3/6 mesi</string>
+    <string name="equal_passwords">Password uguali</string>
+    <string name="you_should_not_use_the_same_password_for_different">You should not use the same password for different services</string>
+    <string name="value">Valore</string>
+    <string name="add_widget">Aggiunta widget</string>
+    <string name="last_modified">Ultima modifica</string>
 </resources>
