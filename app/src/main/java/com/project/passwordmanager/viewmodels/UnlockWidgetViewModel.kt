@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class UnlockWidgetViewModel : ViewModel() {
-
+class UnlockWidgetViewModel(var displayedPassword: String, var displayedButtonText: String) : ViewModel()
+{
+    var locked = true
     var appWidgetId: Int = AppWidgetManager.INVALID_APPWIDGET_ID
 
     private var _toastStringId = MutableLiveData<Int>()
