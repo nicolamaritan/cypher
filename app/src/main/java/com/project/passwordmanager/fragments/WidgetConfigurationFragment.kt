@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RemoteViews
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.WidgetConfigurationCredentialsAdapter
@@ -25,7 +24,7 @@ class WidgetConfigurationFragment : Fragment()
 {
     private var _binding: FragmentWidgetConfigurationBinding? = null
     private val binding get() = _binding!!
-    lateinit var viewModel: ViewModel
+    lateinit var viewModel: WidgetConfigurationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +38,13 @@ class WidgetConfigurationFragment : Fragment()
         val application = requireNotNull(this.activity).application
         val dao = CredentialDatabase.getInstance(application).credentialDao
         val viewModelFactory = WidgetConfigurationViewModelFactory(dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[WidgetConfigurationViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[WidgetConfigurationViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Adapter setup
         val adapter = WidgetConfigurationCredentialsAdapter(requireContext())
+        adapter.selectedCredentialsIds = viewModel.checkedCredentialsIds   // Retrieves previously selected ids from viewmodel
         binding.configurationCredentialsRv.adapter = adapter
 
         // Passing data to the adapter
