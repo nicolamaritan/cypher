@@ -36,6 +36,8 @@
     <string name="wrong_master_password">Wrong master password.</string>
     <string name="authentication">Authentication</string>
     <string name="password_deleted">Password deleted.</string>
+    <string name="unlock_the_password_first">Unlock the password first.</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
 
     // Widget
     <string name="unlock_widget">Unlock credential</string>

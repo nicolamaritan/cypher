@@ -104,7 +104,7 @@ class UnlockWidgetActivity : AppCompatActivity()
             }
             else
             {
-                Toast.makeText(applicationContext, "Unlock the password first.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(R.string.unlock_the_password_first), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -120,7 +120,7 @@ class UnlockWidgetActivity : AppCompatActivity()
         val clipData = ClipData.newPlainText("Copied password", viewModel.displayedPassword)
         clipboardManager.setPrimaryClip(clipData)
 
-        Toast.makeText(applicationContext, "Password copied to clipboard.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, getString(R.string.password_copied_to_clipboard), Toast.LENGTH_SHORT).show()
     }
 
     companion object
