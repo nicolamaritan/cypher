@@ -54,6 +54,9 @@ class WidgetConfigurationFragment : Fragment()
             }
         }
 
+        // Retrieves data from viewModel
+        binding.widgetNameEt.setText(viewModel.widgetName)
+
         val activity = requireActivity()
 
         // Get the intent which invoked the configuration activity, which will contain tha appWidgetId
@@ -98,6 +101,12 @@ class WidgetConfigurationFragment : Fragment()
         }
 
         return view
+    }
+
+    override fun onPause()
+    {
+        super.onPause()
+        viewModel.widgetName = binding.widgetNameEt.text.toString()
     }
 
     override fun onDestroy()

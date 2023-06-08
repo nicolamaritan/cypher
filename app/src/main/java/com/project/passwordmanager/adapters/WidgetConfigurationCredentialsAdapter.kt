@@ -41,8 +41,8 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
             checkBox.isChecked = selectedCredentialsIds.contains(credential.id)
 
             // Checking a credential implies putting it into the list
-            checkBox.setOnCheckedChangeListener{ _, b ->
-                if (b)
+            checkBox.setOnCheckedChangeListener{ _, checked ->
+                if (checked)
                 {
                     selectedCredentialsIds.add(credential.id)
                 }

@@ -20,4 +20,6 @@ class WidgetConfigurationViewModel(private val dao: CredentialDao) : ViewModel()
      * the OS kills the activity.
      */
     var checkedCredentialsIds = mutableListOf<Int>()
+
+    var widgetName = ""
 }
