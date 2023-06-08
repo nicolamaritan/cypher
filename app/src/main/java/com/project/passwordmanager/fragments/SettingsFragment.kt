@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
@@ -15,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.CredentialsOrder
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.FragmentSettingsBinding
 import com.project.passwordmanager.factories.SettingsViewModelFactory
+import com.project.passwordmanager.security.Hashing
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment()
@@ -24,6 +26,7 @@ class SettingsFragment : Fragment()
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     lateinit var viewModel: SettingsViewModel
+    //lateinit var spinnerLanguage : Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +78,48 @@ class SettingsFragment : Fragment()
             } else {
                 disableDarkMode()
             }
+        }
+
+        binding.confirmButton.setOnClickListener {
+            val old = binding.oldPw.text.toString()
+            val newpw = binding.newPw.text.toString()
+            val confirmnewpw = binding.confirmNewPw.text.toString()
+
+            if(Hashing.sha256(old) != Utils.getHashedMasterPassword(requireContext())){
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.wrong_master_password),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            if (old.isBlank() || newpw.isBlank() || confirmnewpw.isBlank())
+            {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.blank_password) +
+                    getString(R.string.passwords_cannot_be_blank),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else if (newpw == confirmnewpw) {
+                // Actually accepts the master password
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.master_password_correctly_inserted),
+                    Toast.LENGTH_LONG
+                ).show()
+                Utils.setHashedMasterPassword(requireContext(), newpw)
+            }
+            else
+            {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.password_mismatch) +
+                    getString(R.string.entered_passwords_do_not_match),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
         }
 
         // Inflate the layout for this fragment

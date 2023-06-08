@@ -51,6 +51,7 @@
     <string name="order2">Alphabetic order by username</string>
     <string name="order3">Chronological order</string>
     <string name="enable_dark_mode">Cambia il tema</string>
+    <string name="change_language">Cambia la lingua</string>
     <string name="tv_change_masterpassword">Cambia la master password:</string>
     <string name="old_pw">Inserisci la vecchia password</string>
     <string name="new_pw">Inserisci la nuova password</string>
@@ -58,6 +59,10 @@
     <string name="order_display">Order display</string>
     <string name="theme_language">Theme and language</string>
     <string name="reset_mp">Reset master password</string>
+    <string-array name="languages">
+        <item>Italiano</item>
+        <item>English</item>
+    </string-array>
 
     // Stats
     <string name="stats">Stats</string>

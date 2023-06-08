@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SettingsFragment"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:context=".fragments.SettingsFragment">
 
     <TextView
         android:id="@+id/tv_choice"
@@ -71,13 +69,36 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchDarkMode"
-        android:layout_width="300dp"
-        android:layout_height="109dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="299dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="36dp"
         android:text="@string/enable_dark_mode"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <TextView
+        android:id="@+id/tv_change_language"
+        android:layout_width="139dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/change_language"
+        app:layout_constraintBottom_toBottomOf="@+id/divider2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        android:layout_width="151dp"
+        android:layout_height="49dp"
+        android:entries="@array/languages"
+        app:layout_constraintBottom_toBottomOf="@id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="@id/tv_change_language"
+        app:layout_constraintTop_toBottomOf="@+id/switchDarkMode"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/divider2"
@@ -86,9 +107,10 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchDarkMode"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.169" />
 
     <TextView
         android:id="@+id/textView"
@@ -103,7 +125,7 @@
     <EditText
         android:id="@+id/oldPw"
         android:layout_width="252dp"
-        android:layout_height="51dp"
+        android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="220dp"
         android:autofillHints="password"
@@ -118,8 +140,8 @@
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="144dp"
-        android:hint="@string/new_pw"
         android:autofillHints="password"
+        android:hint="@string/new_pw"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,8 +154,8 @@
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="76dp"
-        android:hint="@string/confirm_new_pw"
         android:autofillHints="password"
+        android:hint="@string/confirm_new_pw"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +163,7 @@
         app:layout_constraintVertical_bias="0.701" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -156,8 +178,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"
         android:text="@string/order_display"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -166,9 +188,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
+        android:layout_marginTop="16dp"
         android:text="@string/theme_language"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
