@@ -21,5 +21,8 @@ class WidgetConfigurationViewModel(private val dao: CredentialDao) : ViewModel()
      */
     var checkedCredentialsIds = mutableListOf<Int>()
 
+    /**
+     * Holds the inserted text for the widget name.
+     */
     var widgetName = ""
 }

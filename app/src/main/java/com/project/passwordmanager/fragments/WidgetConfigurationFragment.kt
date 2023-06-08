@@ -44,7 +44,8 @@ class WidgetConfigurationFragment : Fragment()
 
         // Adapter setup
         val adapter = WidgetConfigurationCredentialsAdapter(requireContext())
-        adapter.selectedCredentialsIds = viewModel.checkedCredentialsIds   // Retrieves previously selected ids from viewmodel
+        adapter.selectedCredentialsIds = viewModel.checkedCredentialsIds    // Retrieves previously selected ids from viewmodel
+                                                                            // ViewModel is updated as it holds the list reference
         binding.configurationCredentialsRv.adapter = adapter
 
         // Passing data to the adapter
@@ -57,9 +58,8 @@ class WidgetConfigurationFragment : Fragment()
         // Retrieves data from viewModel
         binding.widgetNameEt.setText(viewModel.widgetName)
 
-        val activity = requireActivity()
-
         // Get the intent which invoked the configuration activity, which will contain tha appWidgetId
+        val activity = requireActivity()
         val appWidgetId = activity.intent?.extras?.getInt(
             AppWidgetManager.EXTRA_APPWIDGET_ID,
             AppWidgetManager.INVALID_APPWIDGET_ID
