@@ -40,6 +40,9 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
      */
     var newCredentialPassword = ""
 
+    /**
+     * Inserted master password by the user
+     */
     var insertedMasterPassword = ""
 
 

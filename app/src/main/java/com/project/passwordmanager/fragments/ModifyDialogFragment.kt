@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogModifyBinding
 import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
@@ -41,8 +42,9 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.modify.setOnClickListener {
-            viewModel.modifyCredential(credentialId)
-            if (viewModel.closing) {
+            viewModel.modifyCredential(credentialId, Utils.getHashedMasterPassword(requireContext()))
+            if (viewModel.closing)
+            {
                 dismiss()
             }
         }
