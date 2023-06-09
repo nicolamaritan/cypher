@@ -1,6 +1,5 @@
 package com.project.passwordmanager.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
@@ -8,14 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
+import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.CredentialsOrder
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.FragmentSettingsBinding
 import com.project.passwordmanager.factories.SettingsViewModelFactory
+import com.project.passwordmanager.model.CredentialDatabase
+import com.project.passwordmanager.security.Hashing
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment()
@@ -24,7 +27,6 @@ class SettingsFragment : Fragment()
     private val binding get() = _binding!!
     lateinit var viewModel: SettingsViewModel
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,10 +34,10 @@ class SettingsFragment : Fragment()
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         //Get the view model
-        val viewModelFactory = SettingsViewModelFactory()
+        val dao = CredentialDatabase.getInstance(requireContext()).credentialDao
+        val viewModelFactory = SettingsViewModelFactory(dao)
         viewModel = ViewModelProvider(this, viewModelFactory)[SettingsViewModel::class.java]
 
         // Retrieves the saved option and set it as checked. It is not done by default
@@ -65,30 +67,99 @@ class SettingsFragment : Fragment()
                 .edit().putInt(Constants.CREDENTIALS_ORDER, selectedValue).apply()
         }
 
-        val switchDarkMode: Switch = view.findViewById(R.id.switchDarkMode)
+        // Set the state of the dark mode switch
+        val switchDarkMode: SwitchCompat = view.findViewById(R.id.switchDarkMode)
         switchDarkMode.isChecked = isDarkModeEnabled()
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+            if (isChecked)
+            {
                 enableDarkMode()
-            } else {
+            }
+            else
+            {
                 disableDarkMode()
             }
         }
 
-        // Inflate the layout for this fragment
+
+        binding.confirmButton.setOnClickListener {
+            val insertedOldMasterPassword = binding.oldMasterPassword.text.toString()
+            val insertedNewMasterPassword = binding.newMasterPassword.text.toString()
+            val confirmedNewMasterPassword = binding.confirmedNewMasterPassword.text.toString()
+
+            if(insertedOldMasterPassword.isBlank() || insertedNewMasterPassword.isBlank() || confirmedNewMasterPassword.isBlank()){
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.blank_password) + ". \n" +
+                            getString(R.string.passwords_cannot_be_blank),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else
+            {
+                if (Hashing.sha256(insertedOldMasterPassword) != Utils.getHashedMasterPassword(requireContext()))
+                {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.wrong_master_password),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else
+                {
+                    if (insertedNewMasterPassword == confirmedNewMasterPassword)
+                    {
+                        // Actually accepts the master password
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.master_password_correctly_inserted),
+                            Toast.LENGTH_LONG
+                        ).show()
+                        Utils.setHashedMasterPassword(requireContext(), insertedNewMasterPassword)
+                        viewModel.updatePasswords(insertedOldMasterPassword, insertedNewMasterPassword)
+
+                        // Clears inserted values
+                        binding.oldMasterPassword.setText("")
+                        binding.newMasterPassword.setText("")
+                        binding.confirmedNewMasterPassword.setText("")
+                    }
+                    else
+                    {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.password_mismatch) + ". \n" +
+                                    getString(R.string.entered_passwords_do_not_match),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+
         return view
     }
 
+    /**
+     * Checks if dark mode is currently enabled.
+     * @return Boolean indicating whether dark mode is enabled.
+     */
     private fun isDarkModeEnabled(): Boolean {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES
     }
 
+    /**
+     * Enables dark mode.
+     */
     private fun enableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         requireActivity().recreate()
     }
 
+
+    /**
+     * Disables dark mode.
+     */
     private fun disableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         requireActivity().recreate()
