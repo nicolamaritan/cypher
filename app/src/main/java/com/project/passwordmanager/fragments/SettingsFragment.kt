@@ -68,7 +68,7 @@ class SettingsFragment : Fragment()
         }
 
         // Set the state of the dark mode switch
-        val switchDarkMode: SwitchCompat = view.findViewById(R.id.switchDarkMode)
+        val switchDarkMode: SwitchCompat = view.findViewById(R.id.dark_mode_switch)
         switchDarkMode.isChecked = isDarkModeEnabled()
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked)
@@ -83,9 +83,9 @@ class SettingsFragment : Fragment()
 
 
         binding.confirmButton.setOnClickListener {
-            val insertedOldMasterPassword = binding.oldMasterPassword.text.toString()
-            val insertedNewMasterPassword = binding.newMasterPassword.text.toString()
-            val confirmedNewMasterPassword = binding.confirmedNewMasterPassword.text.toString()
+            val insertedOldMasterPassword = binding.oldMasterpasswordEt.text.toString()
+            val insertedNewMasterPassword = binding.newMasterpasswordEt.text.toString()
+            val confirmedNewMasterPassword = binding.confirmedNewMasterpasswordEt.text.toString()
 
             if(insertedOldMasterPassword.isBlank() || insertedNewMasterPassword.isBlank() || confirmedNewMasterPassword.isBlank()){
                 Toast.makeText(
@@ -119,9 +119,9 @@ class SettingsFragment : Fragment()
                         viewModel.updatePasswords(insertedOldMasterPassword, insertedNewMasterPassword)
 
                         // Clears inserted values
-                        binding.oldMasterPassword.setText("")
-                        binding.newMasterPassword.setText("")
-                        binding.confirmedNewMasterPassword.setText("")
+                        binding.oldMasterpasswordEt.setText("")
+                        binding.newMasterpasswordEt.setText("")
+                        binding.confirmedNewMasterpasswordEt.setText("")
                     }
                     else
                     {

@@ -14,7 +14,7 @@
         app:layout_constraintGuide_begin="262dp" />
 
     <TextView
-        android:id="@+id/choice_tv"
+        android:id="@+id/order_choice_tv"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -69,30 +69,30 @@
         android:paddingStart="17dp"
         android:paddingEnd="17dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintStart_toEndOf="@+id/choice_tv"
+        app:layout_constraintEnd_toStartOf="@+id/change_theme_tv"
+        app:layout_constraintStart_toEndOf="@+id/order_choice_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/change_theme_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enable_dark_mode"
         android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/choice_tv"
+        app:layout_constraintEnd_toStartOf="@+id/change_masterpassword_tv"
+        app:layout_constraintStart_toEndOf="@+id/order_choice_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchDarkMode"
+        android:id="@+id/dark_mode_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleX="1.5"
         android:scaleY="1.5"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/confirmedNewMasterPassword"
+        app:layout_constraintEnd_toStartOf="@+id/confirmed_new_masterpassword_et"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
@@ -104,12 +104,12 @@
         android:layout_height="200dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintEnd_toStartOf="@+id/change_masterpassword_tv"
+        app:layout_constraintStart_toEndOf="@+id/change_theme_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/change_masterpassword_tv"
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -120,7 +120,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/oldMasterPassword"
+        android:id="@+id/old_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
@@ -131,25 +131,25 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <EditText
-        android:id="@+id/newMasterPassword"
+        android:id="@+id/new_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oldMasterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/old_masterpassword_et"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/confirmedNewMasterPassword"
+        android:id="@+id/confirmed_new_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/confirm_new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newMasterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/new_masterpassword_et"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -160,7 +160,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/row3"
         app:layout_constraintStart_toEndOf="@+id/row2"
-        app:layout_constraintTop_toBottomOf="@+id/switchDarkMode" />
+        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
