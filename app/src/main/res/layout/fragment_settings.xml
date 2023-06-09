@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    tools:layout_editor_absoluteY="0dp"
+    >
+    <!-- Text is visible with current size, so false positive is
+     suppressed in the current layout file.-->
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -22,7 +25,10 @@
         android:layout_marginTop="48dp"
         android:text="@string/choice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck"
+        />
+
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -50,7 +56,8 @@
             android:layout_marginEnd="72dp"
             android:text="@string/order2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chronological_order_rb" />
+            app:layout_constraintTop_toBottomOf="@+id/chronological_order_rb"
+            tools:ignore="TextSizeCheck"/>
 
         <RadioButton
             android:id="@+id/alphabetic_service_order_rb"
@@ -60,7 +67,8 @@
             android:layout_marginEnd="72dp"
             android:text="@string/order1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alphabetic_user_order_rb" />
+            app:layout_constraintTop_toBottomOf="@+id/alphabetic_user_order_rb"
+            tools:ignore="TextSizeCheck"/>
 
     </RadioGroup>
 
@@ -73,7 +81,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.055"
+        />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/dark_mode_switch"
@@ -104,7 +113,8 @@
         android:layout_marginBottom="128dp"
         android:text="@string/tv_change_masterpassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextSizeCheck"/>
 
     <EditText
         android:id="@+id/old_masterpassword_et"
@@ -187,7 +197,8 @@
         android:text="@string/reset_mp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        tools:ignore="TextSizeCheck"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
