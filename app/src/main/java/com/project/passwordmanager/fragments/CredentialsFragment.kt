@@ -50,6 +50,7 @@ class CredentialsFragment : Fragment(), DeleteListener
 
         val adapter = CredentialsAdapter(requireContext())
         binding.homeRecyclerView.adapter = adapter
+        adapter.unlockedCredentials = viewModel.unlockedCredentials
 
         // The Fragment listens for the deletion of a credential
         adapter.setDeleteListener(this)
