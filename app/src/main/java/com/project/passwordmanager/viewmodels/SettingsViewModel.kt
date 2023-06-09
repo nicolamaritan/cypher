@@ -9,13 +9,23 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(val dao: CredentialDao) : ViewModel()
 {
-    fun updatePasswords(old : String, newpw : String){
+    /**
+     * Updates the passwords of all credentials in the database.
+     *
+     * This method asynchronously retrieves all credentials from the database using the provided [dao].
+     * It then iterates over each credential, decrypts the password using the [oldMasterPassword] password,
+     * encrypts it using the [newMasterPassword] password, and updates the credential in the database.
+     *
+     * @param oldMasterPassword The old password used for decrypting the stored passwords.
+     * @param newMasterPassword The new password used for encrypting the passwords.
+     */
+    fun updatePasswords(oldMasterPassword : String, newMasterPassword : String){
         viewModelScope.launch{
             val credentials = dao.getAllAsync()
             for (credential in credentials) {
                 Log.d(TAG, credential.toString())
-                val decryptedPassword = Cryptography.decryptText(credential.password, old)
-                val encryptedPassword = Cryptography.encryptText(decryptedPassword, newpw)
+                val decryptedPassword = Cryptography.decryptText(credential.password, oldMasterPassword)
+                val encryptedPassword = Cryptography.encryptText(decryptedPassword, newMasterPassword)
                 credential.password = encryptedPassword
                 dao.update(credential)
             }
@@ -23,6 +33,6 @@ class SettingsViewModel(val dao: CredentialDao) : ViewModel()
     }
     companion object
     {
-        private val TAG = Companion::class.java.name
+        private val TAG = SettingsViewModel::class.java.simpleName
     }
 }
