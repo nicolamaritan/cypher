@@ -153,7 +153,7 @@ class CredentialsAdapter(private val context: Context):
 
                     val activity = context as FragmentActivity
                     val fm: FragmentManager = activity.supportFragmentManager
-                    val alertDialog = ModifyDialogFragment(credential.id)
+                    val alertDialog = ModifyDialogFragment(credential)
                     alertDialog.show(fm, "fragment_alert")
                 }
                 else

@@ -11,6 +11,7 @@ import com.project.passwordmanager.common.Logger
 import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogModifyBinding
 import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
+import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
 
@@ -18,9 +19,9 @@ import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
  * Dialog which shows up when the user presses on the modify button
  * in the Credentials fragment.
  *
- * @param credentialId the id of the credential to modify
+ * @param credential the credential to modify
  */
-class ModifyDialogFragment(private val credentialId : Int): DialogFragment()
+class ModifyDialogFragment(private val credential: Credential): DialogFragment()
 {
     private var _binding: DialogModifyBinding? = null
     private val binding get() = _binding!!
@@ -47,8 +48,11 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment()
         binding.modifyDialogViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.newCredentialService = credential.service
+        viewModel.newCredentialUsername= credential.username
+
         binding.modify.setOnClickListener {
-            viewModel.modifyCredential(credentialId, Utils.getHashedMasterPassword(requireContext()))
+            viewModel.modifyCredential(credential.id, Utils.getHashedMasterPassword(requireContext()))
             if (viewModel.closing)
             {
                 dismiss()
