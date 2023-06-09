@@ -46,19 +46,19 @@ class SettingsFragment : Fragment()
         binding.radioGroup.check(
             when(credentialsOrder)
             {
-                CredentialsOrder.CHRONOLOGICAL -> R.id.radioButton
-                CredentialsOrder.ALPHABETIC_USERNAME -> R.id.radioButton2
-                CredentialsOrder.ALPHABETIC_SERVICE -> R.id.radioButton3
-                else ->  R.id.radioButton
+                CredentialsOrder.CHRONOLOGICAL -> R.id.chronological_order_rb
+                CredentialsOrder.ALPHABETIC_USERNAME -> R.id.alphabetic_user_order_rb
+                CredentialsOrder.ALPHABETIC_SERVICE -> R.id.alphabetic_service_order_rb
+                else ->  R.id.chronological_order_rb
             }
         )
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val selectedValue = when (checkedId)
             {
-                R.id.radioButton -> CredentialsOrder.CHRONOLOGICAL
-                R.id.radioButton2 -> CredentialsOrder.ALPHABETIC_USERNAME
-                R.id.radioButton3 -> CredentialsOrder.ALPHABETIC_SERVICE
+                R.id.chronological_order_rb -> CredentialsOrder.CHRONOLOGICAL
+                R.id.alphabetic_user_order_rb -> CredentialsOrder.ALPHABETIC_USERNAME
+                R.id.alphabetic_service_order_rb -> CredentialsOrder.ALPHABETIC_SERVICE
                 else -> CredentialsOrder.CHRONOLOGICAL
             }
 

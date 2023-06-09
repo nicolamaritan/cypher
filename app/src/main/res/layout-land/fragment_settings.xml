@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SettingsFragment"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:context=".fragments.SettingsFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -15,7 +14,7 @@
         app:layout_constraintGuide_begin="262dp" />
 
     <TextView
-        android:id="@+id/tv_choice"
+        android:id="@+id/choice_tv"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,7 +34,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline5">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/chronological_order_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:checked="true"
@@ -44,20 +43,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/alphabetic_user_order_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/order2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+            app:layout_constraintTop_toBottomOf="@+id/chronological_order_rb" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/alphabetic_service_order_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/order1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+            app:layout_constraintTop_toBottomOf="@+id/alphabetic_user_order_rb" />
 
     </RadioGroup>
 
@@ -71,7 +70,7 @@
         android:paddingEnd="17dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintStart_toEndOf="@+id/tv_choice"
+        app:layout_constraintStart_toEndOf="@+id/choice_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -82,11 +81,11 @@
         android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/tv_choice"
+        app:layout_constraintStart_toEndOf="@+id/choice_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchDarkMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
