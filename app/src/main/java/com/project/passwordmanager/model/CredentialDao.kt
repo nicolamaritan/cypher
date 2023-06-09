@@ -44,6 +44,10 @@ interface CredentialDao {
     @Query("SELECT * FROM credentials_table ORDER BY id ASC")
     fun getAll(): LiveData<List<Credential>>
 
+    @Query("SELECT * FROM credentials_table ORDER BY id ASC")
+    suspend fun getAllAsync() : List<Credential>
+
+
     /**
      * Retrieves all the credentials from the credentials_table in ascending order by date.
      * The result is wrapped in a LiveData object, allowing for automatic updates in the UI.

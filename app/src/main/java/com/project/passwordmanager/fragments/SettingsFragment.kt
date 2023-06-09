@@ -18,6 +18,7 @@ import com.project.passwordmanager.common.CredentialsOrder
 import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.FragmentSettingsBinding
 import com.project.passwordmanager.factories.SettingsViewModelFactory
+import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.security.Hashing
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
@@ -34,10 +35,10 @@ class SettingsFragment : Fragment()
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         //Get the view model
-        val viewModelFactory = SettingsViewModelFactory()
+        val dao = CredentialDatabase.getInstance(requireContext()).credentialDao
+        val viewModelFactory = SettingsViewModelFactory(dao)
         viewModel = ViewModelProvider(this, viewModelFactory)[SettingsViewModel::class.java]
 
         // Retrieves the saved option and set it as checked. It is not done by default
@@ -114,6 +115,7 @@ class SettingsFragment : Fragment()
                             Toast.LENGTH_LONG
                         ).show()
                         Utils.setHashedMasterPassword(requireContext(), newpw)
+                        viewModel.updatePasswords(old, newpw)
                     }
                     else
                     {
