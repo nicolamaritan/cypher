@@ -85,21 +85,21 @@ class SettingsFragment : Fragment()
             val newpw = binding.newPw.text.toString()
             val confirmnewpw = binding.confirmNewPw.text.toString()
 
-            if(Hashing.sha256(old) != Utils.getHashedMasterPassword(requireContext())){
+            if(old.isBlank() || newpw.isBlank() || confirmnewpw.isBlank()){
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.wrong_master_password),
+                    getString(R.string.blank_password) + ". \n" +
+                            getString(R.string.passwords_cannot_be_blank),
                     Toast.LENGTH_LONG
                 ).show()
             }
             else
             {
-                if (old.isBlank() || newpw.isBlank() || confirmnewpw.isBlank())
+                if (Hashing.sha256(old) != Utils.getHashedMasterPassword(requireContext()))
                 {
                     Toast.makeText(
                         requireContext(),
-                        getString(R.string.blank_password) +
-                                getString(R.string.passwords_cannot_be_blank),
+                        getString(R.string.wrong_master_password),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -119,7 +119,7 @@ class SettingsFragment : Fragment()
                     {
                         Toast.makeText(
                             requireContext(),
-                            getString(R.string.password_mismatch) +
+                            getString(R.string.password_mismatch) + ". \n" +
                                     getString(R.string.entered_passwords_do_not_match),
                             Toast.LENGTH_LONG
                         ).show()
