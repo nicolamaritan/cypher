@@ -29,7 +29,7 @@ import com.project.passwordmanager.security.Cryptography
  * @param context the application context
  */
 class CredentialsAdapter(private val context: Context):
-    RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
+    RecyclerView.Adapter<CredentialsAdapter.CredentialsViewHolder>(){
 
     //definition of the data type we will work with
     var data = listOf<Credential>()
@@ -47,11 +47,11 @@ class CredentialsAdapter(private val context: Context):
         deleteListener = listener
     }
 
-    inner class PwmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class CredentialsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-        private val appName: TextView = itemView.findViewById(R.id.service)
-        private val appUser: TextView = itemView.findViewById(R.id.user)
-        private var appPw: TextView = itemView.findViewById(R.id.password)
+        private val service: TextView = itemView.findViewById(R.id.service)
+        private val username: TextView = itemView.findViewById(R.id.user)
+        private var password: TextView = itemView.findViewById(R.id.password)
         private var locked: Boolean = true
 
         private val lockImageButton: ImageButton = itemView.findViewById(R.id.lock_imageButton)
@@ -59,23 +59,23 @@ class CredentialsAdapter(private val context: Context):
         private val editImageButton: ImageButton = itemView.findViewById(R.id.edit_imageButton)
         private val deleteImageButton: ImageButton = itemView.findViewById(R.id.delete_imageButton)
 
-        fun bind(credentialId:Int, service:String, user:String, password:String)
+        fun bind(credential: Credential)
         {
-            appName.text = service
-            appUser.text = user
+            this.service.text = credential.service
+            this.username.text = credential.username
 
             var found = false
             unlockedCredentials.forEach{
-                if (it.id == credentialId)
+                if (it.id == credential.id)
                 {
-                    appPw.text = it.password
+                    this.password.text = it.password
                     locked = false
                     found = true
                 }
             }
             if (!found)
             {
-                appPw.text = context.getString(R.string.locked_password)
+                this.password.text = context.getString(R.string.locked_password)
             }
 
             // --------- Lock Button ----------
@@ -98,11 +98,11 @@ class CredentialsAdapter(private val context: Context):
                              */
                             unlockedCredentials.add(
                                 Credential(
-                                    id = credentialId,
-                                    password = Cryptography.decryptText(password, alertDialog.insertedMasterPassword)
+                                    id = credential.id,
+                                    password = Cryptography.decryptText(credential.password, alertDialog.insertedMasterPassword)
                                 )
                             )
-                            updatePasswordTextView(password, alertDialog.insertedMasterPassword)
+                            updatePasswordTextView(credential.password, alertDialog.insertedMasterPassword)
                         }
 
                         override fun onUnlockFailure() {}
@@ -115,12 +115,12 @@ class CredentialsAdapter(private val context: Context):
                     // Remove the saved credential as it is locked
                     unlockedCredentials.remove(
                         Credential(
-                            id = credentialId,
-                            password = appPw.text.toString()
+                            id = credential.id,
+                            password = this.password.text.toString()
                         )
                     )
 
-                    appPw.text = context.getString(R.string.locked_password)
+                    this.password.text = context.getString(R.string.locked_password)
                     locked = true
                 }
             }
@@ -143,9 +143,9 @@ class CredentialsAdapter(private val context: Context):
                 {
                     // Lock and removes state - Editing a credential locks it
                     locked = true
-                    appPw.text = context.getString(R.string.locked_password)
+                    this.password.text = context.getString(R.string.locked_password)
                     for (i in 0 until unlockedCredentials.size) {
-                        if (unlockedCredentials[i].id == credentialId) {
+                        if (unlockedCredentials[i].id == credential.id) {
                             unlockedCredentials.removeAt(i)
                             break
                         }
@@ -153,7 +153,7 @@ class CredentialsAdapter(private val context: Context):
 
                     val activity = context as FragmentActivity
                     val fm: FragmentManager = activity.supportFragmentManager
-                    val alertDialog = ModifyDialogFragment(credentialId)
+                    val alertDialog = ModifyDialogFragment(credential.id)
                     alertDialog.show(fm, "fragment_alert")
                 }
                 else
@@ -172,7 +172,7 @@ class CredentialsAdapter(private val context: Context):
                 alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
                     override fun onUnlockSuccess()
                     {
-                        deleteListener?.onDeleteCredential(credentialId)
+                        deleteListener?.onDeleteCredential(credential.id)
                     }
 
                     override fun onUnlockFailure() {}
@@ -183,36 +183,48 @@ class CredentialsAdapter(private val context: Context):
 
         }
 
+        /**
+         * Updates the password textview according to the locked state.
+         *
+         * @param encryptedPassword the encrypted password
+         * @param masterPassword the clear master password used for decryption
+         */
         private fun updatePasswordTextView(encryptedPassword: String, masterPassword: String)
         {
-            appPw.text = if(locked) context.getString(R.string.locked_password)
+            password.text = if(locked) context.getString(R.string.locked_password)
                         else Cryptography.decryptText(encryptedPassword, masterPassword)
         }
 
+        /**
+         * Copies the password to the clipboard.
+         */
         private fun copyPassword()
         {
             val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("Copied password", appPw.text)
+            val clipData = ClipData.newPlainText("Copied password", password.text)
             clipboardManager.setPrimaryClip(clipData)
 
             Toast.makeText(context, context.getString(R.string.password_copied_to_clipboard), Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PwmViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CredentialsViewHolder
+    {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.credentials_recyclerview_item, parent, false)
 
-        return PwmViewHolder(view)
+        return CredentialsViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: PwmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CredentialsViewHolder, position: Int)
+    {
         val item = data[position]
-        holder.bind(item.id, item.service, item.username, item.password)
+        holder.bind(item)
     }
 
 }
