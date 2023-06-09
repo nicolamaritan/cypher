@@ -47,8 +47,8 @@
     <string name="old_pw">Insert old master password</string>
     <string name="new_pw">Insert new master password</string>
     <string name="confirm_new_pw">Confirm new master password</string>
-    <string name="order_display">Ordine di visualizzazione</string>
-    <string name="theme_language">Tema e lingua</string>
+    <string name="order_display">Order display</string>
+    <string name="theme_language">Theme</string>
     <string name="stats">Stats</string>
     <string name="pw_to_modify">Password to modify</string>
     <string name="show">Show</string>

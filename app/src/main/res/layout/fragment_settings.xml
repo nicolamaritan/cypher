@@ -79,34 +79,11 @@
         android:id="@+id/switchDarkMode"
         android:layout_width="299dp"
         android:layout_height="51dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="80dp"
         android:text="@string/enable_dark_mode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
-
-    <TextView
-        android:id="@+id/tv_change_language"
-        android:layout_width="139dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/change_language"
-        app:layout_constraintBottom_toBottomOf="@+id/divider2"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinnerLanguage"
-        android:layout_width="151dp"
-        android:layout_height="49dp"
-        android:entries="@array/languages"
-        app:layout_constraintBottom_toBottomOf="@id/divider2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.784"
-        app:layout_constraintStart_toStartOf="@id/tv_change_language"
-        app:layout_constraintTop_toBottomOf="@+id/switchDarkMode"
-        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/divider2"
@@ -115,10 +92,9 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchDarkMode"
-        app:layout_constraintVertical_bias="0.169" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <TextView
         android:id="@+id/textView"

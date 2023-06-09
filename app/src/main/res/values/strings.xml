@@ -56,8 +56,8 @@
     <string name="old_pw">Inserisci la vecchia master password</string>
     <string name="new_pw">Inserisci la nuova master password</string>
     <string name="confirm_new_pw">Conferma la nuova master password</string>
-    <string name="order_display">Order display</string>
-    <string name="theme_language">Theme and language</string>
+    <string name="order_display">Ordine di visualizzazione</string>
+    <string name="theme_language">Tema</string>
     <string name="reset_mp" translatable="false">Reset master password</string>
     <string-array name="languages">
         <item>Italiano</item>
