@@ -132,23 +132,27 @@ class CredentialsAdapter(private val context: Context):
 
             // --------- Edit Button ----------
             editImageButton.setOnClickListener {
-                // Lock and removes state
-                locked = true
-                appPw.text = context.getString(R.string.locked_password)
-                for (i in 0 until unlockedCredentials.size)
+                if(!locked)
                 {
-                    if (unlockedCredentials[i].id == credentialId)
-                    {
-                        unlockedCredentials.removeAt(i)
-                        break
+                    // Lock and removes state - Editing a credential locks it
+                    locked = true
+                    appPw.text = context.getString(R.string.locked_password)
+                    for (i in 0 until unlockedCredentials.size) {
+                        if (unlockedCredentials[i].id == credentialId) {
+                            unlockedCredentials.removeAt(i)
+                            break
+                        }
                     }
+
+                    val activity = context as FragmentActivity
+                    val fm: FragmentManager = activity.supportFragmentManager
+                    val alertDialog = ModifyDialogFragment(credentialId)
+                    alertDialog.show(fm, "fragment_alert")
                 }
-
-
-                val activity = context as FragmentActivity
-                val fm: FragmentManager = activity.supportFragmentManager
-                val alertDialog = ModifyDialogFragment(credentialId)
-                alertDialog.show(fm, "fragment_alert")
+                else
+                {
+                    Toast.makeText(context, context.getString(R.string.unlock_the_password_first), Toast.LENGTH_SHORT).show()
+                }
             }
 
             // --------- Delete Button ----------

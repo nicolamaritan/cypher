@@ -69,6 +69,6 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
 
     companion object
     {
-        private val TAG = ModifyDialogFragment::javaClass.toString()
+        private val TAG = ModifyDialogFragment::class.java.simpleName
     }
 }
