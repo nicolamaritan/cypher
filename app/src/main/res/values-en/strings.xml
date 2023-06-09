@@ -6,6 +6,8 @@
     <string name="emptywidget_text">No credentials added.</string>
     <string name="credentials_fragment">Hello credentials fragment</string>
     <string name="addcredentials_fragment">Hello add credentials fragment</string>
+    <string name="status_widget_description">Keep an eye on the passwords to change.</string>
+
     <string name="add">ADD</string>
     <string name="credentials">Credentials</string>
     <string name="add_credential">Add credentials</string>
@@ -81,4 +83,20 @@
     <string name="value">Value</string>
     <string name="add_widget">Aggiunta widget</string>
     <string name="last_modified">Last modified</string>
+    <string name="unlock_the_password_first">Unlock the password first.</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
+    <string name="my_passwords">My passwords</string>
+    <string name="stored_credentials">Stored credentials: %1$d</string>
+
+    // Widget Previews
+    <string name="education_portals">Education portals</string>
+    <string name="alice_smith">alice.smith</string>
+    <string name="cool_school">Cool School</string>
+    <string name="alice_smith_underscore">alice_smith</string>
+    <string name="stem_everywhere">STEM everywhere</string>
+    <string name="your_credentials_status">Your credentials status:</string>
+    <string name="fake_date_2023_02_21">2023&#8211;02&#8211;21</string>
+    <string name="important_bank_account_fake">Important bank account</string>
+    <string name="alice_and_bob_fake">Alice and Bob</string>
+    <string name="fake_date_2022_10_11">2022&#8211;10&#8211;11</string>
 </resources>

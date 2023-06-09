@@ -4,6 +4,11 @@
     <string name="save_configuration">Salva</string>
     <string name="app_widget_description">Memorizza in modo sicuro le tue credenziali nella schermata iniziale. Puoi sbloccarli e bloccarli quando necessario.</string>
     <string name="emptywidget_text">Nessuna credenziale aggiunta</string>
+    <string name="status_widget_description">Keep an eye on the passwords to change.</string>
+    <string name="unlock_the_password_first">Unlock the password first.</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
+    <string name="my_passwords">Le mie password</string>
+    <string name="stored_credentials">Password conservate: %1$d</string>
 
     <string name="credentials_fragment">Ciao credentials fragment</string>
     <string name="addcredentials_fragment">Ciao add credentials fragment</string>

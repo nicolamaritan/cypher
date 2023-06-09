@@ -93,7 +93,7 @@
         android:scaleX="1.5"
         android:scaleY="1.5"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/confirmNewPw"
+        app:layout_constraintEnd_toStartOf="@+id/confirmedNewMasterPassword"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
@@ -121,7 +121,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/oldPw"
+        android:id="@+id/oldMasterPassword"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
@@ -132,29 +132,29 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <EditText
-        android:id="@+id/newPw"
+        android:id="@+id/newMasterPassword"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oldPw"
+        app:layout_constraintTop_toBottomOf="@+id/oldMasterPassword"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/confirmNewPw"
+        android:id="@+id/confirmedNewMasterPassword"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/confirm_new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPw"
+        app:layout_constraintTop_toBottomOf="@+id/newMasterPassword"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/confirm"
