@@ -14,6 +14,12 @@ import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
 
+/**
+ * Dialog which shows up when the user presses on the modify button
+ * in the Credentials fragment.
+ *
+ * @param credentialId the id of the credential to modify
+ */
 class ModifyDialogFragment(private val credentialId : Int): DialogFragment()
 {
     private var _binding: DialogModifyBinding? = null

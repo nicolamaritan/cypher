@@ -20,7 +20,14 @@ import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.security.Cryptography
 
-
+/**
+ * This Adapter is responsible of linking the data fetched from the
+ * database and the view in the CredentialsFragment. It shows the data and
+ * setup the various operation for each item. Each item has the operation of
+ * modify, remote, copy and lock/unlock.
+ *
+ * @param context the application context
+ */
 class CredentialsAdapter(private val context: Context):
     RecyclerView.Adapter<CredentialsAdapter.PwmViewHolder>(){
 

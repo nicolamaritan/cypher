@@ -21,6 +21,12 @@ import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.security.Hashing
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
+/**
+ * This Fragment is the View which is responsible for showing the settings to the user.
+ * It allows the user to set the order of the display of the credentials in the Credentials
+ * fragment, select the theme of the app (dark or light theme) and to reset the master
+ * password.
+ */
 class SettingsFragment : Fragment()
 {
     private var _binding: FragmentSettingsBinding? = null
