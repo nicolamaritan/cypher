@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
@@ -68,25 +67,27 @@ class SettingsFragment : Fragment()
                 .edit().putInt(Constants.CREDENTIALS_ORDER, selectedValue).apply()
         }
 
-        setTextViewColors()
         // Set the state of the dark mode switch
         val switchDarkMode: SwitchCompat = view.findViewById(R.id.switchDarkMode)
         switchDarkMode.isChecked = isDarkModeEnabled()
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+            if (isChecked)
+            {
                 enableDarkMode()
-            } else {
+            }
+            else
+            {
                 disableDarkMode()
             }
         }
 
 
         binding.confirmButton.setOnClickListener {
-            val old = binding.oldPw.text.toString()
-            val newpw = binding.newPw.text.toString()
-            val confirmnewpw = binding.confirmNewPw.text.toString()
+            val insertedOldMasterPassword = binding.oldMasterPassword.text.toString()
+            val insertedNewMasterPassword = binding.newMasterPassword.text.toString()
+            val confirmedNewMasterPassword = binding.confirmedNewMasterPassword.text.toString()
 
-            if(old.isBlank() || newpw.isBlank() || confirmnewpw.isBlank()){
+            if(insertedOldMasterPassword.isBlank() || insertedNewMasterPassword.isBlank() || confirmedNewMasterPassword.isBlank()){
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.blank_password) + ". \n" +
@@ -96,7 +97,7 @@ class SettingsFragment : Fragment()
             }
             else
             {
-                if (Hashing.sha256(old) != Utils.getHashedMasterPassword(requireContext()))
+                if (Hashing.sha256(insertedOldMasterPassword) != Utils.getHashedMasterPassword(requireContext()))
                 {
                     Toast.makeText(
                         requireContext(),
@@ -106,7 +107,7 @@ class SettingsFragment : Fragment()
                 }
                 else
                 {
-                    if (newpw == confirmnewpw)
+                    if (insertedNewMasterPassword == confirmedNewMasterPassword)
                     {
                         // Actually accepts the master password
                         Toast.makeText(
@@ -114,11 +115,13 @@ class SettingsFragment : Fragment()
                             getString(R.string.master_password_correctly_inserted),
                             Toast.LENGTH_LONG
                         ).show()
-                        Utils.setHashedMasterPassword(requireContext(), newpw)
-                        viewModel.updatePasswords(old, newpw)
-                        binding.oldPw.setText("")
-                        binding.newPw.setText("")
-                        binding.confirmNewPw.setText("")
+                        Utils.setHashedMasterPassword(requireContext(), insertedNewMasterPassword)
+                        viewModel.updatePasswords(insertedOldMasterPassword, insertedNewMasterPassword)
+
+                        // Clears inserted values
+                        binding.oldMasterPassword.setText("")
+                        binding.newMasterPassword.setText("")
+                        binding.confirmedNewMasterPassword.setText("")
                     }
                     else
                     {
@@ -133,7 +136,6 @@ class SettingsFragment : Fragment()
             }
         }
 
-        // Inflate the layout for this fragment
         return view
     }
 
@@ -161,41 +163,6 @@ class SettingsFragment : Fragment()
     private fun disableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         requireActivity().recreate()
-    }
-
-    /**
-     * Sets the text color of the TextViews based on the current mode (light or dark).
-     */
-    private fun setTextViewColors() {
-        // Set text color for TextView 1
-        val textView1: TextView = binding.tvOrderDisplay
-        if (isDarkModeEnabled()) {
-            // Set text color to night mode color
-            textView1.setTextColor(ContextCompat.getColor(requireContext(), R.color.night_on_primary))
-        } else {
-            // Set text color to default color
-            textView1.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-        }
-
-        // Set text color for TextView 2
-        val textView2: TextView = binding.tvThemeLanguage
-        if (isDarkModeEnabled()) {
-            // Set text color to night mode color
-            textView2.setTextColor(ContextCompat.getColor(requireContext(), R.color.night_on_primary))
-        } else {
-            // Set text color to default color
-            textView2.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-        }
-
-        // Set text color for TextView 3
-        val textView3: TextView = binding.tvResetMp
-        if (isDarkModeEnabled()) {
-            // Set text color to night mode color
-            textView3.setTextColor(ContextCompat.getColor(requireContext(), R.color.night_on_primary))
-        } else {
-            // Set text color to default color
-            textView3.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-        }
     }
 
     override fun onDestroyView()
