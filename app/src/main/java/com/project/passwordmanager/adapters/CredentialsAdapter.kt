@@ -126,7 +126,7 @@ class CredentialsAdapter(private val context: Context):
                 }
                 else
                 {
-                    Toast.makeText(context, "Unlock the password first.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.unlock_the_password_first), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -188,7 +188,7 @@ class CredentialsAdapter(private val context: Context):
             val clipData = ClipData.newPlainText("Copied password", appPw.text)
             clipboardManager.setPrimaryClip(clipData)
 
-            Toast.makeText(context, "Password copied to clipboard.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.password_copied_to_clipboard), Toast.LENGTH_SHORT).show()
         }
     }
 
