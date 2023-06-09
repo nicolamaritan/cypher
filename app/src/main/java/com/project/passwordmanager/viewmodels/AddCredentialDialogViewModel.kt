@@ -127,9 +127,6 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
 
     companion object
     {
-        /**
-         * TAG used for logging.
-         */
         val TAG: String = AddCredentialDialogViewModel::class.java.simpleName
     }
 }

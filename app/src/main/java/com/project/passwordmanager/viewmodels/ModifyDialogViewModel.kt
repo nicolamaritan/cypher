@@ -67,8 +67,9 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
      * After modifying the credential, it sets the closing flag to true and emits a toast event with positive
      * result message.
      *
+     * @param credentialId the id of the credential to modify
+     * @param hashedMasterPassword hashed master password passed by the fragment
      */
-
     fun modifyCredential(credentialId : Int, hashedMasterPassword: String) {
         Log.d(TAG, "modifyCredential invoked.")
         val credential = Credential()
@@ -94,6 +95,7 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
             return
         }
 
+        // Encrypt the new password with the master password
         credential.password = Cryptography.encryptText(
             newCredentialPassword,
             insertedMasterPassword
@@ -101,16 +103,14 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
 
         viewModelScope.launch {
             dao.update(credential)
-            closing = true
             _toastStringId.value = R.string.credential_modified_toast
         }
+        closing = true
 
     }
 
-    companion object {
-        /**
-         * TAG used for logging.
-         */
+    companion object
+    {
         val TAG: String = ModifyDialogViewModel::class.java.simpleName
     }
 }

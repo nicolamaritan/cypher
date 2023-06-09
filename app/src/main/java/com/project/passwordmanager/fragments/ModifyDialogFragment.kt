@@ -1,6 +1,5 @@
 package com.project.passwordmanager.fragments
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,8 @@ import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
 
-class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
+class ModifyDialogFragment(private val credentialId : Int): DialogFragment()
+{
     private var _binding: DialogModifyBinding? = null
     private val binding get() = _binding!!
 
@@ -62,11 +62,6 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
         }
 
         return view
-    }
-
-    override fun onDismiss(dialog: DialogInterface)
-    {
-        super.onDismiss(dialog)
     }
 
     companion object
