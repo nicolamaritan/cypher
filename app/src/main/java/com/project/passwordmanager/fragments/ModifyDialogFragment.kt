@@ -1,6 +1,5 @@
 package com.project.passwordmanager.fragments
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,21 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Logger
+import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.DialogModifyBinding
 import com.project.passwordmanager.factories.ModifyDialogViewModelFactory
+import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.ModifyDialogViewModel
 
-class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
+/**
+ * Dialog which shows up when the user presses on the modify button
+ * in the Credentials fragment.
+ *
+ * @param credential the credential to modify
+ */
+class ModifyDialogFragment(private val credential: Credential): DialogFragment()
+{
     private var _binding: DialogModifyBinding? = null
     private val binding get() = _binding!!
 
@@ -40,9 +48,13 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
         binding.modifyDialogViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.newCredentialService = credential.service
+        viewModel.newCredentialUsername= credential.username
+
         binding.modify.setOnClickListener {
-            viewModel.modifyCredential(credentialId)
-            if (viewModel.closing) {
+            viewModel.modifyCredential(credential.id, Utils.getHashedMasterPassword(requireContext()))
+            if (viewModel.closing)
+            {
                 dismiss()
             }
         }
@@ -62,13 +74,8 @@ class ModifyDialogFragment(private val credentialId : Int): DialogFragment() {
         return view
     }
 
-    override fun onDismiss(dialog: DialogInterface)
-    {
-        super.onDismiss(dialog)
-    }
-
     companion object
     {
-        private val TAG = ModifyDialogFragment::javaClass.toString()
+        private val TAG = ModifyDialogFragment::class.java.simpleName
     }
 }

@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    tools:layout_editor_absoluteY="0dp"
+    >
+    <!-- Text is visible with current size, so false positive is
+     suppressed in the current layout file.-->
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -15,14 +18,17 @@
     tools:context=".fragments.SettingsFragment">
 
     <TextView
-        android:id="@+id/tv_choice"
+        android:id="@+id/order_choice_tv"
         android:layout_width="116dp"
         android:layout_height="67dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:text="@string/choice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck"
+        />
+
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -32,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/chronological_order_rb"
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:layout_marginTop="32dp"
@@ -43,24 +49,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/alphabetic_user_order_rb"
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="72dp"
             android:text="@string/order2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+            app:layout_constraintTop_toBottomOf="@+id/chronological_order_rb"
+            tools:ignore="TextSizeCheck"/>
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/alphabetic_service_order_rb"
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="72dp"
             android:text="@string/order1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+            app:layout_constraintTop_toBottomOf="@+id/alphabetic_user_order_rb"
+            tools:ignore="TextSizeCheck"/>
 
     </RadioGroup>
 
@@ -73,10 +81,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.055"
+        />
 
     <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchDarkMode"
+        android:id="@+id/dark_mode_switch"
         android:layout_width="299dp"
         android:layout_height="51dp"
         android:layout_marginTop="80dp"
@@ -93,21 +102,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchDarkMode"
+        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch"
         app:layout_constraintVertical_bias="0.102" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/change_masterpassword_tv"
         android:layout_width="118dp"
         android:layout_height="81dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="128dp"
         android:text="@string/tv_change_masterpassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextSizeCheck"/>
 
     <EditText
-        android:id="@+id/oldMasterPassword"
+        android:id="@+id/old_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
@@ -119,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/newMasterPassword"
+        android:id="@+id/new_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
@@ -129,11 +139,11 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oldMasterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/old_masterpassword_et"
         app:layout_constraintVertical_bias="0.647" />
 
     <EditText
-        android:id="@+id/confirmedNewMasterPassword"
+        android:id="@+id/confirmed_new_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
@@ -143,7 +153,7 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newMasterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/new_masterpassword_et"
         app:layout_constraintVertical_bias="0.701" />
 
     <Button
@@ -154,7 +164,7 @@
         android:text="@string/confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmedNewMasterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmed_new_masterpassword_et" />
 
     <TextView
         android:id="@+id/tv_order_display"
@@ -187,7 +197,8 @@
         android:text="@string/reset_mp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        tools:ignore="TextSizeCheck"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

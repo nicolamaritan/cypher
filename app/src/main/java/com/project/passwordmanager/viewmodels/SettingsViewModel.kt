@@ -21,7 +21,7 @@ class SettingsViewModel(val dao: CredentialDao) : ViewModel()
      */
     fun updatePasswords(oldMasterPassword : String, newMasterPassword : String){
         viewModelScope.launch{
-            val credentials = dao.getAllAsync()
+            val credentials = dao.getAllList()
             for (credential in credentials) {
                 Log.d(TAG, credential.toString())
                 val decryptedPassword = Cryptography.decryptText(credential.password, oldMasterPassword)

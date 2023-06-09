@@ -10,9 +10,8 @@ import com.project.passwordmanager.common.CredentialValidator
 import com.project.passwordmanager.model.Credential
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.security.Cryptography
-import kotlinx.coroutines.Dispatchers
+import com.project.passwordmanager.security.Hashing
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * ViewModel class for ModifyDialogFragment.
@@ -45,6 +44,12 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
      */
     var closing = false
 
+    /**
+     * Inserted master password by the user
+     */
+    var insertedMasterPassword = ""
+
+
     private val _toastStringId = MutableLiveData<Int>()
 
     /**
@@ -62,65 +67,50 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
      * After modifying the credential, it sets the closing flag to true and emits a toast event with positive
      * result message.
      *
+     * @param credentialId the id of the credential to modify
+     * @param hashedMasterPassword hashed master password passed by the fragment
      */
-
-    fun modifyCredential(credentialId : Int) {
+    fun modifyCredential(credentialId : Int, hashedMasterPassword: String) {
         Log.d(TAG, "modifyCredential invoked.")
         val credential = Credential()
         credential.id = credentialId
         credential.username = newCredentialUsername
         credential.service = newCredentialService
-        // TODO change modifyCredential to accept the inserted password to authenticate
+
+        /* This value is only temporary, as it will be overwritten
+        *  encrypted value. This is set to check if the user has
+        *  inserted text in the field, blocking if it is empty.
+        * */
         credential.password = newCredentialPassword
+
 
         if (!CredentialValidator.validate(credential)) {
             _toastStringId.value = R.string.invalid_credential_toast
             return
         }
 
-        credential.password = Cryptography.encryptText(newCredentialPassword, "MASTER")
+        if (Hashing.sha256(insertedMasterPassword) != hashedMasterPassword)
+        {
+            _toastStringId.value = R.string.wrong_master_password
+            return
+        }
+
+        // Encrypt the new password with the master password
+        credential.password = Cryptography.encryptText(
+            newCredentialPassword,
+            insertedMasterPassword
+        )
+
         viewModelScope.launch {
             dao.update(credential)
+            _toastStringId.value = R.string.credential_modified_toast
         }
-
-        closing = true
-        _toastStringId.value = R.string.credential_modified_toast
-    }
-
-    /**
-     * Deletes a credential from the database using the specified ID.
-     *
-     * @param credentialId the ID of the credential to delete.
-     */
-    fun deleteCredential(credentialId: Int) {
-        Log.d(TAG, "deleteCredential invoked.")
-
-        // Perform the asynchronous operation using Kotlin coroutines
-        viewModelScope.launch {
-            // Retrieve the credential from the database on the IO thread
-            val credential = withContext(Dispatchers.IO) {
-                dao.getCredentialById(credentialId)
-            }
-
-            // If the credential exists, delete it from the database on the IO thread
-            if (credential != null) {
-                withContext(Dispatchers.IO) {
-                    dao.delete(credential)
-                }
-            }
-        }
-
-        // Set the closing flag to true
         closing = true
 
-        // Set the toast message value for the credential deletion notification
-        _toastStringId.value = R.string.credential_deleted_toast
     }
 
-    companion object {
-        /**
-         * TAG used for logging.
-         */
+    companion object
+    {
         val TAG: String = ModifyDialogViewModel::class.java.simpleName
     }
 }

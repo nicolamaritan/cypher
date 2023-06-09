@@ -21,6 +21,12 @@ import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.security.Hashing
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
+/**
+ * This Fragment is the View which is responsible for showing the settings to the user.
+ * It allows the user to set the order of the display of the credentials in the Credentials
+ * fragment, select the theme of the app (dark or light theme) and to reset the master
+ * password.
+ */
 class SettingsFragment : Fragment()
 {
     private var _binding: FragmentSettingsBinding? = null
@@ -46,19 +52,19 @@ class SettingsFragment : Fragment()
         binding.radioGroup.check(
             when(credentialsOrder)
             {
-                CredentialsOrder.CHRONOLOGICAL -> R.id.radioButton
-                CredentialsOrder.ALPHABETIC_USERNAME -> R.id.radioButton2
-                CredentialsOrder.ALPHABETIC_SERVICE -> R.id.radioButton3
-                else ->  R.id.radioButton
+                CredentialsOrder.CHRONOLOGICAL -> R.id.chronological_order_rb
+                CredentialsOrder.ALPHABETIC_USERNAME -> R.id.alphabetic_user_order_rb
+                CredentialsOrder.ALPHABETIC_SERVICE -> R.id.alphabetic_service_order_rb
+                else ->  R.id.chronological_order_rb
             }
         )
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val selectedValue = when (checkedId)
             {
-                R.id.radioButton -> CredentialsOrder.CHRONOLOGICAL
-                R.id.radioButton2 -> CredentialsOrder.ALPHABETIC_USERNAME
-                R.id.radioButton3 -> CredentialsOrder.ALPHABETIC_SERVICE
+                R.id.chronological_order_rb -> CredentialsOrder.CHRONOLOGICAL
+                R.id.alphabetic_user_order_rb -> CredentialsOrder.ALPHABETIC_USERNAME
+                R.id.alphabetic_service_order_rb -> CredentialsOrder.ALPHABETIC_SERVICE
                 else -> CredentialsOrder.CHRONOLOGICAL
             }
 
@@ -68,7 +74,7 @@ class SettingsFragment : Fragment()
         }
 
         // Set the state of the dark mode switch
-        val switchDarkMode: SwitchCompat = view.findViewById(R.id.switchDarkMode)
+        val switchDarkMode: SwitchCompat = view.findViewById(R.id.dark_mode_switch)
         switchDarkMode.isChecked = isDarkModeEnabled()
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked)
@@ -83,9 +89,9 @@ class SettingsFragment : Fragment()
 
 
         binding.confirmButton.setOnClickListener {
-            val insertedOldMasterPassword = binding.oldMasterPassword.text.toString()
-            val insertedNewMasterPassword = binding.newMasterPassword.text.toString()
-            val confirmedNewMasterPassword = binding.confirmedNewMasterPassword.text.toString()
+            val insertedOldMasterPassword = binding.oldMasterpasswordEt.text.toString()
+            val insertedNewMasterPassword = binding.newMasterpasswordEt.text.toString()
+            val confirmedNewMasterPassword = binding.confirmedNewMasterpasswordEt.text.toString()
 
             if(insertedOldMasterPassword.isBlank() || insertedNewMasterPassword.isBlank() || confirmedNewMasterPassword.isBlank()){
                 Toast.makeText(
@@ -119,9 +125,9 @@ class SettingsFragment : Fragment()
                         viewModel.updatePasswords(insertedOldMasterPassword, insertedNewMasterPassword)
 
                         // Clears inserted values
-                        binding.oldMasterPassword.setText("")
-                        binding.newMasterPassword.setText("")
-                        binding.confirmedNewMasterPassword.setText("")
+                        binding.oldMasterpasswordEt.setText("")
+                        binding.newMasterpasswordEt.setText("")
+                        binding.confirmedNewMasterpasswordEt.setText("")
                     }
                     else
                     {

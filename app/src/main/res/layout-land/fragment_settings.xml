@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SettingsFragment"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:context=".fragments.SettingsFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -15,7 +14,7 @@
         app:layout_constraintGuide_begin="262dp" />
 
     <TextView
-        android:id="@+id/tv_choice"
+        android:id="@+id/order_choice_tv"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -32,10 +31,12 @@
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5">
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        tools:ignore="TextSizeCheck">
+        <!-- Text is visible with current size -->
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/chronological_order_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:checked="true"
@@ -44,20 +45,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/alphabetic_user_order_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/order2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+            app:layout_constraintTop_toBottomOf="@+id/chronological_order_rb" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/alphabetic_service_order_rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/order1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+            app:layout_constraintTop_toBottomOf="@+id/alphabetic_user_order_rb" />
 
     </RadioGroup>
 
@@ -70,30 +71,30 @@
         android:paddingStart="17dp"
         android:paddingEnd="17dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintStart_toEndOf="@+id/tv_choice"
+        app:layout_constraintEnd_toStartOf="@+id/change_theme_tv"
+        app:layout_constraintStart_toEndOf="@+id/order_choice_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/change_theme_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enable_dark_mode"
         android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/tv_choice"
+        app:layout_constraintEnd_toStartOf="@+id/change_masterpassword_tv"
+        app:layout_constraintStart_toEndOf="@+id/order_choice_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Switch
-        android:id="@+id/switchDarkMode"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/dark_mode_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleX="1.5"
         android:scaleY="1.5"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/confirmedNewMasterPassword"
+        app:layout_constraintEnd_toStartOf="@+id/confirmed_new_masterpassword_et"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
@@ -105,12 +106,12 @@
         android:layout_height="200dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintEnd_toStartOf="@+id/change_masterpassword_tv"
+        app:layout_constraintStart_toEndOf="@+id/change_theme_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/change_masterpassword_tv"
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -118,10 +119,12 @@
         android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+    <!-- Text is visible with current size -->
 
     <EditText
-        android:id="@+id/oldMasterPassword"
+        android:id="@+id/old_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
@@ -129,29 +132,35 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.25"
+        android:inputType=""
+        android:autofillHints="" />
 
     <EditText
-        android:id="@+id/newMasterPassword"
+        android:id="@+id/new_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oldMasterPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/old_masterpassword_et"
+        app:layout_constraintVertical_bias="0.0"
+        android:inputType=""
+        android:autofillHints="" />
 
     <EditText
-        android:id="@+id/confirmedNewMasterPassword"
+        android:id="@+id/confirmed_new_masterpassword_et"
         android:layout_width="252dp"
         android:layout_height="59dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/confirm_new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newMasterPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/new_masterpassword_et"
+        app:layout_constraintVertical_bias="0.0"
+        android:autofillHints=""
+        android:inputType="" />
 
     <Button
         android:id="@+id/confirm_button"
@@ -161,7 +170,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/row3"
         app:layout_constraintStart_toEndOf="@+id/row2"
-        app:layout_constraintTop_toBottomOf="@+id/switchDarkMode" />
+        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"

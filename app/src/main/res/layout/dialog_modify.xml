@@ -74,6 +74,22 @@
                 android:text="@={modifyDialogViewModel.newCredentialPassword}"
                 />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/master_password" />
+
+            <EditText
+                android:id="@+id/inserted_master_password_te"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/insert_your_master_password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:autofillHints=""
+                android:text="@={modifyDialogViewModel.insertedMasterPassword}"
+                />
+
             <Button
                 android:id="@+id/modify"
                 android:layout_width="150dp"
