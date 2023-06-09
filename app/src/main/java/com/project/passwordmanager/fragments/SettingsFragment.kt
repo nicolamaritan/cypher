@@ -116,6 +116,9 @@ class SettingsFragment : Fragment()
                         ).show()
                         Utils.setHashedMasterPassword(requireContext(), newpw)
                         viewModel.updatePasswords(old, newpw)
+                        binding.oldPw.setText("")
+                        binding.newPw.setText("")
+                        binding.confirmNewPw.setText("")
                     }
                     else
                     {
