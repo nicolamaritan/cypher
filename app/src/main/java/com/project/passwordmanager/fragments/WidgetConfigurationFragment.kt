@@ -18,7 +18,7 @@ import com.project.passwordmanager.databinding.FragmentWidgetConfigurationBindin
 import com.project.passwordmanager.factories.WidgetConfigurationViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
-import com.project.passwordmanager.widgets.credentials.PasswordManagerWidget
+import com.project.passwordmanager.widgets.credentials.CredentialsWidget
 
 class WidgetConfigurationFragment : Fragment()
 {
@@ -84,7 +84,7 @@ class WidgetConfigurationFragment : Fragment()
                 widgetPreferencesManager.insertAddedIds(toBeAddedIds)
 
 
-                val viewMapping = PasswordManagerWidget.getWidgetViewMapping(requireContext(), appWidgetId)
+                val viewMapping = CredentialsWidget.getWidgetViewMapping(requireContext(), appWidgetId)
                 // The returned RemoteViews is chosen based on the widget size, according to the mapping
                 val views = RemoteViews(viewMapping)
 

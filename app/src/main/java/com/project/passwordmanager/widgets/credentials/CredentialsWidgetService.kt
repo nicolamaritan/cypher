@@ -16,7 +16,7 @@ import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.model.CredentialRepository
 
-class PasswordManagerWidgetService : RemoteViewsService() {
+class CredentialsWidgetService : RemoteViewsService() {
 
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
         return PasswordManagerWidgetItemFactory(applicationContext, intent)
@@ -73,10 +73,10 @@ class PasswordManagerWidgetService : RemoteViewsService() {
             view.setTextViewText(R.id.user, entry.username)
 
             val fillInIntentBundle = Bundle()
-            fillInIntentBundle.putInt(PasswordManagerWidget.ITEM_POSITION, position)
-            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_SERVICE, entry.service)
-            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_USERNAME, entry.username)
-            fillInIntentBundle.putString(PasswordManagerWidget.ITEM_PASSWORD, entry.password)
+            fillInIntentBundle.putInt(CredentialsWidget.ITEM_POSITION, position)
+            fillInIntentBundle.putString(CredentialsWidget.ITEM_SERVICE, entry.service)
+            fillInIntentBundle.putString(CredentialsWidget.ITEM_USERNAME, entry.username)
+            fillInIntentBundle.putString(CredentialsWidget.ITEM_PASSWORD, entry.password)
 
             val fillInIntent = Intent()
             fillInIntent.putExtras(fillInIntentBundle)
@@ -116,6 +116,6 @@ class PasswordManagerWidgetService : RemoteViewsService() {
     }
     companion object
     {
-        private val TAG = PasswordManagerWidgetService::class.simpleName
+        private val TAG = CredentialsWidgetService::class.simpleName
     }
 }
