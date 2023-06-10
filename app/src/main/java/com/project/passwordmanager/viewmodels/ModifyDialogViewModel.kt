@@ -12,6 +12,7 @@ import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.security.Hashing
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 /**
  * ViewModel class for ModifyDialogFragment.
@@ -100,6 +101,9 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
             newCredentialPassword,
             insertedMasterPassword
         )
+
+        // Update the last modified date field
+        credential.date = LocalDate.now()
 
         viewModelScope.launch {
             dao.update(credential)
