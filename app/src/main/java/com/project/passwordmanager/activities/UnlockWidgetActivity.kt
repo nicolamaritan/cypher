@@ -16,7 +16,7 @@ import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.listeners.UnlockDialogListener
 import com.project.passwordmanager.security.Cryptography
 import com.project.passwordmanager.viewmodels.UnlockWidgetViewModel
-import com.project.passwordmanager.widgets.credentials.PasswordManagerWidget
+import com.project.passwordmanager.widgets.credentials.CredentialsWidget
 
 /**
  * This activity is responsible for unlocking the selected password.
@@ -55,9 +55,9 @@ class UnlockWidgetActivity : AppCompatActivity()
 
 
         // Get data from the filled-in intent
-        val encryptedPassword = intent.getStringExtra(PasswordManagerWidget.ITEM_PASSWORD)!!
-        binding.credentialItem.user.text = intent.getStringExtra(PasswordManagerWidget.ITEM_USERNAME)!!
-        binding.credentialItem.service.text = intent.getStringExtra(PasswordManagerWidget.ITEM_SERVICE)!!
+        val encryptedPassword = intent.getStringExtra(CredentialsWidget.ITEM_PASSWORD)!!
+        binding.credentialItem.user.text = intent.getStringExtra(CredentialsWidget.ITEM_USERNAME)!!
+        binding.credentialItem.service.text = intent.getStringExtra(CredentialsWidget.ITEM_SERVICE)!!
 
         // Get saved state from viewModel - prevents data loss when rotating the screen
         binding.credentialItem.password.text = viewModel.displayedPassword

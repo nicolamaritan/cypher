@@ -18,7 +18,7 @@ import com.project.passwordmanager.common.WidgetPreferencesManager
  * Implementation of App Widget functionality for the Password Manager widget.
  * This class extends AppWidgetProvider and provides methods to handle widget updates and events.
  */
-class PasswordManagerWidget : AppWidgetProvider()
+class CredentialsWidget : AppWidgetProvider()
 {
     override fun onUpdate(
         context: Context,
@@ -82,7 +82,7 @@ class PasswordManagerWidget : AppWidgetProvider()
 
     companion object
     {
-        val TAG = PasswordManagerWidget::class.java.toString()
+        val TAG = CredentialsWidget::class.java.toString()
         const val ITEM_POSITION = "item_position"
         const val ITEM_CLICK_ACTION = "item_click"
         const val SEE_ALL_ACTION = "see_all"
@@ -99,7 +99,7 @@ class PasswordManagerWidget : AppWidgetProvider()
          */
         private fun initRemoteAdapter(remoteViews: RemoteViews, context: Context, appWidgetId: Int)
         {
-            val serviceIntent = Intent(context, PasswordManagerWidgetService::class.java).apply {
+            val serviceIntent = Intent(context, CredentialsWidgetService::class.java).apply {
                 //Add the widget ID to the intent extras
                 putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
 
@@ -180,14 +180,14 @@ class PasswordManagerWidget : AppWidgetProvider()
              *  Therefore, each layout should be configured BEFORE invoking RemoteViews(viewMapping).
              * */
             val smallView =
-                RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
+                RemoteViews(context.packageName, R.layout.credentials_widget).apply {
                     initRemoteAdapter(this, context, appWidgetId)
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)
                 }
 
             val tallView =
-                RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
+                RemoteViews(context.packageName, R.layout.credentials_widget_tall).apply {
                     initRemoteAdapter(this, context, appWidgetId)
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)
@@ -195,7 +195,7 @@ class PasswordManagerWidget : AppWidgetProvider()
                 }
 
             val wideView =
-                RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
+                RemoteViews(context.packageName, R.layout.credentials_widget_wide).apply {
                     initRemoteAdapter(this, context, appWidgetId)
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)

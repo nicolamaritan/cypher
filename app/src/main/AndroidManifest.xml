@@ -37,7 +37,7 @@
             android:exported="false" />
 
         <receiver
-            android:name=".widgets.credentials.PasswordManagerWidget"
+            android:name=".widgets.credentials.CredentialsWidget"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -64,7 +64,7 @@ Beyond the requirements listed in Declare a widget in the manifest,
         This prevents other applications from freely accessing your widget's data.
         -->
         <service
-            android:name=".widgets.credentials.PasswordManagerWidgetService"
+            android:name=".widgets.credentials.CredentialsWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 

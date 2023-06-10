@@ -45,7 +45,7 @@
         android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/how_to_create_a_strong_password"
         android:hint="@string/insert_your_master_password"
         android:inputType="textPassword"
         tools:hint="Insert your Master Password"
@@ -69,7 +69,7 @@
     <!-- Suppresses warning as the text edit is set to fill all the horizontal space -->
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/how_to_create_a_strong_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/how_to_create_strong_password"
