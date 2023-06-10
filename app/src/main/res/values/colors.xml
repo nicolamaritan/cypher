@@ -31,5 +31,4 @@
     </color> <!-- Darker shade of teal for night theme -->
     <color name="night_on_secondary">#FFFFFF</color>
     <color name="orange">#f99b0e</color> <!-- White text on teal for night theme -->
-
 </resources>
