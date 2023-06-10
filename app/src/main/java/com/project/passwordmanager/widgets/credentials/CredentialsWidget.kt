@@ -180,14 +180,14 @@ class CredentialsWidget : AppWidgetProvider()
              *  Therefore, each layout should be configured BEFORE invoking RemoteViews(viewMapping).
              * */
             val smallView =
-                RemoteViews(context.packageName, R.layout.password_manager_widget).apply {
+                RemoteViews(context.packageName, R.layout.credentials_widget).apply {
                     initRemoteAdapter(this, context, appWidgetId)
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)
                 }
 
             val tallView =
-                RemoteViews(context.packageName, R.layout.password_manager_widget_tall).apply {
+                RemoteViews(context.packageName, R.layout.credentials_widget_tall).apply {
                     initRemoteAdapter(this, context, appWidgetId)
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)
@@ -195,7 +195,7 @@ class CredentialsWidget : AppWidgetProvider()
                 }
 
             val wideView =
-                RemoteViews(context.packageName, R.layout.password_manager_widget_wide).apply {
+                RemoteViews(context.packageName, R.layout.credentials_widget_wide).apply {
                     initRemoteAdapter(this, context, appWidgetId)
                     setupItemClick(this, context, appWidgetId)
                     setupWidgetName(this, context, appWidgetId)
