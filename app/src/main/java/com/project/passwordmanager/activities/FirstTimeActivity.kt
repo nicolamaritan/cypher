@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.widget.Toast
 import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
@@ -24,6 +25,8 @@ class FirstTimeActivity : AppCompatActivity()
         // Fully replaces the original bar with a toolbar
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
+
+        binding.howToCreateAStrongPassword.movementMethod = LinkMovementMethod.getInstance()
 
         binding.button.setOnClickListener{
             val inserted = binding.insertEt.text.toString()
