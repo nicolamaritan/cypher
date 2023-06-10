@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="appwidget_text">Example</string>
     <string name="save_configuration">Save</string>
     <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
     <string name="emptywidget_text">No credentials added.</string>
@@ -8,10 +7,9 @@
     <string name="addcredentials_fragment">Hello add credentials fragment</string>
     <string name="status_widget_description">Keep an eye on the passwords to change.</string>
 
-    <string name="add">ADD</string>
+    <string name="add">Add</string>
     <string name="credentials">Credentials</string>
     <string name="add_credential">Add credentials</string>
-    <string name="clear">Clear</string>
     <string name="insert_the_password">Insert the password</string>
     <string name="insert_the_service">Insert the service</string>
     <string name="service">Service</string>
@@ -22,8 +20,7 @@
     <string name="credential_deleted_toast">Credential safely deleted ;)</string>
     <string name="unlock_toast">Successful unlock</string>
     <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
-    <string name="unlock">UNLOCK</string>
-    <string name="do_something">Do something</string>
+    <string name="unlock">Unlock</string>
     <string name="copy_the_credential_s_password">Copy the credential\'s password.</string>
     <string name="modify_the_credential">Modify</string>
     <string name="delete_the_credential">Delete</string>
@@ -35,16 +32,14 @@
     <string name="unlock_widget">Unlock widget</string>
     <string name="insert_the_master_password_to_unlock_your_password">Insert the Master Password to unlock your password.</string>
     <string name="insert_your_master_password">Insert your master password</string>
-    <string name="lock">LOCK</string>
+    <string name="lock">Lock</string>
     <string name="widget_configuration">Widget configuration</string>
-    <string name="credential_unlocked_successfully">Credential unlocked successfully</string>
-    <string name="select_at_least">Select at least one credentia</string>
+    <string name="select_at_least">Select at least one credential</string>
     <string name="choice">Choose the order:</string>
     <string name="order1">Alphabetic order by service</string>
     <string name="order2">Alphabetic order by username</string>
     <string name="order3">Chronological order</string>
     <string name="enable_dark_mode">Change theme</string>
-    <string name="change_language">Change language</string>
     <string name="tv_change_masterpassword">Change your master password:</string>
     <string name="old_pw">Insert old master password</string>
     <string name="new_pw">Insert new master password</string>
@@ -52,10 +47,8 @@
     <string name="order_display">Order display</string>
     <string name="theme_language">Theme</string>
     <string name="stats">Stats</string>
-    <string name="pw_to_modify">Password to modify</string>
     <string name="show">Show</string>
     <string name="categories">Categories</string>
-    <string name="stat3">Stat to invent</string>
     <string name="last_modify_date">Last modify date</string>
     <string name="modify_your_username">Modify your username</string>
     <string name="modify_the_service">Modify your service</string>
@@ -72,14 +65,12 @@
     <string name="passwords_cannot_be_blank">Passwords cannot be blank</string>
     <string name="insert_the_master_password">Insert the Master Password</string>
     <string name="see_all">See All</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings">Settings</string>
     <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
     <string name="number_of_old_passwords">Number of old passwords stored: %1$s</string>
     <string name="password_status">Password status</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
     <string name="equal_passwords">Equal passwords</string>
-    <string name="you_should_not_use_the_same_password_for_different">You should not use the same password for different</string>
     <string name="value">Value</string>
     <string name="add_widget">Aggiunta widget</string>
     <string name="last_modified">Last modified</string>

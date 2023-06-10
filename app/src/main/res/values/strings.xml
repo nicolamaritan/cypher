@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Sky Cypher</string>
-    <string name="appwidget_text">Esempio</string>
     <string name="save_configuration">Salva</string>
     <string name="app_widget_description">Memorizza in modo sicuro le tue credenziali nella schermata iniziale. Puoi sbloccarli e bloccarli quando necessario.</string>
     <string name="emptywidget_text">Nessuna credenziale aggiunta</string>
@@ -12,10 +11,9 @@
 
     <string name="credentials_fragment">Ciao credentials fragment</string>
     <string name="addcredentials_fragment">Ciao add credentials fragment</string>
-    <string name="add">AGGIUNGI</string>
+    <string name="add">Aggiungi</string>
     <string name="credentials">Credenziali</string>
     <string name="add_credential">Aggiungi credenziali</string>
-    <string name="clear">Pulisci</string>
     <string name="insert_the_password">Inserisci la password</string>
     <string name="password" translatable="false">Password</string>
     <string name="master_password" translatable="false">Master Password</string>
@@ -29,8 +27,7 @@
     <string name="credential_deleted_toast">Credenziali eliminate correttamente ;)</string>
     <string name="unlock_toast">Sblocco riuscito</string>
     <string name="invalid_credential_toast">Credenziali non valide. Uno o più campi vuoti</string>
-    <string name="unlock">SBLOCCA</string>
-    <string name="do_something">Fai qualcosa</string>
+    <string name="unlock">Sblocca</string>
     <string name="copy_the_credential_s_password">Copia la password.</string>
     <string name="modify_the_credential">Modifica</string>
     <string name="delete_the_credential">Cancella</string>
@@ -47,7 +44,6 @@
     <string name="insert_your_master_password">Inserisci la tua master password</string>
     <string name="lock">BLOCCA</string>
     <string name="widget_configuration">Configurazione widget</string>
-    <string name="credential_unlocked_successfully">Credenziali sbloccate correttamente</string>
     <string name = "select_at_least">Seleziona almeno una credenziale</string>
 
     //Settings
@@ -70,10 +66,8 @@
 
     // Stats
     <string name="stats">Statistiche</string>
-    <string name="pw_to_modify">Password da modificare</string>
     <string name="show">Mostra</string>
     <string name="categories">Categorie</string>
-    <string name="stat3">Stat da inventare</string>
     <string name="last_modify_date">Data di ultima modifica</string>
 
     // Modify
@@ -94,14 +88,12 @@
     <string name="passwords_cannot_be_blank">Le password non possono essere vuote</string>
     <string name="insert_the_master_password">Inserisci la Master Password</string>
     <string name="see_all">Vedi tutto</string>
-    <string name="hello_blank_fragment">Ciao blank fragment</string>
     <string name="settings">Impostazioni</string>
     <string name="number_of_passwords_stored">Numero di password salvate: %1$s</string>
     <string name="number_of_old_passwords">Numero di vecchie password salvate: %1$s</string>
     <string name="password_status">Stato della password</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">E\' consigliato cambiare le tue password almeno ogni 3/6 mesi</string>
     <string name="equal_passwords">Password uguali</string>
-    <string name="you_should_not_use_the_same_password_for_different">You should not use the same password for different services</string>
     <string name="value">Valore</string>
     <string name="add_widget">Aggiunta widget</string>
     <string name="last_modified">Ultima modifica</string>
