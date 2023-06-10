@@ -58,7 +58,7 @@ class CredentialsFragment : Fragment(), DeleteListener
         //passes the data to the adapter
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
 
