@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="save_configuration">Save</string>
     <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
     <string name="emptywidget_text">No credentials added.</string>
-    <string name="credentials_fragment">Hello credentials fragment</string>
-    <string name="addcredentials_fragment">Hello add credentials fragment</string>
     <string name="status_widget_description">Keep an eye on the passwords to change.</string>
 
     <string name="add">Add</string>
@@ -70,9 +67,7 @@
     <string name="number_of_old_passwords">Number of old passwords stored: %1$s</string>
     <string name="password_status">Password status</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
-    <string name="equal_passwords">Equal passwords</string>
     <string name="value">Value</string>
-    <string name="add_widget">Aggiunta widget</string>
     <string name="last_modified">Last modified</string>
     <string name="unlock_the_password_first">Unlock the password first.</string>
     <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
