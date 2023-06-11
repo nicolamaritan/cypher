@@ -9,7 +9,8 @@ import javax.crypto.spec.SecretKeySpec
 object Cryptography
 {
     /**
-     * Encrypts the given text using AES encryption with a key size of 256 bits and returns the encrypted text in base64 encoded format.
+     * Encrypts the given text using AES encryption with a key size of 256 bits and
+     * returns the encrypted text in base64 encoded format.
      *
      * @param text The text to be encrypted.
      * @param masterPassword The master password used to generate the secret key for encryption.
@@ -26,7 +27,8 @@ object Cryptography
     }
 
     /**
-     * Decrypts the given base64 encoded encrypted text using AES encryption with a key size of 256 bits and returns the original text.
+     * Decrypts the given base64 encoded encrypted text using AES encryption with a
+     * key size of 256 bits and returns the original text.
      *
      * @param encryptedText The base64 encoded encrypted text.
      * @param masterPassword The master password used to generate the secret key for decryption.
