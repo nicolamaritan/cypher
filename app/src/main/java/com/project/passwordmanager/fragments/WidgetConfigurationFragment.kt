@@ -43,7 +43,7 @@ class WidgetConfigurationFragment : Fragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Adapter setup
-        val adapter = WidgetConfigurationCredentialsAdapter(requireContext())
+        val adapter = WidgetConfigurationCredentialsAdapter()
         adapter.selectedCredentialsIds = viewModel.checkedCredentialsIds    // Retrieves previously selected ids from viewmodel
                                                                             // ViewModel is updated as it holds the list reference
         binding.configurationCredentialsRv.adapter = adapter

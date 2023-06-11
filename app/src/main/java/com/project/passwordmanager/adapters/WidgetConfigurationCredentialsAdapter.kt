@@ -1,6 +1,5 @@
 package com.project.passwordmanager.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.model.Credential
 
 
-class WidgetConfigurationCredentialsAdapter(context: Context):
+class WidgetConfigurationCredentialsAdapter():
     ListAdapter<Credential, WidgetConfigurationCredentialsAdapter.WidgetConfigurationCredentialsViewHolder>
         (CredentialDiffItemCallback()){
 
