@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.common.DateChecker
 import com.project.passwordmanager.common.DateStatus
 import com.project.passwordmanager.model.Credential
@@ -15,17 +17,8 @@ import java.time.LocalDate
 
 //Adapter for the password status's recyclerview
 class CredentialsStatusAdapter(val context: Context):
-    RecyclerView.Adapter<CredentialsStatusAdapter.StatsViewHolder>(){
-
-    //definition of the data type we will work with
-    var data = listOf<Credential>()
-        //custom setter that tells the recyclerView if data changed
-        set(value){
-            field = value
-            notifyDataSetChanged()
-        }
-
-    inner class StatsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    ListAdapter<Credential, CredentialsStatusAdapter.CredentialsStatusViewHolder>(CredentialDiffItemCallback()){
+    inner class CredentialsStatusViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
         private val service: TextView = itemView.findViewById(R.id.stats_service)
         private val username: TextView = itemView.findViewById(R.id.stats_user)
@@ -50,22 +43,17 @@ class CredentialsStatusAdapter(val context: Context):
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CredentialsStatusViewHolder
     {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.credentials_status_recyclerview_item, parent, false)
 
-        return StatsViewHolder(view)
+        return CredentialsStatusViewHolder(view)
     }
 
-    override fun getItemCount(): Int
+    override fun onBindViewHolder(holder: CredentialsStatusViewHolder, position: Int)
     {
-        return data.size
-    }
-
-    override fun onBindViewHolder(holder: StatsViewHolder, position: Int)
-    {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 }

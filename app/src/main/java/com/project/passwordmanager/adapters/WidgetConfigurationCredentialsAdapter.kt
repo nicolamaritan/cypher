@@ -1,26 +1,20 @@
 package com.project.passwordmanager.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.model.Credential
 
 
-class WidgetConfigurationCredentialsAdapter(context: Context):
-    RecyclerView.Adapter<WidgetConfigurationCredentialsAdapter.WidgetConfigurationCredentialsViewHolder>(){
-
-    // Definition of the data type we will work with
-    var data = listOf<Credential>()
-        // Custom setter that tells the recyclerView if data changed
-        set(value){
-            field = value
-            notifyDataSetChanged()
-        }
+class WidgetConfigurationCredentialsAdapter:
+    ListAdapter<Credential, WidgetConfigurationCredentialsAdapter.WidgetConfigurationCredentialsViewHolder>
+        (CredentialDiffItemCallback()){
 
     /**
      * Contains the selected ids to show in the widget.
@@ -63,12 +57,8 @@ class WidgetConfigurationCredentialsAdapter(context: Context):
         return WidgetConfigurationCredentialsViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
     override fun onBindViewHolder(holder: WidgetConfigurationCredentialsViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 

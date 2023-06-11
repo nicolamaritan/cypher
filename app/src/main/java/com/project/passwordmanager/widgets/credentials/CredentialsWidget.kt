@@ -84,8 +84,8 @@ class CredentialsWidget : AppWidgetProvider()
     {
         val TAG = CredentialsWidget::class.java.toString()
         const val ITEM_POSITION = "item_position"
-        const val ITEM_CLICK_ACTION = "item_click"
-        const val SEE_ALL_ACTION = "see_all"
+        private const val ITEM_CLICK_ACTION = "item_click"
+        private const val SEE_ALL_ACTION = "see_all"
         const val ITEM_PASSWORD = "item_password"
         const val ITEM_SERVICE = "item_service"
         const val ITEM_USERNAME = "item_username"

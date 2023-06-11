@@ -11,8 +11,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.fragments.ModifyDialogFragment
 import com.project.passwordmanager.fragments.UnlockDialogFragment
 import com.project.passwordmanager.listeners.DeleteListener
@@ -29,15 +31,7 @@ import com.project.passwordmanager.security.Cryptography
  * @param context the application context
  */
 class CredentialsAdapter(private val context: Context):
-    RecyclerView.Adapter<CredentialsAdapter.CredentialsViewHolder>(){
-
-    //definition of the data type we will work with
-    var data = listOf<Credential>()
-        //custom setter that tells the recyclerView if data changed
-        set(value){
-            field = value
-            notifyDataSetChanged()
-        }
+    ListAdapter<Credential, CredentialsAdapter.CredentialsViewHolder>(CredentialDiffItemCallback()){
 
     private var deleteListener: DeleteListener? = null
     var unlockedCredentials = mutableListOf<Credential>()
@@ -104,8 +98,6 @@ class CredentialsAdapter(private val context: Context):
                             )
                             updatePasswordTextView(credential.password, alertDialog.insertedMasterPassword)
                         }
-
-                        override fun onUnlockFailure() {}
                     })
 
                     alertDialog.show(fm, "fragment_alert")
@@ -174,8 +166,6 @@ class CredentialsAdapter(private val context: Context):
                     {
                         deleteListener?.onDeleteCredential(credential.id)
                     }
-
-                    override fun onUnlockFailure() {}
                 })
 
                 alertDialog.show(fm, UnlockDialogFragment.UNLOCK_DIALOG_FRAGMENT_TAG)
@@ -216,14 +206,9 @@ class CredentialsAdapter(private val context: Context):
         return CredentialsViewHolder(view)
     }
 
-    override fun getItemCount(): Int
-    {
-        return data.size
-    }
-
     override fun onBindViewHolder(holder: CredentialsViewHolder, position: Int)
     {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 

@@ -1,9 +1,9 @@
-package com.project.passwordmanager.factories;
+package com.project.passwordmanager.factories
 
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.model.CredentialDao
-import com.project.passwordmanager.viewmodels.StatsViewModel;
+import com.project.passwordmanager.viewmodels.StatsViewModel
 
 /**
  * This factory class is responsible for creating instances of the StatsViewModel.

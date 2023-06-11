@@ -25,15 +25,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Insert the name displayed on the widget."
+                android:text="@string/insert_the_name_displayed_on_the_widget"
                 />
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Insert the widget name."
+                android:layout_height="48dp"
+                android:hint="@string/insert_the_widget_name"
                 android:id="@+id/widget_name_et"
-                />
+                android:autofillHints=""
+                android:inputType=""
+                tools:ignore="VisualLintTextFieldSize" />
+            <!-- False positive as whe width matches the parent size -->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/configuration_credentials_rv"

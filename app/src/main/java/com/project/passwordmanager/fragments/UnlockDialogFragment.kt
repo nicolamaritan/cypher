@@ -76,7 +76,6 @@ class UnlockDialogFragment : DialogFragment()
             else
             {
                 binding.insertedPasswordTe.text.clear()
-                unlockDialogListener!!.onUnlockFailure()
             }
         }
 

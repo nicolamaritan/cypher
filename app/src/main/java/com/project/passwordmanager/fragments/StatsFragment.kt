@@ -13,6 +13,11 @@ import com.project.passwordmanager.factories.StatsViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.StatsViewModel
 
+/**
+ * Shows the stats in the View "Stats" in the main screen. It shows the number of credentials
+ * stored, how many of them are old and shows which are the oldest passwords, in order
+ * to tell the user visually which passwords need to be updated as soon as possibile.
+ */
 class StatsFragment : Fragment()
 {
     private var _binding: FragmentStatsBinding? = null
@@ -47,7 +52,7 @@ class StatsFragment : Fragment()
         //passes the data to the adapter
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
-                credentialsStatusAdapter.data = it
+                credentialsStatusAdapter.submitList(it)
                 binding.numberOfPwStoredTv.text =
                     resources.getString(R.string.number_of_passwords_stored, it.size.toString())
             }

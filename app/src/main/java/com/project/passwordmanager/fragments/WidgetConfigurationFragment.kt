@@ -20,6 +20,12 @@ import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
 import com.project.passwordmanager.widgets.credentials.CredentialsWidget
 
+/**
+ * This fragment is contained in the WidgetConfigurationActivity and shows a list
+ * of all Credentials, allowing the user to choose which credentials to store
+ * in the home screen. It also allow the user to set a name for the widget. If the name
+ * remains blank, "Your passwords" is set as default.
+ */
 class WidgetConfigurationFragment : Fragment()
 {
     private var _binding: FragmentWidgetConfigurationBinding? = null
@@ -43,7 +49,7 @@ class WidgetConfigurationFragment : Fragment()
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Adapter setup
-        val adapter = WidgetConfigurationCredentialsAdapter(requireContext())
+        val adapter = WidgetConfigurationCredentialsAdapter()
         adapter.selectedCredentialsIds = viewModel.checkedCredentialsIds    // Retrieves previously selected ids from viewmodel
                                                                             // ViewModel is updated as it holds the list reference
         binding.configurationCredentialsRv.adapter = adapter
@@ -51,7 +57,7 @@ class WidgetConfigurationFragment : Fragment()
         // Passing data to the adapter
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
 
