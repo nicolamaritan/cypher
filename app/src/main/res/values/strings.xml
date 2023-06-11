@@ -11,7 +11,6 @@
 
     // Credentials
     <string name="credentials">Credenziali</string>
-    <string name="add_credential">Aggiungi credenziali</string>
     <string name="insert_the_password">Inserisci la password</string>
     <string name="password" translatable="false">Password</string>
     <string name="master_password" translatable="false">Master Password</string>
@@ -19,10 +18,8 @@
     <string name="service">Servizio</string>
     <string name="insert_your_username">Inserisci l\'username</string>
     <string name="username" translatable="false">Username</string>
-    <string name="insert_a_new_credential">Inserisci una nuova credenziale</string>
     <string name="credential_added_toast">Credenziale aggiunta correttamente</string>
     <string name="credential_modified_toast">Credenziale modificata correttamente</string>
-    <string name="credential_deleted_toast">Credenziale eliminata correttamente</string>
     <string name="invalid_credential_toast">Credenziali non valide. Uno o più campi vuoti</string>
     <string name="copy_the_credential_s_password">Copia la password.</string>
     <string name="modify_the_credential">Modifica</string>
@@ -34,7 +31,6 @@
 
     // Credentials Widget
     <string name="unlock_widget">Sblocca widget</string>
-    <string name="insert_the_master_password_to_unlock_your_password">Inserisci la master password per sbloccare questa password</string>
     <string name="insert_your_master_password">Inserisci la tua master password</string>
     <string name="lock">BLOCCA</string>
     <string name="widget_configuration">Configurazione widget</string>
@@ -66,15 +62,9 @@
     <string name="order_display">Ordine di visualizzazione</string>
     <string name="theme_language">Tema</string>
     <string name="reset_mp" translatable="false">Reset master password</string>
-    <string-array name="languages">
-        <item>Italiano</item>
-        <item>English</item>
-    </string-array>
 
     // Stats
     <string name="stats">Statistiche</string>
-    <string name="show">Mostra</string>
-    <string name="categories">Categorie</string>
     <string name="last_modify_date">Data di ultima modifica</string>
     <string name="number_of_old_passwords">Numero di vecchie password salvate: %1$s</string>
     <string name="password_status">Stato della password</string>
@@ -97,7 +87,6 @@
     <string name="entered_passwords_do_not_match">Le password inserite non corrispondono</string>
     <string name="master_password_correctly_inserted">Master Password inserita correttamente</string>
     <string name="blank_password">Password vuota</string>
-    <string name="insert_the_master_password">Inserisci la Master Password</string>
 
     // Widget Previews
     <string name="education_portals">Portali istruzione</string>

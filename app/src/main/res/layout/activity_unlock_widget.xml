@@ -14,9 +14,8 @@
         android:layout_height="?attr/actionBarSize"
         style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
-    <include
-        android:id="@+id/credential_item"
-        layout="@layout/unlock_widget_credential_item">
+    <include layout="@layout/unlock_widget_credential_item"
+        android:id="@+id/credential_item">
     </include>
 
 

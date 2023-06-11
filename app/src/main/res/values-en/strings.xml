@@ -6,15 +6,12 @@
 
     <string name="add">Add</string>
     <string name="credentials">Credentials</string>
-    <string name="add_credential">Add credentials</string>
     <string name="insert_the_password">Insert the password</string>
     <string name="insert_the_service">Insert the service</string>
     <string name="service">Service</string>
     <string name="insert_your_username">Insert your username</string>
-    <string name="insert_a_new_credential">Insert a new credential</string>
     <string name="credential_added_toast">Credential safely added ;)</string>
     <string name="credential_modified_toast">Credential safely modified ;)</string>
-    <string name="credential_deleted_toast">Credential safely deleted ;)</string>
     <string name="unlock_toast">Successful unlock</string>
     <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
     <string name="unlock">Unlock</string>
@@ -27,7 +24,6 @@
     <string name="authentication">Authentication</string>
     <string name="password_deleted">Password deleted</string>
     <string name="unlock_widget">Unlock widget</string>
-    <string name="insert_the_master_password_to_unlock_your_password">Insert the Master Password to unlock your password.</string>
     <string name="insert_your_master_password">Insert your master password</string>
     <string name="lock">Lock</string>
     <string name="widget_configuration">Widget configuration</string>
@@ -44,8 +40,6 @@
     <string name="order_display">Order display</string>
     <string name="theme_language">Theme</string>
     <string name="stats">Stats</string>
-    <string name="show">Show</string>
-    <string name="categories">Categories</string>
     <string name="last_modify_date">Last modify date</string>
     <string name="modify_your_username">Modify your username</string>
     <string name="modify_the_service">Modify your service</string>
@@ -60,7 +54,6 @@
     <string name="master_password_correctly_inserted">Master Password correctly inserted</string>
     <string name="blank_password">Blank password</string>
     <string name="passwords_cannot_be_blank">Passwords cannot be blank</string>
-    <string name="insert_the_master_password">Insert the Master Password</string>
     <string name="see_all">See All</string>
     <string name="settings">Settings</string>
     <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>

@@ -167,7 +167,6 @@
         app:layout_constraintTop_toBottomOf="@+id/confirmed_new_masterpassword_et" />
 
     <TextView
-        android:id="@+id/tv_order_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -178,7 +177,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_theme_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -189,7 +187,6 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
-        android:id="@+id/tv_reset_mp"
         android:layout_width="117dp"
         android:layout_height="44dp"
         android:layout_marginStart="16dp"
