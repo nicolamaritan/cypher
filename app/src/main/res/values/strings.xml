@@ -1,6 +1,6 @@
 <resources>
     // Common
-    <string name="app_name" translatable="false">Sky Cypher</string>
+    <string name="app_name" translatable="false">Cypher</string>
     <string name="unlock_the_password_first">Unlock the password first.</string>
     <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
     <string name="unlock">Sblocca</string>
