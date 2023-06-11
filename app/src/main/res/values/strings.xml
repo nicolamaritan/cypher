@@ -48,6 +48,8 @@
     <string name="modify_the_service">Modifica servizio</string>
     <string name="modify_the_password">Modifica password</string>
     <string name="stored_credentials">Password conservate: %1$d</string>
+    <string name="insert_the_name_displayed_on_the_widget">Insert the name displayed on the widget.</string>
+    <string name="insert_the_widget_name">Insert the widget name.</string>
 
 
     // Settings
@@ -107,4 +109,5 @@
     <string name="important_bank_account_fake">Account bancari importanti</string>
     <string name="alice_and_bob_fake">Mario e Luigi</string>
     <string name="fake_date_2022_10_11">2022&#8211;10&#8211;11</string>
+
 </resources>
