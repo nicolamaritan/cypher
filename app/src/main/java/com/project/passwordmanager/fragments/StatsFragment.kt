@@ -47,7 +47,7 @@ class StatsFragment : Fragment()
         //passes the data to the adapter
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
-                credentialsStatusAdapter.data = it
+                credentialsStatusAdapter.submitList(it)
                 binding.numberOfPwStoredTv.text =
                     resources.getString(R.string.number_of_passwords_stored, it.size.toString())
             }

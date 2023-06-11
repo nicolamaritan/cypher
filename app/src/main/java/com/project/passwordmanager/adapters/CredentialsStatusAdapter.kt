@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
+import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.common.DateChecker
 import com.project.passwordmanager.common.DateStatus
 import com.project.passwordmanager.model.Credential
@@ -15,16 +17,7 @@ import java.time.LocalDate
 
 //Adapter for the password status's recyclerview
 class CredentialsStatusAdapter(val context: Context):
-    RecyclerView.Adapter<CredentialsStatusAdapter.StatsViewHolder>(){
-
-    //definition of the data type we will work with
-    var data = listOf<Credential>()
-        //custom setter that tells the recyclerView if data changed
-        set(value){
-            field = value
-            notifyDataSetChanged()
-        }
-
+    ListAdapter<Credential, CredentialsStatusAdapter.StatsViewHolder>(CredentialDiffItemCallback()){
     inner class StatsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
         private val service: TextView = itemView.findViewById(R.id.stats_service)
@@ -58,14 +51,9 @@ class CredentialsStatusAdapter(val context: Context):
         return StatsViewHolder(view)
     }
 
-    override fun getItemCount(): Int
-    {
-        return data.size
-    }
-
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int)
     {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 }
