@@ -98,8 +98,6 @@ class CredentialsAdapter(private val context: Context):
                             )
                             updatePasswordTextView(credential.password, alertDialog.insertedMasterPassword)
                         }
-
-                        override fun onUnlockFailure() {}
                     })
 
                     alertDialog.show(fm, "fragment_alert")
@@ -168,8 +166,6 @@ class CredentialsAdapter(private val context: Context):
                     {
                         deleteListener?.onDeleteCredential(credential.id)
                     }
-
-                    override fun onUnlockFailure() {}
                 })
 
                 alertDialog.show(fm, UnlockDialogFragment.UNLOCK_DIALOG_FRAGMENT_TAG)

@@ -80,8 +80,6 @@ class UnlockWidgetActivity : AppCompatActivity()
                         binding.credentialItem.password.text = viewModel.displayedPassword
                         binding.unlockButton.text = viewModel.displayedButtonText
                     }
-
-                    override fun onUnlockFailure() {}
                 })
 
                 unlockDialog.show(supportFragmentManager, UnlockDialogFragment.UNLOCK_DIALOG_FRAGMENT_TAG)
