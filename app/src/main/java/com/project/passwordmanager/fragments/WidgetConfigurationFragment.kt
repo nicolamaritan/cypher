@@ -20,6 +20,12 @@ import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
 import com.project.passwordmanager.widgets.credentials.CredentialsWidget
 
+/**
+ * This fragment is contained in the WidgetConfigurationActivity and shows a list
+ * of all Credentials, allowing the user to choose which credentials to store
+ * in the home screen. It also allow the user to set a name for the widget. If the name
+ * remains blank, "Your passwords" is set as default.
+ */
 class WidgetConfigurationFragment : Fragment()
 {
     private var _binding: FragmentWidgetConfigurationBinding? = null

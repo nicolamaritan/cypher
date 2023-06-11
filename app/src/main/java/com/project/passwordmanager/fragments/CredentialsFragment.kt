@@ -18,6 +18,10 @@ import com.project.passwordmanager.listeners.DeleteListener
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.CredentialsViewModel
 
+/**
+ * Fragment which shows the list of your credentials. It consists of the first view
+ * of the user after configuring the Master Password in the first time only activity.
+ */
 class CredentialsFragment : Fragment(), DeleteListener
 {
     private var _binding: FragmentCredentialsBinding? = null
