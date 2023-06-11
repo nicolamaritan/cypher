@@ -3,7 +3,6 @@ package com.project.passwordmanager.factories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.model.CredentialDao
-import com.project.passwordmanager.viewmodels.CredentialsViewModel
 import com.project.passwordmanager.viewmodels.WidgetConfigurationViewModel
 
 class WidgetConfigurationViewModelFactory(private val dao: CredentialDao)

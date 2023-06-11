@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.viewmodels.UnlockDialogViewModel
 
-class UnlockDialogViewModelFactory()
+class UnlockDialogViewModelFactory
     : ViewModelProvider.Factory
 {
     /*

@@ -8,7 +8,7 @@ import android.content.Context
  * @param context The context in which the widget preferences are managed.
  * @param appWidgetId The ID of the app widget.
  */
-class WidgetPreferencesManager(val context: Context, val appWidgetId: Int) {
+class WidgetPreferencesManager(val context: Context, private val appWidgetId: Int) {
 
     /**
      * Retrieves the list of added IDs from the widget preferences.
