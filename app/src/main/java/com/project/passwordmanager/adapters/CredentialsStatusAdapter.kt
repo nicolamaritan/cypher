@@ -17,8 +17,8 @@ import java.time.LocalDate
 
 //Adapter for the password status's recyclerview
 class CredentialsStatusAdapter(val context: Context):
-    ListAdapter<Credential, CredentialsStatusAdapter.StatsViewHolder>(CredentialDiffItemCallback()){
-    inner class StatsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    ListAdapter<Credential, CredentialsStatusAdapter.CredentialsStatusViewHolder>(CredentialDiffItemCallback()){
+    inner class CredentialsStatusViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
         private val service: TextView = itemView.findViewById(R.id.stats_service)
         private val username: TextView = itemView.findViewById(R.id.stats_user)
@@ -43,15 +43,15 @@ class CredentialsStatusAdapter(val context: Context):
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CredentialsStatusViewHolder
     {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.credentials_status_recyclerview_item, parent, false)
 
-        return StatsViewHolder(view)
+        return CredentialsStatusViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: StatsViewHolder, position: Int)
+    override fun onBindViewHolder(holder: CredentialsStatusViewHolder, position: Int)
     {
         val item = getItem(position)
         holder.bind(item)

@@ -12,7 +12,7 @@ import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.model.Credential
 
 
-class WidgetConfigurationCredentialsAdapter():
+class WidgetConfigurationCredentialsAdapter:
     ListAdapter<Credential, WidgetConfigurationCredentialsAdapter.WidgetConfigurationCredentialsViewHolder>
         (CredentialDiffItemCallback()){
 
