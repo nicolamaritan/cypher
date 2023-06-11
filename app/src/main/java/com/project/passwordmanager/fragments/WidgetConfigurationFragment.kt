@@ -51,7 +51,7 @@ class WidgetConfigurationFragment : Fragment()
         // Passing data to the adapter
         viewModel.credentials.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         }
 
