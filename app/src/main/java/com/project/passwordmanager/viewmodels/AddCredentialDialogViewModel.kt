@@ -65,7 +65,7 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
      *
      * @return True if the credential is added successfully, false otherwise.
      */
-    fun addCredential() : Boolean
+    fun addCredential()
     {
         Log.d(TAG, "addCredential invoked.")
         val credential = Credential()
@@ -81,7 +81,6 @@ class AddCredentialDialogViewModel(private val dao: CredentialDao) : ViewModel()
         }
 
         _toastStringId.value = R.string.credential_added_toast
-        return true
     }
 
     /**

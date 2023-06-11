@@ -52,10 +52,8 @@ class AddCredentialDialogFragment : DialogFragment()
             // Passes the true hashed password for the check
             if (viewModel.validateCredential() && viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(requireContext())))
             {
-                if (viewModel.addCredential())
-                {
-                    dismiss()
-                }
+                viewModel.addCredential()
+                dismiss()
             }
             else
             {
