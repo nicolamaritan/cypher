@@ -80,4 +80,10 @@
     <string name="fake_date_2022_10_11">2022&#8211;10&#8211;11</string>
     <string name="insert_the_name_displayed_on_the_widget">Insert the name displayed on the widget.</string>
     <string name="insert_the_widget_name">Insert the widget name.</string>
+
+    // Add Widget
+    <string name="add_widget">Add widget</string>
+    <string name="add_to_cypher">Add to Cypher\n+</string>
+    <string name="descr_creation_widget">button for the add credential widget</string>
+    <string name="add_widget_description">Aggiungi una credenziale dalla tua home screen</string>
 </resources>

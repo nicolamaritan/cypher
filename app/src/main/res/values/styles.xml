@@ -6,4 +6,9 @@
         <item name="colorPrimary">@color/purple_500</item>
     </style>
 
+    <style name="Widget.PasswordManager.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
 </resources>

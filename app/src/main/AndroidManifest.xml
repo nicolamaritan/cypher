@@ -6,11 +6,21 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PasswordManager"
-        >
+        android:theme="@style/Theme.PasswordManager">
+        <receiver
+            android:name=".widgets.addcredential.AddCredentialWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/add_credential_widget_info" />
+        </receiver>
         <receiver
             android:name=".widgets.stats.StatsWidget"
             android:exported="false">
