@@ -51,7 +51,7 @@ class AddCredentialWidget : AppWidgetProvider() {
             context.packageName,
             R.layout.add_credential_widget
         ).apply {
-            setOnClickPendingIntent(R.id.add_widget_button, pendingIntent)
+            setOnClickPendingIntent(R.id.add_credential_widget_layout_id, pendingIntent)
         }
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)
