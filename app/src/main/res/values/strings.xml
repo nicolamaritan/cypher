@@ -101,8 +101,9 @@
 
     // Add Widget
     <string name="add_widget">Add widget</string>
-    <string name="add_to_cypher">Aggiungi a Cypher\n+</string>
+    <string name="add_to_cypher">Aggiungi</string>
     <string name="descr_creation_widget">Pulsante per aggiungere una credenziale</string>
     <string name="add_widget_description">Aggiungi una credenziale dalla tua home screen</string>
+    <string name="immagine_del_widget_di_aggiunta">Immagine del widget di aggiunta</string>
 
 </resources>

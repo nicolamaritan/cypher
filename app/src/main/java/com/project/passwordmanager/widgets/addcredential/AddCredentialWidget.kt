@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import com.project.passwordmanager.R
-import com.project.passwordmanager.activities.MainActivity
+import com.project.passwordmanager.activities.AddCredentialActivity
 
 /**
  * Implementation of App Widget functionality.
@@ -41,7 +41,7 @@ class AddCredentialWidget : AppWidgetProvider() {
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             /* context = */ context,
             /* requestCode = */  0,
-            /* intent = */ Intent(context, MainActivity::class.java),
+            /* intent = */ Intent(context, AddCredentialActivity::class.java),
             /* flags = */ PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
