@@ -105,5 +105,6 @@
     <string name="descr_creation_widget">Pulsante per aggiungere una credenziale</string>
     <string name="add_widget_description">Aggiungi una credenziale dalla tua home screen</string>
     <string name="immagine_del_widget_di_aggiunta">Immagine del widget di aggiunta</string>
+    <string name="add_a_new_credential_to_cypher_it_will_be_in_good_hands">Aggiungi una nuova credenziale a Cypher. Sarà in buone mani.</string>
 
 </resources>
