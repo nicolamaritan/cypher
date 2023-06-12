@@ -1,71 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_widget_description">Safely store your credentials in the home screen. You can unlock and lock them when needed.</string>
-    <string name="emptywidget_text">No credentials added.</string>
-    <string name="status_widget_description">Keep an eye on the passwords to change.</string>
-
+    // Common
+    <string name="unlock_the_password_first">Unlock the password first.</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
+    <string name="unlock">Unlock</string>
     <string name="add">Add</string>
+    <string name="unlock_toast">Unlock successful</string>
+    <string name="authentication">Authentication</string>
+
+    // Credentials
     <string name="credentials">Credentials</string>
     <string name="insert_the_password">Insert the password</string>
     <string name="insert_the_service">Insert the service</string>
     <string name="service">Service</string>
     <string name="insert_your_username">Insert your username</string>
-    <string name="credential_added_toast">Credential safely added ;)</string>
-    <string name="credential_modified_toast">Credential safely modified ;)</string>
-    <string name="unlock_toast">Successful unlock</string>
-    <string name="invalid_credential_toast">Invalid credentials! One or more empty values.</string>
-    <string name="unlock">Unlock</string>
-    <string name="copy_the_credential_s_password">Copy the credential\'s password.</string>
+    <string name="credential_added_toast">Credential added successfully</string>
+    <string name="credential_modified_toast">Credential modified successfully</string>
+    <string name="invalid_credential_toast">Invalid credentials. One or more fields are empty</string>
+    <string name="copy_the_credential_s_password">Copy the password.</string>
     <string name="modify_the_credential">Modify</string>
     <string name="delete_the_credential">Delete</string>
-    <string name="unlock_lock_the_credential_s_password">Unlock/lock the credential\'s password</string>
-    <string name="add_a_new_credential">Add a new credential</string>
-    <string name="wrong_master_password">Wrong master password</string>
-    <string name="authentication">Authentication</string>
+    <string name="unlock_lock_the_credential_s_password">Lock/Unlock the password</string>
+    <string name="add_a_new_credential">Add new credential</string>
+    <string name="wrong_master_password">Incorrect master password</string>
     <string name="password_deleted">Password deleted</string>
+
+    // Credentials Widget
     <string name="unlock_widget">Unlock widget</string>
     <string name="insert_your_master_password">Insert your master password</string>
-    <string name="lock">Lock</string>
+    <string name="lock">LOCK</string>
     <string name="widget_configuration">Widget configuration</string>
     <string name="select_at_least">Select at least one credential</string>
-    <string name="choice">Choose the order:</string>
-    <string name="order1">Alphabetic order by service</string>
-    <string name="order2">Alphabetic order by username</string>
+    <string name="emptywidget_text">No credentials added</string>
+    <string name="app_widget_description">Securely store your credentials on the home screen. Unlock and lock them when needed.</string>
+    <string name="my_passwords">My Passwords</string>
+    <string name="see_all">See All</string>
+    <string name="passwords_cannot_be_blank">Passwords cannot be blank</string>
+    <string name="modify_your_username">Modify username</string>
+    <string name="modify_the_service">Modify service</string>
+    <string name="modify_the_password">Modify password</string>
+    <string name="stored_credentials">Stored Passwords: %1$d</string>
+    <string name="insert_the_name_displayed_on_the_widget">Insert the name displayed on the widget.</string>
+    <string name="insert_the_widget_name">Insert the widget name.</string>
+
+    // Settings
+    <string name="settings">Settings</string>
+    <string name="choice">Choose order:</string>
+    <string name="order1">Alphabetical order by service</string>
+    <string name="order2">Alphabetical order by username</string>
     <string name="order3">Chronological order</string>
     <string name="enable_dark_mode">Change theme</string>
-    <string name="tv_change_masterpassword">Change your master password:</string>
-    <string name="old_pw">Insert old master password</string>
-    <string name="new_pw">Insert new master password</string>
+    <string name="tv_change_masterpassword">Change master password:</string>
+    <string name="old_pw">Enter old master password</string>
+    <string name="new_pw">Enter new master password</string>
     <string name="confirm_new_pw">Confirm new master password</string>
-    <string name="order_display">Order display</string>
+    <string name="order_display">Display order</string>
     <string name="theme_language">Theme</string>
-    <string name="stats">Stats</string>
-    <string name="last_modify_date">Last modify date</string>
-    <string name="modify_your_username">Modify your username</string>
-    <string name="modify_the_service">Modify your service</string>
-    <string name="modify_the_password">Modify your password</string>
-    <string name="how_to_create_strong_password">How to create a <i>strong</i> password? Check <a href="https://support.google.com/accounts/answer/32040?hl=en">Google\'s advices.</a></string>
-    <string name="welcome_this_app">Welcome! This app allows you to safely store your password on the device.</string>
-    <string name="choose">Choose a <i>strong</i> Master Password used to access all your saved passwords</string>
-    <string name="reinsert_your_master_password">Reinsert your Master Password</string>
-    <string name="confirm">Confirm</string>
-    <string name="password_mismatch">Password mismatch</string>
-    <string name="entered_passwords_do_not_match">The entered passwords do not match</string>
-    <string name="master_password_correctly_inserted">Master Password correctly inserted</string>
-    <string name="blank_password">Blank password</string>
-    <string name="passwords_cannot_be_blank">Passwords cannot be blank</string>
-    <string name="see_all">See All</string>
-    <string name="settings">Settings</string>
-    <string name="number_of_passwords_stored">Number of passwords stored: %1$s</string>
-    <string name="number_of_old_passwords">Number of old passwords stored: %1$s</string>
+
+    // Stats
+    <string name="stats">Statistics</string>
+    <string name="last_modify_date">Last modification date</string>
+    <string name="number_of_old_passwords">Number of old saved passwords: %1$s</string>
     <string name="password_status">Password status</string>
-    <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3/6 months.</string>
+    <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">It is advisable to change your passwords at least every 3–6 months</string>
     <string name="value">Value</string>
     <string name="last_modified">Last modified</string>
-    <string name="unlock_the_password_first">Unlock the password first.</string>
-    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
-    <string name="my_passwords">My passwords</string>
-    <string name="stored_credentials">Stored credentials: %1$d</string>
+
+    // Stats Widget
+    <string name="status_widget_description">Keep an eye on passwords to change.</string>
+    <string name="your_credentials_status">Your Passwords Status:</string>
+    <string name="number_of_passwords_stored">Number of stored passwords: %1$s</string>
+
+    // Welcome
+    <string name="how_to_create_strong_password">How to create a <i>strong</i> password? See <a href="https://support.google.com/accounts/answer/32040?hl=en">Google\'s Tips</a></string>
+    <string name="welcome_this_app">Welcome! This app allows you to securely store your passwords</string>
+    <string name="choose">Choose a <i>strong</i> master password to access all the saved passwords</string>
+    <string name="reinsert_your_master_password">Re-enter Master Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="password_mismatch">Password mismatch</string>
+    <string name="entered_passwords_do_not_match">Entered passwords do not match</string>
+    <string name="master_password_correctly_inserted">Master Password correctly inserted</string>
+    <string name="blank_password">Blank password</string>
 
     // Widget Previews
     <string name="education_portals">Education portals</string>
@@ -73,18 +88,16 @@
     <string name="cool_school">Cool School</string>
     <string name="alice_smith_underscore">alice_smith</string>
     <string name="stem_everywhere">STEM everywhere</string>
-    <string name="your_credentials_status">Your credentials status:</string>
     <string name="fake_date_2023_02_21">2023&#8211;02&#8211;21</string>
     <string name="important_bank_account_fake">Important bank account</string>
     <string name="alice_and_bob_fake">Alice and Bob</string>
     <string name="fake_date_2022_10_11">2022&#8211;10&#8211;11</string>
-    <string name="insert_the_name_displayed_on_the_widget">Insert the name displayed on the widget.</string>
-    <string name="insert_the_widget_name">Insert the widget name.</string>
 
-    // Add Widget
+
+    // Add widget
     <string name="add_widget">Add widget</string>
     <string name="add_to_cypher">Add</string>
-    <string name="descr_creation_widget">button for the add credential widget</string>
-    <string name="add_widget_description">Aggiungi una credenziale dalla tua home screen</string>
-    <string name="immagine_del_widget_di_aggiunta">Immagine del widget di aggiunta</string>
+    <string name="descr_creation_widget">Button to add a credential</string>
+    <string name="add_widget_description">Add a credential from your home screen</string>
+    <string name="immagine_del_widget_di_aggiunta">Add widget image</string>
 </resources>
