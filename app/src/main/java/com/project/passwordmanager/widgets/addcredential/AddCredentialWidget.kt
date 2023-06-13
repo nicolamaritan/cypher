@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.util.SizeF
 import android.widget.RemoteViews
 import com.project.passwordmanager.R
 import com.project.passwordmanager.activities.AddCredentialActivity
@@ -46,13 +47,26 @@ class AddCredentialWidget : AppWidgetProvider()
 
         // Get the layout for the widget and attach an on-click listener
         // to the layout.
-        val views: RemoteViews = RemoteViews(
+        val smallView: RemoteViews = RemoteViews(
             context.packageName,
             R.layout.add_credential_widget
         ).apply {
             setOnClickPendingIntent(R.id.add_credential_widget_layout_id, pendingIntent)
         }
 
+        val wideView: RemoteViews = RemoteViews(
+            context.packageName,
+            R.layout.add_credential_widget_wide
+        ).apply {
+            setOnClickPendingIntent(R.id.add_credential_widget_layout_id, pendingIntent)
+        }
+
+        val viewMapping =  mapOf(
+            SizeF(80f, 80f) to smallView,
+            SizeF(300f, 80f) to wideView
+        )
+
+        val views = RemoteViews(viewMapping)
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
