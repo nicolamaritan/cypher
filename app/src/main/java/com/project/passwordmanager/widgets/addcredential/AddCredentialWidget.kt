@@ -45,9 +45,15 @@ class AddCredentialWidget : AppWidgetProvider()
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Get the layout for the widget and attach an on-click listener
-        // to the layout.
+        // Get the layout for the widget and attach an on-click listener to the layout.
         val smallView: RemoteViews = RemoteViews(
+            context.packageName,
+            R.layout.add_credential_widget_small
+        ).apply {
+            setOnClickPendingIntent(R.id.add_credential_widget_layout_id, pendingIntent)
+        }
+
+        val normalView: RemoteViews = RemoteViews(
             context.packageName,
             R.layout.add_credential_widget
         ).apply {
@@ -62,7 +68,8 @@ class AddCredentialWidget : AppWidgetProvider()
         }
 
         val viewMapping =  mapOf(
-            SizeF(80f, 80f) to smallView,
+            SizeF(150f, 80f) to smallView,
+            SizeF(250f, 80f) to normalView,
             SizeF(300f, 80f) to wideView
         )
 
