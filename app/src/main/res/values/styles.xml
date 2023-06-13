@@ -3,7 +3,7 @@
     <style name="Widget.PasswordManager.AppWidget.Container" parent="android:Widget">
         <item name="android:id">@android:id/background</item>
         <item name="android:background">?android:attr/colorBackground</item>
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/light_blue_900</item>
     </style>
 
     <style name="Widget.PasswordManager.AppWidget.InnerView" parent="android:Widget">
