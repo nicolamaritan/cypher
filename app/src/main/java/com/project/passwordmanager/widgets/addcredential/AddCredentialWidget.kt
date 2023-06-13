@@ -10,27 +10,26 @@ import com.project.passwordmanager.R
 import com.project.passwordmanager.activities.AddCredentialActivity
 
 /**
- * Implementation of App Widget functionality.
+ * Add widget. It allows the user to add a new credential from the
+ * home screen. It has a single layout which works as button.
  */
-class AddCredentialWidget : AppWidgetProvider() {
+class AddCredentialWidget : AppWidgetProvider()
+{
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
         // There may be multiple widgets active, so update all of them
-        for (appWidgetId in appWidgetIds) {
+        for (appWidgetId in appWidgetIds)
+        {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
     }
 
-    override fun onEnabled(context: Context) {
-        // Enter relevant functionality for when the first widget is created
-    }
+    override fun onEnabled(context: Context) {}
 
-    override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
+    override fun onDisabled(context: Context) {}
 
     private fun updateAppWidget(
         context: Context,
@@ -39,20 +38,21 @@ class AddCredentialWidget : AppWidgetProvider() {
     ) {
         // Create an Intent to launch ExampleActivity.
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
-            /* context = */ context,
-            /* requestCode = */  0,
-            /* intent = */ Intent(context, AddCredentialActivity::class.java),
-            /* flags = */ PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            context,
+            0,
+            Intent(context, AddCredentialActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         // Get the layout for the widget and attach an on-click listener
-        // to the button.
+        // to the layout.
         val views: RemoteViews = RemoteViews(
             context.packageName,
             R.layout.add_credential_widget
         ).apply {
             setOnClickPendingIntent(R.id.add_credential_widget_layout_id, pendingIntent)
         }
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
