@@ -5,15 +5,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.viewmodels.SettingsViewModel
 
-class SettingsViewModelFactory(val dao : CredentialDao) : ViewModelProvider.Factory {
-
-    /**
-     * Creates a new instance of the specified ViewModel class.
-     *
-     * @param modelClass The class of the ViewModel to create.
-     * @return A new instance of the ViewModel.
-     * @throws IllegalArgumentException if the specified ViewModel class is unknown.
-     */
+/**
+ * This factory class is responsible for creating instances of the SettingsViewModel.
+ * It implements the ViewModelProvider.Factory interface.
+ */
+class SettingsViewModelFactory(val dao : CredentialDao) : ViewModelProvider.Factory
+{
+    /*
+        Suppresses the warning as the method checks if the modelClass
+        is castable to a UnlockDialogViewModel. If it is not,
+        the method throws IllegalArgumentException.
+    */
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
