@@ -2,12 +2,13 @@ package com.project.passwordmanager.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.ActivityAddCredentialBinding
-import com.project.passwordmanager.factories.AddCredentialDialogViewModelFactory
+import com.project.passwordmanager.factories.AddCredentialActivityViewModelFactory
 import com.project.passwordmanager.model.CredentialDatabase
-import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
+import com.project.passwordmanager.viewmodels.AddCredentialActivityViewModel
 
 class AddCredentialActivity : AppCompatActivity()
 {
@@ -26,8 +27,8 @@ class AddCredentialActivity : AppCompatActivity()
         // Instantiating the ViewModel
         val application = application
         val dao = CredentialDatabase.getInstance(application).credentialDao
-        val viewModelFactory = AddCredentialDialogViewModelFactory(dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[AddCredentialDialogViewModel::class.java]
+        val viewModelFactory = AddCredentialActivityViewModelFactory(dao)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[AddCredentialActivityViewModel::class.java]
 
         // DataBinding
         binding.credentialsDialogViewModel = viewModel
@@ -43,6 +44,18 @@ class AddCredentialActivity : AppCompatActivity()
             else
             {
                 binding.insertedMasterPasswordTe.text.clear()
+            }
+        }
+
+        /*
+        * Observes the toastStringId in the viewModel to show
+        * a toast whenever the value changes.
+        * Contains the id of the string to show.
+        * */
+        viewModel.toastStringId.observe(this) {
+            it.let {
+                val toastMessage = applicationContext.getString(it)
+                Toast.makeText(applicationContext, toastMessage, Toast.LENGTH_LONG).show()
             }
         }
     }
