@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.viewmodels.UnlockDialogViewModel
 
+/**
+ * This factory class is responsible for creating instances of the UnlockDialogViewModel.
+ * It implements the ViewModelProvider.Factory interface.
+ */
 class UnlockDialogViewModelFactory
     : ViewModelProvider.Factory
 {

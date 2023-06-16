@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel
 
+/**
+ * This factory class is responsible for creating instances of the AddCredentialDialog.
+ * It implements the ViewModelProvider.Factory interface.
+ */
 class AddCredentialDialogViewModelFactory(private val dao: CredentialDao)
     : ViewModelProvider.Factory
 {

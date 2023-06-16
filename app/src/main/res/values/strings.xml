@@ -34,7 +34,7 @@
     <string name="insert_your_master_password">Inserisci la tua master password</string>
     <string name="lock">BLOCCA</string>
     <string name="widget_configuration">Configurazione widget</string>
-    <string name = "select_at_least">Seleziona almeno una credenziale</string>
+    <string name="select_at_least">Seleziona almeno una credenziale</string>
     <string name="emptywidget_text">Nessuna credenziale aggiunta</string>
     <string name="app_widget_description">Memorizza in modo sicuro le tue credenziali nella schermata home. Puoi sbloccarli e bloccarli quando necessario.</string>
     <string name="my_passwords">Le mie password</string>
@@ -98,5 +98,12 @@
     <string name="important_bank_account_fake">Account bancari importanti</string>
     <string name="alice_and_bob_fake">Mario e Luigi</string>
     <string name="fake_date_2022_10_11">2022&#8211;10&#8211;11</string>
+
+    // Add Widget
+    <string name="add_to_cypher">Aggiungi a Cypher</string>
+    <string name="add_widget_description">Aggiungi una credenziale dalla tua home screen</string>
+    <string name="immagine_del_widget_di_aggiunta">Immagine del widget di aggiunta</string>
+    <string name="add_a_new_credential_to_cypher_it_will_be_in_good_hands">Aggiungi una nuova credenziale a Cypher. Sarà in buone mani.</string>
+    <string name="add_plus" translatable="false">+</string>
 
 </resources>
