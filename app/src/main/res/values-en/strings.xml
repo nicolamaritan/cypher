@@ -22,12 +22,12 @@
     <string name="delete_the_credential">Delete</string>
     <string name="unlock_lock_the_credential_s_password">Lock/Unlock the password</string>
     <string name="add_a_new_credential">Add new credential</string>
-    <string name="wrong_master_password">Incorrect master password</string>
+    <string name="wrong_master_password">Incorrect Master Password</string>
     <string name="password_deleted">Password deleted</string>
 
     // Credentials Widget
     <string name="unlock_widget">Unlock widget</string>
-    <string name="insert_your_master_password">Insert your master password</string>
+    <string name="insert_your_master_password">Insert your Master Password</string>
     <string name="lock">LOCK</string>
     <string name="widget_configuration">Widget configuration</string>
     <string name="select_at_least">Select at least one credential</string>
@@ -50,10 +50,10 @@
     <string name="order2">Alphabetical order by username</string>
     <string name="order3">Chronological order</string>
     <string name="enable_dark_mode">Change theme</string>
-    <string name="tv_change_masterpassword">Change master password:</string>
-    <string name="old_pw">Enter old master password</string>
-    <string name="new_pw">Enter new master password</string>
-    <string name="confirm_new_pw">Confirm new master password</string>
+    <string name="tv_change_masterpassword">Change Master Password:</string>
+    <string name="old_pw">Enter old Master Password</string>
+    <string name="new_pw">Enter new Master Password</string>
+    <string name="confirm_new_pw">Confirm new Master Password</string>
     <string name="order_display">Display order</string>
     <string name="theme_language">Theme</string>
 

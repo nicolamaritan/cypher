@@ -26,12 +26,12 @@
     <string name="delete_the_credential">Cancella</string>
     <string name="unlock_lock_the_credential_s_password">Blocca/sblocca la password</string>
     <string name="add_a_new_credential">Aggiungi nuova credenziale</string>
-    <string name="wrong_master_password">Master password errata</string>
+    <string name="wrong_master_password">Master Password errata</string>
     <string name="password_deleted">Password eliminata</string>
 
     // Credentials Widget
     <string name="unlock_widget">Sblocca widget</string>
-    <string name="insert_your_master_password">Inserisci la tua master password</string>
+    <string name="insert_your_master_password">Inserisci la tua Master Password</string>
     <string name="lock">BLOCCA</string>
     <string name="widget_configuration">Configurazione widget</string>
     <string name="select_at_least">Seleziona almeno una credenziale</string>
@@ -55,13 +55,13 @@
     <string name="order2">Ordine alfabetico per username</string>
     <string name="order3">Ordine cronologico</string>
     <string name="enable_dark_mode">Cambia il tema</string>
-    <string name="tv_change_masterpassword">Cambia la master password:</string>
-    <string name="old_pw">Inserisci la vecchia master password</string>
-    <string name="new_pw">Inserisci la nuova master password</string>
-    <string name="confirm_new_pw">Conferma la nuova master password</string>
+    <string name="tv_change_masterpassword">Cambia la Master Password:</string>
+    <string name="old_pw">Inserisci la vecchia Master Password</string>
+    <string name="new_pw">Inserisci la nuova Master Password</string>
+    <string name="confirm_new_pw">Conferma la nuova Master Password</string>
     <string name="order_display">Ordine di visualizzazione</string>
     <string name="theme_language">Tema</string>
-    <string name="reset_mp" translatable="false">Reset master password</string>
+    <string name="reset_mp" translatable="false">Reset Master Password</string>
 
     // Stats
     <string name="stats">Statistiche</string>
@@ -80,7 +80,7 @@
     // Welcome
     <string name="how_to_create_strong_password">Come creare una password<i>forte</i>? Vedi <a href="https://support.google.com/accounts/answer/32040?hl=en">Consigli di Google</a></string>
     <string name="welcome_this_app">Benvenuto! Questa app ti consente di memorizzare in modo sicuro le tue password</string>
-    <string name="choose">Scegli una master password <i>forte</i> per accedere a tutte le password salvate</string>
+    <string name="choose">Scegli una Master Password <i>forte</i> per accedere a tutte le password salvate</string>
     <string name="reinsert_your_master_password">Inserisci nuovamente la Master Password</string>
     <string name="confirm">Conferma</string>
     <string name="password_mismatch">Password non corrispondenti</string>
