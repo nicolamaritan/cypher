@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/CredentialsFragment"
         android:name="com.project.passwordmanager.fragments.CredentialsFragment"
-        android:label="Credentials"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_credentials"/>
 
     <fragment
         android:id="@+id/StatsFragment"
         android:name="com.project.passwordmanager.fragments.StatsFragment"
-        android:label="Stats"
+        android:label="@string/stats"
         tools:layout="@layout/fragment_stats"/>
 
     <fragment
         android:id="@+id/SettingsFragment"
         android:name="com.project.passwordmanager.fragments.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/settings"
         tools:layout="@layout/fragment_settings"/>
 </navigation>
