@@ -35,10 +35,9 @@ class AddCredentialActivity : AppCompatActivity()
 
         binding.addFromWidget.setOnClickListener{
             // Passes the true hashed password for the check
-            if (viewModel.validateCredential() /*&& viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(context))*/)
+            if (viewModel.validateCredential() && viewModel.checkInsertedMasterPassword(Utils.getHashedMasterPassword(this)))
             {
                 viewModel.addCredential()
-                //dismiss()
                 finish()
             }
             else
