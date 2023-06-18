@@ -2,15 +2,12 @@ package com.project.passwordmanager.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.CredentialsAdapter
@@ -75,39 +72,19 @@ class CredentialsFragment : Fragment(), DeleteListener
             viewModel.showDialog(parentFragmentManager)
         }
 
-        binding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int)
-            {
-                super.onScrolled(recyclerView, dx, dy)
-                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val lastCompleteVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition()
-                Log.d(TAG, "last complete visible: $lastCompleteVisibleItemPosition")
-                Log.d(TAG, "size: ${recyclerView.size}")
-
-                if (lastCompleteVisibleItemPosition+1  == recyclerView.size)
+        binding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener()
+        {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
                 {
-                    binding.fab.hide()
+                    binding.fab.show()
                 }
                 else
                 {
-                    binding.fab.show()
+                    binding.fab.hide()
                 }
             }
-
-            /*override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int)
-            {
-                super.onScrollStateChanged(recyclerView, newState)
-                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val lastCompleteVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition()
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && (lastCompleteVisibleItemPosition+1  == recyclerView.size))
-                {
-                    binding.fab.hide()
-                }
-                else
-                {
-                    binding.fab.show()
-                }
-            }*/
         })
 
         return view
