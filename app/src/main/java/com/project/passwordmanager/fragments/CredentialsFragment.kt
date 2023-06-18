@@ -2,12 +2,16 @@ package com.project.passwordmanager.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.CredentialsAdapter
 import com.project.passwordmanager.common.Constants
@@ -17,6 +21,7 @@ import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.listeners.DeleteListener
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.CredentialsViewModel
+
 
 /**
  * Fragment which shows the list of your credentials. It consists of the first view
@@ -70,6 +75,41 @@ class CredentialsFragment : Fragment(), DeleteListener
             viewModel.showDialog(parentFragmentManager)
         }
 
+        binding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int)
+            {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastCompleteVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition()
+                Log.d(TAG, "last complete visible: $lastCompleteVisibleItemPosition")
+                Log.d(TAG, "size: ${recyclerView.size}")
+
+                if (lastCompleteVisibleItemPosition+1  == recyclerView.size)
+                {
+                    binding.fab.hide()
+                }
+                else
+                {
+                    binding.fab.show()
+                }
+            }
+
+            /*override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int)
+            {
+                super.onScrollStateChanged(recyclerView, newState)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastCompleteVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition()
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && (lastCompleteVisibleItemPosition+1  == recyclerView.size))
+                {
+                    binding.fab.hide()
+                }
+                else
+                {
+                    binding.fab.show()
+                }
+            }*/
+        })
+
         return view
     }
 
@@ -84,6 +124,11 @@ class CredentialsFragment : Fragment(), DeleteListener
     {
         viewModel.deleteCredential(credentialId)
         Toast.makeText(context, getString(R.string.password_deleted), Toast.LENGTH_LONG).show()
+    }
+
+    companion object
+    {
+        val TAG: String = CredentialsFragment::class.java.simpleName
     }
 
 }
