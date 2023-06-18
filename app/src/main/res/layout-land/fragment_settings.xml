@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.SettingsFragment">
+    <!-- Text is visible with current size, so false positive is
+     suppressed in the current layout file.-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -131,11 +133,11 @@
     <EditText
         android:id="@+id/old_masterpassword_et"
         android:layout_width="252dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
+        android:autofillHints="password"
         android:hint="@string/old_pw"
-        android:inputType=""
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
@@ -144,28 +146,28 @@
     <EditText
         android:id="@+id/new_masterpassword_et"
         android:layout_width="252dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/old_masterpassword_et"
         app:layout_constraintVertical_bias="0.0"
-        android:inputType=""
-        android:autofillHints="" />
+        android:inputType="textPassword"
+        android:autofillHints="password" />
 
     <EditText
         android:id="@+id/confirmed_new_masterpassword_et"
         android:layout_width="252dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/confirm_new_pw"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_masterpassword_et"
         app:layout_constraintVertical_bias="0.0"
-        android:autofillHints=""
-        android:inputType="" />
+        android:autofillHints="password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/confirm_button"
