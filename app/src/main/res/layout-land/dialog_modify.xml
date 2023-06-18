@@ -1,27 +1,28 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
         <variable
-            name="credentialsDialogViewModel"
-            type="com.project.passwordmanager.viewmodels.AddCredentialDialogViewModel" />
+            name="modifyDialogViewModel"
+            type="com.project.passwordmanager.viewmodels.ModifyDialogViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--
-            The warning UselessParent is a false positive
-            because this structure allows a wider dialog.
-            Therefore the warning is ignored.
-        -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
+        <!--
+            The warning UselessParent is a false positive
+            because this structure allows a wider dialog.
+            Therefore the warning is ignored.
+        -->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_gravity="center"
@@ -39,10 +40,10 @@
                     android:id="@+id/username_te"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/insert_your_username"
+                    android:hint="@string/modify_your_username"
                     android:minHeight="48dp"
                     android:autofillHints="username"
-                    android:text="@={credentialsDialogViewModel.newCredentialUsername}"
+                    android:text="@={modifyDialogViewModel.newCredentialUsername}"
                     android:inputType="" />
 
                 <TextView
@@ -54,11 +55,11 @@
                     android:id="@+id/service_te"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/insert_the_service"
+                    android:hint="@string/modify_the_service"
                     android:minHeight="48dp"
                     android:autofillHints=""
                     android:inputType=""
-                    android:text="@={credentialsDialogViewModel.newCredentialService}"
+                    android:text="@={modifyDialogViewModel.newCredentialService}"
                     />
 
                 <TextView
@@ -70,21 +71,12 @@
                     android:id="@+id/password_te"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/insert_the_password"
+                    android:hint="@string/modify_the_password"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
                     android:autofillHints=""
-                    android:text="@={credentialsDialogViewModel.newCredentialPassword}"
+                    android:text="@={modifyDialogViewModel.newCredentialPassword}"
                     />
-
-                <View
-                    android:id="@+id/row"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="13dp"
-                    android:background="@android:color/darker_gray"
-                    />
-
 
 
             </LinearLayout>
@@ -93,10 +85,9 @@
                 android:layout_width="300dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_margin="20dp"
-                tools:ignore="UselessParent"
-                android:orientation="vertical">
-
+                tools:ignore="UselessParent">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,17 +101,16 @@
                     android:inputType="textPassword"
                     android:minHeight="48dp"
                     android:autofillHints=""
-                    android:text="@={credentialsDialogViewModel.insertedMasterPassword}"
+                    android:text="@={modifyDialogViewModel.insertedMasterPassword}"
                     />
 
                 <Button
-                    android:layout_gravity="center"
-                    android:id="@+id/add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add" />
+                    android:id="@+id/modify"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:text="@string/modify_the_credential"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
-
     </FrameLayout>
 </layout>
