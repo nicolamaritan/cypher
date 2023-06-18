@@ -50,6 +50,11 @@ class ModifyDialogViewModel(private val dao: CredentialDao) : ViewModel()
      */
     var insertedMasterPassword = ""
 
+    /**
+     * Saves if the viewModel is istantiated for the first time by the system.
+     */
+    var firstInstantiation = true
+
 
     private val _toastStringId = MutableLiveData<Int>()
 
