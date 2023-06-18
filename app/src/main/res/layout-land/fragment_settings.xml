@@ -175,9 +175,9 @@
         android:layout_height="wrap_content"
         android:text="@string/confirm"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/row3"
-        app:layout_constraintStart_toEndOf="@+id/row2"
-        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/row3"
+        app:layout_constraintTop_toBottomOf="@+id/confirmed_new_masterpassword_et" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
