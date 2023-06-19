@@ -65,7 +65,7 @@
 
     // Stats
     <string name="stats">Statistiche</string>
-    <string name="last_modify_date">Data di ultima modifica</string>
+    <string name="last_modify_date">Ultima modifica</string>
     <string name="number_of_old_passwords">Numero di vecchie password salvate: %1$s</string>
     <string name="password_status">Stato della password</string>
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">E\' consigliato cambiare le tue password almeno ogni 3/6 mesi</string>
