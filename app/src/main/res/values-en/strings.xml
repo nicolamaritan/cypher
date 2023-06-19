@@ -99,4 +99,5 @@
     <string name="add_widget_description">Add a credential from your home screen</string>
     <string name="immagine_del_widget_di_aggiunta">Add widget image</string>
     <string name="add_a_new_credential_to_cypher_it_will_be_in_good_hands">Add a new credential to Cypher. It will be in good hands.</string>
+    <string name="image_warning_about_credentials_modified_long_ago">Image warning about credentials modified long ago.</string>
 </resources>

@@ -71,6 +71,8 @@
     <string name="it_is_advisable_to_change_your_passwords_at_least_every_3_6_months">E\' consigliato cambiare le tue password almeno ogni 3/6 mesi</string>
     <string name="value">Valore</string>
     <string name="last_modified">Ultima modifica</string>
+    <string name="image_warning_about_credentials_modified_long_ago">Immagine di avvertimento per credenziali modificate tempo fa.</string>
+
 
     // Stats widget
     <string name="status_widget_description">Tieni d\'occhio le password da cambiare.</string>
