@@ -15,11 +15,11 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 /**
- * ViewModel class for ModifyDialogFragment.
+ * ViewModel class for `ModifyDialogFragment`.
  * This class is responsible for handling user interactions and data management related to modifying new credentials.
  * It provides methods to modify credentials and handle events for displaying toasts.
  *
- * @param dao The DAO (Data Access Object) for accessing the Credential entity in the database.
+ * @param dao The `CredentialDao` for accessing the Credential entity in the database.
  * @see com.project.passwordmanager.fragments.ModifyDialogFragment
  */
 

@@ -17,9 +17,9 @@ import com.project.passwordmanager.R
 import com.project.passwordmanager.common.Constants
 
 /**
- * MainActivity of the app, first displayed when it is launched. However, it is not the
+ * Main Activity of the app, first displayed when it is launched. However, it is not the
  * first activity the user sees when the app is launched the first time, which it is
- * FirstTimeActivity. The MainActivity allows navigation to 3 different fragments:
+ * `FirstTimeActivity`. The `MainActivity` allows navigation to 3 different fragments:
  * Credentials and Statistics (bottom bar navigation) and Settings (toolbar navigation).
  *
  * @see FirstTimeActivity

@@ -15,7 +15,7 @@ import com.project.passwordmanager.databinding.ActivityFirstTimeBinding
 /**
  * This activity is invoked the first time the app is used, but it is not
  * the main activity specified in the manifest. When this activity is done,
- * it launches the MainActivity.
+ * it launches the `MainActivity`.
  *
  * @see MainActivity
  */
