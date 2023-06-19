@@ -1,11 +1,13 @@
 package com.project.passwordmanager.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -35,6 +37,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, FirstTimeActivity::class.java))
 
             finish()
+        }
+
+        // Set saved dark mode
+        val darkMode = application.getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+            .getBoolean(Constants.DARK_MODE, false)
+        if (darkMode)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
         super.onCreate(savedInstanceState)

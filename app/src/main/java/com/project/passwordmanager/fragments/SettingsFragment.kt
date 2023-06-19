@@ -160,7 +160,12 @@ class SettingsFragment : Fragment()
     /**
      * Enables dark mode.
      */
-    private fun enableDarkMode() {
+    private fun enableDarkMode()
+    {
+        // Save chosen persistent state in shared preferences
+        requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+            .edit().putBoolean(Constants.DARK_MODE, true).apply()
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         requireActivity().recreate()
     }
@@ -169,7 +174,12 @@ class SettingsFragment : Fragment()
     /**
      * Disables dark mode.
      */
-    private fun disableDarkMode() {
+    private fun disableDarkMode()
+    {
+        // Save chosen persistent state in shared preferences
+        requireContext().getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+            .edit().putBoolean(Constants.DARK_MODE, false).apply()
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         requireActivity().recreate()
     }

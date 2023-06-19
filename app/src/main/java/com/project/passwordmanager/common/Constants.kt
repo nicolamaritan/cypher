@@ -15,4 +15,5 @@ object Constants
     const val SYSTEM_PREFERENCES = "system_prefs"
     const val FIRST_TIME = "first_time"
     const val CREDENTIALS_ORDER = "credentials_order"
+    const val DARK_MODE = "dark_mode"
 }
