@@ -14,35 +14,43 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/number_of_pw_stored_tv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            android:text="@string/number_of_passwords_stored"
-            android:textSize="18sp"/>
+            android:layout_height="wrap_content" >
 
-        <View
-            android:id="@+id/divider_1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="5dp"
-            android:background="@android:color/darker_gray" />
+            <TextView
+                android:id="@+id/number_of_pw_stored_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:text="@string/number_of_passwords_stored"
+                android:textSize="18sp"/>
 
-        <TextView
-            android:id="@+id/number_of_old_passwords_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="10dp"
-            android:text="@string/number_of_passwords_stored"
-            android:textSize="18sp"/>
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/number_of_old_passwords_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:text="@string/number_of_passwords_stored"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
 
         <View
             android:id="@+id/divider_2"
