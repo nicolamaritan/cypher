@@ -7,7 +7,7 @@ import com.project.passwordmanager.model.CredentialDao
  * ViewModel class for the widget configuration screen.
  * Manages the data and operations related to the widget configuration.
  *
- * @param dao The DAO (Data Access Object) for retrieving credential data.
+ * @param dao The `CredentialDao` for retrieving credential data.
  */
 class WidgetConfigurationViewModel(private val dao: CredentialDao) : ViewModel()
 {

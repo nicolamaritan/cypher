@@ -7,6 +7,14 @@ import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.security.Cryptography
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel class for `SettingsFragment`.
+ * This class is responsible for handling user interactions and data management related to
+ * the application settings.
+ *
+ * @param dao The `CredentialDao` for accessing the Credential entity in the database.
+ * @see com.project.passwordmanager.fragments.SettingsFragment
+ */
 class SettingsViewModel(val dao: CredentialDao) : ViewModel()
 {
     /**
