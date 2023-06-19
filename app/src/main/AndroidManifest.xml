@@ -60,7 +60,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/password_manager_widget_info" />
+                android:resource="@xml/credentials_widget_info" />
         </receiver>
 
         <activity
