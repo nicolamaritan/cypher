@@ -1,9 +1,12 @@
 package com.project.passwordmanager.activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import com.project.passwordmanager.common.Constants
 import com.project.passwordmanager.common.Utils
 import com.project.passwordmanager.databinding.ActivityAddCredentialBinding
 import com.project.passwordmanager.factories.AddCredentialActivityViewModelFactory
@@ -19,6 +22,18 @@ class AddCredentialActivity : AppCompatActivity()
     private lateinit var binding: ActivityAddCredentialBinding
     override fun onCreate(savedInstanceState: Bundle?)
     {
+        // Set saved dark mode
+        val darkMode = application.getSharedPreferences(Constants.SYSTEM_PREFERENCES, Context.MODE_PRIVATE)
+            .getBoolean(Constants.DARK_MODE, false)
+        if (darkMode)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityAddCredentialBinding.inflate(layoutInflater)
         val view = binding.root
