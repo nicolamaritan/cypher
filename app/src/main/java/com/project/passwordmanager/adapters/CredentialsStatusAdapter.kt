@@ -15,7 +15,14 @@ import com.project.passwordmanager.common.DateStatus
 import com.project.passwordmanager.model.Credential
 import java.time.LocalDate
 
-//Adapter for the password status's recyclerview
+/**
+ * This Adapter is responsible of linking the data fetched from the
+ * database and the view in the StatsFragment. It shows the last modified
+ * date for each credential, signaling the user through its text color
+ * when it is time to update it.
+ *
+ * @param context the application context
+ */
 class CredentialsStatusAdapter(val context: Context):
     ListAdapter<Credential, CredentialsStatusAdapter.CredentialsStatusViewHolder>(CredentialDiffItemCallback()){
     inner class CredentialsStatusViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)

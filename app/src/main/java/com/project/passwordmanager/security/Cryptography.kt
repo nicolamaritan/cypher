@@ -6,6 +6,10 @@ import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
+/**
+ * The `Cryptography` object provides methods for encrypting and
+ * decrypting text using AES encryption.
+ */
 object Cryptography
 {
     /**

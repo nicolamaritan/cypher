@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+/**
+ * ViewModel for the UnlockWidgetActivity.
+ */
 class UnlockWidgetViewModel(var displayedPassword: String, var displayedButtonText: String) : ViewModel()
 {
     var locked = true

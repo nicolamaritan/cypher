@@ -11,7 +11,13 @@ import com.project.passwordmanager.R
 import com.project.passwordmanager.common.CredentialDiffItemCallback
 import com.project.passwordmanager.model.Credential
 
-
+/**
+ * This Adapter is responsible of linking the data fetched from the
+ * database and the view in the WidgetConfigurationFragment. It shows the
+ * saved credential and allows the user to select each wanted
+ * credential in the widget.
+ *
+ */
 class WidgetConfigurationCredentialsAdapter:
     ListAdapter<Credential, WidgetConfigurationCredentialsAdapter.WidgetConfigurationCredentialsViewHolder>
         (CredentialDiffItemCallback()){

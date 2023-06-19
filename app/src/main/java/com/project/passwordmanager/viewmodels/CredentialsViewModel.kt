@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
  * This ViewModel class represents the credentials screen logic and data management.
  * It is responsible for providing data to the UI and handling user interactions.
  *
- * @param dao The CredentialDao used for data retrieval and manipulation.
+ * @param dao The `CredentialDao` used for data retrieval and manipulation.
  */
 class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
 {

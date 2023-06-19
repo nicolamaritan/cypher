@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 /**
- * ViewModel class for AddCredentialActivity.
+ * ViewModel class for `AddCredentialActivity`.
  * This class is responsible for handling user interactions and data management related to adding new credentials.
  * It provides methods to add credentials and handle events for displaying toasts.
  *

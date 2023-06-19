@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.project.passwordmanager.R
 import com.project.passwordmanager.databinding.ActivityWidgetConfigurationBinding
 
+/**
+ * This activity shows the list of possible credentials to add to a widget.
+ * It is the configuration activity for the CredentialsWidget.
+ */
 class WidgetConfigurationActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityWidgetConfigurationBinding
