@@ -82,7 +82,7 @@ class CredentialsWidget : AppWidgetProvider()
 
     companion object
     {
-        val TAG = CredentialsWidget::class.java.toString()
+        val TAG: String = CredentialsWidget::class.java.simpleName
         const val ITEM_POSITION = "item_position"
         private const val ITEM_CLICK_ACTION = "item_click"
         private const val SEE_ALL_ACTION = "see_all"

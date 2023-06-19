@@ -116,6 +116,6 @@ class CredentialsWidgetService : RemoteViewsService() {
     }
     companion object
     {
-        private val TAG = CredentialsWidgetService::class.simpleName
+        private val TAG = CredentialsWidgetService::class.java.simpleName
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.project.passwordmanager.R
 import com.project.passwordmanager.adapters.CredentialsAdapter
 import com.project.passwordmanager.common.Constants
@@ -17,6 +18,7 @@ import com.project.passwordmanager.factories.CredentialsViewModelFactory
 import com.project.passwordmanager.listeners.DeleteListener
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.CredentialsViewModel
+
 
 /**
  * Fragment which shows the list of your credentials. It consists of the first view
@@ -70,6 +72,21 @@ class CredentialsFragment : Fragment(), DeleteListener
             viewModel.showDialog(parentFragmentManager)
         }
 
+        binding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener()
+        {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    binding.fab.show()
+                }
+                else
+                {
+                    binding.fab.hide()
+                }
+            }
+        })
+
         return view
     }
 
@@ -84,6 +101,11 @@ class CredentialsFragment : Fragment(), DeleteListener
     {
         viewModel.deleteCredential(credentialId)
         Toast.makeText(context, getString(R.string.password_deleted), Toast.LENGTH_LONG).show()
+    }
+
+    companion object
+    {
+        val TAG: String = CredentialsFragment::class.java.simpleName
     }
 
 }

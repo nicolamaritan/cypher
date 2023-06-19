@@ -123,6 +123,6 @@ class UnlockWidgetActivity : AppCompatActivity()
 
     companion object
     {
-        private val TAG = UnlockWidgetActivity::class.java.toString()
+        private val TAG = UnlockWidgetActivity::class.java.simpleName
     }
 }

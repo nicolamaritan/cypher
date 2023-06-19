@@ -110,6 +110,9 @@ class SettingsFragment : Fragment()
                         getString(R.string.wrong_master_password),
                         Toast.LENGTH_LONG
                     ).show()
+                    binding.oldMasterpasswordEt.text.clear()
+                    binding.newMasterpasswordEt.text.clear()
+                    binding.confirmedNewMasterpasswordEt.text.clear()
                 }
                 else
                 {
