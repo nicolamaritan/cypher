@@ -26,6 +26,13 @@ class UnlockDialogFragment : DialogFragment()
     private var _binding: DialogUnlockBinding? = null
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
+        // Clears dialog for a clean authentication
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) dismiss()
+    }
+
     /* Saved in clear to be accessed by the outside to lock and unlock
     *
     * */

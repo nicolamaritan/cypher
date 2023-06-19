@@ -78,10 +78,10 @@ class CredentialsAdapter(private val context: Context):
                 {
                     val activity = context as FragmentActivity
                     val fm: FragmentManager = activity.supportFragmentManager
-                    val alertDialog = UnlockDialogFragment()
+                    val unlockDialogFragment = UnlockDialogFragment()
 
                     // Set an UnlockDialogListener to handle unlock events
-                    alertDialog.setUnlockDialogListener(object : UnlockDialogListener {
+                    unlockDialogFragment.setUnlockDialogListener(object : UnlockDialogListener {
                         override fun onUnlockSuccess()
                         {
                             locked = false
@@ -93,14 +93,14 @@ class CredentialsAdapter(private val context: Context):
                             unlockedCredentials.add(
                                 Credential(
                                     id = credential.id,
-                                    password = Cryptography.decryptText(credential.password, alertDialog.insertedMasterPassword)
+                                    password = Cryptography.decryptText(credential.password, unlockDialogFragment.insertedMasterPassword)
                                 )
                             )
-                            updatePasswordTextView(credential.password, alertDialog.insertedMasterPassword)
+                            updatePasswordTextView(credential.password, unlockDialogFragment.insertedMasterPassword)
                         }
                     })
 
-                    alertDialog.show(fm, "fragment_alert")
+                    unlockDialogFragment.show(fm, UnlockDialogFragment.UNLOCK_DIALOG_FRAGMENT_TAG)
                 }
                 else
                 {
@@ -147,7 +147,7 @@ class CredentialsAdapter(private val context: Context):
                     val fm: FragmentManager = activity.supportFragmentManager
                     //val alertDialog = ModifyDialogFragment(credential)
                     val modifyDialogFragment = ModifyDialogFragment.newInstance(credential)
-                    modifyDialogFragment.show(fm, "fragment_alert")
+                    modifyDialogFragment.show(fm, UnlockDialogFragment.UNLOCK_DIALOG_FRAGMENT_TAG)
                 }
                 else
                 {
