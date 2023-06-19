@@ -3,7 +3,8 @@ package com.project.passwordmanager.common
 import java.time.LocalDate
 
 /**
- * The DateChecker class allows you to check the age of a given date relative to a specified current date.
+ * The DateChecker class allows you to check the age of a given date
+ * relative to a specified current date.
  *
  * @property currentDate The reference date against which other dates will be compared.
  */

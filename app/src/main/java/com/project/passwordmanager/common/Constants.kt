@@ -1,5 +1,9 @@
 package com.project.passwordmanager.common
 
+/**
+ * Constants used through the whole project to access
+ * SharedPreferences resources.
+ */
 object Constants
 {
     const val MASTER_PASSWORD = "MASTER_PASSWORD"

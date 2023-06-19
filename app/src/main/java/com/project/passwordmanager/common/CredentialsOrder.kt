@@ -1,5 +1,8 @@
 package com.project.passwordmanager.common
 
+/**
+ * Constants indicating the possible credentials order in the credential fragment.
+ */
 object CredentialsOrder
 {
     const val CHRONOLOGICAL = 1

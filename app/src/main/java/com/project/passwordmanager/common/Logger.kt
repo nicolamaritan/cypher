@@ -2,6 +2,9 @@ package com.project.passwordmanager.common
 
 import android.util.Log
 
+/**
+ * Utility class to log simple formatted Logcat messages.
+ */
 object Logger
 {
     /**
