@@ -16,12 +16,26 @@ import com.project.passwordmanager.model.CredentialDao
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.model.CredentialRepository
 
-class CredentialsWidgetService : RemoteViewsService() {
+/**
+ * The `CredentialsWidgetService` is responsible for providing the remote views
+ * factory for the credentials widget.
+ * It creates and manages the remote views for the widget's list view.
+ */
+class CredentialsWidgetService : RemoteViewsService()
+{
 
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
         return PasswordManagerWidgetItemFactory(applicationContext, intent)
     }
 
+    /**
+     * The `PasswordManagerWidgetItemFactory` is responsible for
+     * creating and managing the remote views
+     * for each item in the credentials widget's list view.
+     *
+     * @param context The application context.
+     * @param intent The intent received from the widget.
+     */
     inner class PasswordManagerWidgetItemFactory(
         private val context: Context,
         intent: Intent?
