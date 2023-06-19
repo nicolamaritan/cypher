@@ -1,8 +1,8 @@
 <resources>
     // Common
     <string name="app_name" translatable="false">Cypher</string>
-    <string name="unlock_the_password_first">Unlock the password first.</string>
-    <string name="password_copied_to_clipboard">Password copied to clipboard.</string>
+    <string name="unlock_the_password_first">Prima sblocca la credenziale.</string>
+    <string name="password_copied_to_clipboard">Password copiata negli appunti.</string>
     <string name="unlock">Sblocca</string>
     <string name="add">Aggiungi</string>
     <string name="unlock_toast">Sblocco riuscito</string>
@@ -44,8 +44,8 @@
     <string name="modify_the_service">Modifica servizio</string>
     <string name="modify_the_password">Modifica password</string>
     <string name="stored_credentials">Password conservate: %1$d</string>
-    <string name="insert_the_name_displayed_on_the_widget">Insert the name displayed on the widget.</string>
-    <string name="insert_the_widget_name">Insert the widget name.</string>
+    <string name="insert_the_name_displayed_on_the_widget">Inserisci il nome mostrato nel widget.</string>
+    <string name="insert_the_widget_name">Insert il nome del widget.</string>
 
 
     // Settings
