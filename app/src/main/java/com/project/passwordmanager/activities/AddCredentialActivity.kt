@@ -10,6 +10,10 @@ import com.project.passwordmanager.factories.AddCredentialActivityViewModelFacto
 import com.project.passwordmanager.model.CredentialDatabase
 import com.project.passwordmanager.viewmodels.AddCredentialActivityViewModel
 
+/**
+ * Activity is invoked from the AddWidget when clicking on its layout. It allows
+ * the user to insert a new credential in the database.
+ */
 class AddCredentialActivity : AppCompatActivity()
 {
     private lateinit var binding: ActivityAddCredentialBinding
