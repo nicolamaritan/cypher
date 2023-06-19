@@ -79,6 +79,7 @@ class AddCredentialDialogFragment : DialogFragment()
 
     companion object
     {
-        private val TAG = AddCredentialDialogFragment::javaClass.toString()
+
+        private val TAG = AddCredentialDialogFragment::class.simpleName
     }
 }

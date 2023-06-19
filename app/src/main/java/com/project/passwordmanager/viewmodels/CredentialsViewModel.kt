@@ -78,6 +78,6 @@ class CredentialsViewModel(val dao: CredentialDao) : ViewModel()
 
     companion object
     {
-        private val TAG = CredentialsViewModel::javaClass.toString()
+        private val TAG = CredentialsViewModel::class.java.simpleName
     }
 }

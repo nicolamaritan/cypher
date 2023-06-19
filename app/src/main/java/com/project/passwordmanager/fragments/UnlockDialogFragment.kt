@@ -107,6 +107,8 @@ class UnlockDialogFragment : DialogFragment()
     companion object
     {
         private val TAG = UnlockDialogFragment::class.java.simpleName
+
+        // TAG value not used for logging, but to refer to the dialog when showing one
         const val UNLOCK_DIALOG_FRAGMENT_TAG = "Unlock_Dialog"
     }
 }
